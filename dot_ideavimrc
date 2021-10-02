@@ -1,0 +1,68 @@
+source ~/.vimrc.global
+
+" Plugins {
+    set easymotion
+    set surround
+    set ideajoin
+    set exchange
+    set highlightedyank
+    set textobj-indent
+    set argtextobj
+    set multiple-cursors
+" }
+
+" https://github.com/JetBrains/ideavim/wiki/Select-mode
+set idearefactormode=visual
+
+" {
+    inoremap <BS> <NOP>
+    inoremap <Esc> <NOP>
+    inoremap <Up> <NOP>
+    inoremap <Down> <NOP>
+    inoremap <Left> <NOP>
+    inoremap <Right> <NOP>
+
+    nnoremap <BS> <NOP>
+    nnoremap <Up> <NOP>
+    nnoremap <Down> <NOP>
+    nnoremap <Left> <NOP>
+    nnoremap <Right> <NOP>
+" }
+
+" { Browse
+    noremap <Space>d :action GotoDeclaration<CR>
+
+    noremap <BS> :action Back<CR>
+    noremap <C-BS> :action Forward<CR>
+" }
+
+" { EditorSelectWord
+    noremap <C-W> :action EditorSelectWord<CR>
+    noremap <C-S-W> :action EditorUnSelectWord<CR>
+" }
+
+" { Windows
+    nnoremap <TAB>m :action HideAllWindows<CR>
+    nnoremap <TAB>r :action ActivatenpmToolWindow<CR>
+    nnoremap <TAB>g :action ActivateCommitToolWindow<CR>
+    nnoremap <TAB>t :action ActivateTerminalToolWindow<CR>
+" }
+
+
+" { Edit
+    noremap <Space>ca :action StringManipulation.Group.SwitchCase<CR>
+    noremap <Space>rr :action Refactorings.QuickListPopupAction<CR>
+    noremap <Space>sw :action SurroundWith<CR>
+" }
+
+nnoremap <Space>his :action LocalHistory.ShowHistory<CR>
+nnoremap <Space>fs :action FileStructurePopup<CR>
+
+
+nnoremap <leader>rf :action ReformatCode<CR>
+
+
+map <TAB><TAB> <Plug>(easymotion-s)
+
+
+nnoremap <Space>reg "adO<ESC>0iregion <ESC>$dTnx2o<ESC>0iendregion <ESC>$dTnxk0"aP/^\(end\)\?region<CR>NA
