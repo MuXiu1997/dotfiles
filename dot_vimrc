@@ -1,0 +1,44 @@
+source ~/.vimrc.global
+
+" { Plugins
+    call plug#begin('~/.vim/plugged')
+    Plug 'easymotion/vim-easymotion'
+    Plug 'tpope/vim-surround'
+    Plug 'mg979/vim-visual-multi'
+    Plug 'tommcdo/vim-exchange'
+    Plug 'machakann/vim-highlightedyank'
+    Plug 'arcticicestudio/nord-vim'
+    Plug 'michaeljsmith/vim-indent-object'
+    call plug#end()
+" }
+
+" { Cursor
+    if $TERM_PROGRAM =~ "iTerm"
+        let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+        let &t_SR = "\<Esc>]50;CursorShape=2\x7"
+        let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+        " 当进入 Vim 时, 改变光标为 blinking block
+        autocmd VimEnter *  silent execute '!echo -ne "\e[1 q"' | redraw!
+    elseif $TERM_PROGRAM =~ "tmux"
+        let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+        let &t_SR = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=2\x7\<Esc>\\"
+        let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+    endif
+" }
+
+" { Options
+    syntax on
+
+    set mouse=a
+    set paste
+    set cursorline
+    set expandtab
+    set list
+    set listchars=tab:--,trail:.
+
+    colorscheme nord
+" }
+
+map <TAB><TAB> <Plug>(easymotion-s)
+
+
