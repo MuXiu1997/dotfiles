@@ -1,0 +1,20 @@
+# { Homebrew
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+    if type brew &>/dev/null; then
+      FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
+    fi
+    PATH="/opt/homebrew/bin:$PATH"
+# }
+
+# { Nvm
+    NVM_DIR="$HOME/.nvm"
+    [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && . "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+    [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && . "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+# }
+
+# { Pyenv
+    PATH="/opt/homebrew/opt/pyenv/bin:$PATH"
+    PATH="$(pyenv root)/shims:$PATH"
+    eval "$(pyenv init --path)"
+# }
+
