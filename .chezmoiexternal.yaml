@@ -5,6 +5,13 @@
   stripComponents: 1
   refreshPeriod: "168h"
 
+.oh-my-tmux:
+  type: "archive"
+  url: "https://github.com/gpakosz/.tmux/archive/master.tar.gz"
+  exact: true
+  stripComponents: 1
+  refreshPeriod: "168h"
+
 # Oh-my-zsh themes
 .oh-my-zsh/custom/themes/powerlevel10k:
   type: "archive"
