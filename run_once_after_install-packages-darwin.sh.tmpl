@@ -1,0 +1,7 @@
+{{- if (eq .chezmoi.os "darwin") -}}
+#!/bin/bash
+set -e
+
+# install packages skip mas
+HOMEBREW_BUNDLE_MAS_SKIP=$(cat ~/Brewfile | grep -e '^mas' | awk -v FS='id: ' '{print $2}') brew bundle --global -v --no-lock
+{{ end -}}
