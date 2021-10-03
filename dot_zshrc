@@ -78,7 +78,7 @@ HIST_STAMPS="yyyy-mm-dd"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git command-not-found ranger-zoxide zsh-completions zsh-vi-mode fzf-tab zsh-autosuggestions zsh-syntax-highlighting)
+plugins=(forgit command-not-found ranger-zoxide zsh-completions zsh-vi-mode fzf-tab zsh-autosuggestions zsh-syntax-highlighting)
 autoload -U compinit && compinit
 
 source $ZSH/oh-my-zsh.sh
