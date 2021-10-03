@@ -16,6 +16,8 @@ brew "fd"
 brew "fzf"
 # Distributed revision control system
 brew "git"
+# Syntax-highlighting pager for git and diff output
+brew "git-delta"
 # Open source programming language to build simple/reliable/efficient software
 brew "go"
 # Fast linters runner for Go
@@ -62,6 +64,8 @@ brew "tldr"
 brew "tmux"
 # Display directories as trees (with optional color/HTML output)
 brew "tree"
+# Vi 'workalike' with many additional features
+brew "vim"
 # Internet file retriever
 brew "wget"
 # Shell extension to navigate your filesystem faster
