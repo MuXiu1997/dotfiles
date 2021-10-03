@@ -38,6 +38,8 @@ brew "mas"
 brew "openjdk"
 # Java-based project management
 brew "maven"
+# Ambitious Vim-fork focused on extensibility and agility
+brew "neovim"
 # Manage multiple Node.js versions
 brew "nvm"
 # Protocol buffers (Google's data interchange format)
@@ -70,21 +72,76 @@ brew "vim"
 brew "wget"
 # Shell extension to navigate your filesystem faster
 brew "zoxide"
+# Application launcher and productivity software
+cask "alfred"
+# Redis desktop manager
+cask "another-redis-desktop-manager"
+# Desktop password and login vault
+cask "bitwarden"
+# Translation application for text, pictures, and manual input
+cask "bob"
+# Server and cloud storage browser
+cask "cyberduck"
+# Downloads videos from different websites
+cask "downie"
+# Terminal/ssh/serial port/sftp client
+cask "electerm"
+# Download accelerator and organizer
+cask "free-download-manager"
+# Utility to hide menu bar items
+cask "hiddenbar"
+# Free and open-source media player
+cask "iina"
+# Terminal emulator as alternative to Apple's Terminal app
+cask "iterm2"
+# JetBrains tools manager
+cask "jetbrains-toolbox"
+# Open-source keystroke visualizer
+cask "keycastr"
+# Snippet management app
+cask "lepton"
+# Utility to open, create and modify archive files
+cask "maczip"
+# Provides updates to various Microsoft products
+cask "microsoft-auto-update"
+# Web browser
+cask "microsoft-edge"
+# Smooths scrolling and set mouse scroll directions independently
+cask "mos"
+# Re-mounts write-protected NTFS volumes
+cask "mounty"
+# Music streaming platform
+cask "neteasemusic"
+# Collaboration platform for API development
+cask "postman"
 # QuickLook plug-in that renders source code with syntax highlighting
 cask "qlcolorcode"
 # QuickLook generator for Markdown files
 cask "qlmarkdown"
 cask "qlstephen"
+# Instant messaging tool
+cask "qq"
 cask "quicklook-json"
+# Move and resize windows using keyboard shortcuts or snap areas
+cask "rectangle"
+# Snip or pin screenshots
+cask "snipaste"
 # Rime input method engine
 cask "squirrel"
-mas "Hidden Bar", id: 1452453066
+# System monitor for the menu bar
+cask "stats"
+# App to switch hosts
+cask "switchhosts"
+# Configurable document editor that supports Markdown
+cask "typora"
+# Free messaging and calling application
+cask "wechat"
+# Weixin DevTools for Official Account and Mini Program development
+cask "wechatwebdevtools"
 mas "iMovie 剪辑", id: 408981434
 mas "Keynote 讲演", id: 409183694
 mas "Numbers 表格", id: 409203825
 mas "Pages 文稿", id: 409201541
-mas "QQ", id: 451108668
 mas "Spark", id: 1176895641
 mas "WPS Office", id: 1443749478
 mas "库乐队", id: 682658836
-mas "微信", id: 836500024
