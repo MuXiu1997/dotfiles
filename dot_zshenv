@@ -1,5 +1,10 @@
 # { Common
-    EDITOR='vim'
+    if type nvim &>/dev/null; then
+        EDITOR='nvim'
+    else
+        EDITOR='vim'
+    fi
+
     FPATH="$HOME/.config/zsh/completions:$FPATH"
 # }
 
