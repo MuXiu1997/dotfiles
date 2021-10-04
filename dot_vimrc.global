@@ -1,20 +1,20 @@
 let mapleader=","
 
-set incsearch           " 输入搜索模式时同时高亮部分的匹配
-set hlsearch            " 高亮最近的匹配搜索模式
-set ignorecase          " 搜索模式时忽略大小写
-set smartcase           " 模式中有大写字母时不忽略大小写
+set incsearch               " 输入搜索模式时同时高亮部分的匹配
+set hlsearch                " 高亮最近的匹配搜索模式
+set ignorecase              " 搜索模式时忽略大小写
+set smartcase               " 模式中有大写字母时不忽略大小写
 
-set scrolloff=5         " 光标上下的最少行数
-set sidescrolloff=15    " 在光标左右最少出现的列数
+set scrolloff=5             " 光标上下的最少行数
+set sidescrolloff=15        " 在光标左右最少出现的列数
 
-set clipboard+=unnamed  " 使用剪贴板作为无名的寄存器
+set clipboard+=unnamed      " 使用剪贴板作为无名的寄存器
 
-set showmode            " 在状态行上显示当前模式的消息
-set showcmd             " 在状态行里显示 (部分) 命令
-set relativenumber      " 每行前显示相对行号
+set showmode                " 在状态行上显示当前模式的消息
+set showcmd                 " 在状态行里显示 (部分) 命令
+set number relativenumber   " 每行前显示相对行号
 
-set history=1000        " 记住的命令行的行数
+set history=1000            " 记住的命令行的行数
 
 set shiftwidth=4 tabstop=4
 
