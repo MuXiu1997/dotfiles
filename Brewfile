@@ -38,6 +38,8 @@ brew "mas"
 brew "openjdk"
 # Java-based project management
 brew "maven"
+# Fast, highly customisable system info script
+brew "neofetch"
 # Ambitious Vim-fork focused on extensibility and agility
 brew "neovim"
 # Manage multiple Node.js versions
@@ -58,8 +60,6 @@ brew "reattach-to-user-namespace"
 brew "ripgrep"
 # Utility that provides fast incremental file transfer
 brew "rsync"
-# Generate ASCII art with terminal, shell, and OS info
-brew "screenfetch"
 # Simplified and community-driven man pages
 brew "tldr"
 # Terminal multiplexer
