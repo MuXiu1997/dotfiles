@@ -11,6 +11,7 @@ source ~/.vimrc.global
     Plug 'tommcdo/vim-exchange'
     Plug 'machakann/vim-highlightedyank'
     Plug 'michaeljsmith/vim-indent-object'
+    Plug 'junegunn/vim-easy-align'
 
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
     call plug#end()
@@ -83,5 +84,11 @@ colorscheme nord
     " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
     nmap <silent> <F2> <Plug>(coc-diagnostic-next)
 " }
+
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
 
 map <TAB><TAB> <Plug>(easymotion-s)
