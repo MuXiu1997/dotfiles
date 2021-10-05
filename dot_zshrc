@@ -116,7 +116,8 @@ source $ZSH/oh-my-zsh.sh
     alias -- -="cd -"
 
     # Ls
-    alias ls="lsd"
+    alias ls="exa --icons --color='always' --time-style=long-iso"
+
 
     # Vim
     if type nvim &>/dev/null;
@@ -133,7 +134,7 @@ source $ZSH/oh-my-zsh.sh
     alias cm="chezmoi"
     alias cmmanaged="selected=\$(cm managed | fzf --height 40% --reverse) && echo \${HOME}/\${selected}"
     alias cmedit="selected=\$(cmmanaged) && chezmoi edit \${selected}"
-    alias cmra="selected=\$(cmmanaged) && chezmoi re-add \${selected}"
+    alias cmra="selected=\$(cmmanaged) && chezmoi add \${selected}"
 
     # Brew
     alias brewdump="cd;brew bundle dump -f --describe;cd -"
