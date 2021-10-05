@@ -65,7 +65,7 @@ source "/opt/homebrew/opt/fzf/shell/key-bindings.zsh"
 ####    filepath="$1"
 ####    if [[ $(file --mime "$filepath") =~ binary ]]; then
 ####        if [[ -d "$filepath" ]]; then
-####            exec lsd -1 --icon=never --color=always "$filepath"
+####            exec exa -1 --color=always "$filepath"
 ####        else
 ####            echo ""$filepath" is a binary file"
 ####        fi
