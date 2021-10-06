@@ -307,7 +307,7 @@ handle_mime() {
             #     --force -- "${FILE_PATH}" && exit 5
             # env COLORTERM=8bit bat --color=always --style="plain" \
             #     -- "${FILE_PATH}" && exit 5
-            env COLORTERM=8bit bat --color=always --theme=Nord --style="plain" \
+            env COLORTERM=8bit bat --color=always --theme=Nord -r :100 --style="plain" \
                 -- "${FILE_PATH}" && exit 5
             # pygmentize -f "${pygmentize_format}" -O "style=${PYGMENTIZE_STYLE}"\
             #     -- "${FILE_PATH}" && exit 5
