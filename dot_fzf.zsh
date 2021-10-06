@@ -25,27 +25,26 @@ source "/opt/homebrew/opt/fzf/shell/key-bindings.zsh"
     ${FZF_DEFAULT_COLOR}
     "
 
-    ____fzf_funtions="cat ~/.fzf.zsh | grep -E '^####' | cut -c5-"
+    __fzf_funtions="cat ~/.fzf.zsh | grep -E '^####' | cut -c5-"
 # }
 
 # { CTRL-T
     temp_fzf_ctrl_t_type_file="$(mktemp -t fzf_ctrl_t_type.XXXXXXXXXX)"
     temp_fzf_ctrl_t_hidden_file="$(mktemp -t fzf_ctrl_t_hidden.XXXXXXXXXX)"
 
-    export FZF_CTRL_T_COMMAND="$____fzf_funtions | zsh -s _fzf_ctrl_t_command 0 \"$temp_fzf_ctrl_t_type_file\" \"$temp_fzf_ctrl_t_hidden_file\""
+    export FZF_CTRL_T_COMMAND="$__fzf_funtions | zsh -s _fzf_ctrl_t_command 0 \"$temp_fzf_ctrl_t_type_file\" \"$temp_fzf_ctrl_t_hidden_file\""
     export FZF_CTRL_T_OPTS="
     --height '80%'
     --border
     --ansi
     --prompt 'Files> '
     --header 'CTRL-D: Directories / CTRL-F: Files / CTRL-SPACE: Toggle Hidden'
-    --bind 'ctrl-f:change-prompt(Files> )+reload($____fzf_funtions | zsh -s _fzf_ctrl_t_command 1 \"$temp_fzf_ctrl_t_type_file\" \"$temp_fzf_ctrl_t_hidden_file\")'
-    --bind 'ctrl-d:change-prompt(Directories> )+reload($____fzf_funtions | zsh -s _fzf_ctrl_t_command 2 \"$temp_fzf_ctrl_t_type_file\" \"$temp_fzf_ctrl_t_hidden_file\")'
-    --bind 'ctrl-space:+reload($____fzf_funtions | zsh -s _fzf_ctrl_t_command 3 \"$temp_fzf_ctrl_t_type_file\" \"$temp_fzf_ctrl_t_hidden_file\")'
-    --preview '$____fzf_funtions | sh -s _file_preview {}'
+    --bind 'ctrl-f:change-prompt(Files> )+reload($__fzf_funtions | zsh -s _fzf_ctrl_t_command 1 \"$temp_fzf_ctrl_t_type_file\" \"$temp_fzf_ctrl_t_hidden_file\")'
+    --bind 'ctrl-d:change-prompt(Directories> )+reload($__fzf_funtions | zsh -s _fzf_ctrl_t_command 2 \"$temp_fzf_ctrl_t_type_file\" \"$temp_fzf_ctrl_t_hidden_file\")'
+    --bind 'ctrl-space:+reload($__fzf_funtions | zsh -s _fzf_ctrl_t_command 3 \"$temp_fzf_ctrl_t_type_file\" \"$temp_fzf_ctrl_t_hidden_file\")'
+    --preview '$__fzf_funtions | sh -s _file_preview {}'
     "
 # }
-
 
 # { CTRL-R
     export FZF_CTRL_R_OPTS="
@@ -58,6 +57,9 @@ source "/opt/homebrew/opt/fzf/shell/key-bindings.zsh"
     "
 # }
 
+unset __fzf_funtions
+unset temp_fzf_ctrl_t_type_file
+unset temp_fzf_ctrl_t_hidden_file
 
 ####set -e
 ####
