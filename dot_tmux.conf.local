@@ -348,7 +348,6 @@ bind C-a send-prefix
 #set -g status-position top
 
 set-option -g allow-rename off
-bind C-s popup -E 'panes=(); while read -r line; do panes+=("$line"); done <<< "$(tmux list-panes)"; if [[ ${#panes[@]} == 1 ]]; then echo "only one pane" && sleep 1s && exit 0; fi; s1=$(IFS=$'"'"'\n'"'"'; echo "${panes[*]}" | fzf --query="^" --reverse --header="Select the first pane") || exit 1; tmp=(); for(( i=0; i<${#panes[@]}; i++ )); do [[ "${panes[i]}" != "$s1" ]] && tmp+=("${panes[i]}"); done; panes=("${tmp[@]}"); unset tmp; s2=$(IFS=$'"'"'\n'"'"'; echo "${panes[*]}" | fzf --query="^" --reverse --header="Select the second pane") || exit 1; tmux swap-pane -s ${s1%:*} -t ${s2%:*}'
 
 # -- tpm -----------------------------------------------------------------------
 
@@ -392,6 +391,7 @@ tmux_conf_uninstall_plugins_on_reload=true
 #set -g @continuum-restore 'on'
 set -g @plugin "arcticicestudio/nord-tmux"
 set -g @plugin 'tmux-plugins/tmux-prefix-highlight'
+set -g @plugin 'MuXiu1997/tmux-panes-manager#main'
 
 
 # -- custom variables ----------------------------------------------------------
