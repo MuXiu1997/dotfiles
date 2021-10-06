@@ -10,6 +10,8 @@ brew "bitwarden-cli"
 brew "bottom"
 # Manage your dotfiles across multiple diverse machines, securely
 brew "chezmoi"
+# Modern replacement for 'ls'
+brew "exa"
 # Simple, fast and user-friendly alternative to find
 brew "fd"
 # Command-line fuzzy finder written in Go
