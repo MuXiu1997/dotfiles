@@ -1,8 +1,8 @@
 # { Common
     if type nvim &>/dev/null; then
-        EDITOR='nvim'
+        export EDITOR='nvim'
     else
-        EDITOR='vim'
+        export EDITOR='vim'
     fi
 
     FPATH="$HOME/.config/zsh/completions:$FPATH"
