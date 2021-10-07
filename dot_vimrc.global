@@ -20,16 +20,13 @@ set history=1000       " 记住的命令行的行数
 set shiftwidth=4       " (自动) 缩进使用的步进单位，以空白数目计
 set tabstop=4          " <Tab> 在文件里使用的空格数
 
-nnoremap <Space>nh :noh<CR>
+set nowrap             " 禁用长行回绕并在下一行继续
+
+nnoremap <SPACE>nh :noh<CR>
 
 noremap  <SPACE>a  ^
 noremap  <SPACE>e  $
 
-inoremap <A-H>     <Left>
-inoremap <A-J>     <Down>
-inoremap <A-K>     <Up>
-inoremap <A-L>     <Right>
-
-nnoremap <Space>m  `m
+nnoremap <SPACE>m  `m
 nnoremap Q         @q
 
