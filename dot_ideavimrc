@@ -16,21 +16,21 @@ set idearefactormode=visual
 
 " {
     inoremap <BS>    <NOP>
-    inoremap <Esc>   <NOP>
-    inoremap <Up>    <NOP>
-    inoremap <Down>  <NOP>
-    inoremap <Left>  <NOP>
-    inoremap <Right> <NOP>
+    inoremap <ESC>   <NOP>
+    inoremap <UP>    <NOP>
+    inoremap <DOWN>  <NOP>
+    inoremap <LEFT>  <NOP>
+    inoremap <RIGHT> <NOP>
 
     nnoremap <BS>    <NOP>
-    nnoremap <Up>    <NOP>
-    nnoremap <Down>  <NOP>
-    nnoremap <Left>  <NOP>
-    nnoremap <Right> <NOP>
+    nnoremap <UP>    <NOP>
+    nnoremap <DOWN>  <NOP>
+    nnoremap <LEFT>  <NOP>
+    nnoremap <RIGHT> <NOP>
 " }
 
 " { Browse
-    noremap <Space>d :action GotoDeclaration<CR>
+    noremap <SPACE>d :action GotoDeclaration<CR>
 
     noremap <BS>     :action Back<CR>
     noremap <C-BS>   :action Forward<CR>
@@ -50,13 +50,13 @@ set idearefactormode=visual
 
 
 " { Edit
-    noremap <Space>ca :action StringManipulation.Group.SwitchCase<CR>
-    noremap <Space>rr :action Refactorings.QuickListPopupAction<CR>
-    noremap <Space>sw :action SurroundWith<CR>
+    noremap <SPACE>ca :action StringManipulation.Group.SwitchCase<CR>
+    noremap <SPACE>rr :action Refactorings.QuickListPopupAction<CR>
+    noremap <SPACE>sw :action SurroundWith<CR>
 " }
 
-nnoremap <Space>his :action LocalHistory.ShowHistory<CR>
-nnoremap <Space>fs  :action FileStructurePopup<CR>
+nnoremap <SPACE>his :action LocalHistory.ShowHistory<CR>
+nnoremap <SPACE>fs  :action FileStructurePopup<CR>
 
 
 nnoremap <leader>rf :action ReformatCode<CR>
