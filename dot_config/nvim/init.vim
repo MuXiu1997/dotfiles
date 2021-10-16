@@ -61,7 +61,18 @@ source ~/.vimrc.global
 " }
 
 " { Plug 'neoclide/coc.nvim'
-    let g:coc_global_extensions = ['coc-json', 'coc-vimlsp', 'coc-sh']
+    let g:coc_global_extensions = [
+                \ 'coc-json',
+                \ 'coc-vimlsp',
+                \ 'coc-sh',
+                \ 'coc-css',
+                \ 'coc-go',
+                \ 'coc-html',
+                \ 'coc-tsserver',
+                \ 'coc-rust-analyzer',
+                \ 'coc-pyright',
+                \ '@yaegassy/coc-volar',
+                \ ]
 
     " Use <C-SPACE> to trigger completion.
     if has('nvim')
@@ -106,3 +117,5 @@ source ~/.vimrc.global
     endif
 " }
 
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gr <Plug>(coc-references)
