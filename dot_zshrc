@@ -183,8 +183,8 @@ source $ZSH/oh-my-zsh.sh
         local command="lsof -i -nP 2> /dev/null | awk '{if ( 1<NR ) {print}}'"
         local kill_process="echo {} | awk '{print \$2}' | xargs kill -9"
         FZF_DEFAULT_COMMAND=${command} fzf \
-            --header 'CTRL-K: Kill Process; CTRL-R: Reload' \
-            --bind "ctrl-k:execute-silent(${kill_process})+reload(${command})" \
+            --header 'CTRL-D: Kill Process; CTRL-R: Reload' \
+            --bind "ctrl-d:execute-silent(${kill_process})+reload(${command})" \
             --bind "ctrl-r:reload(${command})"
     }
 
