@@ -9,6 +9,7 @@ source ~/.vimrc.global
     set textobj-indent
     set argtextobj
     set multiple-cursors
+    set matchit
 " }
 
 " https://github.com/JetBrains/ideavim/wiki/Select-mode
