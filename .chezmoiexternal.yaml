@@ -71,7 +71,13 @@
   exact: true
   stripComponents: 1
   refreshPeriod: "168h"
-  
+.config/ranger/plugins/ranger_yoink:
+  type: "archive"
+  url: "https://github.com/MuXiu1997/ranger-yoink/archive/main.tar.gz"
+  exact: true
+  stripComponents: 1
+  refreshPeriod: "168h"
+
 # Vim-plug
 .local/share/nvim/site/autoload/plug.vim:
   type: "file"
