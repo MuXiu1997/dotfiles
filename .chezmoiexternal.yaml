@@ -83,6 +83,12 @@
   exact: true
   stripComponents: 1
   refreshPeriod: "168h"
+.config/ranger/plugins/ranger_fzf_filter:
+  type: "archive"
+  url: "https://github.com/MuXiu1997/ranger-fzf-filter/archive/main.tar.gz"
+  exact: true
+  stripComponents: 1
+  refreshPeriod: "168h"
 
 # Vim-plug
 .local/share/nvim/site/autoload/plug.vim:
