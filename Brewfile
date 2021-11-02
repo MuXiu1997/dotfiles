@@ -2,6 +2,7 @@ tap "homebrew/bundle"
 tap "homebrew/cask", "https://github.com/Homebrew/homebrew-cask.git"
 tap "homebrew/cask-fonts", "https://github.com/Homebrew/homebrew-cask-fonts.git"
 tap "homebrew/core", "https://github.com/Homebrew/homebrew-core.git"
+tap "vldmrkl/formulae"
 # Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
 # Secure and free password manager for all of your devices
@@ -10,6 +11,8 @@ brew "bitwarden-cli"
 brew "bottom"
 # Manage your dotfiles across multiple diverse machines, securely
 brew "chezmoi"
+# Top-like interface for container metrics
+brew "ctop"
 # Modern replacement for 'ls'
 brew "exa"
 # Simple, fast and user-friendly alternative to find
@@ -30,6 +33,8 @@ brew "gost"
 brew "grpcurl"
 # System monitoring dashboard for terminal
 brew "gtop"
+# Simple terminal UI for git commands
+brew "lazygit"
 # Clone of ls with colorful output, file type icons, and more
 brew "lsd"
 # Utility for directing compilation
@@ -74,6 +79,8 @@ brew "vim"
 brew "wget"
 # Shell extension to navigate your filesystem faster
 brew "zoxide"
+# macOS CLI for AirDrop
+brew "vldmrkl/formulae/airdrop-cli"
 # Application launcher and productivity software
 cask "alfred"
 # Redis desktop manager
@@ -84,6 +91,8 @@ cask "bitwarden"
 cask "bob"
 # Server and cloud storage browser
 cask "cyberduck"
+# Teamwork app by Alibaba Group
+cask "dingtalk"
 # Downloads videos from different websites
 cask "downie"
 # Terminal/ssh/serial port/sftp client
@@ -146,4 +155,5 @@ mas "Numbers 表格", id: 409203825
 mas "Pages 文稿", id: 409201541
 mas "Spark", id: 1176895641
 mas "WPS Office", id: 1443749478
+mas "Xcode", id: 497799835
 mas "库乐队", id: 682658836
