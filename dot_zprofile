@@ -1,20 +1,26 @@
 # { Homebrew
-    eval "$(/opt/homebrew/bin/brew shellenv)"
     if type brew &>/dev/null; then
-      FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
+        eval "$(brew shellenv)"
+        export FPATH="$(brew --prefix)/share/zsh/site-functions:$FPATH"
+        export PATH="$(brew --prefix)/bin:$PATH"
     fi
-    PATH="/opt/homebrew/bin:$PATH"
 # }
 
 # { Nvm
-    NVM_DIR="$HOME/.nvm"
-    [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && . "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
-    [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && . "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+    export NVM_DIR="$HOME/.nvm"
+    [ -s "$(brew --prefix)/opt/nvm/nvm.sh" ] && . "$(brew --prefix)/opt/nvm/nvm.sh"  # This loads nvm
+    [ -s "$(brew --prefix)/opt/nvm/etc/bash_completion.d/nvm" ] && . "$(brew --prefix)/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 # }
 
 # { Pyenv
-    PATH="/opt/homebrew/opt/pyenv/bin:$PATH"
-    PATH="$(pyenv root)/shims:$PATH"
-    eval "$(pyenv init --path)"
+    if type pyenv &>/dev/null; then
+        PATH="$(pyenv root)/shims:$PATH"
+        eval "$(pyenv init --path)"
+    fi
+# }
+
+# { Zoxide
+    export _ZO_DATA_DIR="$HOME/.zoxide"
+    if (( $+commands[zoxide] )); then eval "$(zoxide init zsh)";else echo 'zoxide: command not found, please install it from https://github.com/ajeetdsouza/zoxide'; fi
 # }
 

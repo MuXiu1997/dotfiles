@@ -1,61 +1,18 @@
-# { Common
+# { EDITOR
     if type nvim &>/dev/null; then
         export EDITOR='nvim'
     else
         export EDITOR='vim'
     fi
-
-    FPATH="$HOME/.config/zsh/completions:$FPATH"
-# }
-
-# { Custom bin dir
-    PATH="$HOME/bin:$PATH"
-# }
-
-# { Homebrew
-    # export HOMEBREW_BREW_GIT_REMOTE="https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/brew.git"
-    # export HOMEBREW_CORE_GIT_REMOTE="https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/homebrew-core.git"
-    # export HOMEBREW_NO_INSTALL_CLEANUP=1
-    eval "$(/opt/homebrew/bin/brew shellenv)"
-    if type brew &>/dev/null; then
-      FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
-    fi
-    PATH="/opt/homebrew/bin:$PATH"
-# }
-
-# { Git
-    PATH="/opt/homebrew/opt/git/bin:$PATH"
-# }
-
-# { Make
-    PATH="/opt/homebrew/opt/make/libexec/gnubin:$PATH"
-# }
-
-# { Rust
-    source "$HOME/.cargo/env"
-# }
-
-# { Go
-    PATH="/Users/muxiu1997/go/bin:$PATH"
-# }
-
-# { Java
-    PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
-    CPPFLAGS="-I/opt/homebrew/opt/openjdk/include"
-# }
-
-# { Nvm
-    NVM_DIR="$HOME/.nvm"
-    [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && . "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
-    [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && . "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
-# }
-
-# { Pyenv
-    PATH="/opt/homebrew/opt/pyenv/bin:$PATH"
-    PATH="$(pyenv root)/shims:$PATH"
-    eval "$(pyenv init --path)"
 # }
 
 # { Ranger
-    RANGER_LOAD_DEFAULT_RC="FALSE"
+    export RANGER_LOAD_DEFAULT_RC="FALSE"
 # {
+
+export FPATH="$HOME/.config/zsh/completions:$FPATH"
+
+export PATH="$HOME/bin:$PATH"
+# Brew
+export PATH="/opt/homebrew/bin:$PATH"
+
