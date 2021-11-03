@@ -18,11 +18,14 @@
     fi
 # }
 
+# { Direnv
+    eval "$(direnv hook zsh)"
+# }
+
 # { Zoxide
     export _ZO_DATA_DIR="$HOME/.zoxide"
     if (( $+commands[zoxide] )); then eval "$(zoxide init zsh)";else echo 'zoxide: command not found, please install it from https://github.com/ajeetdsouza/zoxide'; fi
 # }
-
 
 # { Update completions
     if type update-completions &>/dev/null; then
