@@ -27,9 +27,14 @@
 # }
 
 # { Brew
-    alias brewdump="cd;brew bundle dump -f --describe;cd -"
+    alias brewd="brew-dump"
+    alias brewu="brew-upgrade"
 # }
-#
+
 # { Lazygit
     alias lg="lazygit"
+# }
+
+# { Tmux
+    alias tkill="tmux kill-server"
 # }

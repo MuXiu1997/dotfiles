@@ -57,12 +57,6 @@
   exact: true
   stripComponents: 1
   refreshPeriod: "168h"
-.oh-my-zsh/custom/plugins/forgit:
-  type: "archive"
-  url: "https://github.com/wfxr/forgit/archive/master.tar.gz"
-  exact: true
-  stripComponents: 1
-  refreshPeriod: "168h"
 
 # Ranger plugins
 .config/ranger/plugins/ranger_devicons:

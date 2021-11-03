@@ -10,9 +10,12 @@
     export RANGER_LOAD_DEFAULT_RC="FALSE"
 # {
 
+# { Brew
+    export HOMEBREW_NO_AUTO_UPDATE="true"
+    export PATH="/opt/homebrew/bin:$PATH"
+# }
+
 export FPATH="$HOME/.config/zsh/completions:$FPATH"
 
 export PATH="$HOME/bin:$PATH"
-# Brew
-export PATH="/opt/homebrew/bin:$PATH"
 
