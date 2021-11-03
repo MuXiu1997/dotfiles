@@ -1,3 +1,7 @@
+# { Proxy
+    alias p="ALL_PROXY=socks5://127.0.0.1:1080"
+# }
+
 # { Cd
     alias ..="cd .."
     alias -- -="cd -"
@@ -7,16 +11,16 @@
     alias ls="exa --icons --color='always' --time-style=long-iso"
 # }
 
-# { Vim
-    if type nvim &>/dev/null;
-        then alias vim='nvim'
-    fi
-# }
-
 # { Zsh
     alias zrconf="$EDITOR ~/.zshrc"
     alias zpconf="$EDITOR ~/.zprofile"
     alias zeconf="$EDITOR ~/.zshenv"
+# }
+
+# { Vim
+    if type nvim &>/dev/null;
+        then alias vim='nvim'
+    fi
 # }
 
 # { Chezmoi
