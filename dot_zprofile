@@ -9,7 +9,6 @@
 # { Nvm
     export NVM_DIR="$HOME/.nvm"
     [ -s "$(brew --prefix)/opt/nvm/nvm.sh" ] && . "$(brew --prefix)/opt/nvm/nvm.sh"  # This loads nvm
-    [ -s "$(brew --prefix)/opt/nvm/etc/bash_completion.d/nvm" ] && . "$(brew --prefix)/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 # }
 
 # { Pyenv
@@ -24,3 +23,9 @@
     if (( $+commands[zoxide] )); then eval "$(zoxide init zsh)";else echo 'zoxide: command not found, please install it from https://github.com/ajeetdsouza/zoxide'; fi
 # }
 
+
+# { Update completions
+    if type update-completions &>/dev/null; then
+        update-completions
+    fi
+# }

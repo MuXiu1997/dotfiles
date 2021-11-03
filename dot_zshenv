@@ -15,6 +15,8 @@
     export PATH="/opt/homebrew/bin:$PATH"
 # }
 
+export ZSH_CONFIG="$HOME/.config/zsh"
+
 export FPATH="$HOME/.config/zsh/completions:$FPATH"
 
 export PATH="$HOME/bin:$PATH"

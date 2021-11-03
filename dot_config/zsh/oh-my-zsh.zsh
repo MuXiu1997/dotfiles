@@ -65,6 +65,9 @@ HIST_STAMPS="yyyy-mm-dd"
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
+# Path to the cache folder.
+ZSH_CACHE_DIR="$ZSH/cache"
+
 # Path to the completion cache file.
 ZSH_COMPDUMP="$ZSH_CACHE_DIR/.zcompdump"
 
@@ -73,7 +76,7 @@ ZSH_COMPDUMP="$ZSH_CACHE_DIR/.zcompdump"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(command-not-found ranger-zoxide zsh-completions zsh-vi-mode fzf-tab zsh-autosuggestions zsh-syntax-highlighting)
+plugins=(command-not-found ranger-zoxide zsh-vi-mode fzf-tab zsh-autosuggestions zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 

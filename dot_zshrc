@@ -5,8 +5,6 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-export ZSH_CONFIG="$HOME/.config/zsh"
-
 # Oh my zsh
 [[ ! -f "$ZSH_CONFIG/oh-my-zsh.zsh" ]] || source "$ZSH_CONFIG/oh-my-zsh.zsh" 
 
