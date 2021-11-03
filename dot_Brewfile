@@ -13,6 +13,8 @@ brew "bottom"
 brew "chezmoi"
 # Top-like interface for container metrics
 brew "ctop"
+# Load/unload environment variables based on $PWD
+brew "direnv"
 # Modern replacement for 'ls'
 brew "exa"
 # Simple, fast and user-friendly alternative to find
@@ -149,11 +151,6 @@ cask "typora"
 cask "wechat"
 # Weixin DevTools for Official Account and Mini Program development
 cask "wechatwebdevtools"
-mas "iMovie 剪辑", id: 408981434
-mas "Keynote 讲演", id: 409183694
-mas "Numbers 表格", id: 409203825
-mas "Pages 文稿", id: 409201541
 mas "Spark", id: 1176895641
 mas "WPS Office", id: 1443749478
 mas "Xcode", id: 497799835
-mas "库乐队", id: 682658836
