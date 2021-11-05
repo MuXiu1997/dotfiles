@@ -33,18 +33,3 @@ class mkcd(Command):
         else:
             self.fm.notify('file/directory exists!', bad=True)
 
-
-class chezmoi_edit(Command):
-    """
-    chezmoi_edit
-
-    Edit the highlighted file with chezmoi
-    """
-
-    def execute(self):
-        from ranger.ext.spawn import check_output
-        thisfile = self.fm.thisfile
-        if thisfile is None:
-            self.fm.notify('no highlighted file', bad=True)
-            return
-        self.fm.execute_command('chezmoi edit --apply {}'.format(thisfile.path))
