@@ -109,6 +109,8 @@ cask "iina"
 cask "iterm2"
 # JetBrains tools manager
 cask "jetbrains-toolbox"
+# Open-source screen recorder built with web technology
+cask "kap"
 # Open-source keystroke visualizer
 cask "keycastr"
 # Snippet management app
