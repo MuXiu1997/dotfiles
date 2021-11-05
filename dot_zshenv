@@ -1,3 +1,9 @@
+export ZSH_CONFIG="$HOME/.config/zsh"
+
+export FPATH="$HOME/.config/zsh/completions:$FPATH"
+
+export PATH="$HOME/bin:$PATH"
+
 # { EDITOR
     if type nvim &>/dev/null; then
         export EDITOR='nvim'
@@ -6,18 +12,16 @@
     fi
 # }
 
-# { Ranger
-    export RANGER_LOAD_DEFAULT_RC="FALSE"
-# {
-
 # { Brew
     export HOMEBREW_NO_AUTO_UPDATE="true"
     export PATH="/opt/homebrew/bin:$PATH"
 # }
 
-export ZSH_CONFIG="$HOME/.config/zsh"
+# { Ranger
+    export RANGER_LOAD_DEFAULT_RC="FALSE"
+# {
 
-export FPATH="$HOME/.config/zsh/completions:$FPATH"
-
-export PATH="$HOME/bin:$PATH"
+# {
+    export LG_CONFIG_FILE="$HOME/.config/lazygit/config.yml"
+# }
 
