@@ -5,9 +5,12 @@ import subprocess
 
 
 def get_outdated(_type, color):
+    env = os.environ
+    env['HOMEBREW_NO_AUTO_UPDATE'] = 'true'
     cmd = subprocess.Popen(
         ['brew', 'outdated', '-v', '--{}'.format(_type), ],
-        stdout=subprocess.PIPE
+        stdout=subprocess.PIPE,
+        env=env
     )
     stdout, _ = cmd.communicate()
     output = stdout.strip().decode()
@@ -19,18 +22,26 @@ def get_outdated(_type, color):
     return list(map(format_line, output.splitlines()))
 
 
-outdated = [*get_outdated('cask', 33), *get_outdated('formula', 34)]
+if __name__ == '__main__':
+    brew_update_cmd = subprocess.Popen(
+        ['brew', 'update'],
+        stdout=subprocess.PIPE,
+    )
+    brew_update_cmd_stdout, _ = brew_update_cmd.communicate()
+    print(brew_update_cmd_stdout.decode())
 
-fzf_cmd = subprocess.Popen(
-    ['fzf', '--ansi', '-m'],
-    stdin=subprocess.PIPE,
-    stdout=subprocess.PIPE
-)
-fzf_cmd_stdout, _ = fzf_cmd.communicate('\n'.join(outdated).encode())
-if fzf_cmd.returncode != 0:
-    exit(fzf_cmd.returncode)
+    outdated = [*get_outdated('cask', 33), *get_outdated('formula', 34)]
 
-selected = [l.split(' ')[0] for l in fzf_cmd_stdout.decode().splitlines()]
+    fzf_cmd = subprocess.Popen(
+        ['fzf', '--ansi', '-m'],
+        stdin=subprocess.PIPE,
+        stdout=subprocess.PIPE
+    )
+    fzf_cmd_stdout, _ = fzf_cmd.communicate('\n'.join(outdated).encode())
+    if fzf_cmd.returncode != 0:
+        exit(fzf_cmd.returncode)
 
-print('brew upgrade --no-quarantine -- {}'.format(' '.join(selected)))
-os.execvp('brew', ['brew', 'upgrade', '--no-quarantine', '--', *selected])
+    selected = [l.split(' ')[0] for l in fzf_cmd_stdout.decode().splitlines()]
+
+    print('brew upgrade --no-quarantine -- {}'.format(' '.join(selected)))
+    os.execvp('brew', ['brew', 'upgrade', '--no-quarantine', '--', *selected])
