@@ -13,15 +13,18 @@ export PATH="$HOME/bin:$PATH"
 # }
 
 # { Brew
-    export HOMEBREW_NO_AUTO_UPDATE="true"
     export PATH="/opt/homebrew/bin:$PATH"
 # }
 
 # { Ranger
     export RANGER_LOAD_DEFAULT_RC="FALSE"
 # {
+#
+# { Git
+    export GIT_CONFIG_GLOBAL="$HOME/.config/git/config"
+# }
 
-# {
+# { Lazygit
     export LG_CONFIG_FILE="$HOME/.config/lazygit/config.yml"
 # }
 
