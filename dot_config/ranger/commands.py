@@ -1,5 +1,6 @@
 from ranger.api.commands import Command
 
+
 class mkcd(Command):
     """
     :mkcd <dirname>
@@ -30,4 +31,20 @@ class mkcd(Command):
                     self.fm.thisdir.load_content(schedule=False)
                     self.fm.execute_console('scout -ae ^{}$'.format(s))
         else:
-            self.fm.notify("file/directory exists!", bad=True)
+            self.fm.notify('file/directory exists!', bad=True)
+
+
+class chezmoi_edit(Command):
+    """
+    chezmoi_edit
+
+    Edit the highlighted file with chezmoi
+    """
+
+    def execute(self):
+        from ranger.ext.spawn import check_output
+        thisfile = self.fm.thisfile
+        if thisfile is None:
+            self.fm.notify('no highlighted file', bad=True)
+            return
+        self.fm.execute_command('chezmoi edit --apply {}'.format(thisfile.path))
