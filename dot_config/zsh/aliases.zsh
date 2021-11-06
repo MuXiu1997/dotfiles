@@ -12,9 +12,9 @@
 # }
 
 # { Zsh
-    alias zrconf="$EDITOR ~/.zshrc"
-    alias zpconf="$EDITOR ~/.zprofile"
-    alias zeconf="$EDITOR ~/.zshenv"
+    alias zrconf="$EDITOR $ZDOTDIR/.zshrc"
+    alias zpconf="$EDITOR $ZDOTDIR/.zprofile"
+    alias zeconf="$EDITOR $ZDOTDIR/.zshenv"
 # }
 
 # { Vim
