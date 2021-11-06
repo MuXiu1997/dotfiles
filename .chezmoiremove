@@ -1,3 +1,5 @@
 .zshrc
 .zprofile
 .zsh_history
+
+.tmux.conf

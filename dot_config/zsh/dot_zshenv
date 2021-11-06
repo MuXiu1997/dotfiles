@@ -10,6 +10,10 @@
     export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 # }
 
+# { Tmux
+    export TMUX_PLUGIN_MANAGER_PATH="$XDG_CONFIG_HOME/tmux/plugins"
+# }
+
 export FPATH="$HOME/.config/zsh/completions:$FPATH"
 
 export PATH="$HOME/bin:$PATH"
