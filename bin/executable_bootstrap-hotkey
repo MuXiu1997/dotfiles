@@ -3,6 +3,7 @@ import os
 import subprocess
 
 tmux = '/opt/homebrew/bin/tmux'
+zsh = '/bin/zsh'
 HotKey = 'HotKey'
 
 has_hotkey_session = subprocess.run(
@@ -15,4 +16,4 @@ has_hotkey_session = subprocess.run(
 if has_hotkey_session:
     os.execv(tmux, [tmux, 'a', '-t', HotKey])
 else:
-    os.execv(tmux, [tmux, 'new', '-s', HotKey])
+    os.execv(zsh, [zsh, '-cil', 'tmux new -s {}'.format(HotKey)])
