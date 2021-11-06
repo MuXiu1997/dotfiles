@@ -21,7 +21,7 @@ export HISTFILE="$XDG_STATE_HOME/zsh/history"
 zvm_after_init_commands+=("[[ ! -f $XDG_CONFIG_HOME/fzf.zsh ]] || source $XDG_CONFIG_HOME/fzf.zsh") # https://github.com/jeffreytse/zsh-vi-mode#execute-extra-commands
 
 # Fzf-tab
-zvm_after_init_commands+=('[[ ! -f ~/.fzf-tab.zsh ]] || source ~/.fzf-tab.zsh')
+zvm_after_init_commands+=("[[ ! -f $XDG_CONFIG_HOME/fzf-tab.zsh ]] || source $XDG_CONFIG_HOME/fzf-tab.zsh")
 
 # Iterm2
 [[ ! -f "${HOME}/.iterm2_shell_integration.zsh" ]] || source "${HOME}/.iterm2_shell_integration.zsh"
