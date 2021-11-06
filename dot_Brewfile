@@ -5,6 +5,10 @@ tap "homebrew/core", "https://github.com/Homebrew/homebrew-core.git"
 tap "vldmrkl/formulae"
 # Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
+# Command-line interface for SQLite
+brew "sqlite"
+# Interpreted, interactive, object-oriented programming language
+brew "python@3.9"
 # Secure and free password manager for all of your devices
 brew "bitwarden-cli"
 # Yet another cross-platform graphical process/system monitor
@@ -33,6 +37,8 @@ brew "golangci-lint"
 brew "gost"
 # Like cURL, but for gRPC
 brew "grpcurl"
+# HTTP/2 C Library
+brew "nghttp2"
 # System monitoring dashboard for terminal
 brew "gtop"
 # Simple terminal UI for git commands
@@ -57,14 +63,8 @@ brew "nvm"
 brew "protobuf"
 # Python version management
 brew "pyenv"
-# Command-line interface for SQLite
-brew "sqlite"
-# Interpreted, interactive, object-oriented programming language
-brew "python@3.9"
 # File browser
 brew "ranger"
-# Reattach process (e.g., tmux) to background
-brew "reattach-to-user-namespace"
 # Search tool like grep and The Silver Searcher
 brew "ripgrep"
 # Utility that provides fast incremental file transfer
