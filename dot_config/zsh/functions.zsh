@@ -1,3 +1,12 @@
+r() {
+    local temp_file="$(mktemp -t "ranger_cd.XXXXXXXXXX")"
+    ranger-zoxide --choosedir "$temp_file" "$@"
+    if local choosedir="$(cat -- "$temp_file")" && [ -n "$choosedir" ] && [ "$choosedir" != "$PWD" ]; then
+        cd -- "$choosedir"
+    fi
+    rm -f -- "$temp_file"
+}
+
 # List Port
 pls() {
     local command="lsof -i -nP 2> /dev/null | awk '{if ( 1<NR ) {print}}'"
