@@ -45,12 +45,6 @@
   exact: true
   stripComponents: 1
   refreshPeriod: "168h"
-.config/oh-my-zsh/custom/plugins/ranger-zoxide:
-  type: "archive"
-  url: "https://github.com/MuXiu1997/ranger-zoxide/archive/main.tar.gz"
-  exact: true
-  stripComponents: 1
-  refreshPeriod: "168h"
 .config/oh-my-zsh/custom/plugins/fzf-tab:
   type: "archive"
   url: "https://github.com/Aloxaf/fzf-tab/archive/master.tar.gz"

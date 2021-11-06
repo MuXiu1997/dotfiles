@@ -76,7 +76,7 @@ ZSH_COMPDUMP="$ZSH_CACHE_DIR/.zcompdump"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(command-not-found ranger-zoxide zsh-vi-mode fzf-tab zsh-autosuggestions zsh-syntax-highlighting)
+plugins=(command-not-found zsh-vi-mode fzf-tab zsh-autosuggestions zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
