@@ -83,6 +83,13 @@
   exact: true
   stripComponents: 1
   refreshPeriod: "168h"
+.config/ranger/plugins/ranger-zoxide:
+  type: "archive"
+  url: "https://github.com/jchook/ranger-zoxide/archive/master.tar.gz"
+  exact: true
+  stripComponents: 1
+  refreshPeriod: "168h"
+
 
 # Vim-plug
 .local/share/nvim/site/autoload/plug.vim:
