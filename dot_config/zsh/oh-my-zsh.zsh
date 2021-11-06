@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH=$HOME/.oh-my-zsh
+export ZSH="$XDG_CONFIG_HOME/oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -66,7 +66,7 @@ HIST_STAMPS="yyyy-mm-dd"
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
 # Path to the cache folder.
-ZSH_CACHE_DIR="$ZSH/cache"
+ZSH_CACHE_DIR="$XDG_CACHE_HOME/ohmyzsh"
 
 # Path to the completion cache file.
 ZSH_COMPDUMP="$ZSH_CACHE_DIR/.zcompdump"
