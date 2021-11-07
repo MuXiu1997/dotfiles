@@ -9,6 +9,9 @@
 {{/* git XDG */ -}}
 .gitconfig
 
+{{/* nvm XDG */ -}}
+.nvm
+
 {{/* pyenv XDG */ -}}
 .pyenv
 
