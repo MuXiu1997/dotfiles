@@ -1,10 +1,12 @@
 [delta]
-    features = nord nord-minus nord-plus line-numbers no-header
+    features = default
 
-[delta "lazygit"]
+[delta "default"]
     features = nord nord-minus nord-plus line-numbers no-hunk-header
 
-    paging = never
+[delta "lazygit"]
+    features = default no-paging
+
     line-fill-method = spaces
 
     minus-style = syntax "#572c30"
@@ -32,4 +34,7 @@
 
 [delta "no-hunk-header"]
     hunk-header-style = omit
+
+[delta "no-paging"]
+    paging = never
 
