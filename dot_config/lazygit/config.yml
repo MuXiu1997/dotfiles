@@ -1,8 +1,6 @@
 git:
   paging:
     colorArg: always
-    # bug https://github.com/jesseduffield/lazygit/issues/1564
-    # pager: >
-    #   delta --features lazygit
-    #   --max-line-length "$((2 * {{columnWidth}} + 3))"
-
+    pager: >
+      delta --features lazygit
+      --max-line-length "$((2 * {{columnWidth}} + 3))"
