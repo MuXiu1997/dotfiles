@@ -1,0 +1,16 @@
+{{ $email := promptString "email" -}}
+data:
+  email: {{ $email | quote }}
+
+diff:
+  command: delta
+  args: ['--features', 'default no-paging']
+  exclude: 
+    - scripts
+
+interpreters:
+  py:
+    command: python
+  sh:
+    command: sh
+
