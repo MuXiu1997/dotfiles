@@ -1,4 +1,9 @@
+export FPATH="$HOME/.config/zsh/completions:$FPATH"
+
+export PATH="$HOME/bin:$PATH"
+
 # { Homebrew
+    export PATH="/opt/homebrew/bin:$PATH"
     if type brew &>/dev/null; then
         eval "$(brew shellenv)"
         export FPATH="$(brew --prefix)/share/zsh/site-functions:$FPATH"
@@ -6,14 +11,8 @@
     fi
 # }
 
-# { Nvm
-    export NVM_DIR="$HOME/.nvm"
-    [ -s "$(brew --prefix)/opt/nvm/nvm.sh" ] && . "$(brew --prefix)/opt/nvm/nvm.sh"  # This loads nvm
-# }
-
 # { Pyenv
     if type pyenv &>/dev/null; then
-        PATH="$(pyenv root)/shims:$PATH"
         eval "$(pyenv init --path)"
     fi
 # }
@@ -31,3 +30,4 @@
         update-completions
     fi
 # }
+

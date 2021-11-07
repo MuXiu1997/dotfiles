@@ -6,6 +6,14 @@
     # export XDG_RUNTIME_DIR="/run/user/$UID"
 # }
 
+# { EDITOR
+    if type nvim &>/dev/null; then
+        export EDITOR='nvim'
+    else
+        export EDITOR='vim'
+    fi
+# }
+
 # { Zsh
     export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 # }
@@ -18,22 +26,6 @@
     export _ZO_DATA_DIR="$XDG_DATA_HOME"
 # }
 
-export FPATH="$HOME/.config/zsh/completions:$FPATH"
-
-export PATH="$HOME/bin:$PATH"
-
-# { EDITOR
-    if type nvim &>/dev/null; then
-        export EDITOR='nvim'
-    else
-        export EDITOR='vim'
-    fi
-# }
-
-# { Brew
-    export PATH="/opt/homebrew/bin:$PATH"
-# }
-
 # { Ranger
     export RANGER_LOAD_DEFAULT_RC="FALSE"
 # {
@@ -44,5 +36,17 @@ export PATH="$HOME/bin:$PATH"
 
 # { Lazygit
     export LG_CONFIG_FILE="$HOME/.config/lazygit/config.yml"
+# }
+
+# { Nvm
+    export NVM_DIR="$XDG_DATA_HOME/nvm"
+# }
+
+# { Go
+    export GOPATH="$XDG_DATA_HOME/go"
+# }
+
+# { Pyenv
+    export PYENV_ROOT="$XDG_DATA_HOME/pyenv"
 # }
 
