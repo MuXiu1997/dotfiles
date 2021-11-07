@@ -3,4 +3,5 @@
 .zprofile
 .zsh_history
 
+{{/* tmux XDG */ -}}
 .tmux.conf
