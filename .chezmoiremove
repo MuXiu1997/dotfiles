@@ -5,3 +5,6 @@
 
 {{/* tmux XDG */ -}}
 .tmux.conf
+
+{{/* git XDG */ -}}
+.gitconfig
