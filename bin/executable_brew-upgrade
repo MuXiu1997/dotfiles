@@ -22,12 +22,7 @@ def get_outdated(_type, color):
 
 
 if __name__ == '__main__':
-    brew_update_cmd = subprocess.Popen(
-        ['brew', 'update'],
-        stdout=subprocess.PIPE,
-    )
-    brew_update_cmd_stdout, _ = brew_update_cmd.communicate()
-    print(brew_update_cmd_stdout.decode())
+    subprocess.run(['brew', 'update'])
 
     outdated = [*get_outdated('cask', 33), *get_outdated('formula', 34)]
 
