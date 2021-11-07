@@ -1,3 +1,4 @@
+{{- /* zsh XDG */ -}}
 .zshrc
 .zprofile
 .zsh_history
