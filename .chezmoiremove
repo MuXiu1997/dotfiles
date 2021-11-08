@@ -16,6 +16,10 @@
 .npm
 .npmrc
 
+{{/* pnpm XDG */ -}}
+.pnpm-state
+.pnpm-store
+
 {{/* pyenv XDG */ -}}
 .pyenv
 

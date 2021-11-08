@@ -7,3 +7,6 @@ cache=${XDG_CACHE_HOME}/npm
 tmp=${XDG_RUNTIME_DIR}/npm
 init-module=${XDG_CONFIG_HOME}/npm/config/npm-init.js
 
+# pnpm
+store-dir=${XDG_DATA_HOME}/pnpm-store
+
