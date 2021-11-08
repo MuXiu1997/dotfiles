@@ -3,7 +3,7 @@
     export XDG_CACHE_HOME="$HOME/.cache"
     export XDG_DATA_HOME="$HOME/.local/share"
     export XDG_STATE_HOME="$HOME/.local/state"
-    # export XDG_RUNTIME_DIR="/run/user/$UID"
+    export XDG_RUNTIME_DIR="$TMPDIR"
 # }
 
 # { EDITOR
@@ -40,6 +40,10 @@
 
 # { Nvm
     export NVM_DIR="$XDG_DATA_HOME/nvm"
+# }
+
+# { Npm
+    export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
 # }
 
 # { Go
