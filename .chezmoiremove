@@ -12,6 +12,10 @@
 {{/* nvm XDG */ -}}
 .nvm
 
+{{/* npm XDG */ -}}
+.npm
+.npmrc
+
 {{/* pyenv XDG */ -}}
 .pyenv
 
