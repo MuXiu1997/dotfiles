@@ -1,13 +1,7 @@
-export FPATH="$HOME/.config/zsh/completions:$FPATH"
-
-export PATH="$HOME/bin:$PATH"
-
 # { Homebrew
-    export PATH="/opt/homebrew/bin:$PATH"
     if type brew &>/dev/null; then
         eval "$(brew shellenv)"
-        export FPATH="$(brew --prefix)/share/zsh/site-functions:$FPATH"
-        export PATH="$(brew --prefix)/bin:$PATH"
+        export FPATH="$FPATH:$HOMEBREW_PREFIX/share/zsh/site-functions"
     fi
 # }
 
@@ -15,14 +9,6 @@ export PATH="$HOME/bin:$PATH"
     if type pyenv &>/dev/null; then
         eval "$(pyenv init --path)"
     fi
-# }
-
-# { Direnv
-    eval "$(direnv hook zsh)"
-# }
-
-# { Zoxide
-    if (( $+commands[zoxide] )); then eval "$(zoxide init zsh)";else echo 'zoxide: command not found, please install it from https://github.com/ajeetdsouza/zoxide'; fi
 # }
 
 # { Update completions
