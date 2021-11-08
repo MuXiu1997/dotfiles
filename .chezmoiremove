@@ -20,6 +20,9 @@
 .pnpm-state
 .pnpm-store
 
+{{/* go XDG */ -}}
+go
+
 {{/* pyenv XDG */ -}}
 .pyenv
 
