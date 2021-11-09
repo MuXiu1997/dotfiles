@@ -1,0 +1,42 @@
+realpath() {
+    [[ $1 = /* ]] && echo "$1" || echo "$PWD/${1#./}"
+}
+
+layout_virtualenv() {
+    local venv_path=$(realpath "${1:-venv}")
+    local activate_path="${venv_path}/bin/activate"
+    if [[ ! -f "$activate_path" ]]; then
+        log_error "virtualenv: No ${activate_path} found."
+        exit 2
+    fi
+    source ${activate_path}
+    # https://github.com/direnv/direnv/wiki/PS1
+    unset PS1
+}
+
+layout_pyenv() {
+    local local_python_version=$(head .python-version 2>/dev/null)
+    local python_version=${1:-${local_python_version:-$(pyenv global)}}
+    pyenv local ${python_version}
+}
+
+layout_python() {
+    layout_pyenv $1
+    layout_virtualenv $2
+}
+
+layout_nvm() {
+    local local_node_version=$(head .node-version 2>/dev/null)
+    local node_version=${1:-$local_node_version}
+    if [[ -z "$node_version" ]]; then
+        log_error "nvm: No node version found."
+        exit 2
+    fi
+    source "$(brew --prefix)/opt/nvm/nvm.sh"
+    nvm use "$node_version"
+}
+
+layout_node() {
+    PATH_add node_modules/.bin
+    layout_nvm $1
+}
