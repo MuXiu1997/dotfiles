@@ -9,6 +9,9 @@
 {{/* git XDG */ -}}
 .gitconfig
 
+{{/* fzf XDG */ -}}
+.fzf.zsh
+
 {{/* nvm XDG */ -}}
 .nvm
 
