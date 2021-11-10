@@ -25,7 +25,7 @@ source "/opt/homebrew/opt/fzf/shell/key-bindings.zsh"
     ${FZF_DEFAULT_COLOR}
     "
 
-    __fzf_funtions="cat ~/.fzf.zsh | grep -E '^####' | cut -c5-"
+    __fzf_funtions="cat ~/.config/fzf.zsh | grep -E '^####' | cut -c5-"
 # }
 
 # { CTRL-T
