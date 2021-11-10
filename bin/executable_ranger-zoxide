@@ -23,24 +23,28 @@ def y_or_n(msg):
             return True
 
 
-parser = argparse.ArgumentParser(description='ranger + zoxide.')
-parser.add_argument(
-    '--choosedir',
-    help='makes ranger act like a file chooser. When opening a file, it will quit and write the name of the selected file to OUTFILE.',
-)
-parser.add_argument('-i', '--interactive', action='store_true', help='use interactive selection')
-parser.add_argument('keywords', metavar='KEYWORDS', nargs='*')
-args = parser.parse_args()
+def parse_args():
+    parser = argparse.ArgumentParser(description='ranger + zoxide.')
+    parser.add_argument(
+        '--choosedir',
+        help='makes ranger act like a file chooser. When opening a file, it will quit and write the name of the selected file to OUTFILE.',
+    )
+    parser.add_argument('-i', '--interactive', action='store_true', help='use interactive selection')
+    parser.add_argument('keywords', metavar='KEYWORDS', nargs='*')
+    return parser.parse_args()
 
-ranger_start_dir = os.getcwd()
 
-zoxide_query_args = []
-if args.interactive:
-    zoxide_query_args.append('-i')
-if len(args.keywords) != 0:
-    zoxide_query_args.extend(args.keywords)
+def get_ranger_start_dir(args):
+    zoxide_query_args = []
 
-if len(zoxide_query_args) != 0:
+    if args.interactive:
+        zoxide_query_args.append('-i')
+    if len(args.keywords) != 0:
+        zoxide_query_args.extend(args.keywords)
+
+    if len(zoxide_query_args) == 0:
+        return os.getcwd()
+
     zoxide_query = subprocess.Popen(
         ['zoxide', 'query', *zoxide_query_args],
         stdout=subprocess.PIPE,
@@ -49,16 +53,33 @@ if len(zoxide_query_args) != 0:
     zoxide_query_stdout, _ = zoxide_query.communicate()
 
     if zoxide_query.returncode == 130:
-        exit(130)
+        return False
     if zoxide_query.returncode == 1:
         if not y_or_n('\033[0;33mno match found, use $PWD or not?\033[0m \033[0;29m[y/n]\033[0m'):
-            exit(0)
+            return None
+        return os.getcwd()
     if zoxide_query.returncode == 0:
-        ranger_start_dir = zoxide_query_stdout.decode().strip()
+        return zoxide_query_stdout.decode().strip()
 
-ranger_args = []
-if args.choosedir is not None:
-    ranger_args.extend(['--choosedir', args.choosedir])
-ranger_args.append(ranger_start_dir)
 
-os.execvp('ranger', ['ranger', *ranger_args])
+def get_ranger_args(start_dir, choose_dir):
+    if choose_dir is not None:
+        return ['--choosedir', choose_dir, start_dir]
+    return [start_dir]
+
+
+def main():
+    args = parse_args()
+    start_dir = get_ranger_start_dir(args)
+    if start_dir is None:
+        exit(0)
+    if not start_dir:
+        exit(130)
+    choose_dir = args.choosedir
+
+    ranger_args = get_ranger_args(start_dir, choose_dir)
+    os.execvp('ranger', ['ranger', *ranger_args])
+
+
+if __name__ == '__main__':
+    main()
