@@ -53,6 +53,10 @@ fi
     eval "$(direnv hook zsh)"
 # }
 
+# Top Priority
+local custom_bin="$HOME/bin"
+path=($custom_bin $path)
+
 # To customize prompt, run `p10k configure` or edit $ZDOTDIR/.p10k.zsh.
 [[ ! -f "$ZDOTDIR/p10k.zsh" ]] || source "$ZDOTDIR/p10k.zsh"
 

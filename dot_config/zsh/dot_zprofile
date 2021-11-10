@@ -1,6 +1,7 @@
 # { Homebrew
-    if type brew &>/dev/null; then
-        eval "$(brew shellenv)"
+    local brew='/opt/homebrew/bin/brew'
+    if [[ -f "$brew" ]]; then
+        eval "$($brew shellenv)"
         export FPATH="$FPATH:$HOMEBREW_PREFIX/share/zsh/site-functions"
     fi
 # }

@@ -55,11 +55,7 @@
 # }
 
 typeset -U path fpath PATH FPATH
-function () {
-    local custom_bin="$HOME/bin"
-    local homebrew_bin="/opt/homebrew/bin"
-    [[ ${path[@]/${custom_bin}/} != ${path[@]} ]] || path=($custom_bin $path)
-    [[ ${path[@]/${homebrew_bin}/} != ${path[@]} ]] || path=($homebrew_bin $path)
-    fpath=($fpath $XDG_DATA_HOME/zsh/site-functions)
-}
+local custom_bin="$HOME/bin"
+path=($custom_bin $path)
+fpath=($fpath $XDG_DATA_HOME/zsh/site-functions)
 
