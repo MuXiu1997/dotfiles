@@ -1,3 +1,5 @@
+import os
+
 from ranger.api.commands import Command
 
 
@@ -33,3 +35,26 @@ class mkcd(Command):
         else:
             self.fm.notify('file/directory exists!', bad=True)
 
+
+class du(Command):
+    def execute(self):
+        import subprocess
+        import tempfile
+        import os
+
+        width = str(self.fm.ui.termsize[1])
+
+        selection = [fl.path for fl in self.fm.thistab.get_selection()]
+
+        dust = subprocess.Popen(
+            ['dust', '-r', '-w', width, *selection],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.DEVNULL
+        )
+        dust_stdout, _ = dust.communicate()
+
+        with tempfile.NamedTemporaryFile('wb', prefix='ranger_command_du_dust_output.') as tf:
+            tf.write(dust_stdout)
+            tf.flush()
+            less = self.fm.execute_command(['less', '-Rmc', '--', tf.name], stderr=subprocess.DEVNULL)
+            less.communicate()
