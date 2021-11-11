@@ -19,6 +19,8 @@ brew "chezmoi"
 brew "ctop"
 # Load/unload environment variables based on $PWD
 brew "direnv"
+# More intuitive version of du in rust
+brew "dust"
 # Modern replacement for 'ls'
 brew "exa"
 # Simple, fast and user-friendly alternative to find
@@ -41,6 +43,8 @@ brew "grpcurl"
 brew "nghttp2"
 # System monitoring dashboard for terminal
 brew "gtop"
+# Lazier way to manage everything docker
+brew "lazydocker"
 # Simple terminal UI for git commands
 brew "lazygit"
 # Clone of ls with colorful output, file type icons, and more
