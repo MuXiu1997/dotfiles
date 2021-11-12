@@ -1,19 +1,19 @@
-.config/oh-my-zsh:
+{{- $xdgConfigHome := ".config" -}}
+{{- $ohMyZsh := (print $xdgConfigHome "/oh-my-zsh") -}}
+{{- $ohMyZshThemes := (print $ohMyZsh "/custom/themes") -}}
+{{- $ohMyZshPlugins := (print $ohMyZsh "/custom/plugins") -}}
+{{- $ohMyTmux := (print $xdgConfigHome "/oh-my-tmux") -}}
+{{- $rangerPlugins := (print $xdgConfigHome "/ranger/plugins") -}}
+
+{{ $ohMyZsh -}}:
   type: "archive"
   url: "https://github.com/ohmyzsh/ohmyzsh/archive/master.tar.gz"
   exact: true
   stripComponents: 1
   refreshPeriod: "168h"
 
-.config/oh-my-tmux:
-  type: "archive"
-  url: "https://github.com/gpakosz/.tmux/archive/master.tar.gz"
-  exact: true
-  stripComponents: 1
-  refreshPeriod: "168h"
-
 # Oh-my-zsh themes
-.config/oh-my-zsh/custom/themes/powerlevel10k:
+{{ $ohMyZshThemes -}}/powerlevel10k:
   type: "archive"
   url: "https://github.com/romkatv/powerlevel10k/archive/master.tar.gz"
   exact: true
@@ -21,63 +21,70 @@
   refreshPeriod: "168h"
 
 # Oh-my-zsh plugins
-.config/oh-my-zsh/custom/plugins/zsh-syntax-highlighting:
+{{ $ohMyZshPlugins -}}/zsh-syntax-highlighting:
   type: "archive"
   url: "https://github.com/zsh-users/zsh-syntax-highlighting/archive/master.tar.gz"
   exact: true
   stripComponents: 1
   refreshPeriod: "168h"
-.config/oh-my-zsh/custom/plugins/zsh-autosuggestions:
+{{ $ohMyZshPlugins -}}/zsh-autosuggestions:
   type: "archive"
   url: "https://github.com/zsh-users/zsh-autosuggestions/archive/master.tar.gz"
   exact: true
   stripComponents: 1
   refreshPeriod: "168h"
-.config/oh-my-zsh/custom/plugins/zsh-completions:
+{{ $ohMyZshPlugins -}}/zsh-completions:
   type: "archive"
   url: "https://github.com/zsh-users/zsh-completions/archive/master.tar.gz"
   exact: true
   stripComponents: 1
   refreshPeriod: "168h"
-.config/oh-my-zsh/custom/plugins/zsh-vi-mode:
+{{ $ohMyZshPlugins -}}/zsh-vi-mode:
   type: "archive"
   url: "https://github.com/jeffreytse/zsh-vi-mode/archive/master.tar.gz"
   exact: true
   stripComponents: 1
   refreshPeriod: "168h"
-.config/oh-my-zsh/custom/plugins/fzf-tab:
+{{ $ohMyZshPlugins -}}/fzf-tab:
   type: "archive"
   url: "https://github.com/Aloxaf/fzf-tab/archive/master.tar.gz"
   exact: true
   stripComponents: 1
   refreshPeriod: "168h"
 
+{{ $ohMyTmux -}}:
+  type: "archive"
+  url: "https://github.com/gpakosz/.tmux/archive/master.tar.gz"
+  exact: true
+  stripComponents: 1
+  refreshPeriod: "168h"
+
 # Ranger plugins
-.config/ranger/plugins/ranger_devicons:
+{{ $rangerPlugins -}}/ranger_devicons:
   type: "archive"
   url: "https://github.com/alexanderjeurissen/ranger_devicons/archive/main.tar.gz"
   exact: true
   stripComponents: 1
   refreshPeriod: "168h"
-.config/ranger/plugins/ranger_yoink:
+{{ $rangerPlugins -}}/ranger_yoink:
   type: "archive"
   url: "https://github.com/MuXiu1997/ranger-yoink/archive/main.tar.gz"
   exact: true
   stripComponents: 1
   refreshPeriod: "168h"
-.config/ranger/plugins/ranger_airdrop:
+{{ $rangerPlugins -}}/ranger_airdrop:
   type: "archive"
   url: "https://github.com/MuXiu1997/ranger-airdrop/archive/main.tar.gz"
   exact: true
   stripComponents: 1
   refreshPeriod: "168h"
-.config/ranger/plugins/ranger_fzf_filter:
+{{ $rangerPlugins -}}/ranger_fzf_filter:
   type: "archive"
   url: "https://github.com/MuXiu1997/ranger-fzf-filter/archive/main.tar.gz"
   exact: true
   stripComponents: 1
   refreshPeriod: "168h"
-.config/ranger/plugins/ranger-zoxide:
+{{ $rangerPlugins -}}/ranger-zoxide:
   type: "archive"
   url: "https://github.com/jchook/ranger-zoxide/archive/master.tar.gz"
   exact: true
