@@ -1,12 +1,9 @@
-import os
-
 from ranger.api.commands import Command
 
 
 class mkcd(Command):
     """
     :mkcd <dirname>
-
     Creates a directory with the name <dirname> and enters it.
     """
 
@@ -58,3 +55,4 @@ class du(Command):
             tf.flush()
             less = self.fm.execute_command(['less', '-Rmc', '--', tf.name], stderr=subprocess.DEVNULL)
             less.communicate()
+
