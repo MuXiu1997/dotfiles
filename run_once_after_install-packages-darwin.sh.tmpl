@@ -1,7 +1,7 @@
 {{- if (eq .chezmoi.os "darwin") -}}
-#!/bin/bash
+#!/bin/zsh
 set -e
 
 # install packages
-brew bundle --global -v --no-lock --no-upgrade
+brew bundle -v --no-lock --no-upgrade --file ~/.local/share/Brewfile
 {{ end -}}

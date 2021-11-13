@@ -1,0 +1,20 @@
+{{- if (eq .chezmoi.os "darwin") -}}
+#!/bin/zsh
+set -e
+
+# install homebrew
+if ! type brew &>/dev/null; then 
+    /bin/zsh -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi
+
+if ! type git &>/dev/null; then 
+    brew install git
+fi
+
+if ! type bw &>/dev/null; then 
+    brew install bitwarden-cli
+fi
+
+bw login
+
+{{ end -}}
