@@ -1,5 +1,5 @@
 # { Proxy
-    alias p="ALL_PROXY=socks5://127.0.0.1:1080"
+    alias p="HTTPS_PROXY=socks5://127.0.0.1:1080 HTTP_PROXY=socks5://127.0.0.1:1080 ALL_PROXY=socks5://127.0.0.1:1080"
 # }
 
 # { Cd
@@ -41,4 +41,8 @@
 
 # { Tmux
     alias tkill="tmux kill-server"
+# }
+
+# { Bw
+    alias bwu="export BW_SESSION=\"\$(bw unlock --raw)\""
 # }
