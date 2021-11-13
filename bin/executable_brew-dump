@@ -2,7 +2,7 @@
 import subprocess
 import os
 
-Brewfile = os.path.join(os.path.expanduser('~'), '.Brewfile')
+Brewfile = os.path.join(os.path.expanduser('~'), '.local', 'share', 'Brewfile')
 
 mas_id_list = [
     '1176895641',  # Spark
