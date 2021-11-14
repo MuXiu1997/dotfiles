@@ -1,0 +1,42 @@
+{{ if (eq .chezmoi.os "darwin") -}}
+#!/bin/zsh
+
+set -eufo pipefail
+
+defaults write NSGlobalDomain InitialKeyRepeat -int 15
+defaults write NSGlobalDomain KeyRepeat -int 2
+defaults write -g ApplePressAndHoldEnabled -bool false
+
+defaults write com.apple.dock autohide -bool true
+defaults write com.apple.dock autohide-delay -float 0
+defaults write com.apple.dock autohide-time-modifier -float 0.5
+defaults write com.apple.dock orientation bottom
+defaults write com.apple.dock magnification -bool true
+
+for dockItemLabel in \
+	Launchpad \
+	Safari \
+	Mail \
+	FaceTime \
+	Messages \
+	Maps \
+	Photos \
+	Contacts \
+	Calendar \
+	Reminders \
+	Notes \
+	Music \
+	Podcasts \
+	TV \
+	News \
+	Numbers \
+	Keynote \
+	Pages \
+	"App Store" \
+	"System Preferences" ; do
+	dockutil --find "$dockItemLabel" >/dev/null && dockutil --no-restart --remove "$dockItemLabel"
+done
+
+killall Dock
+
+{{ end -}}

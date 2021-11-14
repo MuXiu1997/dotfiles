@@ -1,6 +1,7 @@
 {{- if (eq .chezmoi.os "darwin") -}}
 #!/bin/zsh
-set -e
+
+set -eufo pipefail
 
 # install packages
 brew bundle -v --no-lock --no-upgrade --file ~/.local/share/Brewfile
