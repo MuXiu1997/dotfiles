@@ -10,10 +10,6 @@ fi
     export HISTFILE="$XDG_STATE_HOME/zsh/history"
 # }
 
-zvm_config() {
-    ZVM_VI_HIGHLIGHT_BACKGROUND=#3B4252
-}
-
 # { Zsh
     # Zsh vi mode config
     # Must before oh-my-zsh.zsh
@@ -21,10 +17,6 @@ zvm_config() {
 
     # Oh my zsh
     [[ ! -f "$ZDOTDIR/oh-my-zsh.zsh" ]] || source "$ZDOTDIR/oh-my-zsh.zsh" 
-
-    # Zsh vi mode system clipboard patch
-    # Must after oh-my-zsh.zsh
-    [[ ! -f "$ZDOTDIR/zsh-vi-mode-patch.zsh" ]] || source "$ZDOTDIR/zsh-vi-mode-patch.zsh"
 
     [[ ! -f "$ZDOTDIR/aliases.zsh" ]] || source "$ZDOTDIR/aliases.zsh"
     [[ ! -f "$ZDOTDIR/functions.zsh" ]] || source "$ZDOTDIR/functions.zsh"
@@ -61,8 +53,6 @@ zvm_config() {
 # { Direnv
     eval "$(direnv hook zsh)"
 # }
-
-source "$XDG_CONFIG_HOME/zsh/zsh-vi-mode-patch.zsh"
 
 # Top Priority
 local custom_bin="$HOME/bin"
