@@ -46,8 +46,13 @@
     export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
 # }
 
+# { Ni
+    export NI_CONFIG_FILE="$XDG_CONFIG_HOME/ni/nirc"
+# }
+
 # { Go
     export GOPATH="$XDG_DATA_HOME/go"
+    export GOPROXY="https://goproxy.cn,direct"
 # }
 
 # { Pyenv
