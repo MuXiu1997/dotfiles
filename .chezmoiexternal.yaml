@@ -41,7 +41,7 @@
   refreshPeriod: "168h"
 {{ $ohMyZshPlugins -}}/zsh-vi-mode:
   type: "archive"
-  url: "https://github.com/jeffreytse/zsh-vi-mode/archive/master.tar.gz"
+  url: "https://github.com/muxiu1997/zsh-vi-mode/archive/main.tar.gz"
   exact: true
   stripComponents: 1
   refreshPeriod: "168h"
