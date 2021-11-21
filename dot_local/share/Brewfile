@@ -19,6 +19,8 @@ brew "chezmoi"
 brew "ctop"
 # Load/unload environment variables based on $PWD
 brew "direnv"
+# Tool for managing dock items
+brew "dockutil"
 # More intuitive version of du in rust
 brew "dust"
 # Modern replacement for 'ls'
@@ -37,6 +39,8 @@ brew "go"
 brew "golangci-lint"
 # GO Simple Tunnel - a simple tunnel written in golang
 brew "gost"
+# Command-line tool for generating regular expressions
+brew "grex"
 # Like cURL, but for gRPC
 brew "grpcurl"
 # HTTP/2 C Library
@@ -77,6 +81,8 @@ brew "rsync"
 brew "tldr"
 # Terminal multiplexer
 brew "tmux"
+# Program that allows you to count code, quickly
+brew "tokei"
 # Display directories as trees (with optional color/HTML output)
 brew "tree"
 # Vi 'workalike' with many additional features
