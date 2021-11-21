@@ -44,7 +44,7 @@ set idearefactormode=visual
 
 " { Windows
     nnoremap <TAB>m :action HideAllWindows<CR>
-    nnoremap <TAB>r :action ActivatenpmToolWindow<CR>:action ActivateMavenToolWindow<CR>
+    nnoremap <TAB>r :action ActivatenpmToolWindow<CR>:action ActivateMavenToolWindow<CR>:action ActivatemakeToolWindow<CR>
     nnoremap <TAB>g :action ActivateCommitToolWindow<CR>
     nnoremap <TAB>t :action ActivateTerminalToolWindow<CR>
 " }
