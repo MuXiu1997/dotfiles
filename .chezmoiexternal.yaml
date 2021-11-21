@@ -1,96 +1,42 @@
-{{- $xdgConfigHome := ".config" -}}
-{{- $ohMyZsh := (print $xdgConfigHome "/oh-my-zsh") -}}
-{{- $ohMyZshThemes := (print $ohMyZsh "/custom/themes") -}}
-{{- $ohMyZshPlugins := (print $ohMyZsh "/custom/plugins") -}}
-{{- $ohMyTmux := (print $xdgConfigHome "/oh-my-tmux") -}}
-{{- $rangerPlugins := (print $xdgConfigHome "/ranger/plugins") -}}
-
-{{ $ohMyZsh -}}:
-  type: "archive"
-  url: "https://github.com/ohmyzsh/ohmyzsh/archive/master.tar.gz"
+{{- define "gitHubRepoArchive" }}
+  {{- $url := printf "https://github.com/%s/archive/master.zip" .repo }}
+  {{- if (get . "latest") }}
+  {{- $url = printf "https://github.com/%s/archive/%s.zip" .repo (trim (gitHubLatestRelease .repo).TagName) }}
+  {{- else if (get . "branch") }}
+  {{- $url = printf "https://github.com/%s/archive/%s.zip" .repo .branch }}
+  {{- end }}
+  type: archive
+  url: {{ $url }}
   exact: true
   stripComponents: 1
-  refreshPeriod: "168h"
+  refreshPeriod: 168h
+{{- end -}}
+
+# Oh-my-zsh
+{{ .ohMyZshDir }}:
+  {{- template "gitHubRepoArchive" .ohMyZsh }}
 
 # Oh-my-zsh themes
-{{ $ohMyZshThemes -}}/powerlevel10k:
-  type: "archive"
-  url: "https://github.com/romkatv/powerlevel10k/archive/master.tar.gz"
-  exact: true
-  stripComponents: 1
-  refreshPeriod: "168h"
+{{ range .ohMyZshThemes -}}
+  {{- $.ohMyZshThemesDir -}}/{{ base .repo }}:
+  {{- template "gitHubRepoArchive" . }}
+{{ end }}
 
 # Oh-my-zsh plugins
-{{ $ohMyZshPlugins -}}/zsh-syntax-highlighting:
-  type: "archive"
-  url: "https://github.com/zsh-users/zsh-syntax-highlighting/archive/master.tar.gz"
-  exact: true
-  stripComponents: 1
-  refreshPeriod: "168h"
-{{ $ohMyZshPlugins -}}/zsh-autosuggestions:
-  type: "archive"
-  url: "https://github.com/zsh-users/zsh-autosuggestions/archive/master.tar.gz"
-  exact: true
-  stripComponents: 1
-  refreshPeriod: "168h"
-{{ $ohMyZshPlugins -}}/zsh-completions:
-  type: "archive"
-  url: "https://github.com/zsh-users/zsh-completions/archive/master.tar.gz"
-  exact: true
-  stripComponents: 1
-  refreshPeriod: "168h"
-{{ $ohMyZshPlugins -}}/zsh-vi-mode:
-  type: "archive"
-  url: "https://github.com/muxiu1997/zsh-vi-mode/archive/main.tar.gz"
-  exact: true
-  stripComponents: 1
-  refreshPeriod: "168h"
-{{ $ohMyZshPlugins -}}/fzf-tab:
-  type: "archive"
-  url: "https://github.com/Aloxaf/fzf-tab/archive/master.tar.gz"
-  exact: true
-  stripComponents: 1
-  refreshPeriod: "168h"
+{{ range .ohMyZshPlugins -}}
+  {{- $.ohMyZshPluginsDir -}}/{{ base .repo }}:
+  {{- template "gitHubRepoArchive" . }}
+{{ end }}
 
-{{ $ohMyTmux -}}:
-  type: "archive"
-  url: "https://github.com/muxiu1997/.tmux/archive/main.tar.gz"
-  exact: true
-  stripComponents: 1
-  refreshPeriod: "168h"
+# Oh-my-tmux
+{{ .ohMyTmuxDir }}:
+  {{- template "gitHubRepoArchive" .ohMyTmux }}
 
 # Ranger plugins
-{{ $rangerPlugins -}}/ranger_devicons:
-  type: "archive"
-  url: "https://github.com/alexanderjeurissen/ranger_devicons/archive/main.tar.gz"
-  exact: true
-  stripComponents: 1
-  refreshPeriod: "168h"
-{{ $rangerPlugins -}}/ranger_yoink:
-  type: "archive"
-  url: "https://github.com/MuXiu1997/ranger-yoink/archive/main.tar.gz"
-  exact: true
-  stripComponents: 1
-  refreshPeriod: "168h"
-{{ $rangerPlugins -}}/ranger_airdrop:
-  type: "archive"
-  url: "https://github.com/MuXiu1997/ranger-airdrop/archive/main.tar.gz"
-  exact: true
-  stripComponents: 1
-  refreshPeriod: "168h"
-{{ $rangerPlugins -}}/ranger_fzf_filter:
-  type: "archive"
-  url: "https://github.com/MuXiu1997/ranger-fzf-filter/archive/main.tar.gz"
-  exact: true
-  stripComponents: 1
-  refreshPeriod: "168h"
-{{ $rangerPlugins -}}/ranger-zoxide:
-  type: "archive"
-  url: "https://github.com/jchook/ranger-zoxide/archive/master.tar.gz"
-  exact: true
-  stripComponents: 1
-  refreshPeriod: "168h"
-
+{{ range .rangerPlugins -}}
+  {{- $.rangerPluginsDir -}}/{{ base .repo }}:
+  {{- template "gitHubRepoArchive" . }}
+{{ end }}
 
 # Vim-plug
 .local/share/nvim/site/autoload/plug.vim:
@@ -101,3 +47,4 @@
   type: "file"
   url: "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
   refreshPeriod: "168h"
+
