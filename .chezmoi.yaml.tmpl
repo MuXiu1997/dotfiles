@@ -1,6 +1,5 @@
-{{ $email := promptString "email" -}}
 data:
-  email: {{ $email | quote }}
+  email: {{ (bitwarden "item" "088ee225-3820-441b-870b-d15a7922185a").identity.email }}
 
 diff:
   command: delta
