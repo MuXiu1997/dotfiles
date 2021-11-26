@@ -1,35 +1,36 @@
-ohMyZshDir: .config/oh-my-zsh
-ohMyZsh:
-  repo: ohmyzsh/ohmyzsh
+externalSource:
+  ohMyZshDir: .config/oh-my-zsh
+  ohMyZsh:
+    repo: ohmyzsh/ohmyzsh
 
-ohMyZshThemesDir: .config/oh-my-zsh/custom/themes
-ohMyZshThemes:
-  - repo: romkatv/powerlevel10k
-    latest: true
+  ohMyZshThemesDir: .config/oh-my-zsh/custom/themes
+  ohMyZshThemes:
+    - repo: romkatv/powerlevel10k
+      latest: true
 
-ohMyZshPluginsDir: .config/oh-my-zsh/custom/plugins
-ohMyZshPlugins:
-  - repo: zsh-users/zsh-syntax-highlighting
-  - repo: zsh-users/zsh-autosuggestions
-  - repo: zsh-users/zsh-completions
-  - repo: MuXiu1997/zsh-vi-mode
-    branch: main
-  - repo: Aloxaf/fzf-tab
+  ohMyZshPluginsDir: .config/oh-my-zsh/custom/plugins
+  ohMyZshPlugins:
+    - repo: zsh-users/zsh-syntax-highlighting
+    - repo: zsh-users/zsh-autosuggestions
+    - repo: zsh-users/zsh-completions
+    - repo: MuXiu1997/zsh-vi-mode
+      branch: main
+    - repo: Aloxaf/fzf-tab
 
-ohMyTmuxDir: .config/oh-my-tmux
-ohMyTmux:
-  repo: MuXiu1997/.tmux
-  branch: main
+  ohMyTmuxDir: .config/oh-my-tmux
+  ohMyTmux:
+    repo: MuXiu1997/.tmux
+    branch: main
 
-rangerPluginsDir: .config/ranger/plugins
-rangerPlugins:
-  - repo: alexanderjeurissen/ranger_devicons
-    branch: main
-  - repo: MuXiu1997/ranger-yoink
-    branch: main
-  - repo: MuXiu1997/ranger-airdrop
-    branch: main
-  - repo: MuXiu1997/ranger-fzf-filter
-    branch: main
-  - repo: jchook/ranger-zoxide
+  rangerPluginsDir: .config/ranger/plugins
+  rangerPlugins:
+    - repo: alexanderjeurissen/ranger_devicons
+      branch: main
+    - repo: MuXiu1997/ranger-yoink
+      branch: main
+    - repo: MuXiu1997/ranger-airdrop
+      branch: main
+    - repo: MuXiu1997/ranger-fzf-filter
+      branch: main
+    - repo: jchook/ranger-zoxide
 

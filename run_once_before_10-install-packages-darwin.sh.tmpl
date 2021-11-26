@@ -1,0 +1,23 @@
+{{- if (eq .chezmoi.os "darwin") -}}
+#!/bin/zsh
+
+set -eufo pipefail
+
+# install homebrew
+if ! type brew &>/dev/null; then 
+    /bin/zsh -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi
+
+brew="
+{{- if (eq .chezmoi.arch "arm64") -}}
+/opt/homebrew/bin/brew
+{{- else -}}
+/usr/local/bin/brew
+{{- end -}}
+"
+
+# install packages
+$brew bundle -v --no-lock --no-upgrade --file=/dev/stdin <<EOF
+{{ include "dot_local/share/Brewfile" }}
+EOF
+{{ end -}}
