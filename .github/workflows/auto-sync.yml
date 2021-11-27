@@ -2,14 +2,11 @@ name: Mirror Github to Gitee
 on:
   push:
   workflow_dispatch:
-  schedule:
-    - cron: '0 16 * * *'
 jobs:
-  run:
-    name: Sync GitHub to Gitee
+  sync:
     runs-on: ubuntu-latest
     steps:
-    - name: dotfiles repo mirror.
+    - name: dotfiles repo mirror
       uses: Yikun/hub-mirror-action@master
       with:
         src: github/MuXiu1997
