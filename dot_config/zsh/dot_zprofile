@@ -12,9 +12,3 @@
     fi
 # }
 
-# { Update completions
-    if type update-completions &>/dev/null; then
-        update-completions
-    fi
-# }
-
