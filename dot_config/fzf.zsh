@@ -22,6 +22,8 @@ source "/opt/homebrew/opt/fzf/shell/key-bindings.zsh"
     '
 
     export FZF_DEFAULT_OPTS="
+    --bind=tab:down,btab:up,change:top,ctrl-space:toggle
+    --cycle
     ${FZF_DEFAULT_COLOR}
     "
 
