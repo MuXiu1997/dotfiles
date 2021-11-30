@@ -1,4 +1,3 @@
-registry=https://registry.npmmirror.com/
 save-prefix=
 
 # prefix is unnecessary (and unsupported) if Node.js is installed by nvm
