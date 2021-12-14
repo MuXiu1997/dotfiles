@@ -62,6 +62,10 @@
 # { Pyenv
     export PYENV_ROOT="$XDG_DATA_HOME/pyenv"
 # }
+#
+# { Jenv
+    export JENV_ROOT="$XDG_DATA_HOME/jenv"
+# }
 
 typeset -U path fpath PATH FPATH
 local custom_bin="$HOME/bin"

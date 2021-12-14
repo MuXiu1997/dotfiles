@@ -42,6 +42,12 @@ fi
     fi
 # }
 
+# { Jenv
+    if type jenv &>/dev/null; then
+        eval "$(jenv init -)"
+    fi
+# }
+
 # { Nvm
     # Must be in the .zshrc file
     # Don't try to load nvm if command already available

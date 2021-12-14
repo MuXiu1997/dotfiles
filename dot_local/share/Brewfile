@@ -57,6 +57,8 @@ brew "lazydocker"
 brew "lazygit"
 # Clone of ls with colorful output, file type icons, and more
 brew "lsd"
+# Powerful, lightweight programming language
+brew "lua"
 # Utility for directing compilation
 brew "make"
 # Mac App Store command-line interface
