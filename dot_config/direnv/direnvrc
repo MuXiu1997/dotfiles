@@ -92,3 +92,35 @@ layout_node() {
     PATH_add node_modules/.bin
     layout_nvm "$1"
 }
+
+layout_goenv() {
+  local golang_version
+  set_version go "$1"
+  golang_version=$(get_version go)
+  if [[ -z "$golang_version" ]]; then
+        log_warn "goenv: goenv is used but no golang version found, skip loading"
+        return
+  fi
+  goenv local "$golang_version"
+  log_status "goenv: currently activated golang version is $golang_version"
+}
+
+layout_golang() {
+  layout_goenv "$1"
+}
+
+layout_jenv() {
+  local java_version
+  set_version java "$1"
+  java_version=$(get_version java)
+  if [[ -z "$java_version" ]]; then
+        log_warn "jenv: jenv is used but no java version found, skip loading"
+        return
+  fi
+  jenv local "$java_version"
+  log_status "jenv: currently activated java version is $java_version"
+}
+
+layout_java() {
+  layout_jenv "$1"
+}
