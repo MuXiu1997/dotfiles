@@ -5,10 +5,6 @@ tap "homebrew/core", "https://github.com/Homebrew/homebrew-core.git"
 tap "vldmrkl/formulae"
 # Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
-# Command-line interface for SQLite
-brew "sqlite"
-# Interpreted, interactive, object-oriented programming language
-brew "python@3.9"
 # Secure and free password manager for all of your devices
 brew "bitwarden-cli"
 # Yet another cross-platform graphical process/system monitor
@@ -47,10 +43,10 @@ brew "gost"
 brew "grex"
 # Like cURL, but for gRPC
 brew "grpcurl"
-# HTTP/2 C Library
-brew "nghttp2"
 # System monitoring dashboard for terminal
 brew "gtop"
+# Manage your Java environment
+brew "jenv"
 # Lazier way to manage everything docker
 brew "lazydocker"
 # Simple terminal UI for git commands
@@ -71,12 +67,20 @@ brew "maven"
 brew "neofetch"
 # Ambitious Vim-fork focused on extensibility and agility
 brew "neovim"
+# HTTP/2 C Library
+brew "nghttp2"
 # Manage multiple Node.js versions
 brew "nvm"
+# Development kit for the Java programming language
+brew "openjdk@11"
 # Protocol buffers (Google's data interchange format)
 brew "protobuf"
 # Python version management
 brew "pyenv"
+# Command-line interface for SQLite
+brew "sqlite"
+# Interpreted, interactive, object-oriented programming language
+brew "python@3.9"
 # File browser
 brew "ranger"
 # Search tool like grep and The Silver Searcher
