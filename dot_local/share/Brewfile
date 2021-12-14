@@ -37,6 +37,8 @@ brew "git"
 brew "git-delta"
 # Open source programming language to build simple/reliable/efficient software
 brew "go"
+# Go version management
+brew "goenv", args: ["HEAD"]
 # Fast linters runner for Go
 brew "golangci-lint"
 # GO Simple Tunnel - a simple tunnel written in golang
