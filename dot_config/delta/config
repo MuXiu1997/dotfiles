@@ -38,3 +38,5 @@
 [delta "no-paging"]
     paging = never
 
+[delta "paging"]
+    paging = always
