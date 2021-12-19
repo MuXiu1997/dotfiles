@@ -1,9 +1,11 @@
 data:
-  email: {{ (bitwarden "item" "088ee225-3820-441b-870b-d15a7922185a").identity.email }}
+  email: muxiu1997@gmail.com
 
 diff:
-  command: delta
-  args: ['--features', 'default no-paging']
-  exclude: 
+  exclude:
     - scripts
+  pager: LESS='Rmc' delta --features 'default paging'
 
+merge:
+  command: nvim
+  args: ['-d', '{{ "{{ .Destination }}" }}', '{{ "{{ .Source }}" }}', '{{ "{{ .Target }}" }}']
