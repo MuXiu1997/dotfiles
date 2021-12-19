@@ -63,6 +63,10 @@ fi
     fi
 # }
 
+# { Pgp
+    export GPG_TTY=$(tty)
+# }
+
 # { Direnv
     eval "$(direnv hook zsh)"
 # }
