@@ -1,4 +1,38 @@
-source ~/.vimrc.global
+let mapleader=","
+
+set incsearch          " 输入搜索模式时同时高亮部分的匹配
+set hlsearch           " 高亮最近的匹配搜索模式
+set ignorecase         " 搜索模式时忽略大小写
+set smartcase          " 模式中有大写字母时不忽略大小写
+
+set scrolloff=5        " 光标上下的最少行数
+set sidescrolloff=15   " 在光标左右最少出现的列数
+
+set clipboard+=unnamed " 使用剪贴板作为无名的寄存器
+
+set showmode           " 在状态行上显示当前模式的消息
+set showcmd            " 在状态行里显示 (部分) 命令
+set relativenumber     " 每行前显示相对行号
+set number             " 行前显示行号
+
+set history=1000       " 记住的命令行的行数
+
+set shiftwidth=4       " (自动) 缩进使用的步进单位，以空白数目计
+set tabstop=4          " <Tab> 在文件里使用的空格数
+
+set nowrap             " 禁用长行回绕并在下一行继续
+
+nnoremap <Space>nh :noh<CR>
+
+noremap  <Space>a  ^
+noremap  <Space>e  $
+
+nnoremap <Space>m  `m
+nnoremap Q         @q
+
+noremap  <Space>p  "0p
+noremap  <Space>P  "0P
+vnoremap <Space>p  "0p
 
 " Plugins {
     set easymotion
@@ -17,21 +51,21 @@ set idearefactormode=visual
 
 " {
     inoremap <BS>    <NOP>
-    inoremap <ESC>   <NOP>
-    inoremap <UP>    <NOP>
-    inoremap <DOWN>  <NOP>
-    inoremap <LEFT>  <NOP>
-    inoremap <RIGHT> <NOP>
+    inoremap <Esc>   <NOP>
+    inoremap <Up>    <NOP>
+    inoremap <Down>  <NOP>
+    inoremap <Left>  <NOP>
+    inoremap <Right> <NOP>
 
     nnoremap <BS>    <NOP>
-    nnoremap <UP>    <NOP>
-    nnoremap <DOWN>  <NOP>
-    nnoremap <LEFT>  <NOP>
-    nnoremap <RIGHT> <NOP>
+    nnoremap <Up>    <NOP>
+    nnoremap <Down>  <NOP>
+    nnoremap <Left>  <NOP>
+    nnoremap <Right> <NOP>
 " }
 
 " { Browse
-    noremap <SPACE>d :action GotoDeclaration<CR>
+    noremap <Space>d :action GotoDeclaration<CR>
 
     noremap <BS>     :action Back<CR>
     noremap <C-BS>   :action Forward<CR>
@@ -43,25 +77,25 @@ set idearefactormode=visual
 " }
 
 " { Windows
-    nnoremap <TAB>m :action HideAllWindows<CR>
-    nnoremap <TAB>r :action ActivatenpmToolWindow<CR>:action ActivateMavenToolWindow<CR>:action ActivatemakeToolWindow<CR>
-    nnoremap <TAB>g :action ActivateCommitToolWindow<CR>
-    nnoremap <TAB>t :action ActivateTerminalToolWindow<CR>
+    nnoremap <Tab>m :action HideAllWindows<CR>
+    nnoremap <Tab>r :action ActivatenpmToolWindow<CR>:action ActivateMavenToolWindow<CR>:action ActivatemakeToolWindow<CR>
+    nnoremap <Tab>g :action ActivateCommitToolWindow<CR>
+    nnoremap <Tab>t :action ActivateTerminalToolWindow<CR>
 " }
 
 
 " { Edit
-    noremap <SPACE>ca :action StringManipulation.Group.SwitchCase<CR>
-    noremap <SPACE>rr :action Refactorings.QuickListPopupAction<CR>
-    noremap <SPACE>sw :action SurroundWith<CR>
+    noremap <Space>ca :action StringManipulation.Group.SwitchCase<CR>
+    noremap <Space>rr :action Refactorings.QuickListPopupAction<CR>
+    noremap <Space>sw :action SurroundWith<CR>
 " }
 
-nnoremap <SPACE>his :action LocalHistory.ShowHistory<CR>
-nnoremap <SPACE>fs  :action FileStructurePopup<CR>
+nnoremap <Space>his :action LocalHistory.ShowHistory<CR>
+nnoremap <Space>fs  :action FileStructurePopup<CR>
 
 
-nnoremap <leader>rf :action ReformatCode<CR>
+nnoremap <Leader>rf :action ReformatCode<CR>
 
 
-map      <TAB><TAB> <Plug>(easymotion-s)
+map      <Tab><Tab> <Plug>(easymotion-s)
 
