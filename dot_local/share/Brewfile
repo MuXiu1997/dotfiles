@@ -23,6 +23,8 @@ brew "dust"
 brew "exa"
 # Simple, fast and user-friendly alternative to find
 brew "fd"
+# macOS CLI for managing custom icons for files and folders
+brew "fileicon"
 # Command-line fuzzy finder written in Go
 brew "fzf"
 # GitHub command-line tool
@@ -31,6 +33,8 @@ brew "gh"
 brew "git"
 # Syntax-highlighting pager for git and diff output
 brew "git-delta"
+# GNU Pretty Good Privacy (PGP) package
+brew "gnupg"
 # Open source programming language to build simple/reliable/efficient software
 brew "go"
 # Go version management
@@ -47,6 +51,8 @@ brew "grpcurl"
 brew "gtop"
 # Manage your Java environment
 brew "jenv"
+# Lightweight and flexible command-line JSON processor
+brew "jq"
 # Lazier way to manage everything docker
 brew "lazydocker"
 # Simple terminal UI for git commands
@@ -77,8 +83,6 @@ brew "openjdk@11"
 brew "protobuf"
 # Python version management
 brew "pyenv"
-# Command-line interface for SQLite
-brew "sqlite"
 # Interpreted, interactive, object-oriented programming language
 brew "python@3.9"
 # File browser
@@ -99,6 +103,8 @@ brew "tree"
 brew "vim"
 # Internet file retriever
 brew "wget"
+# Process YAML documents from the CLI
+brew "yq"
 # Shell extension to navigate your filesystem faster
 brew "zoxide"
 # macOS CLI for AirDrop
@@ -121,6 +127,8 @@ cask "downie"
 cask "electerm"
 # Download accelerator and organizer
 cask "free-download-manager"
+# Tools to protect your files
+cask "gpg-suite-no-mail"
 # Utility to hide menu bar items
 cask "hiddenbar"
 # Free and open-source media player
