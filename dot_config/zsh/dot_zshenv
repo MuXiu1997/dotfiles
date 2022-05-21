@@ -59,6 +59,10 @@
     export GOPROXY="https://goproxy.cn,direct"
 # }
 
+# { Gradle
+    export GRADLE_USER_HOME="$XDG_DATA_HOME/gradle"
+# }
+
 # { Pyenv
     export PYENV_ROOT="$XDG_DATA_HOME/pyenv"
 # }
