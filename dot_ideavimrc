@@ -34,6 +34,16 @@ noremap  <Space>p  "0p
 noremap  <Space>P  "0P
 vnoremap <Space>p  "0p
 
+onoremap ij        i'
+onoremap iJ        i"
+onoremap aj        a'
+onoremap aJ        a"
+
+vnoremap ij        i'
+vnoremap iJ        i"
+vnoremap aj        a'
+vnoremap aJ        a"
+
 " Plugins {
     set easymotion
     set surround
