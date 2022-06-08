@@ -7,6 +7,8 @@ tap "vldmrkl/formulae"
 brew "bat"
 # Secure and free password manager for all of your devices
 brew "bitwarden-cli"
+# Collection of portable C++ source libraries
+brew "boost"
 # Yet another cross-platform graphical process/system monitor
 brew "bottom"
 # Manage your dotfiles across multiple diverse machines, securely
@@ -25,6 +27,10 @@ brew "exa"
 brew "fd"
 # macOS CLI for managing custom icons for files and folders
 brew "fileicon"
+# Collection of reusable C++ library artifacts developed at Facebook
+brew "folly"
+# Terminal JSON viewer
+brew "fx"
 # Command-line fuzzy finder written in Go
 brew "fzf"
 # GitHub command-line tool
@@ -33,6 +39,14 @@ brew "gh"
 brew "git"
 # Syntax-highlighting pager for git and diff output
 brew "git-delta"
+# Library for command-line editing
+brew "readline"
+# GNU Ubiquitous Intelligent Language for Extensions
+brew "guile"
+# Validating, recursive, caching DNS resolver
+brew "unbound"
+# GNU Transport Layer Security (TLS) Library
+brew "gnutls"
 # GNU Pretty Good Privacy (PGP) package
 brew "gnupg"
 # Open source programming language to build simple/reliable/efficient software
@@ -61,6 +75,8 @@ brew "lazygit"
 brew "lsd"
 # Powerful, lightweight programming language
 brew "lua"
+# Bare libuv bindings for lua
+brew "luv"
 # Utility for directing compilation
 brew "make"
 # Mac App Store command-line interface
@@ -84,6 +100,8 @@ brew "protobuf"
 # Python version management
 brew "pyenv"
 # Interpreted, interactive, object-oriented programming language
+brew "python@3.10"
+# Interpreted, interactive, object-oriented programming language
 brew "python@3.9"
 # File browser
 brew "ranger"
@@ -91,6 +109,10 @@ brew "ranger"
 brew "ripgrep"
 # Utility that provides fast incremental file transfer
 brew "rsync"
+# Powerful, clean, object-oriented scripting language
+brew "ruby"
+# 7-Zip is a file archiver with a high compression ratio
+brew "sevenzip"
 # Simplified and community-driven man pages
 brew "tldr"
 # Terminal multiplexer
@@ -103,6 +125,8 @@ brew "tree"
 brew "vim"
 # Internet file retriever
 brew "wget"
+# XML command-line utilities
+brew "xmlstarlet"
 # Process YAML documents from the CLI
 brew "yq"
 # Shell extension to navigate your filesystem faster
@@ -123,7 +147,7 @@ cask "cyberduck"
 cask "dingtalk"
 # Downloads videos from different websites
 cask "downie"
-# Terminal/ssh/serial port/sftp client
+# Terminal/ssh/sftp client
 cask "electerm"
 # Download accelerator and organizer
 cask "free-download-manager"
@@ -179,7 +203,7 @@ cask "switchhosts"
 cask "typora"
 # Free messaging and calling application
 cask "wechat"
-# Weixin DevTools for Official Account and Mini Program development
+# Wechat DevTools for Official Account and Mini Program development
 cask "wechatwebdevtools"
 mas "Spark", id: 1176895641
 mas "WPS Office", id: 1443749478
