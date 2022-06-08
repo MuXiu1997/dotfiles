@@ -2,7 +2,6 @@
 import argparse
 import os
 import subprocess
-import tempfile
 
 
 def y_or_n(msg):

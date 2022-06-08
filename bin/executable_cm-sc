@@ -1,0 +1,69 @@
+#!/usr/bin/env python
+import os
+import subprocess
+import json
+
+shortcuts = [
+    'chezmoi apply -Rvn --force | LESS="Rmc" delta --features "default paging"',
+    'chezmoi apply -vn --force | LESS="Rmc" delta --features "default paging"',
+    'chezmoi apply -v',
+    'chezmoi execute-template "$(cat .chezmoiexternal.yaml | sed \'$d\' | sed \'/execute-template/d\')" | bat -l yaml'
+]
+
+
+def bat(cmd):
+    bat_cmd = subprocess.Popen(
+        ['bat', '--language=zsh', '--plain', '--color=always'],
+        stdin=subprocess.PIPE,
+        stdout=subprocess.PIPE
+    )
+    stdout, _ = bat_cmd.communicate(cmd.encode())
+    return stdout.decode()
+
+
+def is_bw_locked():
+    bw_cmd = subprocess.Popen(
+        ['bw', 'status'],
+        stdin=subprocess.PIPE,
+        stdout=subprocess.PIPE
+    )
+    stdout, _ = bw_cmd.communicate()
+    status = json.loads(stdout.decode())
+    return status['status'] == 'locked'
+
+
+def get_chezmoi_source_path():
+    chezmoi_cmd = subprocess.Popen(
+        ['chezmoi', 'source-path'],
+        stdin=subprocess.PIPE,
+        stdout=subprocess.PIPE
+    )
+    stdout, _ = chezmoi_cmd.communicate()
+    return stdout.decode().strip()
+
+
+def main():
+    if is_bw_locked():
+        print('Bitwarden not unlocked')
+        exit(1)
+
+    os.chdir(get_chezmoi_source_path())
+
+    coloured_shortcuts = [bat(c) for c in shortcuts]
+
+    fzf_cmd = subprocess.Popen(
+        ['fzf', '--ansi'],
+        stdin=subprocess.PIPE,
+        stdout=subprocess.PIPE
+    )
+    fzf_cmd_stdout, _ = fzf_cmd.communicate('\n'.join(coloured_shortcuts).encode())
+    if fzf_cmd.returncode != 0:
+        exit(fzf_cmd.returncode)
+
+    selected = fzf_cmd_stdout.decode().strip()
+
+    os.execvp('zsh', ['zsh', '-ci', selected])
+
+
+if __name__ == '__main__':
+    main()

@@ -6,14 +6,20 @@ tmux = '/opt/homebrew/bin/tmux'
 zsh = '/bin/zsh'
 HotKey = 'HotKey'
 
-has_hotkey_session = subprocess.run(
-    [tmux, 'has', '-t', HotKey],
-    check=False,
-    stdout=subprocess.DEVNULL,
-    stderr=subprocess.DEVNULL,
-).returncode == 0
 
-if has_hotkey_session:
-    os.execv(tmux, [tmux, 'a', '-t', HotKey])
-else:
-    os.execv(zsh, [zsh, '-cil', 'tmux new -s {}'.format(HotKey)])
+def main():
+    has_hotkey_session = subprocess.run(
+        [tmux, 'has', '-t', HotKey],
+        check=False,
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+    ).returncode == 0
+
+    if has_hotkey_session:
+        os.execv(tmux, [tmux, 'a', '-t', HotKey])
+    else:
+        os.execv(zsh, [zsh, '-cil', 'tmux new -s {}'.format(HotKey)])
+
+
+if __name__ == '__main__':
+    main()

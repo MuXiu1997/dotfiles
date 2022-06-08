@@ -10,22 +10,28 @@ mas_id_list = [
     '497799835',  # Xcode
 ]
 
-env = os.environ
-env['HOMEBREW_NO_AUTO_UPDATE'] = 'true'
-cmd = subprocess.Popen(
-    ['brew', 'bundle', 'dump', '--describe', '--file=-'],
-    stdout=subprocess.PIPE,
-    env=env,
-)
 
-stdout, _ = cmd.communicate()
+def main():
+    env = os.environ
+    env['HOMEBREW_NO_AUTO_UPDATE'] = 'true'
+    cmd = subprocess.Popen(
+        ['brew', 'bundle', 'dump', '--describe', '--file=-'],
+        stdout=subprocess.PIPE,
+        env=env,
+    )
 
-output = stdout.decode()
-output = '\n'.join([
-    l for l in output.splitlines() if
-    not (l.startswith('mas'))
-    or (l.startswith('mas') and any([l.endswith(mas_id) for mas_id in mas_id_list]))
-])
+    stdout, _ = cmd.communicate()
 
-with open(Brewfile, 'w') as fp:
-    fp.write(output)
+    output = stdout.decode()
+    output = '\n'.join([
+        l for l in output.splitlines() if
+        not (l.startswith('mas'))
+        or (l.startswith('mas') and any([l.endswith(mas_id) for mas_id in mas_id_list]))
+    ])
+
+    with open(Brewfile, 'w') as fp:
+        fp.write(output)
+
+
+if __name__ == '__main__':
+    main()
