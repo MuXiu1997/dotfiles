@@ -34,3 +34,32 @@ externalSource:
       branch: main
     - repo: jchook/ranger-zoxide
 
+XDG:
+  remove:
+    # zsh
+    - .zshrc
+    - .zprofile
+    - .zsh_history
+    # tmux
+    - .tmux.conf
+    # git
+    - .gitconfig
+    # fzf
+    - .fzf.zsh
+    # nvm
+    - .nvm
+    # npm
+    - .npm
+    - .npmrc
+    # pnpm
+    - .pnpm-state
+    - .pnpm-store
+    # go
+    - go
+    # pyenv
+    - .pyenv
+    # gradle
+    - .gradle
+    # maven
+    - .m2
+

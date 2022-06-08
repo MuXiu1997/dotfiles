@@ -1,34 +1,3 @@
-{{- /* zsh XDG */ -}}
-.zshrc
-.zprofile
-.zsh_history
-
-{{/* tmux XDG */ -}}
-.tmux.conf
-
-{{/* git XDG */ -}}
-.gitconfig
-
-{{/* fzf XDG */ -}}
-.fzf.zsh
-
-{{/* nvm XDG */ -}}
-.nvm
-
-{{/* npm XDG */ -}}
-.npm
-.npmrc
-
-{{/* pnpm XDG */ -}}
-.pnpm-state
-.pnpm-store
-
-{{/* go XDG */ -}}
-go
-
-{{/* pyenv XDG */ -}}
-.pyenv
-
-{{/* maven XDG */ -}}
-.m2
-
+{{ range .XDG.remove -}}
+    {{ . }}
+{{ end }}
