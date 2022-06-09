@@ -2,6 +2,7 @@ tap "homebrew/bundle"
 tap "homebrew/cask", "https://github.com/Homebrew/homebrew-cask.git"
 tap "homebrew/cask-fonts", "https://github.com/Homebrew/homebrew-cask-fonts.git"
 tap "homebrew/core", "https://github.com/Homebrew/homebrew-core.git"
+tap "hpedrorodrigues/tools"
 tap "vldmrkl/formulae"
 # Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
@@ -95,12 +96,14 @@ brew "nghttp2"
 brew "nvm"
 # Development kit for the Java programming language
 brew "openjdk@11"
+# Interpreted, interactive, object-oriented programming language
+brew "python@3.10"
+# Python package management tool
+brew "poetry"
 # Protocol buffers (Google's data interchange format)
 brew "protobuf"
 # Python version management
 brew "pyenv"
-# Interpreted, interactive, object-oriented programming language
-brew "python@3.10"
 # Interpreted, interactive, object-oriented programming language
 brew "python@3.9"
 # File browser
@@ -145,6 +148,8 @@ cask "bob"
 cask "cyberduck"
 # Teamwork app by Alibaba Group
 cask "dingtalk"
+# Command-line utility for managing macOS dock items
+cask "dockutil"
 # Downloads videos from different websites
 cask "downie"
 # Terminal/ssh/sftp client
