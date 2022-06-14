@@ -25,9 +25,6 @@
 
 # { Chezmoi
     alias cm="chezmoi"
-    alias cmmanaged="selected=\$(cm managed | fzf --height 40% --reverse) && echo \${HOME}/\${selected}"
-    alias cmedit="selected=\$(cmmanaged) && chezmoi edit \${selected}"
-    alias cmra="selected=\$(cmmanaged) && chezmoi add \${selected}"
 # }
 
 # { Brew
@@ -36,7 +33,7 @@
 # }
 
 # { Lazygit
-    alias lg="lazygit"
+    alias lg="GPG_TTY=\$(tty) lazygit"
 # }
 
 # { Tmux
