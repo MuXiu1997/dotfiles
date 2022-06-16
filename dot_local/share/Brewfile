@@ -52,6 +52,8 @@ brew "gnutls"
 brew "gnupg"
 # Open source programming language to build simple/reliable/efficient software
 brew "go"
+# Go implementation of configuration language for defining JSON data
+brew "go-jsonnet"
 # Go version management
 brew "goenv", args: ["HEAD"]
 # Fast linters runner for Go
@@ -182,6 +184,8 @@ cask "microsoft-edge"
 cask "mos"
 # Re-mounts write-protected NTFS volumes
 cask "mounty"
+# Neovim Client
+cask "neovide"
 # Music streaming platform
 cask "neteasemusic"
 # Collaboration platform for API development
@@ -196,6 +200,8 @@ cask "qq"
 cask "quicklook-json"
 # Move and resize windows using keyboard shortcuts or snap areas
 cask "rectangle"
+# Displays all open files and sockets in use by all running processes
+cask "sloth"
 # Snip or pin screenshots
 cask "snipaste"
 # Rime input method engine
