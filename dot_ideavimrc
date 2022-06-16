@@ -59,21 +59,6 @@ vnoremap aJ        a"
 " https://github.com/JetBrains/ideavim/wiki/Select-mode
 set idearefactormode=visual
 
-" {
-    inoremap <BS>    <NOP>
-    inoremap <Esc>   <NOP>
-    inoremap <Up>    <NOP>
-    inoremap <Down>  <NOP>
-    inoremap <Left>  <NOP>
-    inoremap <Right> <NOP>
-
-    nnoremap <BS>    <NOP>
-    nnoremap <Up>    <NOP>
-    nnoremap <Down>  <NOP>
-    nnoremap <Left>  <NOP>
-    nnoremap <Right> <NOP>
-" }
-
 " { Browse
     noremap <Space>d :action GotoDeclaration<CR>
 
