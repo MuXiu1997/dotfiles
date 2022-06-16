@@ -105,6 +105,8 @@ handle_extension() {
 
         ## JSON
         json)
+            env COLORTERM=8bit bat --color=always --theme=ansi -r :100 --style="plain" \
+                -- "${FILE_PATH}" && exit 5
             jq --color-output . "${FILE_PATH}" && exit 5
             python -m json.tool -- "${FILE_PATH}" && exit 5
             ;;
@@ -307,7 +309,7 @@ handle_mime() {
             #     --force -- "${FILE_PATH}" && exit 5
             # env COLORTERM=8bit bat --color=always --style="plain" \
             #     -- "${FILE_PATH}" && exit 5
-            env COLORTERM=8bit bat --color=always --theme=Coldark-Dark -r :100 --style="plain" \
+            env COLORTERM=8bit bat --color=always --theme=ansi -r :100 --style="plain" \
                 -- "${FILE_PATH}" && exit 5
             # pygmentize -f "${pygmentize_format}" -O "style=${PYGMENTIZE_STYLE}"\
             #     -- "${FILE_PATH}" && exit 5
@@ -332,6 +334,11 @@ handle_mime() {
             mediainfo "${FILE_PATH}" && exit 5
             exiftool "${FILE_PATH}" && exit 5
             exit 1;;
+
+        ## JSON
+        application/json)
+            env COLORTERM=8bit bat --color=always --theme=ansi -r :100 --style="plain" --language="JSON" \
+                -- "${FILE_PATH}" && exit 5
     esac
 }
 
