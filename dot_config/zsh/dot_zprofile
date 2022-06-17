@@ -1,5 +1,10 @@
 # { Homebrew
-    local brew='/opt/homebrew/bin/brew'
+    if [[ "$(/usr/bin/uname -m)" == "arm64" ]]; then
+        local HOMEBREW_PREFIX="/opt/homebrew"
+    else
+        local HOMEBREW_PREFIX="/usr/local"
+    fi
+    local brew="${HOMEBREW_PREFIX}/bin/brew"
     if [[ -f "$brew" ]]; then
         eval "$($brew shellenv)"
         export FPATH="$FPATH:$HOMEBREW_PREFIX/share/zsh/site-functions"

@@ -24,16 +24,13 @@ fi
 
 # { Cli
     # Zoxide
-    if (( $+commands[zoxide] )); then eval "$(zoxide init zsh)";else echo 'zoxide: command not found, please install it from https://github.com/ajeetdsouza/zoxide'; fi
+    if (( $+commands[zoxide] )); then eval "$(zoxide init zsh)"; else echo 'zoxide: command not found, please install it from https://github.com/ajeetdsouza/zoxide'; fi
 
     # Fzf
     zvm_after_init_commands+=("[[ ! -f $XDG_CONFIG_HOME/fzf.zsh ]] || source $XDG_CONFIG_HOME/fzf.zsh") # https://github.com/jeffreytse/zsh-vi-mode#execute-extra-commands
 
     # Fzf-tab
     zvm_after_init_commands+=("[[ ! -f $XDG_CONFIG_HOME/fzf-tab.zsh ]] || source $XDG_CONFIG_HOME/fzf-tab.zsh")
-
-    # Iterm2
-    [[ ! -f "${HOME}/.iterm2_shell_integration.zsh" ]] || source "${HOME}/.iterm2_shell_integration.zsh"
 # }
 
 # { Goenv
