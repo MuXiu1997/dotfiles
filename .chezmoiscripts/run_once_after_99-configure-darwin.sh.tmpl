@@ -1,0 +1,14 @@
+{{- if (eq .chezmoi.os "darwin") -}}
+#!/usr/bin/env sh
+set -eufo pipefail
+
+defaults write NSGlobalDomain InitialKeyRepeat -int 15
+defaults write NSGlobalDomain KeyRepeat -int 2
+defaults write -g ApplePressAndHoldEnabled -bool false
+
+$HOME/bin/setup-dock
+
+{{ end -}}
+{{/*
+# vim: set ft=sh:
+*/}}
