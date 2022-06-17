@@ -1,13 +1,14 @@
 #!/usr/bin/env python
+import json
 import os
 import subprocess
-import json
 
 shortcuts = [
     'chezmoi apply -Rvn --force | LESS="Rmc" delta --features "default paging"',
     'chezmoi apply -vn --force | LESS="Rmc" delta --features "default paging"',
     'chezmoi apply -v',
-    'chezmoi execute-template "$(cat .chezmoiexternal.yaml | sed \'$d\' | sed \'/execute-template/d\')" | bat -l yaml'
+    'chezmoi execute-template "$(cat .chezmoiexternal.yaml | sed \'$d\' | sed \'/execute-template/d\')" | bat -l yaml',
+    'chezmoi state delete-bucket --bucket=scriptState',
 ]
 
 

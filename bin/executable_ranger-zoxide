@@ -1,11 +1,13 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 import argparse
 import os
 import subprocess
 
 
 def y_or_n(msg):
-    import sys, tty, termios
+    import sys
+    import tty
+    import termios
     while True:
         print(msg)
 
@@ -26,7 +28,8 @@ def parse_args():
     parser = argparse.ArgumentParser(description='ranger + zoxide.')
     parser.add_argument(
         '--choosedir',
-        help='makes ranger act like a file chooser. When opening a file, it will quit and write the name of the selected file to OUTFILE.',
+        help='makes ranger act like a file chooser. When opening a file, '
+             'it will quit and write the name of the selected file to OUTFILE.',
     )
     parser.add_argument('-i', '--interactive', action='store_true', help='use interactive selection')
     parser.add_argument('keywords', metavar='KEYWORDS', nargs='*')

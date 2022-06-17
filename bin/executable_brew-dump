@@ -1,6 +1,6 @@
-#!/usr/bin/env python
-import subprocess
+#!/usr/bin/env python3
 import os
+import subprocess
 
 Brewfile = os.path.join(os.path.expanduser('~'), '.local', 'share', 'Brewfile')
 
