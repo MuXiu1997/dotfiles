@@ -1,7 +1,7 @@
 tap "homebrew/bundle"
 tap "homebrew/cask", "https://github.com/Homebrew/homebrew-cask.git"
 tap "homebrew/cask-fonts", "https://github.com/Homebrew/homebrew-cask-fonts.git"
-tap "homebrew/core", "https://github.com/Homebrew/homebrew-core.git"
+tap "homebrew/core"
 tap "hpedrorodrigues/tools"
 tap "vldmrkl/formulae"
 # Clone of cat(1) with syntax highlighting and Git integration
@@ -18,8 +18,6 @@ brew "chezmoi"
 brew "ctop"
 # Load/unload environment variables based on $PWD
 brew "direnv"
-# Tool for managing dock items
-brew "dockutil"
 # More intuitive version of du in rust
 brew "dust"
 # Modern replacement for 'ls'
@@ -98,6 +96,8 @@ brew "nghttp2"
 brew "nvm"
 # Development kit for the Java programming language
 brew "openjdk@11"
+# 📦🚀 Fast, disk space efficient package manager
+brew "pnpm"
 # Interpreted, interactive, object-oriented programming language
 brew "python@3.10"
 # Python package management tool
@@ -150,8 +150,6 @@ cask "bob"
 cask "cyberduck"
 # Teamwork app by Alibaba Group
 cask "dingtalk"
-# Command-line utility for managing macOS dock items
-cask "dockutil"
 # Downloads videos from different websites
 cask "downie"
 # Terminal/ssh/sftp client
