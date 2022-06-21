@@ -18,7 +18,8 @@ function defineDevice(
   product_id: number,
   is_keyboard: boolean,
   is_pointing_device: boolean,
-  callback: (device: Device) => void = () => {},
+  callback: (device: Device) => void = () => {
+  },
 ): Device {
   const device: Device = {
     identifiers: {
@@ -75,12 +76,30 @@ const deviceNIZ84BT5_0 = defineDevice(
   (d) => d.manipulate_caps_lock_led = true,
 );
 
+const deviceNIZ84USBKeyboard = defineDevice(
+  1155,
+  20777,
+  true,
+  false,
+  (d) => d.manipulate_caps_lock_led = true,
+);
+
+const deviceNIZ84USBKeyboardAndPoint = defineDevice(
+  1155,
+  20777,
+  true,
+  true,
+  (d) => d.manipulate_caps_lock_led = true,
+);
+
 const devices = [
   deviceAppleMagicTrackpad,
   deviceMajestouchConvertible2,
   deviceLogitechGPWKeyboard,
   deviceLogitechGPWPoint,
   deviceNIZ84BT5_0,
+  deviceNIZ84USBKeyboard,
+  deviceNIZ84USBKeyboardAndPoint,
 ];
 // endregion Devices
 
@@ -92,7 +111,11 @@ const ruleSwapCommandAndOption = (() => {
       description: `${from} to ${to}`,
       conditions: [{
         type: "device_unless",
-        identifiers: [deviceNIZ84BT5_0.identifiers],
+        identifiers: [
+          deviceNIZ84BT5_0,
+          deviceNIZ84USBKeyboard,
+          deviceNIZ84USBKeyboardAndPoint,
+        ].map((d) => d.identifiers),
       }],
       from: {
         key_code: from,
