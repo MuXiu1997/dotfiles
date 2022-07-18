@@ -32,7 +32,6 @@ nnoremap Q         @q
 
 noremap  <Space>p  "0p
 noremap  <Space>P  "0P
-vnoremap <Space>p  "0p
 
 onoremap ij        i'
 onoremap iJ        i"
@@ -58,6 +57,9 @@ vnoremap aJ        a"
 
 " https://github.com/JetBrains/ideavim/wiki/Select-mode
 set idearefactormode=visual
+
+" https://github.com/JetBrains/ideavim/wiki/Emulated-plugins#highlightedyank
+let g:highlightedyank_highlight_color = "rgb(123, 171, 187, 127)"
 
 " { Browse
     noremap <Space>d :action GotoDeclaration<CR>
