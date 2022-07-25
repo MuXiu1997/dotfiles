@@ -117,6 +117,7 @@ layout_jenv() {
         log_warn "jenv: jenv is used but no java version found, skip loading"
         return
   fi
+  jenv enable-plugin export >/dev/null 2>&1
   jenv local "$java_version"
   log_status "jenv: currently activated java version is $java_version"
 }
