@@ -151,11 +151,11 @@ const ruleEnsureInputSourceRime = {
         "basic.to_if_held_down_threshold_milliseconds": 1500,
       },
       from: {
-        key_code: "left_control",
+        key_code: "left_shift",
       },
       to: [
         {
-          key_code: "left_control",
+          key_code: "left_shift",
         },
       ],
       to_if_held_down: [
