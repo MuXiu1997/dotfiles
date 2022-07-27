@@ -6,16 +6,28 @@ tap "hpedrorodrigues/tools"
 tap "vldmrkl/formulae"
 # Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
+# Cryptography and SSL/TLS Toolkit
+brew "openssl@1.1"
 # Secure and free password manager for all of your devices
 brew "bitwarden-cli"
+# General-purpose data compression with high compression ratio
+brew "xz"
 # Collection of portable C++ source libraries
 brew "boost"
 # Yet another cross-platform graphical process/system monitor
 brew "bottom"
+# Core application library for C
+brew "glib"
+# Library for command-line editing
+brew "readline"
+# Interpreted, interactive, object-oriented programming language
+brew "python@3.9"
 # Manage your dotfiles across multiple diverse machines, securely
 brew "chezmoi"
 # Top-like interface for container metrics
 brew "ctop"
+# Secure runtime for JavaScript and TypeScript
+brew "deno"
 # Load/unload environment variables based on $PWD
 brew "direnv"
 # More intuitive version of du in rust
@@ -38,8 +50,6 @@ brew "gh"
 brew "git"
 # Syntax-highlighting pager for git and diff output
 brew "git-delta"
-# Library for command-line editing
-brew "readline"
 # GNU Ubiquitous Intelligent Language for Extensions
 brew "guile"
 # Validating, recursive, caching DNS resolver
@@ -62,8 +72,8 @@ brew "gost"
 brew "grex"
 # Like cURL, but for gRPC
 brew "grpcurl"
-# System monitoring dashboard for terminal
-brew "gtop"
+# OpenType text shaping engine
+brew "harfbuzz"
 # Manage your Java environment
 brew "jenv"
 # Lightweight and flexible command-line JSON processor
@@ -72,8 +82,6 @@ brew "jq"
 brew "lazydocker"
 # Simple terminal UI for git commands
 brew "lazygit"
-# Clone of ls with colorful output, file type icons, and more
-brew "lsd"
 # Powerful, lightweight programming language
 brew "lua"
 # Bare libuv bindings for lua
@@ -96,18 +104,16 @@ brew "nghttp2"
 brew "nvm"
 # Development kit for the Java programming language
 brew "openjdk@11"
+# Framework for layout and rendering of i18n text
+brew "pango"
 # 📦🚀 Fast, disk space efficient package manager
 brew "pnpm"
-# Interpreted, interactive, object-oriented programming language
-brew "python@3.10"
 # Python package management tool
 brew "poetry"
 # Protocol buffers (Google's data interchange format)
 brew "protobuf"
 # Python version management
 brew "pyenv"
-# Interpreted, interactive, object-oriented programming language
-brew "python@3.9"
 # File browser
 brew "ranger"
 # Search tool like grep and The Silver Searcher
@@ -130,8 +136,6 @@ brew "tree"
 brew "vim"
 # Internet file retriever
 brew "wget"
-# XML command-line utilities
-brew "xmlstarlet"
 # Process YAML documents from the CLI
 brew "yq"
 # Shell extension to navigate your filesystem faster
@@ -158,6 +162,8 @@ cask "electerm"
 cask "free-download-manager"
 # Tools to protect your files
 cask "gpg-suite-no-mail"
+# Desktop automation application
+cask "hammerspoon"
 # Utility to hide menu bar items
 cask "hiddenbar"
 # Free and open-source media player
@@ -188,14 +194,8 @@ cask "neovide"
 cask "neteasemusic"
 # Collaboration platform for API development
 cask "postman"
-# QuickLook plug-in that renders source code with syntax highlighting
-cask "qlcolorcode"
-# QuickLook generator for Markdown files
-cask "qlmarkdown"
-cask "qlstephen"
 # Instant messaging tool
 cask "qq"
-cask "quicklook-json"
 # Move and resize windows using keyboard shortcuts or snap areas
 cask "rectangle"
 # Displays all open files and sockets in use by all running processes
@@ -208,12 +208,11 @@ cask "squirrel"
 cask "stats"
 # App to switch hosts
 cask "switchhosts"
-# Configurable document editor that supports Markdown
-cask "typora"
 # Free messaging and calling application
 cask "wechat"
 # Wechat DevTools for Official Account and Mini Program development
 cask "wechatwebdevtools"
+mas "Bob", id: 1630034110
 mas "Spark", id: 1176895641
 mas "WPS Office", id: 1443749478
 mas "Xcode", id: 497799835
