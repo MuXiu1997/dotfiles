@@ -34,6 +34,11 @@ externalSource:
       branch: main
     - repo: jchook/ranger-zoxide
 
+  hammerspoonDir: .config/hammerspoon
+  hammerspoon:
+    repo: MuXiu1997/hammerspoon
+    branch: main
+
 XDG:
   remove:
     # zsh
@@ -62,4 +67,6 @@ XDG:
     - .gradle
     # maven
     - .m2
+    # hammerspoon
+    - .hammerspoon
 

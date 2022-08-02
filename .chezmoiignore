@@ -5,3 +5,5 @@ install.*.sh
 
 .config/oh-my-zsh/cache/**
 .config/oh-my-zsh/custom/themes/powerlevel10k/**/*.zwc
+
+.config/hammerspoon/Spoons

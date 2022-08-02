@@ -42,6 +42,10 @@
   {{- template "gitHubRepoArchive" . }}
 {{ end }}
 
+# Hammerspoon
+{{ .hammerspoonDir }}:
+  {{- template "gitHubRepoArchive" .hammerspoon }}
+
 # Nvim
 .config/nvim:
   type: archive
