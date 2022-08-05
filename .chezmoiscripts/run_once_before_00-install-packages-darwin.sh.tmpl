@@ -1,19 +1,21 @@
 {{- if (eq .chezmoi.os "darwin") -}}
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 set -eufo pipefail
 
 # install homebrew
-if ! type brew &>/dev/null; then 
-    /bin/zsh -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+if ! type brew &>/dev/null; then
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
 
-brew="
-{{- if (eq .chezmoi.arch "arm64") -}}
-/opt/homebrew/bin/brew
-{{- else -}}
-/usr/local/bin/brew
-{{- end -}}
-"
+if [[ "$(/usr/bin/uname -m)" == "arm64" ]]; then
+    HOMEBREW_PREFIX="/opt/homebrew"
+else
+    HOMEBREW_PREFIX="/usr/local"
+fi
+    brew="${HOMEBREW_PREFIX}/bin/brew"
+if [[ -f "$brew" ]]; then
+    eval "$($brew shellenv)"
+fi
 
 # install packages
 $brew bundle -v --no-lock --no-upgrade --file=/dev/stdin <<EOF
