@@ -12,16 +12,10 @@ brew "openssl@1.1"
 brew "bitwarden-cli"
 # General-purpose data compression with high compression ratio
 brew "xz"
-# Collection of portable C++ source libraries
-brew "boost"
 # Yet another cross-platform graphical process/system monitor
 brew "bottom"
 # Core application library for C
 brew "glib"
-# Library for command-line editing
-brew "readline"
-# Interpreted, interactive, object-oriented programming language
-brew "python@3.9"
 # Manage your dotfiles across multiple diverse machines, securely
 brew "chezmoi"
 # Top-like interface for container metrics
@@ -50,6 +44,8 @@ brew "gh"
 brew "git"
 # Syntax-highlighting pager for git and diff output
 brew "git-delta"
+# Library for command-line editing
+brew "readline"
 # GNU Ubiquitous Intelligent Language for Extensions
 brew "guile"
 # Validating, recursive, caching DNS resolver
@@ -106,6 +102,8 @@ brew "nvm"
 brew "openjdk@11"
 # Framework for layout and rendering of i18n text
 brew "pango"
+# Pinentry for GPG on Mac
+brew "pinentry-mac"
 # 📦🚀 Fast, disk space efficient package manager
 brew "pnpm"
 # Python package management tool
@@ -114,6 +112,8 @@ brew "poetry"
 brew "protobuf"
 # Python version management
 brew "pyenv"
+# Interpreted, interactive, object-oriented programming language
+brew "python@3.9"
 # File browser
 brew "ranger"
 # Search tool like grep and The Silver Searcher
@@ -132,6 +132,8 @@ brew "tmux"
 brew "tokei"
 # Display directories as trees (with optional color/HTML output)
 brew "tree"
+# File synchronization tool for OSX
+brew "unison"
 # Vi 'workalike' with many additional features
 brew "vim"
 # Internet file retriever
@@ -154,8 +156,12 @@ cask "bob"
 cask "cyberduck"
 # Teamwork app by Alibaba Group
 cask "dingtalk"
+# App to build and share containerized applications and microservices
+cask "docker"
 # Downloads videos from different websites
 cask "downie"
+# Client for the Dropbox cloud storage service
+cask "dropbox"
 # Terminal/ssh/sftp client
 cask "electerm"
 # Download accelerator and organizer
@@ -166,14 +172,19 @@ cask "gpg-suite-no-mail"
 cask "hammerspoon"
 # Utility to hide menu bar items
 cask "hiddenbar"
+cask "hyperswitch"
 # Free and open-source media player
 cask "iina"
 # Terminal emulator as alternative to Apple's Terminal app
 cask "iterm2"
+# Menu bar calendar
+cask "itsycal"
 # JetBrains tools manager
 cask "jetbrains-toolbox"
 # Open-source screen recorder built with web technology
 cask "kap"
+# Keyboard customizer
+cask "karabiner-elements"
 # Open-source keystroke visualizer
 cask "keycastr"
 # Snippet management app
@@ -198,6 +209,8 @@ cask "postman"
 cask "qq"
 # Move and resize windows using keyboard shortcuts or snap areas
 cask "rectangle"
+# Open source virtual/remote desktop application
+cask "rustdesk"
 # Displays all open files and sockets in use by all running processes
 cask "sloth"
 # Snip or pin screenshots
