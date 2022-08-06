@@ -1,13 +1,19 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 set -e
 
 tmpdir=$(mktemp -d)
 trap 'rm -rf ${tmpdir}' EXIT
 
+if [[ "$(/usr/bin/uname -m)" == "arm64" ]]; then
+    export PATH="/opt/homebrew/bin:$PATH"
+else
+    export PATH="/usr/local/bin:$PATH"
+fi
+
 # ensure chezmoi
 if [ ! "$(command -v chezmoi)" ]; then
-    sh -c "$(curl -fsSL https://git.io/chezmoi)" -- -b "$tmpdir"
+    bash -c "$(curl -fsSL https://git.io/chezmoi)" -- -b "$tmpdir"
 fi
 
 # ensure bitwarden-cli
@@ -26,4 +32,4 @@ $bw logout || true
 BW_SESSION=$($bw login --raw)
 
 # chezmoi init
-sh -c "PATH=$tmpdir:$PATH BW_SESSION=$BW_SESSION chezmoi init --apply --verbose MuXiu1997"
+bash -c "PATH=$tmpdir:$PATH BW_SESSION=$BW_SESSION chezmoi init --apply --verbose MuXiu1997"

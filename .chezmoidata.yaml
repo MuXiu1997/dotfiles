@@ -45,6 +45,7 @@ XDG:
     - .zshrc
     - .zprofile
     - .zsh_history
+    - .zsh_sessions
     # tmux
     - .tmux.conf
     # git
