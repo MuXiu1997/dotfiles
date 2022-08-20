@@ -6,14 +6,6 @@
     export XDG_RUNTIME_DIR="$TMPDIR"
 # }
 
-# { EDITOR
-    if type nvim &>/dev/null; then
-        export EDITOR='nvim'
-    else
-        export EDITOR='vim'
-    fi
-# }
-
 # { Zsh
     export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 # }
@@ -84,6 +76,9 @@
 # { Jenv
     export JENV_ROOT="$XDG_DATA_HOME/jenv"
 # }
+
+
+[[ ! -f "$ZDOTDIR/.zshenv.local" ]] || source "$ZDOTDIR/.zshenv.local"
 
 typeset -U path fpath PATH FPATH
 local custom_bin="$HOME/bin"

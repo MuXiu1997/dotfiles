@@ -1,8 +1,12 @@
 # { Homebrew
-    if [[ "$(/usr/bin/uname -m)" == "arm64" ]]; then
-        local HOMEBREW_PREFIX="/opt/homebrew"
-    else
-        local HOMEBREW_PREFIX="/usr/local"
+    if [[ "$(/usr/bin/uname)" == "Darwin" ]]; then
+        if [[ "$(/usr/bin/uname -m)" == "arm64" ]]; then
+            local HOMEBREW_PREFIX="/opt/homebrew"
+        else
+            local HOMEBREW_PREFIX="/usr/local"
+        fi
+    else # Linux
+        local HOMEBREW_PREFIX="/home/linuxbrew/.linuxbrew"
     fi
     local brew="${HOMEBREW_PREFIX}/bin/brew"
     if [[ -f "$brew" ]]; then
@@ -11,9 +15,10 @@
     fi
 # }
 
-# { Pyenv
-    if type pyenv &>/dev/null; then
-        eval "$(pyenv init --path)"
+# { EDITOR
+    if type nvim &>/dev/null; then
+        export EDITOR='nvim'
+    else
+        export EDITOR='vim'
     fi
 # }
-

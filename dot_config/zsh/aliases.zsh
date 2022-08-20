@@ -8,18 +8,14 @@
 # }
 
 # { Ls
-    alias ls="exa --icons --color='always' --time-style=long-iso"
-# }
-
-# { Zsh
-    alias zrconf="$EDITOR $ZDOTDIR/.zshrc"
-    alias zpconf="$EDITOR $ZDOTDIR/.zprofile"
-    alias zeconf="$EDITOR $ZDOTDIR/.zshenv"
+    if type exa &>/dev/null; then
+        alias ls="exa --icons --color='always' --time-style=long-iso"
+    fi
 # }
 
 # { Vim
-    if type nvim &>/dev/null;
-        then alias vim='nvim'
+    if type nvim &>/dev/null; then
+        alias vim='nvim'
     fi
 # }
 

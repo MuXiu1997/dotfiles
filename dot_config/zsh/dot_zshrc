@@ -13,10 +13,10 @@ fi
 # { Zsh
     # Zsh vi mode config
     # Must before oh-my-zsh.zsh
-    [[ ! -f "$ZDOTDIR/zvm-config.zsh" ]] || source "$ZDOTDIR/zvm-config.zsh" 
+    [[ ! -f "$ZDOTDIR/zvm-config.zsh" ]] || source "$ZDOTDIR/zvm-config.zsh"
 
     # Oh my zsh
-    [[ ! -f "$ZDOTDIR/oh-my-zsh.zsh" ]] || source "$ZDOTDIR/oh-my-zsh.zsh" 
+    [[ ! -f "$ZDOTDIR/oh-my-zsh.zsh" ]] || source "$ZDOTDIR/oh-my-zsh.zsh"
 
     [[ ! -f "$ZDOTDIR/aliases.zsh" ]] || source "$ZDOTDIR/aliases.zsh"
     [[ ! -f "$ZDOTDIR/functions.zsh" ]] || source "$ZDOTDIR/functions.zsh"
@@ -51,7 +51,9 @@ fi
     if ! type nvm &>/dev/null; then
         [ -s "$(brew --prefix)/opt/nvm/nvm.sh" ] && . "$(brew --prefix)/opt/nvm/nvm.sh"
     fi
-    nvm use default --silent
+    if type nvm &>/dev/null; then
+        nvm use default --silent
+    fi
 # }
 
 # { Pyenv
@@ -65,7 +67,9 @@ fi
 # }
 
 # { Direnv
-    eval "$(direnv hook zsh)"
+    if type direnv &>/dev/null; then
+        eval "$(direnv hook zsh)"
+    fi
 # }
 
 # Top Priority
