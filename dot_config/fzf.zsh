@@ -1,17 +1,6 @@
-# Setup fzf
-# ---------
-if [[ ! "$PATH" == */opt/homebrew/opt/fzf/bin* ]]; then
-  export PATH="${PATH:+${PATH}:}/opt/homebrew/opt/fzf/bin"
-fi
-
-# Auto-completion
-# ---------------
-[[ $- == *i* ]] && source "/opt/homebrew/opt/fzf/shell/completion.zsh" 2> /dev/null
-
-# Key bindings
-# ------------
-source "/opt/homebrew/opt/fzf/shell/key-bindings.zsh"
-
+# { Key bindings
+  [[ ! -f "$HOMEBREW_PREFIX/opt/fzf/shell/key-bindings.zsh" ]] || source "$HOMEBREW_PREFIX/opt/fzf/shell/key-bindings.zsh"
+# }
 
 # { Default
     export FZF_COMPLETION_TRIGGER='\'
@@ -27,7 +16,7 @@ source "/opt/homebrew/opt/fzf/shell/key-bindings.zsh"
     ${FZF_DEFAULT_COLOR}
     "
 
-    __fzf_funtions="cat ~/.config/fzf.zsh | grep -E '^####' | cut -c5-"
+    __fzf_funtions="cat $HOME/.config/fzf.zsh | grep -E '^####' | cut -c5-"
 # }
 
 # { CTRL-T
@@ -54,7 +43,7 @@ source "/opt/homebrew/opt/fzf/shell/key-bindings.zsh"
     --sort
     --ansi
     --preview 'echo {2..} | bat --theme=Nord -l sh --style=plain --style=numbers --color=always'
-    --preview-window down:3:wrap 
+    --preview-window down:3:wrap
     --bind 'ctrl-space:toggle-preview'
     "
 # }
@@ -83,20 +72,20 @@ unset temp_fzf_ctrl_t_hidden_file
 ####    temp_hidden_file="$3"
 ####
 ####    case $1 in
-####        0) 
+####        0)
 ####            echo "f" > $temp_type_file
 ####            echo "" > $temp_hidden_file
 ####        ;;
-####        1) 
+####        1)
 ####            echo "f" > $temp_type_file
 ####        ;;
-####        2) 
+####        2)
 ####            echo "d" > $temp_type_file
 ####        ;;
 ####        3)
 ####            if [[ "$(cat -- $temp_hidden_file)" == "" ]]; then
 ####                echo "h" > $temp_hidden_file
-####            else 
+####            else
 ####                echo "" > $temp_hidden_file
 ####            fi
 ####        ;;
