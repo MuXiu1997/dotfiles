@@ -29,7 +29,7 @@
 # }
 
 # { Lazygit
-    alias lg="GPG_TTY=\$(tty) lazygit"
+    alias lg="GPG_TTY=\"\$TTY\" lazygit"
 # }
 
 # { Tmux

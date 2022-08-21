@@ -1,3 +1,5 @@
+typeset -U path fpath PATH FPATH
+
 # { XDG
     export XDG_CONFIG_HOME="$HOME/.config"
     export XDG_CACHE_HOME="$HOME/.cache"
@@ -13,14 +15,12 @@
 
 # { Zsh
     export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
+    export HISTFILE="$XDG_STATE_HOME/zsh/history"
 # }
 
 # { Homebrew
-    local brew="{{- .homebrew_prefix -}}/bin/brew"
-    if [[ -f "$brew" ]]; then
-        eval "$($brew shellenv)"
-        export FPATH="$FPATH:$HOMEBREW_PREFIX/share/zsh/site-functions"
-    fi
+    path=($path {{ .homebrew_prefix }}/bin)
+    fpath=($fpath {{ .homebrew_prefix }}/share/zsh/site-functions)
 # }
 
 # { Tmux
@@ -45,12 +45,6 @@
 
 # { Nvm
     export NVM_DIR="$XDG_DATA_HOME/nvm"
-    if ! type nvm &>/dev/null; then
-        [ -s "$HOMEBREW_PREFIX/opt/nvm/nvm.sh" ] && . "$HOMEBREW_PREFIX/opt/nvm/nvm.sh"
-    fi
-    if type nvm &>/dev/null; then
-        nvm use default --silent
-    fi
 # }
 
 # { Npm
@@ -66,28 +60,19 @@
 # }
 
 # { Pyenv
-    if type pyenv &>/dev/null; then
-        eval "$(pyenv init -)"
-    fi
+    export PYENV_ROOT="$XDG_DATA_HOME/pyenv"
 # }
 
 # { Goenv
     export GOENV_ROOT="$XDG_DATA_HOME/goenv"
-    if type goenv &>/dev/null; then
-        eval "$(goenv init -)"
-    fi
 # }
 
 # { Go
     export GOPATH="$XDG_DATA_HOME/go"
     export GOBIN="$GOPATH/bin"
-    export PATH="$GOBIN:$PATH"
     export GOMODCACHE="$GOPATH/pkg/mod"
     export GOPROXY="https://goproxy.cn,direct"
-# }
-
-# { Pyenv
-    export PYENV_ROOT="$XDG_DATA_HOME/pyenv"
+    path=($GOBIN $path)
 # }
 
 # { Poetry
@@ -99,19 +84,20 @@
 
 # { Jenv
     export JENV_ROOT="$XDG_DATA_HOME/jenv"
-    if type jenv &>/dev/null; then
-        eval "$(jenv init -)"
-    fi
 # }
 
 # { Gradle
     export GRADLE_USER_HOME="$XDG_DATA_HOME/gradle"
 # }
 
+# { Maven
+    export MAVEN_CONFIG="$XDG_CONFIG_HOME/maven/settings.xml"
+    [[ ! -f "$MAVEN_CONFIG" ]] || alias mvn="mvn -s $MAVEN_CONFIG"
+# }
+
 [[ ! -f "$ZDOTDIR/.zshenv.local" ]] || source "$ZDOTDIR/.zshenv.local"
 
-typeset -U path fpath PATH FPATH
-local custom_bin="$HOME/bin"
-path=($custom_bin $path)
-fpath=($fpath $XDG_DATA_HOME/zsh/site-functions)
+export USER_LOCAL_BIN="$HOME/.local/bin"
+path=($USER_LOCAL_BIN $path)
+fpath=($XDG_DATA_HOME/zsh/site-functions $fpath)
 

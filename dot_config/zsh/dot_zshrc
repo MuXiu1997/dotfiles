@@ -10,6 +10,12 @@ fi
     export HISTFILE="$XDG_STATE_HOME/zsh/history"
 # }
 
+# { Editor
+    if type nvim &>/dev/null; then
+        export EDITOR="nvim"
+    fi
+# }
+
 # { Zsh
     # Zsh vi mode config
     # Must before oh-my-zsh.zsh
@@ -18,8 +24,8 @@ fi
     # Oh my zsh
     [[ ! -f "$ZDOTDIR/oh-my-zsh.zsh" ]] || source "$ZDOTDIR/oh-my-zsh.zsh"
 
-    [[ ! -f "$ZDOTDIR/aliases.zsh" ]] || source "$ZDOTDIR/aliases.zsh"
     [[ ! -f "$ZDOTDIR/functions.zsh" ]] || source "$ZDOTDIR/functions.zsh"
+    [[ ! -f "$ZDOTDIR/aliases.zsh" ]] || source "$ZDOTDIR/aliases.zsh"
 # }
 
 # { Cli
@@ -31,6 +37,26 @@ fi
 
     # Fzf-tab
     zvm_after_init_commands+=("[[ ! -f $XDG_CONFIG_HOME/fzf-tab.zsh ]] || source $XDG_CONFIG_HOME/fzf-tab.zsh")
+# }
+
+# { Pgp
+    export GPG_TTY="$TTY"
+# }
+
+# { Nvm
+    # Don't try to load nvm if command already available
+    if ! type nvm &>/dev/null; then
+        [ -s "$HOMEBREW_PREFIX/opt/nvm/nvm.sh" ] && . "$HOMEBREW_PREFIX/opt/nvm/nvm.sh"
+    fi
+    if type nvm &>/dev/null; then
+        nvm use default --silent
+    fi
+# }
+
+# { Pyenv
+    if type pyenv &>/dev/null; then
+        eval "$(pyenv init -)"
+    fi
 # }
 
 # { Goenv
@@ -45,27 +71,6 @@ fi
     fi
 # }
 
-# { Nvm
-    # Must be in the .zshrc file
-    # Don't try to load nvm if command already available
-    if ! type nvm &>/dev/null; then
-        [ -s "$(brew --prefix)/opt/nvm/nvm.sh" ] && . "$(brew --prefix)/opt/nvm/nvm.sh"
-    fi
-    if type nvm &>/dev/null; then
-        nvm use default --silent
-    fi
-# }
-
-# { Pyenv
-    if type pyenv &>/dev/null; then
-        eval "$(pyenv init -)"
-    fi
-# }
-
-# { Pgp
-    export GPG_TTY=$(tty)
-# }
-
 # { Direnv
     if type direnv &>/dev/null; then
         eval "$(direnv hook zsh)"
@@ -73,8 +78,7 @@ fi
 # }
 
 # Top Priority
-path=($HOME/bin $path)
+path=($USER_LOCAL_BIN $path)
 
 # To customize prompt, run `p10k configure` or edit $ZDOTDIR/.p10k.zsh.
 [[ ! -f "$ZDOTDIR/p10k.zsh" ]] || source "$ZDOTDIR/p10k.zsh"
-
