@@ -26,7 +26,7 @@ class mkcd(Command):
                 if s == '..' or (s.startswith('.') and not self.fm.settings['show_hidden']):
                     self.fm.cd(s)
                 else:
-                    ## We force ranger to load content before calling `scout`.
+                    # We force ranger to load content before calling `scout`.
                     self.fm.thisdir.load_content(schedule=False)
                     self.fm.execute_console('scout -ae ^{}$'.format(s))
         else:
@@ -37,7 +37,6 @@ class du(Command):
     def execute(self):
         import subprocess
         import tempfile
-        import os
 
         width = str(self.fm.ui.termsize[1])
 
@@ -55,4 +54,3 @@ class du(Command):
             tf.flush()
             less = self.fm.execute_command(['less', '-Rmc', '--', tf.name], stderr=subprocess.DEVNULL)
             less.communicate()
-
