@@ -1,0 +1,7 @@
+{{- if (eq .chezmoi.os "darwin") -}}
+#!/usr/bin/env bash
+set -eufo pipefail
+
+defaults write org.hammerspoon.Hammerspoon MJConfigFile "{{ .chezmoi.homeDir }}/.config/hammerspoon/init.lua"
+
+{{ end -}}
