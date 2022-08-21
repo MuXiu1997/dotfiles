@@ -3,11 +3,24 @@
     export XDG_CACHE_HOME="$HOME/.cache"
     export XDG_DATA_HOME="$HOME/.local/share"
     export XDG_STATE_HOME="$HOME/.local/state"
-    export XDG_RUNTIME_DIR="$TMPDIR"
+    export XDG_RUNTIME_DIR=
+    {{- if eq .chezmoi.os "darwin" -}}
+      "$TMPDIR"
+    {{- else -}}
+      "/run/user/$UID"
+    {{- end }}
 # }
 
 # { Zsh
     export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
+# }
+
+# { Homebrew
+    local brew="{{- .homebrew_prefix -}}/bin/brew"
+    if [[ -f "$brew" ]]; then
+        eval "$($brew shellenv)"
+        export FPATH="$FPATH:$HOMEBREW_PREFIX/share/zsh/site-functions"
+    fi
 # }
 
 # { Tmux
@@ -32,10 +45,12 @@
 
 # { Nvm
     export NVM_DIR="$XDG_DATA_HOME/nvm"
-# }
-
-# {
-    export DENO_DIR="$XDG_CACHE_HOME/deno"
+    if ! type nvm &>/dev/null; then
+        [ -s "$HOMEBREW_PREFIX/opt/nvm/nvm.sh" ] && . "$HOMEBREW_PREFIX/opt/nvm/nvm.sh"
+    fi
+    if type nvm &>/dev/null; then
+        nvm use default --silent
+    fi
 # }
 
 # { Npm
@@ -46,8 +61,21 @@
     export NI_CONFIG_FILE="$XDG_CONFIG_HOME/ni/nirc"
 # }
 
+# { Deno
+    export DENO_DIR="$XDG_CACHE_HOME/deno"
+# }
+
+# { Pyenv
+    if type pyenv &>/dev/null; then
+        eval "$(pyenv init -)"
+    fi
+# }
+
 # { Goenv
     export GOENV_ROOT="$XDG_DATA_HOME/goenv"
+    if type goenv &>/dev/null; then
+        eval "$(goenv init -)"
+    fi
 # }
 
 # { Go
@@ -56,10 +84,6 @@
     export PATH="$GOBIN:$PATH"
     export GOMODCACHE="$GOPATH/pkg/mod"
     export GOPROXY="https://goproxy.cn,direct"
-# }
-
-# { Gradle
-    export GRADLE_USER_HOME="$XDG_DATA_HOME/gradle"
 # }
 
 # { Pyenv
@@ -75,8 +99,14 @@
 
 # { Jenv
     export JENV_ROOT="$XDG_DATA_HOME/jenv"
+    if type jenv &>/dev/null; then
+        eval "$(jenv init -)"
+    fi
 # }
 
+# { Gradle
+    export GRADLE_USER_HOME="$XDG_DATA_HOME/gradle"
+# }
 
 [[ ! -f "$ZDOTDIR/.zshenv.local" ]] || source "$ZDOTDIR/.zshenv.local"
 

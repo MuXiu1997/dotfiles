@@ -1,5 +1,24 @@
+{{- $validMachineTypes := list "MAC" "SERVER" -}}
+{{- $machineType := promptStringOnce . "machine_type" (printf "Machine type [%s]" ($validMachineTypes | join "|")) | default (first $validMachineTypes) -}}
+{{- if not (has $machineType $validMachineTypes) -}}
+  {{- writeToStdout (printf "Invalid machine type. Valid machine types are: [%s]\n" ($validMachineTypes | join "|")) -}}
+  {{- exit 1 -}}
+{{- end -}}
+
+{{- $homebrew_prefix := "/home/linuxbrew/.linuxbrew" -}}
+{{- if eq .chezmoi.os "darwin" -}}
+  {{- if eq .chezmoi.arch "arm64" -}}
+    {{- $homebrew_prefix = "/opt/homebrew" -}}
+  {{- else -}}
+    {{- $homebrew_prefix = "/usr/local" -}}
+  {{- end -}}
+{{- end -}}
+
 data:
+  name: MuXiu1997
   email: muxiu1997@gmail.com
+  machine_type: {{ $machineType | upper | squote }}
+  homebrew_prefix: {{ $homebrew_prefix | squote }}
 
 diff:
   exclude:
@@ -8,9 +27,4 @@ diff:
 
 merge:
   command: nvim
-  args: ['-d', '{{ "{{ .Destination }}" }}', '{{ "{{ .Source }}" }}', '{{ "{{ .Target }}" }}']
-
-{{/*
-# vim: set ft=yaml:
-*/}}
-
+  args: [ '-d', '{{ "{{ .Destination }}" }}', '{{ "{{ .Source }}" }}', '{{ "{{ .Target }}" }}' ]
