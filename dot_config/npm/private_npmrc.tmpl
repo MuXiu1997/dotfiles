@@ -8,10 +8,6 @@ init-module=${XDG_CONFIG_HOME}/npm/config/npm-init.js
 
 # pnpm
 prefer-offline=true
-global-bin-dir=${HOME}/bin
+global-bin-dir=${USER_LOCAL_BIN}
 
-//registry.npmjs.org/:_authToken={{- (bitwardenFields "item" "35433492-bad9-43e0-b579-fa050ce60fdb").authToken.value -}}
-
-{{/*
-# vim: set ft=sh:
-*/}}
+//registry.npmjs.org/:_authToken={{ joinPath .chezmoi.sourceDir "dot_config" "npm" "registry.npmjs.org.authtoken" | include | decrypt }}
