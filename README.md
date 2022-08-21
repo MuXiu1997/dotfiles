@@ -5,5 +5,5 @@ MuXiu1997's personal dotfiles, managed with [`chezmoi`](https://github.com/twpay
 Install:
 
 ```bash
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/MuXiu1997/dotfiles/main/install.darwin.sh)"
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/MuXiu1997/dotfiles/main/install.sh)"
 ```
