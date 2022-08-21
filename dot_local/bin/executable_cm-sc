@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-import json
 import os
 import subprocess
 
@@ -22,17 +21,6 @@ def bat(cmd):
     return stdout.decode()
 
 
-def is_bw_locked():
-    bw_cmd = subprocess.Popen(
-        ['bw', 'status'],
-        stdin=subprocess.PIPE,
-        stdout=subprocess.PIPE
-    )
-    stdout, _ = bw_cmd.communicate()
-    status = json.loads(stdout.decode())
-    return status['status'] == 'locked'
-
-
 def get_chezmoi_source_path():
     chezmoi_cmd = subprocess.Popen(
         ['chezmoi', 'source-path'],
@@ -44,10 +32,6 @@ def get_chezmoi_source_path():
 
 
 def main():
-    if is_bw_locked():
-        print('Bitwarden not unlocked')
-        exit(1)
-
     os.chdir(get_chezmoi_source_path())
 
     coloured_shortcuts = [bat(c) for c in shortcuts]
