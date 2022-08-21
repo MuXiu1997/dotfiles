@@ -4,6 +4,8 @@ tap "homebrew/cask-fonts", "https://github.com/Homebrew/homebrew-cask-fonts.git"
 tap "homebrew/core"
 tap "hpedrorodrigues/tools"
 tap "vldmrkl/formulae"
+# Simple, modern, secure file encryption
+brew "age"
 # Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
 # Cryptography and SSL/TLS Toolkit
@@ -114,6 +116,8 @@ brew "protobuf"
 brew "pyenv"
 # Interpreted, interactive, object-oriented programming language
 brew "python@3.9"
+# Small and embeddable JavaScript engine
+brew "quickjs"
 # File browser
 brew "ranger"
 # Search tool like grep and The Silver Searcher
@@ -146,6 +150,8 @@ brew "zoxide"
 brew "vldmrkl/formulae/airdrop-cli"
 # Application launcher and productivity software
 cask "alfred"
+# Enable Windows-like alt-tab
+cask "alt-tab"
 # Redis desktop manager
 cask "another-redis-desktop-manager"
 # Desktop password and login vault
@@ -170,9 +176,6 @@ cask "free-download-manager"
 cask "gpg-suite-no-mail"
 # Desktop automation application
 cask "hammerspoon"
-# Utility to hide menu bar items
-cask "hiddenbar"
-cask "hyperswitch"
 # Free and open-source media player
 cask "iina"
 # Terminal emulator as alternative to Apple's Terminal app
@@ -191,6 +194,8 @@ cask "keycastr"
 cask "lepton"
 # Utility to open, create and modify archive files
 cask "maczip"
+# Simple and elegant markdown editor
+cask "mark-text"
 # Provides updates to various Microsoft products
 cask "microsoft-auto-update"
 # Web browser
