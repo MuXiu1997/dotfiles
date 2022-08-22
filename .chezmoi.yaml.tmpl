@@ -22,7 +22,7 @@ data:
 
 encryption: age
 age:
-  identity: {{ .chezmoi.homeDir }}/Library/Mobile Documents/com~apple~CloudDocs/age_secret_key
+  identity: {{ joinPath .chezmoi.homeDir ".local" "share" "age_secret_key" }}
   recipient: age10728gga2gmz5jpgqzca65sx6h3sew53lvksylv24fhz62gqmr59sg3y00h
 
 diff:

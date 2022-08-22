@@ -3,6 +3,9 @@ README.md
 
 install.sh
 
+.age_secret_key.age
+.local/share/age_secret_key
+
 .brewfile/
 
 .config/oh-my-zsh/cache/**
