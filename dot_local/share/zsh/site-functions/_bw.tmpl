@@ -1,1 +1,3 @@
-{{- output "bw" "completion" "--shell" "zsh" -}}
+{{- if lookPath "bw" -}}
+    {{- output "bw" "completion" "--shell" "zsh" -}}
+{{- end -}}
