@@ -1,4 +1,4 @@
-typeset -U path fpath PATH FPATH
+typeset -U path fpath
 
 # { XDG
     export XDG_CONFIG_HOME="$HOME/.config"
@@ -21,6 +21,7 @@ typeset -U path fpath PATH FPATH
 # { Homebrew
     path=($path {{ .homebrew_prefix }}/bin)
     fpath=($fpath {{ .homebrew_prefix }}/share/zsh/site-functions)
+    export HOMEBREW_BREWFILE={{ joinPath .chezmoi.sourceDir ".brewfile" (print .machine_type ".brewfile")  }}
 # }
 
 # { Tmux

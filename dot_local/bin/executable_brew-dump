@@ -2,7 +2,7 @@
 import os
 import subprocess
 
-Brewfile = os.path.join(os.path.expanduser('~'), '.local', 'share', 'Brewfile')
+Brewfile = os.environ['HOMEBREW_BREWFILE']
 
 mas_id_list = [
     '1176895641',  # Spark
@@ -25,11 +25,12 @@ def main():
 
     output = stdout.decode()
     output = '\n'.join([
-        l for l in output.splitlines() if
-        not (l.startswith('mas'))
-        or (l.startswith('mas') and any([l.endswith(mas_id) for mas_id in mas_id_list]))
+        line for line in output.splitlines() if
+        not (line.startswith('mas'))
+        or (line.startswith('mas') and any([line.endswith(mas_id) for mas_id in mas_id_list]))
     ])
 
+    os.makedirs(os.path.dirname(Brewfile), exist_ok=True)
     with open(Brewfile, 'w') as fp:
         fp.write(output)
 

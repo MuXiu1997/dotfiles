@@ -7,6 +7,9 @@ if ! type brew &>/dev/null; then
 fi
 
 # install packages
+{{ $brewfile := joinPath .chezmoi.sourceDir ".brewfile" (print .machine_type ".brewfile") -}}
+{{- if stat $brewfile -}}
 {{ joinPath .homebrew_prefix "bin" "brew" }} bundle -v --no-lock --no-upgrade --file=/dev/stdin <<EOF
-{{ joinPath .chezmoi.sourceDir "dot_local" "share" "Brewfile" | include }}
+{{ $brewfile | include }}
 EOF
+{{- end }}
