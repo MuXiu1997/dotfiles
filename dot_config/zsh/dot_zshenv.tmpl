@@ -26,6 +26,13 @@ typeset -U path fpath
 
 # { Tmux
     export TMUX_PLUGIN_MANAGER_PATH="$XDG_CONFIG_HOME/tmux/plugins"
+    export __TMUX_MOUSE=
+    {{- if eq .machine_type "MAC" -}}
+      "on"
+    {{- else -}}
+      "off"
+    {{- end }}
+
 # }
 
 # { Zoxide
