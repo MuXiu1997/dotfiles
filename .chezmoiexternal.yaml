@@ -10,9 +10,9 @@
   exact: true
   stripComponents: 1
   refreshPeriod: 168h
-{{- end -}}
+{{ end -}}
 
-{{- if not (eq (index .chezmoi.args 1) "execute-template") -}}
+{{- if or (ne (index .chezmoi.args 1) "execute-template") (eq (env "EXECUTE_CHEZMOIEXTERNAL") "true") -}}
 {{- with .externalSource -}}
 {{- $es := . -}}
 
@@ -21,26 +21,26 @@
   {{- template "gitHubRepoArchive" .ohMyZsh }}
 
 # Oh-my-zsh themes
-{{ range .ohMyZshThemes -}}
-  {{- $es.ohMyZshThemesDir -}}/{{ base .repo }}:
+{{ range .ohMyZshThemes }}
+  {{- joinPath $es.ohMyZshThemesDir (base .repo) }}:
   {{- template "gitHubRepoArchive" . }}
-{{ end }}
+{{- end }}
 
 # Oh-my-zsh plugins
-{{ range .ohMyZshPlugins -}}
-  {{- $es.ohMyZshPluginsDir -}}/{{ base .repo }}:
+{{ range .ohMyZshPlugins }}
+  {{- joinPath $es.ohMyZshPluginsDir (base .repo) }}:
   {{- template "gitHubRepoArchive" . }}
-{{ end }}
+{{- end }}
 
 # Oh-my-tmux
 {{ .ohMyTmuxDir }}:
   {{- template "gitHubRepoArchive" .ohMyTmux }}
 
 # Ranger plugins
-{{ range .rangerPlugins -}}
-  {{- $es.rangerPluginsDir -}}/{{ base .repo | snakecase }}:
+{{ range .rangerPlugins }}
+  {{- joinPath $es.rangerPluginsDir (base .repo | snakecase) }}:
   {{- template "gitHubRepoArchive" . }}
-{{ end }}
+{{- end }}
 
 # Hammerspoon
 {{ .hammerspoonDir }}:

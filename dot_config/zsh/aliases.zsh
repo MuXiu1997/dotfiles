@@ -21,6 +21,7 @@
 
 # { Chezmoi
     alias cm="chezmoi"
+    alias cms="chezmoi-shortcut"
 # }
 
 # { Brew
