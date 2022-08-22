@@ -9,3 +9,11 @@ install.sh
 .config/oh-my-zsh/custom/themes/powerlevel10k/**/*.zwc
 
 .config/hammerspoon/Spoons
+
+{{ if ne .machine_type "MAC" -}}
+.config/muxiu1997
+.config/hammerspoon
+.config/karabiner
+.ssh
+.gnupg
+{{ end }}
