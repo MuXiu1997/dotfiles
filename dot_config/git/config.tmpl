@@ -1,7 +1,9 @@
 [user]
     name = {{ .name }}
     email = {{ .email }}
+    {{ if eq .machine_type "MAC" -}}
     signingkey = FF066B943A937BD1
+    {{- end }}
 [init]
     defaultBranch = main
 [core]
@@ -12,4 +14,6 @@
 [push]
     default = current
 [commit]
+    {{ if eq .machine_type "MAC" -}}
     gpgsign = true
+    {{- end }}
