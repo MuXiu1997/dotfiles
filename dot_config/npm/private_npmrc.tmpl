@@ -10,4 +10,6 @@ init-module=${XDG_CONFIG_HOME}/npm/config/npm-init.js
 prefer-offline=true
 global-bin-dir=${USER_LOCAL_BIN}
 
+{{ if eq .machine_type "MAC" -}}
 //registry.npmjs.org/:_authToken={{ joinPath .chezmoi.sourceDir "dot_config" "npm" "registry.npmjs.org.authtoken" | include | decrypt }}
+{{- end }}
