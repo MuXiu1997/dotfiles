@@ -16,4 +16,9 @@ install.sh
 .config/karabiner
 .ssh
 .gnupg
-{{ end }}
+.local/bin/bootstrap-hotkey
+{{- end }}
+
+{{ if ne .machine_type "SERVER" -}}
+.local/bin/bootstrap-main
+{{- end }}
