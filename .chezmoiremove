@@ -1,3 +1,9 @@
 {{ range .XDG.remove -}}
     {{ . }}
 {{ end }}
+
+.bash_history
+.bash_logout
+.bashrc
+.profile
+.selected_editor

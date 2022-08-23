@@ -46,12 +46,16 @@ XDG:
     - .zprofile
     - .zsh_history
     - .zsh_sessions
+    - .zcompdump
     # tmux
     - .tmux.conf
     # git
     - .gitconfig
     # fzf
     - .fzf.zsh
+    # wget
+    - .wgetrc
+    - .wget-hsts
     # nvm
     - .nvm
     # npm
@@ -60,10 +64,10 @@ XDG:
     # pnpm
     - .pnpm-state
     - .pnpm-store
-    # go
-    - go
     # pyenv
     - .pyenv
+    # go
+    - go
     # gradle
     - .gradle
     # maven
