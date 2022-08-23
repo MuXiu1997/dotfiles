@@ -61,6 +61,14 @@ const deviceAppleMagicTrackpad = defineDevice(
   (d) => d.ignore = true,
 )
 
+const deviceAppleMagicTrackpadUSB = defineDevice(
+  1452,
+  613,
+  false,
+  true,
+  (d) => d.ignore = true,
+)
+
 const deviceMajestouchConvertible2 = defineDevice(
   1204,
   4621,
@@ -111,6 +119,7 @@ const devices = [
   deviceAppleInternalTrackpad,
   deviceAppleInternalKeyboard,
   deviceAppleMagicTrackpad,
+  deviceAppleMagicTrackpadUSB,
   deviceMajestouchConvertible2,
   deviceLogitechGPWKeyboard,
   deviceLogitechGPWPoint,
@@ -214,7 +223,7 @@ const ruleEnsureInputSourceRime = {
     {
       type: 'basic',
       parameters: {
-        'basic.to_if_held_down_threshold_milliseconds': 1500,
+        'basic.to_if_held_down_threshold_milliseconds': 750,
       },
       from: {
         key_code: 'left_shift',
@@ -266,6 +275,13 @@ const ruleVim = (() => {
     ],
   }
 })()
+
+const rules = [
+  ruleSwapFnAndControl,
+  ruleSwapCommandAndOption,
+  ruleEnsureInputSourceRime,
+  ruleVim,
+]
 // endregion Rules
 
 const global = {
@@ -286,7 +302,7 @@ const profile = {
     indicate_sticky_modifier_keys_state: true,
     mouse_key_xy_scale: 100,
   },
-  devices: devices,
+  devices,
   complex_modifications: {
     parameters: {
       'basic.simultaneous_threshold_milliseconds': 50,
@@ -295,12 +311,7 @@ const profile = {
       'basic.to_if_held_down_threshold_milliseconds': 500,
       'mouse_motion_to_scroll.speed': 100,
     },
-    rules: [
-      ruleSwapFnAndControl,
-      ruleSwapCommandAndOption,
-      ruleEnsureInputSourceRime,
-      ruleVim,
-    ],
+    rules,
   },
 }
 

@@ -1,2 +1,2 @@
-{{- $tsFile := print .chezmoi.sourceDir "/dot_config/private_karabiner/karabiner.ts" -}}
+{{- $tsFile := joinPath .chezmoi.sourceDir "dot_config" "private_karabiner" "karabiner.ts" -}}
 {{- output "deno" "run" "-A" "--no-check" $tsFile -}}
