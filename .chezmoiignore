@@ -20,6 +20,7 @@ install.sh
 .ssh
 .gnupg
 .local/bin/bootstrap-hotkey
+.ideavimrc
 {{- end }}
 
 {{ if ne .machine_type "SERVER" -}}
