@@ -16,6 +16,12 @@ fi
     fi
 # }
 
+# { Man
+    if type col &>/dev/null && type bat &>/dev/null; then
+        export MANPAGER='sh -c "col -bx | bat -pl man"'
+    fi
+# }
+
 # { Zsh
     # Zsh vi mode config
     # Must before oh-my-zsh.zsh

@@ -40,3 +40,7 @@
 # { Bw
     alias bwu="export BW_SESSION=\"\$(bw unlock --raw)\""
 # }
+
+# { Help
+    alias h="help"
+# }

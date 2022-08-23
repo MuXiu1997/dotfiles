@@ -1,9 +1,18 @@
 r() {
-    local temp_file="$(mktemp -t "ranger_cd.XXXXXXXXXX")"
-    trap "rm -f -- ${temp_file}" EXIT
+    local temp_file choosedir
+    temp_file="$(mktemp -t "ranger_cd.XXXXXXXXXX")"
+    trap 'rm -f -- ${temp_file}' EXIT
     ranger-zoxide --choosedir "$temp_file" "$@"
-    if local choosedir="$(cat -- "$temp_file")" && [ -n "$choosedir" ] && [ "$choosedir" != "$PWD" ]; then
-        cd -- "$choosedir"
+    if choosedir="$(cat -- "$temp_file")" && [ -n "$choosedir" ] && [ "$choosedir" != "$PWD" ]; then
+        cd -- "$choosedir" || return
+    fi
+}
+
+help() {
+    if type col &>/dev/null && type bat &>/dev/null; then
+        "$@" --help | col -bx | bat -pl help
+    else
+        "$@" --help
     fi
 }
 
