@@ -20,8 +20,17 @@
 # }
 
 # { CTRL-T
-    temp_fzf_ctrl_t_type_file="$(mktemp -t fzf_ctrl_t_type.XXXXXXXXXX)"
-    temp_fzf_ctrl_t_hidden_file="$(mktemp -t fzf_ctrl_t_hidden.XXXXXXXXXX)"
+    export temp_fzf_ctrl_t_type_file="$(mktemp -t fzf_ctrl_t_type.XXXXXXXXXX)"
+    export temp_fzf_ctrl_t_hidden_file="$(mktemp -t fzf_ctrl_t_hidden.XXXXXXXXXX)"
+
+    function __clear_temp_fzf_ctrl_files() {
+        rm -f -- $temp_fzf_ctrl_t_type_file
+        rm -f -- $temp_fzf_ctrl_t_hidden_file
+    }
+    typeset -ag zshexit_functions;
+    if [[ -z "${zshexit_functions[(r)__clear_temp_fzf_ctrl_files]+1}" ]]; then
+      zshexit_functions=( __clear_temp_fzf_ctrl_files ${zshexit_functions[@]} )
+    fi
 
     export FZF_CTRL_T_COMMAND="$__fzf_funtions | zsh -s _fzf_ctrl_t_command 0 \"$temp_fzf_ctrl_t_type_file\" \"$temp_fzf_ctrl_t_hidden_file\""
     export FZF_CTRL_T_OPTS="
@@ -49,8 +58,6 @@
 # }
 
 unset __fzf_funtions
-unset temp_fzf_ctrl_t_type_file
-unset temp_fzf_ctrl_t_hidden_file
 
 ####set -e
 ####
