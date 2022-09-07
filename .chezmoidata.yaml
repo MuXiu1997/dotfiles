@@ -70,8 +70,6 @@ XDG:
     - go
     # gradle
     - .gradle
-    # maven
-    - .m2
     # hammerspoon
     - .hammerspoon
 
