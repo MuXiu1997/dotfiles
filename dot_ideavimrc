@@ -97,3 +97,7 @@ nnoremap <Leader>rf :action ReformatCode<CR>
 
 
 map      <Tab><Tab> <Plug>(easymotion-s)
+
+
+noremap gi :action GotoImplementation<CR>
+noremap gs :action GotoSuperMethod<CR>
