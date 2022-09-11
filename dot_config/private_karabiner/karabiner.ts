@@ -279,7 +279,7 @@ const ruleVim = (() => {
 const rules = [
   ruleSwapFnAndControl,
   ruleSwapCommandAndOption,
-  ruleEnsureInputSourceRime,
+  // ruleEnsureInputSourceRime,
   ruleVim,
 ]
 // endregion Rules
