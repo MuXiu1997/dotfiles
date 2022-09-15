@@ -2,6 +2,7 @@ tap "homebrew/bundle"
 tap "homebrew/cask", "https://github.com/Homebrew/homebrew-cask.git"
 tap "homebrew/cask-fonts", "https://github.com/Homebrew/homebrew-cask-fonts.git"
 tap "homebrew/core"
+tap "homebrew/services"
 tap "hpedrorodrigues/tools"
 tap "vldmrkl/formulae"
 # Simple, modern, secure file encryption
@@ -74,6 +75,12 @@ brew "grex"
 brew "grpcurl"
 # OpenType text shaping engine
 brew "harfbuzz"
+# Interpreted, interactive, object-oriented programming language
+brew "python@3.10"
+# User-friendly cURL replacement (command-line HTTP client)
+brew "httpie"
+# Command-line benchmarking tool
+brew "hyperfine"
 # Manage your Java environment
 brew "jenv"
 # Lightweight and flexible command-line JSON processor
@@ -110,8 +117,6 @@ brew "pango"
 brew "pinentry-mac"
 # 📦🚀 Fast, disk space efficient package manager
 brew "pnpm"
-# Interpreted, interactive, object-oriented programming language
-brew "python@3.10"
 # Python package management tool
 brew "poetry"
 # Protocol buffers (Google's data interchange format)
@@ -132,6 +137,8 @@ brew "rsync"
 brew "ruby"
 # 7-Zip is a file archiver with a high compression ratio
 brew "sevenzip"
+# Static analysis and lint tool, for (ba)sh scripts
+brew "shellcheck"
 # Simplified and community-driven man pages
 brew "tldr"
 # Terminal multiplexer
@@ -174,6 +181,8 @@ cask "downie"
 cask "dropbox"
 # Terminal/ssh/sftp client
 cask "electerm"
+# Project management software
+cask "feishu"
 # Download accelerator and organizer
 cask "free-download-manager"
 # Tools to protect your files
