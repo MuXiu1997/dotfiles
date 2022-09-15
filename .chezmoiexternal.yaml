@@ -66,10 +66,12 @@
   url: https://raw.githubusercontent.com/docker/compose/{{ regexFind "\\d+\\.\\d+\\.\\d+" (output "docker-compose" "--version") }}/contrib/completion/zsh/_docker-compose
   refreshPeriod: 168h
 {{- end }}
-.local/share/zsh/site-functions/_nvm:
+{{ range $idx, $cmd := (list "nvm" "mvn") -}}
+{{ if ne $idx 0 -}}{{ "\n" }}{{- end -}}
+.local/share/zsh/site-functions/_{{ $cmd }}:
   type: file
-  url: https://github.com/zsh-users/zsh-completions/raw/master/src/_nvm
+  url: https://github.com/zsh-users/zsh-completions/raw/master/src/_{{ $cmd }}
   refreshPeriod: 168h
-
+{{- end }}
 {{- end }}
 {{- end }}
