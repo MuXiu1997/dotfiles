@@ -26,6 +26,9 @@ let mapleader=","
 
 nnoremap <Space>nh :noh<CR>
 
+nnoremap j jzz
+nnoremap k kzz
+
 noremap  <Space>a  ^
 noremap  <Space>e  $
 
@@ -68,6 +71,9 @@ let g:highlightedyank_highlight_color = "rgb(123, 171, 187, 127)"
 
     noremap <BS>     :action Back<CR>
     noremap <C-BS>   :action Forward<CR>
+    
+    noremap gi       :action GotoImplementation<CR>
+    noremap gs       :action GotoSuperMethod<CR>
 " }
 
 " { EditorSelectWord
@@ -92,12 +98,10 @@ let g:highlightedyank_highlight_color = "rgb(123, 171, 187, 127)"
 nnoremap <Space>his :action LocalHistory.ShowHistory<CR>
 nnoremap <Space>fs  :action FileStructurePopup<CR>
 
-
 nnoremap <Leader>rf :action ReformatCode<CR>
-
 
 map      <Tab><Tab> <Plug>(easymotion-s)
 
 
-noremap gi :action GotoImplementation<CR>
-noremap gs :action GotoSuperMethod<CR>
+
+
