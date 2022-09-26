@@ -18,8 +18,7 @@ function defineDevice(
   product_id: number,
   is_keyboard: boolean,
   is_pointing_device: boolean,
-  callback: (device: Device) => void = () => {
-  },
+  callback: (device: Device) => void = () => {},
 ): Device {
   const device: Device = {
     identifiers: {
@@ -217,33 +216,6 @@ const ruleSwapCommandAndOption = (() => {
   }
 })()
 
-const ruleEnsureInputSourceRime = {
-  description: 'Ensure input source [Rime]',
-  manipulators: [
-    {
-      type: 'basic',
-      parameters: {
-        'basic.to_if_held_down_threshold_milliseconds': 750,
-      },
-      from: {
-        key_code: 'left_shift',
-      },
-      to: [
-        {
-          key_code: 'left_shift',
-        },
-      ],
-      to_if_held_down: [
-        {
-          select_input_source: {
-            input_source_id: 'Rime',
-          },
-        },
-      ],
-    },
-  ],
-}
-
 const ruleVim = (() => {
   function $changeToWithControl(from: string, to: string) {
     return {
@@ -279,7 +251,6 @@ const ruleVim = (() => {
 const rules = [
   ruleSwapFnAndControl,
   ruleSwapCommandAndOption,
-  // ruleEnsureInputSourceRime,
   ruleVim,
 ]
 // endregion Rules
