@@ -49,16 +49,21 @@ vnoremap aj        a'
 vnoremap aJ        a"
 
 " Plugins {
-    set easymotion
-    set surround
-    set ideajoin
-    set exchange
-    set highlightedyank
-    set textobj-indent
-    set argtextobj
-    set multiple-cursors
-    set matchit
+    " https://github.com/JetBrains/ideavim/wiki/Emulated-plugins
+    Plug 'chrisbra/matchit'
+    Plug 'dbakker/vim-paragraph-motion'
+    Plug 'easymotion/vim-easymotion'
+    Plug 'kana/vim-textobj-entire'
+    Plug 'machakann/vim-highlightedyank'
+    Plug 'michaeljsmith/vim-indent-object'
+    Plug 'terryma/vim-multiple-cursors'
+    Plug 'tommcdo/vim-exchange'
+    Plug 'tpope/vim-surround'
+    Plug 'vim-scripts/argtextobj.vim'
 " }
+
+" https://github.com/JetBrains/ideavim/wiki/%22ideajoin%22-examples
+set ideajoin
 
 " https://github.com/JetBrains/ideavim/wiki/Select-mode
 set idearefactormode=visual
@@ -71,7 +76,7 @@ let g:highlightedyank_highlight_color = "rgb(123, 171, 187, 127)"
 
     noremap <BS>     :action Back<CR>
     noremap <C-BS>   :action Forward<CR>
-    
+
     noremap gi       :action GotoImplementation<CR>
     noremap gs       :action GotoSuperMethod<CR>
 " }
@@ -87,7 +92,6 @@ let g:highlightedyank_highlight_color = "rgb(123, 171, 187, 127)"
     nnoremap <Tab>g :action ActivateCommitToolWindow<CR>
     nnoremap <Tab>t :action ActivateTerminalToolWindow<CR>
 " }
-
 
 " { Edit
     noremap <Space>ca :action StringManipulation.Group.SwitchCase<CR>
