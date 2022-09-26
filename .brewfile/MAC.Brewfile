@@ -15,6 +15,8 @@ brew "openssl@1.1"
 brew "bitwarden-cli"
 # General-purpose data compression with high compression ratio
 brew "xz"
+# Collection of portable C++ source libraries
+brew "boost"
 # Yet another cross-platform graphical process/system monitor
 brew "bottom"
 # Core application library for C
@@ -133,8 +135,6 @@ brew "ranger"
 brew "ripgrep"
 # Utility that provides fast incremental file transfer
 brew "rsync"
-# Powerful, clean, object-oriented scripting language
-brew "ruby"
 # 7-Zip is a file archiver with a high compression ratio
 brew "sevenzip"
 # Static analysis and lint tool, for (ba)sh scripts
@@ -167,8 +167,6 @@ cask "alt-tab"
 cask "another-redis-desktop-manager"
 # Desktop password and login vault
 cask "bitwarden"
-# Translation application for text, pictures, and manual input
-cask "bob"
 # Server and cloud storage browser
 cask "cyberduck"
 # Teamwork app by Alibaba Group
