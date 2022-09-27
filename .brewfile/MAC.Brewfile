@@ -165,8 +165,6 @@ cask "alfred"
 cask "alt-tab"
 # Redis desktop manager
 cask "another-redis-desktop-manager"
-# Desktop password and login vault
-cask "bitwarden"
 # Server and cloud storage browser
 cask "cyberduck"
 # Teamwork app by Alibaba Group
@@ -241,6 +239,7 @@ cask "switchhosts"
 cask "wechat"
 # Wechat DevTools for Official Account and Mini Program development
 cask "wechatwebdevtools"
+mas "Bitwarden", id: 1352778147
 mas "Bob", id: 1630034110
 mas "Spark", id: 1176895641
 mas "WPS Office", id: 1443749478
