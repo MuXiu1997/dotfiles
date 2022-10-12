@@ -59,6 +59,10 @@ brew "guile"
 brew "unbound"
 # GNU Transport Layer Security (TLS) Library
 brew "gnutls"
+# X.509 and CMS library
+brew "libksba"
+# Passphrase entry dialog utilizing the Assuan protocol
+brew "pinentry"
 # GNU Pretty Good Privacy (PGP) package
 brew "gnupg"
 # Open source programming language to build simple/reliable/efficient software
@@ -77,6 +81,8 @@ brew "grex"
 brew "grpcurl"
 # OpenType text shaping engine
 brew "harfbuzz"
+# Command-line interface for SQLite
+brew "sqlite"
 # Interpreted, interactive, object-oriented programming language
 brew "python@3.10"
 # User-friendly cURL replacement (command-line HTTP client)
@@ -91,6 +97,8 @@ brew "jq"
 brew "lazydocker"
 # Simple terminal UI for git commands
 brew "lazygit"
+# Pager program similar to more
+brew "less"
 # Powerful, lightweight programming language
 brew "lua"
 # Bare libuv bindings for lua
@@ -105,6 +113,8 @@ brew "openjdk"
 brew "maven"
 # Fast, highly customisable system info script
 brew "neofetch"
+# Parser generator tool and incremental parsing library
+brew "tree-sitter"
 # Ambitious Vim-fork focused on extensibility and agility
 brew "neovim"
 # HTTP/2 C Library
@@ -171,8 +181,6 @@ cask "cyberduck"
 cask "dingtalk"
 # App to build and share containerized applications and microservices
 cask "docker"
-# Downloads videos from different websites
-cask "downie"
 # Client for the Dropbox cloud storage service
 cask "dropbox"
 # Terminal/ssh/sftp client
