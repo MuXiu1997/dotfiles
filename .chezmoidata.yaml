@@ -56,6 +56,8 @@ XDG:
     # wget
     - .wgetrc
     - .wget-hsts
+    # less
+    - .lesshst
     # nvm
     - .nvm
     # npm
