@@ -1,0 +1,64 @@
+#!/usr/bin/env python3
+import subprocess
+
+
+def get_tags():
+    cmd = subprocess.Popen(
+        ['git', 'tag', '--list'],
+        stdout=subprocess.PIPE,
+    )
+    stdout, _ = cmd.communicate()
+    output = stdout.strip().decode()
+    return output.splitlines()
+
+
+def get_remotes():
+    cmd = subprocess.Popen(
+        ['git', 'remote', '--verbose'],
+        stdout=subprocess.PIPE,
+    )
+    stdout, _ = cmd.communicate()
+    output = stdout.strip().decode()
+    remotes = set([l.split('\t')[0] for l in output.splitlines()])
+    remotes = sorted(remotes)
+    return remotes
+
+
+def main():
+    tags = get_tags()
+
+    fzf_cmd = subprocess.Popen(
+        ['fzf', '--ansi', '-m', '--header', 'Select the tags to be deleted'],
+        stdin=subprocess.PIPE,
+        stdout=subprocess.PIPE
+    )
+    fzf_cmd_stdout, _ = fzf_cmd.communicate('\n'.join(tags).encode())
+    if fzf_cmd.returncode != 0:
+        exit(fzf_cmd.returncode)
+
+    selected_tags = [t for t in fzf_cmd_stdout.decode().splitlines()]
+
+    remotes = get_remotes()
+    fzf_cmd = subprocess.Popen(
+        ['fzf', '--ansi', '-m', '--header', 'Select on which remotes to delete the tags'],
+        stdin=subprocess.PIPE,
+        stdout=subprocess.PIPE
+    )
+
+    fzf_cmd_stdout, _ = fzf_cmd.communicate('\n'.join(['\033[1;31m*just local*\033[0m', *remotes]).encode())
+    if fzf_cmd.returncode != 0:
+        exit(fzf_cmd.returncode)
+
+    selected_remotes = [r for r in fzf_cmd_stdout.decode().splitlines()]
+
+    subprocess.run(['git', 'tag', '--delete', *selected_tags])
+
+    if '*just local*' in selected_remotes:
+        exit(0)
+
+    for remote in selected_remotes:
+        subprocess.run(['git', 'push', remote, *[':refs/tags/{}'.format(t) for t in selected_tags]])
+
+
+if __name__ == '__main__':
+    main()
