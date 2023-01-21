@@ -9,8 +9,6 @@ tap "vldmrkl/formulae"
 brew "age"
 # Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
-# Cryptography and SSL/TLS Toolkit
-brew "openssl@1.1"
 # Secure and free password manager for all of your devices
 brew "bitwarden-cli"
 # General-purpose data compression with high compression ratio
@@ -93,6 +91,8 @@ brew "hyperfine"
 brew "jenv"
 # Lightweight and flexible command-line JSON processor
 brew "jq"
+# Anti-bikeshedding Kotlin linter with built-in formatter
+brew "ktlint"
 # Lazier way to manage everything docker
 brew "lazydocker"
 # Simple terminal UI for git commands
@@ -101,14 +101,14 @@ brew "lazygit"
 brew "less"
 # Powerful, lightweight programming language
 brew "lua"
+# Just-In-Time Compiler (JIT) for the Lua programming language
+brew "luajit"
 # Bare libuv bindings for lua
 brew "luv"
 # Utility for directing compilation
 brew "make"
 # Mac App Store command-line interface
 brew "mas"
-# Development kit for the Java programming language
-brew "openjdk"
 # Java-based project management
 brew "maven"
 # Fast, highly customisable system info script
@@ -141,29 +141,37 @@ brew "python@3.9"
 brew "quickjs"
 # File browser
 brew "ranger"
+# Rsync for cloud storage
+brew "rclone"
 # Search tool like grep and The Silver Searcher
 brew "ripgrep"
 # Utility that provides fast incremental file transfer
 brew "rsync"
+# Powerful, clean, object-oriented scripting language
+brew "ruby"
 # 7-Zip is a file archiver with a high compression ratio
 brew "sevenzip"
 # Static analysis and lint tool, for (ba)sh scripts
 brew "shellcheck"
+# SOcket CAT: netcat on steroids
+brew "socat"
 # Simplified and community-driven man pages
 brew "tldr"
+# Clean C library for processing UTF-8 Unicode data
+brew "utf8proc"
 # Terminal multiplexer
 brew "tmux"
 # Program that allows you to count code, quickly
 brew "tokei"
 # Display directories as trees (with optional color/HTML output)
 brew "tree"
-# File synchronization tool for OSX
+# File synchronization tool
 brew "unison"
 # Vi 'workalike' with many additional features
 brew "vim"
 # Internet file retriever
 brew "wget"
-# Process YAML documents from the CLI
+# Process YAML, JSON, XML, CSV and properties documents from the CLI
 brew "yq"
 # Shell extension to navigate your filesystem faster
 brew "zoxide"
