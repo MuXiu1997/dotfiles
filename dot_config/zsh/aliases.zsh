@@ -41,6 +41,10 @@
     alias bwu="export BW_SESSION=\"\$(bw unlock --raw)\""
 # }
 
+# { Flyctl
+    alias fly="flyctl"
+# }
+
 # { Help
     alias h="help"
 # }
