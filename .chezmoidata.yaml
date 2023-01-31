@@ -72,7 +72,8 @@ XDG:
     - go
     # gradle
     - .gradle
-    # cargo
+    # rust
+    - .rustup
     - .cargo
     # hammerspoon
     - .hammerspoon
