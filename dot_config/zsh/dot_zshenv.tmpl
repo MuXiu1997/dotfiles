@@ -106,6 +106,10 @@ typeset -U path fpath
     [[ ! -f "$MAVEN_CONFIG" ]] || alias mvn="mvn -s $MAVEN_CONFIG"
 # }
 
+# { Cargo
+    export CARGO_HOME="$XDG_DATA_HOME/cargo"
+# }
+
 [[ ! -f "$ZDOTDIR/.zshenv.local" ]] || source "$ZDOTDIR/.zshenv.local"
 
 export USER_LOCAL_BIN="$HOME/.local/bin"

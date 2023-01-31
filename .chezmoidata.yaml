@@ -72,6 +72,8 @@ XDG:
     - go
     # gradle
     - .gradle
+    # cargo
+    - .cargo
     # hammerspoon
     - .hammerspoon
 
