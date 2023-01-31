@@ -3,4 +3,4 @@ git:
     colorArg: always
     pager: >
       delta --features lazygit
-      --max-line-length "$((2 * {{columnWidth}} + 3))"
+      --max-line-length "$((2 * {{columnWidth}}))"
