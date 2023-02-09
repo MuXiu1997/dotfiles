@@ -1,0 +1,58 @@
+# ================================ Oh My Zsh ================================= #
+['.config/oh-my-zsh']
+type = 'archive'
+url = 'https://github.com/ohmyzsh/ohmyzsh/archive/master.zip'
+exact = true
+stripComponents = 1
+refreshPeriod = '168h'
+exclude = ['*/themes', '*/plugins']
+# ============================================================================ #
+
+
+# ============================ Oh My Zsh plugins ============================= #
+['.config/oh-my-zsh/custom/plugins/command-not-found']
+type = 'archive'
+url = 'https://github.com/ohmyzsh/ohmyzsh/archive/master.zip'
+exact = true
+stripComponents = 3
+refreshPeriod = '168h'
+include = ['*/plugins/command-not-found/**']
+
+['.config/oh-my-zsh/custom/plugins/zsh-autosuggestions']
+type = 'archive'
+url = 'https://github.com/zsh-users/zsh-autosuggestions/archive/master.zip'
+exact = true
+stripComponents = 1
+refreshPeriod = '168h'
+
+['.config/oh-my-zsh/custom/plugins/zsh-syntax-highlighting']
+type = 'archive'
+url = 'https://github.com/zsh-users/zsh-syntax-highlighting/archive/master.zip'
+exact = true
+stripComponents = 1
+refreshPeriod = '168h'
+
+['.config/oh-my-zsh/custom/plugins/zsh-vi-mode']
+type = 'archive'
+url = 'https://github.com/MuXiu1997/zsh-vi-mode/archive/main.zip'
+exact = true
+stripComponents = 1
+refreshPeriod = '168h'
+
+['.config/oh-my-zsh/custom/plugins/fzf-tab']
+type = 'archive'
+url = 'https://github.com/Aloxaf/fzf-tab/archive/master.zip'
+exact = true
+stripComponents = 1
+refreshPeriod = '168h'
+# ============================================================================ #
+
+
+# ============================= Oh My Zsh themes ============================= #
+['.config/oh-my-zsh/custom/themes/powerlevel10k']
+type = 'archive'
+url = 'https://github.com/romkatv/powerlevel10k/archive/{{ template "gitHubLatestTag" "romkatv/powerlevel10k" }}.zip'
+exact = true
+stripComponents = 1
+refreshPeriod = '168h'
+# ============================================================================ #

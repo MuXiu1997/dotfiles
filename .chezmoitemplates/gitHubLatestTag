@@ -1,0 +1,6 @@
+{{- if (eq (env "CHEZMOI_MOCK_GITHUB_LATEST_RELEASE_TAG_NAME") "true") -}}
+MOCK-TAG
+{{- else -}}
+  {{- $release := gitHubLatestRelease . -}}
+  {{- $release.TagName -}}
+{{- end -}}

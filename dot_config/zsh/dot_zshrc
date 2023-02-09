@@ -1,0 +1,74 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+# { XDG
+  # Avoid creating .zsh_history in $HOME
+  export HISTFILE="${XDG_STATE_HOME}/zsh/history"
+# }
+
+# { Editor
+  command_exists nvim && export EDITOR="nvim"
+# }
+
+# { Man
+  command_exists col && command_exists bat && export MANPAGER='zsh -c "col -bx | bat -pl man"'
+# }
+
+# { Zsh
+  # Zsh vi mode config
+  # Must before oh-my-zsh.zsh
+  file_exists "${ZDOTDIR}/zvm-config.zsh" && source "${ZDOTDIR}/zvm-config.zsh"
+
+  # Oh my zsh
+  file_exists "${ZDOTDIR}/oh-my-zsh.zsh" && source "${ZDOTDIR}/oh-my-zsh.zsh"
+
+  file_exists "${ZDOTDIR}/functions.zsh" && source "${ZDOTDIR}/functions.zsh"
+  file_exists "${ZDOTDIR}/aliases.zsh" && source "${ZDOTDIR}/aliases.zsh"
+# }
+
+# { Cli
+  # Zoxide
+  command_exists zoxide && eval "$(zoxide init zsh)"
+
+  # Fzf
+  zvm_after_init_commands+=("file_exists ${XDG_CONFIG_HOME}/fzf.zsh && source ${XDG_CONFIG_HOME}/fzf.zsh") # See: https://github.com/jeffreytse/zsh-vi-mode#execute-extra-commands
+
+  # Fzf-tab
+  zvm_after_init_commands+=("file_exists ${XDG_CONFIG_HOME}/fzf-tab.zsh && source ${XDG_CONFIG_HOME}/fzf-tab.zsh")
+# }
+
+# { Pgp
+  export GPG_TTY="${TTY}"
+# }
+
+# { Nvm
+  # Don't try to load nvm if command already available
+  ! command_exists nvm && file_exists "${HOMEBREW_PREFIX}/opt/nvm/nvm.sh" && source "${HOMEBREW_PREFIX}/opt/nvm/nvm.sh"
+  command_exists nvm && nvm use default --silent
+# }
+
+# { Pyenv
+  command_exists pyenv && eval "$(pyenv init -)"
+# }
+
+# { Goenv
+  command_exists goenv && eval "$(goenv init -)"
+# }
+
+# { Jenv
+  command_exists jenv && eval "$(jenv init -)"
+# }
+
+# { Direnv
+  command_exists direnv && eval "$(direnv hook zsh)"
+# }
+
+# Ensure that $USER_LOCAL_BIN has the highest priority in $PATH
+path=($USER_LOCAL_BIN $path)
+
+# To customize prompt, run `p10k configure` or edit $ZDOTDIR/p10k.zsh.
+file_exists "${ZDOTDIR}/p10k.zsh" && source "${ZDOTDIR}/p10k.zsh"

@@ -7,3 +7,6 @@ install.sh
 .local/share/age_secret_key
 
 .brewfile/
+
+.config/oh-my-zsh/cache/**
+.config/oh-my-zsh/custom/themes/powerlevel10k/**/*.zwc
