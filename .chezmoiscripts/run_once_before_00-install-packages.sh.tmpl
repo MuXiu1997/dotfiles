@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+set -eufo pipefail
+
+# install homebrew
+if ! type brew &>/dev/null; then
+  bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi
+
+# install packages
+{{- $brewfile := joinPath .chezmoi.sourceDir ".brewfile" (print .machineType ".brewfile") }}
+{{- if stat $brewfile }}
+  {{- joinPath .homebrewPrefix "bin" "brew" | printf "\n%s" }} bundle -v --no-lock --no-upgrade --file=/dev/stdin <<EOF
+  {{- $brewfile | include | printf "\n%s" }}
+EOF
+{{- end }}

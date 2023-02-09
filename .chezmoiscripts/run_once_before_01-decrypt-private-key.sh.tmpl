@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+set -eufo pipefail
+
+{{ $ageKey := joinPath .chezmoi.homeDir ".local" "share" "age_secret_key" -}}
+if [ ! -f "{{ $ageKey }}" ]; then
+  age --decrypt --output {{ $ageKey | quote }} {{ joinPath .chezmoi.sourceDir ".age_secret_key.age" | quote }}
+  chmod 600 {{ $ageKey | quote }}
+fi
