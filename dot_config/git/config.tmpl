@@ -1,0 +1,21 @@
+[user]
+    name = {{ .name }}
+    email = {{ .email }}
+    {{ if eq .machineType "MAC" -}}
+    signingkey = FF066B943A937BD1
+    {{- end }}
+[init]
+    defaultBranch = main
+[core]
+    autocrlf = input
+    ignorecase = false
+[include]
+    path = ../delta/config
+[push]
+    default = current
+[commit]
+    {{ if eq .machineType "MAC" -}}
+    gpgsign = true
+    {{- end }}
+[log]
+    date = format:%Y-%m-%d %H:%M:%S
