@@ -1,0 +1,127 @@
+realpath() {
+    [[ $1 = /* ]] && echo "$1" || echo "$PWD/${1#./}"
+}
+
+set_version() {
+    local command version
+    command="$1"
+    version="$2"
+    if [[ -z "$command" ]]; then
+        log_error "set_version: command is required"
+        exit 1
+    fi
+    if [[ -n "$version" ]]; then
+        echo "$version" > ".$command-version"
+    fi
+}
+
+get_version() {
+    local command version
+    command="$1"
+    if [[ -z "$command" ]]; then
+        log_error "get_version: command is required"
+        exit 1
+    fi
+    head ".$command-version" 2>/dev/null
+}
+
+log_warn() {
+  local color_normal
+  local color_warn
+  color_normal=$(tput sgr0)
+  color_warn=$(tput setaf 3)
+  if [[ -n $DIRENV_LOG_FORMAT ]]; then
+    local msg=$*
+    # shellcheck disable=SC2059,SC1117
+    printf "${color_warn}${DIRENV_LOG_FORMAT}${color_normal}\n" "$msg" >&2
+  fi
+}
+
+layout_virtualenv() {
+    local venv_path activate_path has_custom_venv
+    if [[ -n "$1" ]]; then
+        has_custom_venv=true
+    fi
+    venv_path=$(realpath "${1:-venv}")
+    activate_path="${venv_path}/bin/activate"
+    if [[ ! -f "$activate_path" ]]; then
+        if [[ "$has_custom_venv" == true ]]; then
+            log_error "virtualenv: no ${activate_path} found"
+            exit 1
+        fi
+        log_warn "virtualenv: $venv_path is not a valid virtualenv path, skip loading"
+        return
+    fi
+    # shellcheck disable=SC1090
+    source "${activate_path}"
+    # https://github.com/direnv/direnv/wiki/PS1
+    unset PS1
+}
+
+layout_pyenv() {
+    local python_version
+    set_version python "$1"
+    python_version=$(get_version python)
+    if [[ -z "$python_version" ]]; then
+        log_warn "pyenv: pyenv is used but no python version found, skip loading"
+        return
+    fi
+    pyenv local "$python_version"
+    log_status "pyenv: currently activated python version is $python_version"
+}
+
+layout_python() {
+    layout_pyenv "$1"
+    layout_virtualenv "$2"
+}
+
+layout_nvm() {
+    local node_version
+    set_version node "$1"
+    node_version=$(get_version node)
+    if [[ -z "$node_version" ]]; then
+        log_warn "nvm: nvm is used but no node version found, skip loading"
+        return
+    fi
+    source "$(brew --prefix)/opt/nvm/nvm.sh"
+    nvm use "$node_version"
+    log_status "nvm: currently activated node version is $node_version"
+}
+
+layout_node() {
+    PATH_add node_modules/.bin
+    layout_nvm "$1"
+}
+
+layout_goenv() {
+  local golang_version
+  set_version go "$1"
+  golang_version=$(get_version go)
+  if [[ -z "$golang_version" ]]; then
+        log_warn "goenv: goenv is used but no golang version found, skip loading"
+        return
+  fi
+  goenv local "$golang_version"
+  log_status "goenv: currently activated golang version is $golang_version"
+}
+
+layout_golang() {
+  layout_goenv "$1"
+}
+
+layout_jenv() {
+  local java_version
+  set_version java "$1"
+  java_version=$(get_version java)
+  if [[ -z "$java_version" ]]; then
+        log_warn "jenv: jenv is used but no java version found, skip loading"
+        return
+  fi
+  jenv enable-plugin export >/dev/null 2>&1
+  jenv local "$java_version"
+  log_status "jenv: currently activated java version is $java_version"
+}
+
+layout_java() {
+  layout_jenv "$1"
+}
