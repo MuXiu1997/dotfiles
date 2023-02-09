@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+set -eufo pipefail
+
+if ! type idea &>/dev/null ; then
+  echo "command not found: idea"
+  exit 1
+fi
+
+sed -e 's/open -na/open -Wna/' < "$(which idea)" | bash -s -- "$@"
