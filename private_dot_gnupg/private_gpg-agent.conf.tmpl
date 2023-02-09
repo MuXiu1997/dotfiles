@@ -4,8 +4,5 @@ max-cache-ttl 1036800
 default-cache-ttl-ssh 86400
 max-cache-ttl-ssh 1036800
 
-pinentry-program {{ if (eq .chezmoi.arch "arm64") -}}
-/opt/homebrew/bin/pinentry-mac
-{{- else -}}
-/usr/local/bin/pinentry-mac
-{{- end -}}
+pinentry-program {{ joinPath .homebrewPrefix "bin" "pinentry-mac" }}
+
