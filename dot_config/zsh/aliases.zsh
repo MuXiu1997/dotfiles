@@ -1,50 +1,48 @@
 # { Proxy
-    alias p="HTTPS_PROXY=socks5://127.0.0.1:1080 HTTP_PROXY=socks5://127.0.0.1:1080 ALL_PROXY=socks5://127.0.0.1:1080"
+  alias p="HTTPS_PROXY=socks5://127.0.0.1:1080 HTTP_PROXY=socks5://127.0.0.1:1080 ALL_PROXY=socks5://127.0.0.1:1080"
 # }
 
 # { Cd
-    alias ..="cd .."
-    alias -- -="cd -"
+  alias ..="cd .."
+  alias -- -="cd -"
 # }
 
 # { Ls
-    if type exa &>/dev/null; then
-        alias ls="exa --icons --color='always' --time-style=long-iso"
-    fi
+  # If exa is installed, use it instead of ls
+  command_exists exa && alias ls="exa --icons --color='always' --time-style=long-iso"
 # }
 
 # { Vim
-    if type nvim &>/dev/null; then
-        alias vim='nvim'
-    fi
+  # If nvim is installed, use it instead of vim
+  command_exists nvim && alias vim='nvim'
 # }
 
 # { Chezmoi
-    alias cm="chezmoi"
-    alias cms="chezmoi-shortcut"
+  alias cm="chezmoi"
+  alias cms="chezmoi-shortcut"
 # }
 
 # { Brew
-    alias brewd="brew-dump"
-    alias brewu="brew-upgrade"
+  alias brewd="brew-dump"
+  alias brewu="brew-upgrade"
 # }
 
 # { Lazygit
-    alias lg="GPG_TTY=\"\$TTY\" lazygit"
+  alias lg="GPG_TTY=\"\$TTY\" lazygit"
 # }
 
 # { Tmux
-    alias tkill="tmux kill-server"
+  alias tkill="tmux kill-server"
 # }
 
-# { Bw
-    alias bwu="export BW_SESSION=\"\$(bw unlock --raw)\""
+# { Bitwarden
+  alias bwu="export BW_SESSION=\"\$(bw unlock --raw)\""
 # }
 
 # { Flyctl
-    alias fly="flyctl"
+  alias fly="flyctl"
 # }
 
 # { Help
-    alias h="help"
+  alias h="help"
 # }

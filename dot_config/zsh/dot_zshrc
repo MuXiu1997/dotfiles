@@ -6,85 +6,69 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 # { XDG
-    # Avoiding overwriting
-    export HISTFILE="$XDG_STATE_HOME/zsh/history"
+  # Avoid creating .zsh_history in $HOME
+  export HISTFILE="${XDG_STATE_HOME}/zsh/history"
 # }
 
 # { Editor
-    if type nvim &>/dev/null; then
-        export EDITOR="nvim"
-    fi
+  command_exists nvim && export EDITOR="nvim"
 # }
 
 # { Man
-    if type col &>/dev/null && type bat &>/dev/null; then
-        export MANPAGER='sh -c "col -bx | bat -pl man"'
-    fi
+  command_exists col && command_exists bat && export MANPAGER='zsh -c "col -bx | bat -pl man"'
 # }
 
 # { Zsh
-    # Zsh vi mode config
-    # Must before oh-my-zsh.zsh
-    [[ ! -f "$ZDOTDIR/zvm-config.zsh" ]] || source "$ZDOTDIR/zvm-config.zsh"
+  # Zsh vi mode config
+  # Must before oh-my-zsh.zsh
+  file_exists "${ZDOTDIR}/zvm-config.zsh" && source "${ZDOTDIR}/zvm-config.zsh"
 
-    # Oh my zsh
-    [[ ! -f "$ZDOTDIR/oh-my-zsh.zsh" ]] || source "$ZDOTDIR/oh-my-zsh.zsh"
+  # Oh my zsh
+  file_exists "${ZDOTDIR}/oh-my-zsh.zsh" && source "${ZDOTDIR}/oh-my-zsh.zsh"
 
-    [[ ! -f "$ZDOTDIR/functions.zsh" ]] || source "$ZDOTDIR/functions.zsh"
-    [[ ! -f "$ZDOTDIR/aliases.zsh" ]] || source "$ZDOTDIR/aliases.zsh"
+  file_exists "${ZDOTDIR}/functions.zsh" && source "${ZDOTDIR}/functions.zsh"
+  file_exists "${ZDOTDIR}/aliases.zsh" && source "${ZDOTDIR}/aliases.zsh"
 # }
 
 # { Cli
-    # Zoxide
-    if (( $+commands[zoxide] )); then eval "$(zoxide init zsh)"; else echo 'zoxide: command not found, please install it from https://github.com/ajeetdsouza/zoxide'; fi
+  # Zoxide
+  command_exists zoxide && eval "$(zoxide init zsh)"
 
-    # Fzf
-    zvm_after_init_commands+=("[[ ! -f $XDG_CONFIG_HOME/fzf.zsh ]] || source $XDG_CONFIG_HOME/fzf.zsh") # https://github.com/jeffreytse/zsh-vi-mode#execute-extra-commands
+  # Fzf
+  zvm_after_init_commands+=("file_exists ${XDG_CONFIG_HOME}/fzf.zsh && source ${XDG_CONFIG_HOME}/fzf.zsh") # See: https://github.com/jeffreytse/zsh-vi-mode#execute-extra-commands
 
-    # Fzf-tab
-    zvm_after_init_commands+=("[[ ! -f $XDG_CONFIG_HOME/fzf-tab.zsh ]] || source $XDG_CONFIG_HOME/fzf-tab.zsh")
+  # Fzf-tab
+  zvm_after_init_commands+=("file_exists ${XDG_CONFIG_HOME}/fzf-tab.zsh && source ${XDG_CONFIG_HOME}/fzf-tab.zsh")
 # }
 
 # { Pgp
-    export GPG_TTY="$TTY"
+  export GPG_TTY="${TTY}"
 # }
 
 # { Nvm
-    # Don't try to load nvm if command already available
-    if ! type nvm &>/dev/null; then
-        [ -s "$HOMEBREW_PREFIX/opt/nvm/nvm.sh" ] && . "$HOMEBREW_PREFIX/opt/nvm/nvm.sh"
-    fi
-    if type nvm &>/dev/null; then
-        nvm use default --silent
-    fi
+  # Don't try to load nvm if command already available
+  ! command_exists nvm && file_exists "${HOMEBREW_PREFIX}/opt/nvm/nvm.sh" && source "${HOMEBREW_PREFIX}/opt/nvm/nvm.sh"
+  command_exists nvm && nvm use default --silent
 # }
 
 # { Pyenv
-    if type pyenv &>/dev/null; then
-        eval "$(pyenv init -)"
-    fi
+  command_exists pyenv && eval "$(pyenv init -)"
 # }
 
 # { Goenv
-    if type goenv &>/dev/null; then
-        eval "$(goenv init -)"
-    fi
+  command_exists goenv && eval "$(goenv init -)"
 # }
 
 # { Jenv
-    if type jenv &>/dev/null; then
-        eval "$(jenv init -)"
-    fi
+  command_exists jenv && eval "$(jenv init -)"
 # }
 
 # { Direnv
-    if type direnv &>/dev/null; then
-        eval "$(direnv hook zsh)"
-    fi
+  command_exists direnv && eval "$(direnv hook zsh)"
 # }
 
-# Top Priority
+# Ensure that $USER_LOCAL_BIN has the highest priority in $PATH
 path=($USER_LOCAL_BIN $path)
 
-# To customize prompt, run `p10k configure` or edit $ZDOTDIR/.p10k.zsh.
-[[ ! -f "$ZDOTDIR/p10k.zsh" ]] || source "$ZDOTDIR/p10k.zsh"
+# To customize prompt, run `p10k configure` or edit $ZDOTDIR/p10k.zsh.
+file_exists "${ZDOTDIR}/p10k.zsh" && source "${ZDOTDIR}/p10k.zsh"

@@ -1,120 +1,135 @@
 typeset -U path fpath
 
+# { Helpers
+  function file_exists() {
+    [[ -f "$1" ]] && return 0 || return 1
+  }
+
+  function command_exists() {
+    type "$1" &>/dev/null && return 0 || return 1
+  }
+# }
+
 # { XDG
-    export XDG_CONFIG_HOME="$HOME/.config"
-    export XDG_CACHE_HOME="$HOME/.cache"
-    export XDG_DATA_HOME="$HOME/.local/share"
-    export XDG_STATE_HOME="$HOME/.local/state"
-    export XDG_RUNTIME_DIR=
-    {{- if eq .chezmoi.os "darwin" -}}
-      "$TMPDIR"
-    {{- else -}}
-      "/run/user/$UID"
-    {{- end }}
+  export XDG_CONFIG_HOME="${HOME}/.config"
+  export XDG_CACHE_HOME="${HOME}/.cache"
+  export XDG_DATA_HOME="${HOME}/.local/share"
+  export XDG_STATE_HOME="${HOME}/.local/state"
+  export XDG_RUNTIME_DIR=
+  {{- if eq .chezmoi.os "darwin" -}}
+    "${TMPDIR}"
+  {{- else -}}
+    "/run/user/${UID}"
+  {{- end }}
 # }
 
 # { Zsh
-    export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
-    export HISTFILE="$XDG_STATE_HOME/zsh/history"
+  export ZDOTDIR="${XDG_CONFIG_HOME}/zsh"
+  export HISTFILE="${XDG_STATE_HOME}/zsh/history"
 # }
 
 # { Homebrew
-    path=($path {{ .homebrew_prefix }}/bin)
-    fpath=($fpath {{ .homebrew_prefix }}/share/zsh/site-functions)
-    export HOMEBREW_BREWFILE={{ joinPath .chezmoi.sourceDir ".brewfile" (print .machine_type ".brewfile")  }}
+  path=($path {{ .homebrewPrefix }}/bin)
+  fpath=($fpath {{ .homebrewPrefix }}/share/zsh/site-functions)
+  export HOMEBREW_BREWFILE={{ joinPath .chezmoi.sourceDir ".brewfile" (print .machineType ".brewfile")  }}
 # }
 
 # { Tmux
-    export TMUX_PLUGIN_MANAGER_PATH="$XDG_CONFIG_HOME/tmux/plugins"
-    export __TMUX_MOUSE=
-    {{- if eq .machine_type "MAC" -}}
-      "on"
-    {{- else -}}
-      "off"
-    {{- end }}
+  export TMUX_PLUGIN_MANAGER_PATH="${XDG_CONFIG_HOME}/tmux/plugins"
+  export __TMUX_MOUSE=
+  {{- if eq .machineType "MAC" -}}
+    "on"
+  {{- else -}}
+    "off"
+  {{- end }}
 # }
 
 # { Zoxide
-    export _ZO_DATA_DIR="$XDG_DATA_HOME"
+  export _ZO_DATA_DIR="$XDG_DATA_HOME"
 # }
 
 # { Ranger
-    export RANGER_LOAD_DEFAULT_RC="FALSE"
+  export RANGER_LOAD_DEFAULT_RC="FALSE"
 # {
-#
+
 # { Git
-    export GIT_CONFIG_GLOBAL="$XDG_CONFIG_HOME/git/config"
+  export GIT_CONFIG_GLOBAL="${XDG_CONFIG_HOME}/git/config"
 # }
 
 # { Lazygit
-    export LG_CONFIG_FILE="$XDG_CONFIG_HOME/lazygit/config.yml"
+  export LG_CONFIG_FILE="${XDG_CONFIG_HOME}/lazygit/config.yml"
+# }
+
+# { Less
+  export LESS="Rmc"
 # }
 
 # { Wget
-    export WGETRC="$XDG_CONFIG_HOME/wgetrc"
+  export WGETRC="${XDG_CONFIG_HOME}/wgetrc"
 # }
 
 # { Nvm
-    export NVM_DIR="$XDG_DATA_HOME/nvm"
+  export NVM_DIR="${XDG_DATA_HOME}/nvm"
 # }
 
 # { Npm
-    export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
+  export NPM_CONFIG_USERCONFIG="${XDG_CONFIG_HOME}/npm/npmrc"
 # }
 
 # { Ni
-    export NI_CONFIG_FILE="$XDG_CONFIG_HOME/ni/nirc"
+  export NI_CONFIG_FILE="${XDG_CONFIG_HOME}/ni/nirc"
 # }
 
 # { Deno
-    export DENO_DIR="$XDG_CACHE_HOME/deno"
+  export DENO_DIR="${XDG_CACHE_HOME}/deno"
+  export DENO_INSTALL_ROOT="${XDG_DATA_HOME}/deno/bin"
+  path=($DENO_INSTALL_ROOT $path)
 # }
 
 # { Pyenv
-    export PYENV_ROOT="$XDG_DATA_HOME/pyenv"
+  export PYENV_ROOT="${XDG_DATA_HOME}/pyenv"
 # }
 
 # { Goenv
-    export GOENV_ROOT="$XDG_DATA_HOME/goenv"
+  export GOENV_ROOT="${XDG_DATA_HOME}/goenv"
 # }
 
 # { Go
-    export GOPATH="$XDG_DATA_HOME/go"
-    export GOBIN="$GOPATH/bin"
-    export GOMODCACHE="$GOPATH/pkg/mod"
-    export GOPROXY="https://goproxy.cn,direct"
-    path=($GOBIN $path)
+  export GOPATH="${XDG_DATA_HOME}/go"
+  export GOBIN="${GOPATH}/bin"
+  export GOMODCACHE="${GOPATH}/pkg/mod"
+  export GOPROXY="https://goproxy.cn,direct"
+  path=($GOBIN $path)
 # }
 
 # { Poetry
-    export POETRY_CONFIG_DIR="$XDG_CONFIG_HOME/poetry"
-    export POETRY_DATA_DIR="$XDG_DATA_HOME/poetry"
-    export POETRY_CACHE_DIR="$XDG_CACHE_HOME/poetry"
-    export POETRY_VIRTUALENVS_IN_PROJECT=true
+  export POETRY_CONFIG_DIR="${XDG_CONFIG_HOME}/poetry"
+  export POETRY_DATA_DIR="${XDG_DATA_HOME}/poetry"
+  export POETRY_CACHE_DIR="${XDG_CACHE_HOME}/poetry"
+  export POETRY_VIRTUALENVS_IN_PROJECT=true
 # }
 
 # { Jenv
-    export JENV_ROOT="$XDG_DATA_HOME/jenv"
+  export JENV_ROOT="${XDG_DATA_HOME}/jenv"
 # }
 
 # { Gradle
-    export GRADLE_USER_HOME="$XDG_DATA_HOME/gradle"
+  export GRADLE_USER_HOME="${XDG_DATA_HOME}/gradle"
 # }
 
 # { Maven
-    export MAVEN_CONFIG="$XDG_CONFIG_HOME/maven/settings.xml"
-    [[ ! -f "$MAVEN_CONFIG" ]] || alias mvn="mvn -s $MAVEN_CONFIG"
+  export MAVEN_CONFIG="${XDG_CONFIG_HOME}/maven/settings.xml"
+  file_exists "${MAVEN_CONFIG}" && alias mvn="mvn -s ${MAVEN_CONFIG}"
 # }
 
 # { Rust
-    export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
-    export CARGO_HOME="$XDG_DATA_HOME/cargo"
-    path=($CARGO_HOME/bin $path)
+  export RUSTUP_HOME="${XDG_DATA_HOME}/rustup"
+  export CARGO_HOME="${XDG_DATA_HOME}/cargo"
+  path=(${CARGO_HOME}/bin $path)
 # }
 
-[[ ! -f "$ZDOTDIR/.zshenv.local" ]] || source "$ZDOTDIR/.zshenv.local"
+file_exists "${ZDOTDIR}/.zshenv.local" && source "${ZDOTDIR}/.zshenv.local"
 
-export USER_LOCAL_BIN="$HOME/.local/bin"
+export USER_LOCAL_BIN="${HOME}/.local/bin"
 path=($USER_LOCAL_BIN $path)
-fpath=($XDG_DATA_HOME/zsh/site-functions $fpath)
-
+fpath=("${XDG_DATA_HOME}/zsh/site-functions" $fpath)
