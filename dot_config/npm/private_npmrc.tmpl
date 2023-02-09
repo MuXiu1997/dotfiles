@@ -1,0 +1,19 @@
+save-prefix=
+
+# prefix is unnecessary (and unsupported) if Node.js is installed by nvm
+# prefix=${XDG_DATA_HOME}/npm
+cache=${XDG_CACHE_HOME}/npm
+tmp=${XDG_RUNTIME_DIR}/npm
+init-module=${XDG_CONFIG_HOME}/npm/config/npm-init.js
+
+# pnpm
+prefer-offline=true
+store-dir=${XDG_DATA_HOME}/pnpm/store
+global-dir=${XDG_DATA_HOME}/pnpm/global
+global-bin-dir=${XDG_DATA_HOME}/pnpm/bin
+state-dir=${XDG_STATE_HOME}/pnpm
+cache-dir=${XDG_CACHE_HOME}/pnpm
+
+{{ if eq .machineType "MAC" -}}
+//registry.npmjs.org/:_authToken={{ joinPath .chezmoi.sourceDir "dot_config" "npm" "registry.npmjs.org.authtoken.age" | include | decrypt }}
+{{- end }}
