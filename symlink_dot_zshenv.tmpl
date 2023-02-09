@@ -1,0 +1,6 @@
+{{- /*
+It is necessary to keep .zshenv in $HOME as zsh does not fully support XDG Base Directory Specification.
+But it is possible to symlink $HOME/.zshenv to $XDG_CONFIG_HOME/zsh/.zshenv.
+See: https://wiki.archlinux.org/title/XDG_Base_Directory#Hardcoded zsh
+*/ -}}
+./.config/zsh/.zshenv
