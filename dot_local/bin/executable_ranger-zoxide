@@ -1,0 +1,87 @@
+#!/usr/bin/env python3
+import argparse
+import os
+import subprocess
+
+
+def y_or_n(msg):
+    import sys
+    import tty
+    import termios
+    while True:
+        print(msg)
+
+        fd = sys.stdin.fileno()
+        old_settings = termios.tcgetattr(fd)
+        try:
+            tty.setraw(sys.stdin.fileno())
+            ch = sys.stdin.read(1)
+        finally:
+            termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
+        if ch == 'n':
+            return False
+        if ch == 'y':
+            return True
+
+
+def parse_args():
+    parser = argparse.ArgumentParser(description='ranger + zoxide.')
+    parser.add_argument(
+        '--choosedir',
+        help='makes ranger act like a file chooser. When opening a file, '
+             'it will quit and write the name of the selected file to OUTFILE.',
+    )
+    parser.add_argument('-i', '--interactive', action='store_true', help='use interactive selection')
+    parser.add_argument('keywords', metavar='KEYWORDS', nargs='*')
+    return parser.parse_args()
+
+
+def get_ranger_start_dir(args):
+    zoxide_query_args = []
+
+    if args.interactive:
+        zoxide_query_args.append('-i')
+    if len(args.keywords) != 0:
+        zoxide_query_args.extend(args.keywords)
+
+    if len(zoxide_query_args) == 0:
+        return os.getcwd()
+
+    zoxide_query = subprocess.Popen(
+        ['zoxide', 'query', *zoxide_query_args],
+        stdout=subprocess.PIPE,
+        stderr=None if args.interactive else subprocess.DEVNULL,
+    )
+    zoxide_query_stdout, _ = zoxide_query.communicate()
+
+    if zoxide_query.returncode == 130:
+        return False
+    if zoxide_query.returncode == 1:
+        if not y_or_n('\033[0;33mno match found, use $PWD or not?\033[0m \033[0;29m[y/n]\033[0m'):
+            return None
+        return os.getcwd()
+    if zoxide_query.returncode == 0:
+        return zoxide_query_stdout.decode().strip()
+
+
+def get_ranger_args(start_dir, choose_dir):
+    if choose_dir is not None:
+        return ['--choosedir', choose_dir, start_dir]
+    return [start_dir]
+
+
+def main():
+    args = parse_args()
+    start_dir = get_ranger_start_dir(args)
+    if start_dir is None:
+        exit(0)
+    if not start_dir:
+        exit(130)
+    choose_dir = args.choosedir
+
+    ranger_args = get_ranger_args(start_dir, choose_dir)
+    os.execvp('ranger', ['ranger', *ranger_args])
+
+
+if __name__ == '__main__':
+    main()

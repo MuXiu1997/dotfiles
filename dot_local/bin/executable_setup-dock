@@ -1,0 +1,60 @@
+#!/usr/bin/env python3
+import plistlib
+import subprocess
+from os import path
+from pathlib import Path
+
+
+def main():
+    dock_plist_filepath = Path(path.expanduser('~/Library/Preferences/com.apple.dock.plist'))
+    with dock_plist_filepath.open('rb') as fp:
+        dock_plist = plistlib.load(fp)
+    setup_dock_base(dock_plist)
+    setup_dock_persistent_apps(dock_plist)
+    with dock_plist_filepath.open('wb') as fp:
+        plistlib.dump(dock_plist, fp)
+    subprocess.run(['killall', 'Dock'])
+
+
+def setup_dock_base(dock_plist):
+    dock_plist['autohide'] = True
+    dock_plist['autohide-delay'] = 0.0
+    dock_plist['autohide-time-modifier'] = 0.5
+    dock_plist['expose-group-apps'] = True
+    dock_plist['largesize'] = 128.0
+    dock_plist['loc'] = 'zh_CN:CN'
+    dock_plist['magnification'] = True
+    dock_plist['mcx-expose-disabled'] = False
+    dock_plist['mod-count'] = 5780
+    dock_plist['orientation'] = 'bottom'
+    dock_plist['region'] = 'CN'
+    dock_plist['tilesize'] = 72.0
+    dock_plist['trash-full'] = False
+    dock_plist['version'] = 1
+    dock_plist['wvous-bl-corner'] = 1
+    dock_plist['wvous-bl-modifier'] = 1048576
+    dock_plist['wvous-br-corner'] = 4
+    dock_plist['wvous-br-modifier'] = 0
+    dock_plist['wvous-tl-corner'] = 11
+    dock_plist['wvous-tl-modifier'] = 0
+    dock_plist['wvous-tr-corner'] = 2
+    dock_plist['wvous-tr-modifier'] = 0
+
+
+def setup_dock_persistent_apps(dock_plist):
+    persistent_app_label_list = ['Microsoft Edge', 'WebStorm', 'IntelliJ IDEA', 'PyCharm', 'GoLand', 'Spark']
+
+    def persistent_app_filter(app):
+        tile_data = app.get('tile-data')
+        if tile_data is None:
+            return False
+        file_label = tile_data.get('file-label')
+        if file_label is None:
+            return False
+        return file_label in persistent_app_label_list
+
+    dock_plist['persistent-apps'] = list(filter(persistent_app_filter, dock_plist['persistent-apps']))
+
+
+if __name__ == '__main__':
+    main()

@@ -1,0 +1,23 @@
+#!/usr/bin/env python3
+import argparse
+import os
+import plistlib
+import pprint
+import subprocess
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('file', type=argparse.FileType('rb'), metavar='FILE', help='plist file to preview')
+    args = parser.parse_args()
+    file = args.file
+    plist = plistlib.load(file)
+    output = pprint.pformat(plist)
+    subprocess.Popen(
+        ['bat', '--color=always', '--theme=ansi', '--style=plain', '--language=Python'],
+        stdin=subprocess.PIPE
+    ).communicate(input=output.encode())
+
+
+if __name__ == '__main__':
+    main()

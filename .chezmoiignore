@@ -12,7 +12,14 @@ install.sh
 .config/oh-my-zsh/custom/themes/powerlevel10k/**/*.zwc
 
 {{ if ne .machineType "MAC" -}}
+.local/bin/bootstrap-hotkey
+
 .ssh
 .gnupg
+
 .config/karabiner
+{{- end }}
+
+{{ if ne .machineType "SERVER" -}}
+.local/bin/bootstrap-main
 {{- end }}
