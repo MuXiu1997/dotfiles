@@ -132,6 +132,10 @@ typeset -U path fpath
   path=("${CARGO_HOME}/bin" $path)
 # }
 
+# { JetBrains
+  path=("${XDG_DATA_HOME}/jetbrains/bin" $path)
+# }
+
 file_exists "${ZDOTDIR}/.zshenv.local" && source "${ZDOTDIR}/.zshenv.local"
 
 export USER_LOCAL_BIN="${HOME}/.local/bin"
