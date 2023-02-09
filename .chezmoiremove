@@ -1,9 +1,67 @@
-{{ range .XDG.remove -}}
-    {{ . }}
-{{ end }}
+# ===== Remove the residual files after migrating to XDG Base Directory ====== #
+# zsh
+.zshrc
+.zprofile
+.zsh_history
+.zsh_sessions
+.zcompdump
 
+# tmux
+.tmux.conf
+
+# git
+.gitconfig
+
+# fzf
+.fzf.zsh
+
+# wget
+.wgetrc
+.wget-hsts
+
+# less
+.lesshst
+
+# nvm
+.nvm
+
+# npm
+.npm
+.npmrc
+
+# pnpm
+.pnpm-state
+.pnpm-store
+
+# pyenv
+.pyenv
+
+# go
+go
+
+# gradle
+.gradle
+
+# maven
+.m2
+
+# rust
+.rustup
+.cargo
+
+# hammerspoon
+.hammerspoon
+# ============================================================================ #
+
+
+# ================================= No Bash ================================== #
 .bash_history
 .bash_logout
 .bashrc
 .profile
+# ============================================================================ #
+
+
+# ==================== Do not keep .selected_editor file ===================== #
 .selected_editor
+# ============================================================================ #

@@ -12,7 +12,6 @@ externalSource:
   ohMyZshPlugins:
     - repo: zsh-users/zsh-syntax-highlighting
     - repo: zsh-users/zsh-autosuggestions
-    - repo: zsh-users/zsh-completions
     - repo: MuXiu1997/zsh-vi-mode
       branch: main
     - repo: Aloxaf/fzf-tab
@@ -72,9 +71,10 @@ XDG:
     - go
     # gradle
     - .gradle
+    # maven
+    - .m2
     # rust
     - .rustup
     - .cargo
     # hammerspoon
     - .hammerspoon
-

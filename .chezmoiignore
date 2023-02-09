@@ -13,7 +13,7 @@ install.sh
 
 .config/hammerspoon/Spoons
 
-{{ if ne .machine_type "MAC" -}}
+{{ if ne .machineType "MAC" -}}
 .config/muxiu1997
 .config/hammerspoon
 .config/karabiner
@@ -23,6 +23,6 @@ install.sh
 .ideavimrc
 {{- end }}
 
-{{ if ne .machine_type "SERVER" -}}
+{{ if ne .machineType "SERVER" -}}
 .local/bin/bootstrap-main
 {{- end }}

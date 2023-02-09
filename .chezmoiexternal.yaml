@@ -19,6 +19,11 @@
 # Oh-my-zsh
 {{ .ohMyZshDir }}:
   {{- template "gitHubRepoArchive" .ohMyZsh }}
+  exclude:
+    - '*/themes'
+    - '*/plugins'
+  include:
+    - '*/plugins/command-not-found'
 
 # Oh-my-zsh themes
 {{ range .ohMyZshThemes }}
