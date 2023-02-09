@@ -1,0 +1,35 @@
+{{- $validMachineTypes := list "MAC" "SERVER" -}}
+{{- $machineType := promptStringOnce . "machineType" (printf "Machine type [%s]" ($validMachineTypes | join "|")) | default (first $validMachineTypes) -}}
+{{- if not (has $machineType $validMachineTypes) -}}
+  {{- writeToStdout (printf "Invalid machine type. Valid machine types are: [%s]\n" ($validMachineTypes | join "|")) -}}
+  {{- exit 1 -}}
+{{- end -}}
+
+{{- $homebrewPrefix := "/home/linuxbrew/.linuxbrew" -}}
+{{- if eq .chezmoi.os "darwin" -}}
+  {{- if eq .chezmoi.arch "arm64" -}}
+    {{- $homebrewPrefix = "/opt/homebrew" -}}
+  {{- else -}}
+    {{- $homebrewPrefix = "/usr/local" -}}
+  {{- end -}}
+{{- end -}}
+
+data:
+  name: MuXiu1997
+  email: muxiu1997@gmail.com
+  machineType: {{ $machineType | upper | squote }}
+  homebrewPrefix: {{ $homebrewPrefix | squote }}
+
+encryption: age
+age:
+  identity: {{ joinPath .chezmoi.homeDir ".local" "share" "age_secret_key" }}
+  recipient: age10728gga2gmz5jpgqzca65sx6h3sew53lvksylv24fhz62gqmr59sg3y00h
+
+diff:
+  exclude:
+    - scripts
+  pager: LESS='Rmc' delta --features 'default paging'
+
+merge:
+  command: nvim
+  args: [ '-d', '{{ "{{ .Destination }}" }}', '{{ "{{ .Source }}" }}', '{{ "{{ .Target }}" }}' ]
