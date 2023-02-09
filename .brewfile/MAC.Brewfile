@@ -35,6 +35,8 @@ brew "exa"
 brew "fd"
 # macOS CLI for managing custom icons for files and folders
 brew "fileicon"
+# Command-line tools for fly.io services
+brew "flyctl"
 # Open-source formatting library for C++
 brew "fmt"
 # Collection of reusable C++ library artifacts developed at Facebook
@@ -65,12 +67,12 @@ brew "pinentry"
 brew "gnupg"
 # Open source programming language to build simple/reliable/efficient software
 brew "go"
-# Go implementation of configuration language for defining JSON data
-brew "go-jsonnet"
 # Go version management
 brew "goenv", args: ["HEAD"]
 # Fast linters runner for Go
 brew "golangci-lint"
+# Deliver Go binaries as fast and easily as possible
+brew "goreleaser"
 # GO Simple Tunnel - a simple tunnel written in golang
 brew "gost"
 # Command-line tool for generating regular expressions
@@ -79,6 +81,8 @@ brew "grex"
 brew "grpcurl"
 # OpenType text shaping engine
 brew "harfbuzz"
+# Kubernetes package manager
+brew "helm"
 # Command-line interface for SQLite
 brew "sqlite"
 # Interpreted, interactive, object-oriented programming language
@@ -149,6 +153,8 @@ brew "ripgrep"
 brew "rsync"
 # Powerful, clean, object-oriented scripting language
 brew "ruby"
+# Rust toolchain installer
+brew "rustup-init"
 # 7-Zip is a file archiver with a high compression ratio
 brew "sevenzip"
 # Static analysis and lint tool, for (ba)sh scripts
@@ -171,6 +177,8 @@ brew "unison"
 brew "vim"
 # Internet file retriever
 brew "wget"
+# Check your $HOME for unwanted files and directories
+brew "xdg-ninja"
 # Process YAML, JSON, XML, CSV and properties documents from the CLI
 brew "yq"
 # Shell extension to navigate your filesystem faster
@@ -233,6 +241,8 @@ cask "mounty"
 cask "neovide"
 # Music streaming platform
 cask "neteasemusic"
+# Knowledge base that works on top of a local folder of plain text Markdown files
+cask "obsidian"
 # Collaboration platform for API development
 cask "postman"
 # Instant messaging tool
