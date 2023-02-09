@@ -105,7 +105,3 @@ nnoremap <Space>fs  :action FileStructurePopup<CR>
 nnoremap <Leader>rf :action ReformatCode<CR>
 
 map      <Tab><Tab> <Plug>(easymotion-s)
-
-
-
-
