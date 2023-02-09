@@ -1,0 +1,42 @@
+[delta]
+    features = default
+
+[delta "default"]
+    features = nord nord-minus nord-plus line-numbers no-hunk-header
+
+[delta "lazygit"]
+    features = default no-paging
+
+    line-fill-method = spaces
+
+    minus-style = syntax "#572c30"
+    minus-emph-style = syntax "#9c4f57"
+    minus-empty-line-marker-style = syntax "#572c30"
+
+    plus-style = syntax "#4a5640"
+    plus-emph-style = syntax "#859b73"
+    plus-empty-line-marker-style = syntax "#4a5640"
+
+[delta "nord"]
+    syntax-theme = Nord
+
+[delta "nord-minus"]
+    minus-style = syntax bold ul "#572c30"
+    minus-emph-style = syntax bold ul "#9c4f57"
+    minus-empty-line-marker-style = syntax bold ul "#572c30"
+    line-numbers-minus-style = red
+
+[delta "nord-plus"]
+    plus-style = syntax bold ul "#4a5640"
+    plus-emph-style = syntax bold ul "#859b73"
+    plus-empty-line-marker-style = syntax bold ul "#4a5640"
+    line-numbers-plus-style = green
+
+[delta "no-hunk-header"]
+    hunk-header-style = omit
+
+[delta "no-paging"]
+    paging = never
+
+[delta "paging"]
+    paging = always
