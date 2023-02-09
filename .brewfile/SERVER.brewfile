@@ -1,0 +1,28 @@
+tap "homebrew/bundle"
+tap "homebrew/core"
+# Simple, modern, secure file encryption
+brew "age"
+# Clone of cat(1) with syntax highlighting and Git integration
+brew "bat"
+# Manage your dotfiles across multiple diverse machines, securely
+brew "chezmoi"
+# Modern replacement for 'ls'
+brew "exa"
+# Command-line fuzzy finder written in Go
+brew "fzf"
+# Syntax-highlighting pager for git and diff output
+brew "git-delta"
+# Kubernetes package manager
+brew "helm"
+# Simple terminal UI for git commands
+brew "lazygit"
+# File browser
+brew "ranger"
+# Terminal multiplexer
+brew "tmux"
+# Simple file transfer tools, similar to lrzsz (rz/sz), and compatible with tmux
+brew "trzsz"
+# Shell extension to navigate your filesystem faster
+brew "zoxide"
+# UNIX shell (command interpreter)
+brew "zsh"
