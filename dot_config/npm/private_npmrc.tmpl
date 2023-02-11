@@ -15,5 +15,13 @@ state-dir=${XDG_STATE_HOME}/pnpm
 cache-dir=${XDG_CACHE_HOME}/pnpm
 
 {{ if eq .machineType "MAC" -}}
-//registry.npmjs.org/:_authToken={{ joinPath .chezmoi.sourceDir "dot_config" "npm" "registry.npmjs.org.authtoken.age" | include | decrypt }}
+//registry.npmjs.org/:_authToken={{
+`-----BEGIN AGE ENCRYPTED FILE-----
+YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBJYjFjSk5FeEExNHJNQ0pG
+ZkxCQ0pBa2ZQelFCWkpuaWxQU2VNRTNzUzMwCnpRZ3h5WWJkVHozT2wwbXBiRTBm
+Tk5OZ1BTaW1aWUs5OVp4bStVTis4TlUKLS0tIHMrYmNRdHBtcnBXTW4wRmdWVWZ0
+Y3JuaDBMOUFCaG9saENMZkJCMzhOZ2cKUcQ8IDFoqAQAY9RxR051O0GnFOX0nyRS
+qMGQP9haRX3LDD+JgAXTkOLa3jUJDRUpULN47XOvmABiAN+UA8pV5g0J7lF1ajAM
+3A==
+-----END AGE ENCRYPTED FILE-----` | decrypt }}
 {{- end }}
