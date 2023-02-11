@@ -25,3 +25,8 @@ pls() {
     --bind "ctrl-d:execute-silent(${kill_process})+reload(${command})" \
     --bind "ctrl-r:reload(${command})"
 }
+
+# Copy current path to clipboard
+pp() {
+  pwd | sed -e 's/ /\\ /g' | tr -d '\n' | pbcopy
+}
