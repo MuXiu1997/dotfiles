@@ -104,3 +104,61 @@ exact = true
 stripComponents = 1
 refreshPeriod = '168h'
 # ============================================================================ #
+
+
+# ============================= zsh completions ============================== #
+{{ if lookPath "docker" -}}
+{{- $dockerVersion := output "docker" "--version" | replaceAllRegex "Docker version (.+?), .+" "$1" | trim -}}
+['.local/share/zsh/site-functions/_docker']
+type = 'file'
+url = 'https://raw.githubusercontent.com/docker/cli/v{{ $dockerVersion }}/contrib/completion/zsh/_docker'
+refreshPeriod = '168h'
+{{- end }}
+
+{{ if lookPath "docker-compose" -}}
+{{- $dockerComposeVersion := output "docker-compose" "--version" | replaceAllRegex "docker-compose version (.+?), .+" "$1" | trim -}}
+['.local/share/zsh/site-functions/_docker-compose']
+type = 'file'
+url = 'https://raw.githubusercontent.com/docker/compose/{{ $dockerComposeVersion }}/contrib/completion/zsh/_docker-compose'
+refreshPeriod = '168h'
+{{- end }}
+
+{{ if lookPath "mvn" -}}
+['.local/share/zsh/site-functions/_mvn']
+type = 'file'
+url = 'https://github.com/zsh-users/zsh-completions/raw/master/src/_mvn'
+refreshPeriod = '168h'
+{{- end }}
+
+{{/*
+nvm may have been installed but nvm.sh is not loaded,
+the judgment criterion is whether nvm has been installed
+*/ -}}
+{{ if and (lookPath "brew") (output "brew" "list" "--formula" "-1" | splitList "\n" | has  "nvm") -}}
+['.local/share/zsh/site-functions/_nvm']
+type = 'file'
+url = 'https://github.com/zsh-users/zsh-completions/raw/master/src/_nvm'
+refreshPeriod = '168h'
+{{- end }}
+
+{{ if lookPath "go" -}}
+['.local/share/zsh/site-functions/_go']
+type = 'file'
+url = 'https://github.com/zsh-users/zsh-completions/raw/master/src/_golang'
+refreshPeriod = '168h'
+{{- end }}
+
+{{ if lookPath "node" -}}
+['.local/share/zsh/site-functions/_node']
+type = 'file'
+url = 'https://github.com/zsh-users/zsh-completions/raw/master/src/_node'
+refreshPeriod = '168h'
+{{- end }}
+
+{{ if lookPath "direnv" -}}
+['.local/share/zsh/site-functions/_direnv']
+type = 'file'
+url = 'https://github.com/zsh-users/zsh-completions/raw/master/src/_direnv'
+refreshPeriod = '168h'
+{{- end }}
+# ============================================================================ #
