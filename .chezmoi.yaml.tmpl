@@ -30,6 +30,9 @@ diff:
     - scripts
   pager: LESS='Rmc' delta --features 'default paging'
 
+{{ if eq .machineType "MAC" -}}
 merge:
-  command: nvim
-  args: [ '-d', '{{ "{{ .Destination }}" }}', '{{ "{{ .Source }}" }}', '{{ "{{ .Target }}" }}' ]
+  command: idea-wait
+  args:
+    {{- list "merge" "{{ .Destination }}" "{{ .Target }}" "{{ .Source }}" | toYaml | nindent 4 }}
+{{- end }}
