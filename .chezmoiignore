@@ -11,6 +11,8 @@ install.sh
 .config/oh-my-zsh/cache/**
 .config/oh-my-zsh/custom/themes/powerlevel10k/**/*.zwc
 
+.config/hammerspoon/Spoons
+
 {{ if ne .machineType "MAC" -}}
 .local/bin/bootstrap-hotkey
 
@@ -18,6 +20,7 @@ install.sh
 .gnupg
 
 .config/karabiner
+.config/hammerspoon
 {{- end }}
 
 {{ if ne .machineType "SERVER" -}}
