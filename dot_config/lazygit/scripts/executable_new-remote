@@ -1,0 +1,81 @@
+#!/usr/bin/env python3
+import os
+import subprocess
+import sys
+import time
+
+__import__('__global')
+
+
+def new_remote(remote_name, remote_url):
+    args = ['git', 'remote', 'add', remote_name, remote_url]
+    os.execvp('git', args)
+
+
+def get_remote_name():
+    cmd = subprocess.Popen(
+        ['gum', 'input', '--placeholder', 'origin', '--prompt', 'Remote name: '],
+        stdout=subprocess.PIPE,
+    )
+    stdout, _ = cmd.communicate()
+    if cmd.returncode == 130:
+        exit(130)
+    tag_name = stdout.strip().decode()
+    if not tag_name:
+        return 'origin'
+    return tag_name
+
+
+def get_remote_url():
+    env = os.environ.copy()
+    env['GUM_INPUT_PLACEHOLDER'] = 'Remote url'
+    env['GUM_INPUT_PROMPT'] = 'Remote url: '
+    cmd = subprocess.Popen(
+        ['gum', 'input'],
+        env=env,
+        stdout=subprocess.PIPE,
+    )
+    stdout, _ = cmd.communicate()
+    if cmd.returncode == 130:
+        exit(130)
+    return stdout.strip().decode()
+
+
+def check_remote_url_is_valid(remote_url):
+    spin_cmd = subprocess.Popen(
+        [
+            'gum', 'spin', '--spinner', 'minidot', '--title', 'Checking the remote url...',
+            '--',
+            'tail', '-f', '/dev/null'
+        ],
+        stdout=subprocess.PIPE,
+    )
+    cmd = subprocess.Popen(
+        ['git', 'ls-remote', remote_url],
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+    )
+    while True:
+        if spin_cmd.poll() == 130:
+            cmd.terminate()
+            exit(130)
+        if cmd.poll() is not None:
+            spin_cmd.terminate()
+            return cmd.returncode == 0
+        time.sleep(0.1)
+
+
+def main():
+    remote_name = get_remote_name()
+    remote_url = get_remote_url()
+    if not check_remote_url_is_valid(remote_url):
+        print('\033[31mThe remote url is not valid.\033[0m', file=sys.stderr)
+        exit(1)
+    new_remote(remote_name, remote_url)
+
+
+if __name__ == '__main__':
+    try:
+        main()
+    except KeyboardInterrupt:
+        exit(130)

@@ -1,0 +1,109 @@
+#!/usr/bin/env python3
+import os
+import subprocess
+import sys
+
+__import__('__global')
+
+
+def set_tag(tag_name, commit, massage, force):
+    args = ['git', 'tag', tag_name, commit]
+    if massage:
+        args.extend(['-m', massage])
+    if force:
+        args.append('-f')
+    os.execvp('git', args)
+
+
+def get_tag_name():
+    not_a_valid_tag_name = False
+    while True:
+        env = os.environ.copy()
+        if not_a_valid_tag_name:
+            env['GUM_INPUT_HEADER_FOREGROUND'] = '1'
+            env['GUM_INPUT_HEADER'] = 'The tag name is not valid, please try again'
+        cmd = subprocess.Popen(
+            ['gum', 'input', '--placeholder', 'Tag name', '--prompt', 'Tag name: '],
+            env=env,
+            stdout=subprocess.PIPE,
+        )
+        stdout, _ = cmd.communicate()
+        if cmd.returncode == 130:
+            exit(130)
+        tag_name = stdout.strip().decode()
+        if is_valid_tag_name(tag_name):
+            return tag_name
+        not_a_valid_tag_name = True
+
+
+def get_message():
+    cmd = subprocess.Popen(
+        ['gum', 'confirm', 'Do you want to add a message to the tag?', '--default=0'],
+        stdout=subprocess.PIPE,
+    )
+    cmd.communicate()
+    if cmd.returncode == 130:
+        exit(130)
+    if cmd.returncode != 0:
+        return None
+
+    cmd = subprocess.Popen(
+        [
+            'gum', 'write',
+            '--header', 'Tag message: ',
+            '--placeholder', 'Tag message',
+            '--header.foreground', '4',
+            '--show-line-numbers',
+        ],
+        stdout=subprocess.PIPE,
+    )
+    stdout, _ = cmd.communicate()
+    if cmd.returncode == 130:
+        exit(130)
+    return stdout.strip().decode()
+
+
+def is_force(tag_name):
+    cmd = subprocess.Popen(
+        ['git', 'tag', '-l', tag_name],
+        stdout=subprocess.PIPE,
+    )
+    stdout, _ = cmd.communicate()
+    if not stdout:
+        return False
+
+    cmd = subprocess.Popen(
+        ['gum', 'confirm', 'The tag already exists, do you want to overwrite it?'],
+        stdout=subprocess.PIPE,
+    )
+    cmd.communicate()
+    if cmd.returncode == 130:
+        exit(130)
+    return cmd.returncode == 0
+
+
+def is_valid_tag_name(tag_name):
+    cmd = subprocess.Popen(
+        ['git', 'check-ref-format', '--branch', tag_name],
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+    )
+    cmd.communicate()
+    return cmd.returncode == 0
+
+
+def main():
+    commit = sys.argv[1]
+    tag_name = get_tag_name()
+    if not tag_name:
+        exit(1)
+    massage = get_message()
+    force = is_force(tag_name)
+    set_tag(tag_name, commit, massage, force)
+
+
+if __name__ == '__main__':
+    try:
+        main()
+    except KeyboardInterrupt:
+        exit(130)

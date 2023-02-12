@@ -4,3 +4,18 @@ git:
     pager: >
       delta --features lazygit
       --max-line-length "$((2 * {{columnWidth}}))"
+  parseEmoji: true
+
+customCommands:
+  - key: T
+    command: '$(dirname ${LG_CONFIG_FILE})/scripts/tag {{ .SelectedLocalCommit.Sha }}'
+    context: commits
+    subprocess: true
+  - key: n
+    command: '$(dirname ${LG_CONFIG_FILE})/scripts/new-remote'
+    context: remotes
+    subprocess: true
+  - key: P
+    command: '$(dirname ${LG_CONFIG_FILE})/scripts/push-tag {{ .SelectedTag.Name }}'
+    context: tags
+    subprocess: true

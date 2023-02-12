@@ -1,0 +1,89 @@
+#!/usr/bin/env python3
+import os
+import subprocess
+import sys
+import time
+
+__import__('__global')
+
+
+def push_tag(tag_name, remote, force):
+    args = ['git', 'push', remote, tag_name]
+    if force:
+        args.append('--force')
+    os.execvp('git', args)
+
+
+def get_remote():
+    cmd = subprocess.Popen(
+        ['git', 'remote'],
+        stdout=subprocess.PIPE,
+    )
+    stdout, _ = cmd.communicate()
+    remotes = stdout.decode().splitlines()
+    if 'origin' in remotes:
+        remotes = ['origin'] + [remote for remote in remotes if remote != 'origin']
+
+    print('\033[34mSelect the remote repository to push the tag to:\033[0m')
+    cmd = subprocess.Popen(
+        ['gum', 'choose', '--', *remotes],
+        stdout=subprocess.PIPE,
+    )
+    stdout, _ = cmd.communicate()
+    if cmd.returncode == 130:
+        exit(130)
+    return stdout.decode().rstrip()
+
+
+def check_tag_exists(tag_name, remote):
+    spin_cmd = subprocess.Popen(
+        [
+            'gum', 'spin', '--spinner', 'minidot', '--title', 'Checking if the tag exists in the remote repository...',
+            '--',
+            'tail', '-f', '/dev/null'
+        ],
+        stdout=subprocess.PIPE,
+    )
+    cmd = subprocess.Popen(
+        ['git', 'ls-remote', '--tags', remote, tag_name],
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+    )
+    while True:
+        if spin_cmd.poll() == 130:
+            cmd.terminate()
+            exit(130)
+        if cmd.poll() is not None:
+            spin_cmd.terminate()
+            stdout = cmd.stdout.read()
+            tags = [line.split('\t')[1] for line in stdout.decode().splitlines()]
+            return "refs/tags/{}".format(tag_name) in tags
+        time.sleep(0.1)
+
+
+def is_force(tag_name, remote):
+    if not check_tag_exists(tag_name, remote):
+        return False
+
+    cmd = subprocess.Popen(
+        ['gum', 'confirm', 'The tag already exists in the remote repository. Do you want to force push it?'],
+        stdout=subprocess.PIPE,
+    )
+    cmd.communicate()
+    if cmd.returncode == 130:
+        exit(130)
+    return cmd.returncode == 0
+
+
+def main():
+    tag_name = sys.argv[1]
+    remote = get_remote()
+    force = is_force(tag_name, remote)
+    push_tag(tag_name, remote, force)
+
+
+if __name__ == '__main__':
+    try:
+        main()
+    except KeyboardInterrupt:
+        exit(130)

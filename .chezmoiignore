@@ -13,6 +13,8 @@ install.sh
 
 .config/hammerspoon/Spoons
 
+**/__pycache__/**
+
 {{ if ne .machineType "MAC" -}}
 .local/bin/bootstrap-hotkey
 

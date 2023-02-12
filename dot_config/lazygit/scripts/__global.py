@@ -1,0 +1,13 @@
+import os
+
+os.environ['GUM_CHOOSE_CURSOR_FOREGROUND'] = '6'
+os.environ['GUM_CHOOSE_SELECTED_FOREGROUND'] = '6'
+os.environ['GUM_CONFIRM_PROMPT_FOREGROUND'] = '4'
+os.environ['GUM_CONFIRM_SELECTED_BACKGROUND'] = '6'
+os.environ['GUM_CONFIRM_UNSELECTED_BACKGROUND'] = '0'
+os.environ['GUM_INPUT_CURSOR_BACKGROUND'] = '6'
+os.environ['GUM_INPUT_PROMPT_FOREGROUND'] = '4'
+os.environ['GUM_INPUT_WIDTH'] = '100'
+os.environ['GUM_SPIN_SPINNER_FOREGROUND'] = '6'
+os.environ['GUM_WRITE_CURSOR_FOREGROUND'] = '6'
+os.environ['GUM_WRITE_PROMPT_FOREGROUND'] = '4'
