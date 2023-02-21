@@ -1,0 +1,133 @@
+#!/usr/bin/env python3
+from __global import *
+import argparse
+
+NEW_BRANCH_OPTION = '* New branch *'
+
+
+def push(remote, remote_branch, commit, force=False):
+    args = ['git', 'push', '--progress']
+    if force:
+        args.append('--force')
+    args.append(remote)
+    args.append(f'{commit}:refs/heads/{remote_branch}')
+    os.execvp('git', args)
+
+
+def parse_args():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--local-branch', type=str)
+    parser.add_argument('--commit', type=str)
+    return parser.parse_args()
+
+
+def get_remote():
+    remotes = get_remotes()
+    if len(remotes) == 1:
+        return remotes[0]
+
+    print('\033[34mSelect the remote repository to push to:\033[0m')
+    cmd = subprocess.Popen(
+        ['gum', 'choose', '--', *remotes],
+        stdout=subprocess.PIPE,
+    )
+    stdout, _ = cmd.communicate()
+    if cmd.returncode == 130:
+        exit(130)
+    return stdout.decode().rstrip()
+
+
+def get_remote_branch(remote):
+    remote_branches = [b.removeprefix(remote + '/') for b in get_remote_branches() if b.startswith(remote + '/')]
+
+    remote_branches.append(NEW_BRANCH_OPTION)
+    print('\033[34mSelect the branch to push to:\033[0m')
+    cmd = subprocess.Popen(
+        ['gum', 'choose', '--', *remote_branches],
+        stdout=subprocess.PIPE,
+    )
+    stdout, _ = cmd.communicate()
+    if cmd.returncode == 130:
+        exit(130)
+    branch = stdout.decode().rstrip()
+    if branch == NEW_BRANCH_OPTION:
+        return get_new_remote_branch()
+    return branch
+
+
+def check_commit_non_fast_forward(remote, remote_branch, commit):
+    spin_cmd = subprocess.Popen(
+        [
+            'gum', 'spin',
+            '--spinner', 'minidot', '--title', 'Checking if the commit will overwrite the remote branch...',
+            '--',
+            'tail', '-f', '/dev/null'
+        ],
+        stdout=subprocess.PIPE,
+    )
+    cmd = subprocess.Popen(
+        ['git', 'merge-base', '--is-ancestor', f'{remote}/{remote_branch}', commit],
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+    )
+    while True:
+        if spin_cmd.poll() == 130:
+            cmd.terminate()
+            exit(130)
+        if cmd.poll() is not None:
+            spin_cmd.terminate()
+            return cmd.returncode == 1
+        time.sleep(0.1)
+
+
+def is_new_remote_branch():
+    cmd = subprocess.Popen(
+        ['gum', 'confirm', 'Create a new branch?'],
+        stdout=subprocess.PIPE,
+    )
+    cmd.communicate()
+    if cmd.returncode == 130:
+        exit(130)
+    return cmd.returncode == 0
+
+
+def get_new_remote_branch():
+    cmd = subprocess.Popen(
+        ['gum', 'input', '--placeholder', 'Branch name', '--prompt', 'Branch name: '],
+        stdout=subprocess.PIPE,
+    )
+    stdout, _ = cmd.communicate()
+    if cmd.returncode == 130:
+        exit(130)
+    return stdout.strip().decode()
+
+
+def is_force(remote, remote_branch, commit):
+    if not check_commit_non_fast_forward(remote, remote_branch, commit):
+        return False
+
+    cmd = subprocess.Popen(
+        ['gum', 'confirm', 'The commit will overwrite the remote branch. Force push?'],
+        stdout=subprocess.PIPE,
+    )
+    cmd.communicate()
+    if cmd.returncode == 130:
+        exit(130)
+    return cmd.returncode == 0
+
+
+def main():
+    args = parse_args()
+    if args.local_branch:
+        commit = get_local_branch_commit(args.local_branch)
+    else:
+        commit = args.commit
+
+    remote = get_remote()
+    remote_branch = get_remote_branch(remote)
+    force = is_force(remote, remote_branch, commit)
+    push(remote, remote_branch, commit, force)
+
+
+if __name__ == '__main__':
+    main()

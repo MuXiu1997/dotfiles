@@ -1,9 +1,5 @@
 #!/usr/bin/env python3
-import os
-import subprocess
-import sys
-
-__import__('__global')
+from __global import *
 
 
 def set_tag(tag_name, commit, massage, force):

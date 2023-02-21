@@ -1,10 +1,5 @@
 #!/usr/bin/env python3
-import os
-import subprocess
-import sys
-import time
-
-__import__('__global')
+from __global import *
 
 
 def push_tag(tag_name, remote, force):
@@ -15,14 +10,7 @@ def push_tag(tag_name, remote, force):
 
 
 def get_remote():
-    cmd = subprocess.Popen(
-        ['git', 'remote'],
-        stdout=subprocess.PIPE,
-    )
-    stdout, _ = cmd.communicate()
-    remotes = stdout.decode().splitlines()
-    if 'origin' in remotes:
-        remotes = ['origin'] + [remote for remote in remotes if remote != 'origin']
+    remotes = get_remotes()
 
     print('\033[34mSelect the remote repository to push the tag to:\033[0m')
     cmd = subprocess.Popen(
