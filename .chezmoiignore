@@ -23,6 +23,7 @@ install.sh
 
 .config/karabiner
 .config/hammerspoon
+.config/ideavim/ideavimrc
 {{- end }}
 
 {{ if ne .machineType "SERVER" -}}
