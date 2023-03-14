@@ -39,6 +39,10 @@
   alias fly="flyctl"
 # }
 
+# { Just
+  alias j="just"
+# }
+
 # { Help
   alias h="help"
 # }
