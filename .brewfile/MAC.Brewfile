@@ -21,6 +21,8 @@ brew "bottom"
 brew "glib"
 # Manage your dotfiles across multiple diverse machines, securely
 brew "chezmoi"
+# GNU File, Shell, and Text utilities
+brew "coreutils"
 # Top-like interface for container metrics
 brew "ctop"
 # Secure runtime for JavaScript and TypeScript
@@ -51,10 +53,6 @@ brew "gh"
 brew "git"
 # Syntax-highlighting pager for git and diff output
 brew "git-delta"
-# Library for command-line editing
-brew "readline"
-# GNU Ubiquitous Intelligent Language for Extensions
-brew "guile"
 # Validating, recursive, caching DNS resolver
 brew "unbound"
 # GNU Transport Layer Security (TLS) Library
@@ -63,6 +61,8 @@ brew "gnutls"
 brew "libksba"
 # Passphrase entry dialog utilizing the Assuan protocol
 brew "pinentry"
+# Library for command-line editing
+brew "readline"
 # GNU Pretty Good Privacy (PGP) package
 brew "gnupg"
 # Open source programming language to build simple/reliable/efficient software
@@ -79,12 +79,14 @@ brew "gost"
 brew "grex"
 # Like cURL, but for gRPC
 brew "grpcurl"
+# GNU Ubiquitous Intelligent Language for Extensions
+brew "guile"
+# Tool for glamorous shell scripts
+brew "gum"
 # OpenType text shaping engine
 brew "harfbuzz"
 # Kubernetes package manager
 brew "helm"
-# Command-line interface for SQLite
-brew "sqlite"
 # Interpreted, interactive, object-oriented programming language
 brew "python@3.10"
 # User-friendly cURL replacement (command-line HTTP client)
@@ -95,6 +97,10 @@ brew "hyperfine"
 brew "jenv"
 # Lightweight and flexible command-line JSON processor
 brew "jq"
+# Implementation of JSON Schema for Python
+brew "jsonschema"
+# Handy way to save and run project-specific commands
+brew "just"
 # Anti-bikeshedding Kotlin linter with built-in formatter
 brew "ktlint"
 # Lazier way to manage everything docker
@@ -127,6 +133,8 @@ brew "nghttp2"
 brew "nvm"
 # Development kit for the Java programming language
 brew "openjdk@11"
+# Cryptography and SSL/TLS Toolkit
+brew "openssl@3"
 # Framework for layout and rendering of i18n text
 brew "pango"
 # Pinentry for GPG on Mac
@@ -151,8 +159,6 @@ brew "rclone"
 brew "ripgrep"
 # Utility that provides fast incremental file transfer
 brew "rsync"
-# Powerful, clean, object-oriented scripting language
-brew "ruby"
 # Rust toolchain installer
 brew "rustup-init"
 # 7-Zip is a file archiver with a high compression ratio
@@ -161,6 +167,8 @@ brew "sevenzip"
 brew "shellcheck"
 # SOcket CAT: netcat on steroids
 brew "socat"
+# User interface to the TELNET protocol
+brew "telnet"
 # Simplified and community-driven man pages
 brew "tldr"
 # Clean C library for processing UTF-8 Unicode data
@@ -227,7 +235,7 @@ cask "keycastr"
 cask "lepton"
 # Utility to open, create and modify archive files
 cask "maczip"
-# Simple and elegant markdown editor
+# Markdown editor
 cask "mark-text"
 # Provides updates to various Microsoft products
 cask "microsoft-auto-update"
