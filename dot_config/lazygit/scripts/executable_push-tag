@@ -12,9 +12,13 @@ def push_tag(tag_name, remote, force):
 def get_remote():
     remotes = get_remotes()
 
-    print('\033[34mSelect the remote repository to push the tag to:\033[0m')
     cmd = subprocess.Popen(
-        ['gum', 'choose', '--', *remotes],
+        [
+            'gum', 'choose',
+            '--header', 'Select the remote repository to push the tag to:',
+            '--',
+            *remotes
+        ],
         stdout=subprocess.PIPE,
     )
     stdout, _ = cmd.communicate()
@@ -26,7 +30,9 @@ def get_remote():
 def check_tag_exists(tag_name, remote):
     spin_cmd = subprocess.Popen(
         [
-            'gum', 'spin', '--spinner', 'minidot', '--title', 'Checking if the tag exists in the remote repository...',
+            'gum', 'spin',
+            '--spinner', 'minidot',
+            '--title', 'Checking if the tag exists in the remote repository...',
             '--',
             'tail', '-f', '/dev/null'
         ],

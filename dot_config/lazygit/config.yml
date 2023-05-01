@@ -8,22 +8,27 @@ git:
 
 customCommands:
   - key: T
+    description: '[ tag ]'
     command: '$(dirname ${LG_CONFIG_FILE})/scripts/tag "{{ .SelectedLocalCommit.Sha }}"'
     context: commits
     subprocess: true
   - key: n
+    description: '[ new remote ]'
     command: '$(dirname ${LG_CONFIG_FILE})/scripts/new-remote'
     context: remotes
     subprocess: true
   - key: P
+    description: '[ push tag ]'
     command: '$(dirname ${LG_CONFIG_FILE})/scripts/push-tag "{{ .SelectedTag.Name }}"'
     context: tags
     subprocess: true
   - key: N
+    description: '[ push branch ]'
     command: '$(dirname ${LG_CONFIG_FILE})/scripts/custom-push --local-branch "{{ .SelectedLocalBranch.Name }}"'
     context: localBranches
     subprocess: true
   - key: N
+    description: '[ push commit ]'
     command: '$(dirname ${LG_CONFIG_FILE})/scripts/custom-push --commit "{{ .SelectedLocalCommit.Sha }}"'
     context: commits
     subprocess: true

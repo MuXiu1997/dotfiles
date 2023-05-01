@@ -26,9 +26,13 @@ def get_remote():
     if len(remotes) == 1:
         return remotes[0]
 
-    print('\033[34mSelect the remote repository to push to:\033[0m')
     cmd = subprocess.Popen(
-        ['gum', 'choose', '--', *remotes],
+        [
+            'gum', 'choose',
+            '--header', 'Select the remote repository to push to:',
+            '--',
+            *remotes
+        ],
         stdout=subprocess.PIPE,
     )
     stdout, _ = cmd.communicate()
@@ -41,9 +45,13 @@ def get_remote_branch(remote):
     remote_branches = [b.removeprefix(remote + '/') for b in get_remote_branches() if b.startswith(remote + '/')]
 
     remote_branches.append(NEW_BRANCH_OPTION)
-    print('\033[34mSelect the branch to push to:\033[0m')
     cmd = subprocess.Popen(
-        ['gum', 'choose', '--', *remote_branches],
+        [
+            'gum', 'choose',
+            '--header', 'Select the branch to push to:',
+            '--',
+            *remote_branches
+        ],
         stdout=subprocess.PIPE,
     )
     stdout, _ = cmd.communicate()
@@ -59,7 +67,8 @@ def check_commit_non_fast_forward(remote, remote_branch, commit):
     spin_cmd = subprocess.Popen(
         [
             'gum', 'spin',
-            '--spinner', 'minidot', '--title', 'Checking if the commit will overwrite the remote branch...',
+            '--spinner', 'minidot',
+            '--title', 'Checking if the commit will overwrite the remote branch...',
             '--',
             'tail', '-f', '/dev/null'
         ],
