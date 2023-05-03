@@ -145,7 +145,8 @@ typeset -U path fpath
 # }
 
 # { JetBrains
-  path=("${XDG_DATA_HOME}/jetbrains/bin" $path)
+  export JETBRAINS_BIN="${XDG_DATA_HOME}/jetbrains/bin"
+  path=("${JETBRAINS_BIN}" $path)
 # }
 
 {{ if eq .machineType "MAC" -}}
