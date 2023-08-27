@@ -1,7 +1,5 @@
 tap "homebrew/bundle"
-tap "homebrew/cask", "https://github.com/Homebrew/homebrew-cask.git"
 tap "homebrew/cask-fonts", "https://github.com/Homebrew/homebrew-cask-fonts.git"
-tap "homebrew/core"
 tap "homebrew/services"
 tap "hpedrorodrigues/tools"
 tap "vldmrkl/formulae"
@@ -9,6 +7,12 @@ tap "vldmrkl/formulae"
 brew "age"
 # Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
+# Cryptography and SSL/TLS Toolkit
+brew "openssl@3"
+# High performance key/value database
+brew "berkeley-db"
+# Platform built on V8 to build network applications
+brew "node"
 # Secure and free password manager for all of your devices
 brew "bitwarden-cli"
 # General-purpose data compression with high compression ratio
@@ -19,6 +23,10 @@ brew "boost"
 brew "bottom"
 # Core application library for C
 brew "glib"
+# Cryptography and SSL/TLS Toolkit
+brew "openssl@1.1"
+# Library for command-line editing
+brew "readline"
 # Manage your dotfiles across multiple diverse machines, securely
 brew "chezmoi"
 # GNU File, Shell, and Text utilities
@@ -29,8 +37,14 @@ brew "ctop"
 brew "deno"
 # Load/unload environment variables based on $PWD
 brew "direnv"
+# Disk Usage/Free Utility - a better 'df' alternative
+brew "duf"
 # More intuitive version of du in rust
 brew "dust"
+# C library implementing the SSH2 protocol
+brew "libssh2"
+# C library of Git core methods that is re-entrant and linkable
+brew "libgit2"
 # Modern replacement for 'ls'
 brew "exa"
 # Simple, fast and user-friendly alternative to find
@@ -61,8 +75,6 @@ brew "gnutls"
 brew "libksba"
 # Passphrase entry dialog utilizing the Assuan protocol
 brew "pinentry"
-# Library for command-line editing
-brew "readline"
 # GNU Pretty Good Privacy (PGP) package
 brew "gnupg"
 # Open source programming language to build simple/reliable/efficient software
@@ -87,14 +99,14 @@ brew "gum"
 brew "harfbuzz"
 # Kubernetes package manager
 brew "helm"
-# Interpreted, interactive, object-oriented programming language
-brew "python@3.10"
 # User-friendly cURL replacement (command-line HTTP client)
 brew "httpie"
 # Command-line benchmarking tool
 brew "hyperfine"
 # Manage your Java environment
 brew "jenv"
+# Command-line pager for JSON data
+brew "jless"
 # Lightweight and flexible command-line JSON processor
 brew "jq"
 # Implementation of JSON Schema for Python
@@ -109,6 +121,8 @@ brew "lazydocker"
 brew "lazygit"
 # Pager program similar to more
 brew "less"
+# C library for reading, creating, and modifying zip archives
+brew "libzip"
 # Powerful, lightweight programming language
 brew "lua"
 # Just-In-Time Compiler (JIT) for the Lua programming language
@@ -133,20 +147,24 @@ brew "nghttp2"
 brew "nvm"
 # Development kit for the Java programming language
 brew "openjdk@11"
-# Cryptography and SSL/TLS Toolkit
-brew "openssl@3"
 # Framework for layout and rendering of i18n text
 brew "pango"
 # Pinentry for GPG on Mac
 brew "pinentry-mac"
-# 📦🚀 Fast, disk space efficient package manager
+# Fast, disk space efficient package manager
 brew "pnpm"
+# Tool for creating isolated virtual python environments
+brew "virtualenv"
 # Python package management tool
 brew "poetry"
+# Modern replacement for ps written by Rust
+brew "procs"
 # Protocol buffers (Google's data interchange format)
 brew "protobuf"
 # Python version management
 brew "pyenv"
+# Interpreted, interactive, object-oriented programming language
+brew "python@3.10"
 # Interpreted, interactive, object-oriented programming language
 brew "python@3.9"
 # Small and embeddable JavaScript engine
@@ -159,6 +177,8 @@ brew "rclone"
 brew "ripgrep"
 # Utility that provides fast incremental file transfer
 brew "rsync"
+# Powerful, clean, object-oriented scripting language
+brew "ruby"
 # Rust toolchain installer
 brew "rustup-init"
 # 7-Zip is a file archiver with a high compression ratio
@@ -245,8 +265,6 @@ cask "microsoft-edge"
 cask "mos"
 # Re-mounts write-protected NTFS volumes
 cask "mounty"
-# Neovim Client
-cask "neovide"
 # Music streaming platform
 cask "neteasemusic"
 # Knowledge base that works on top of a local folder of plain text Markdown files
