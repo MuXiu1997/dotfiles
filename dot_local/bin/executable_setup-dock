@@ -42,7 +42,14 @@ def setup_dock_base(dock_plist):
 
 
 def setup_dock_persistent_apps(dock_plist):
-    persistent_app_label_list = ['Microsoft Edge', 'WebStorm', 'IntelliJ IDEA', 'PyCharm', 'GoLand', 'Spark']
+    persistent_app_label_list = [
+        'Microsoft Edge',
+        'WebStorm',
+        'IntelliJ IDEA Ultimate',
+        'PyCharm Professional Edition',
+        'GoLand',
+        'Spark',
+    ]
 
     def persistent_app_filter(app):
         tile_data = app.get('tile-data')
