@@ -1,0 +1,26 @@
+chezmoi_source_dir := `chezmoi source-path`
+chezmoi_external_filepath := chezmoi_source_dir / ".chezmoiexternal.toml"
+
+[private]
+default:
+  @just --choose -u
+
+# Chezmoi apply
+apply:
+  @chezmoi apply -v
+
+# # Chezmoi preview the apply result
+preview $LESS="Rmc":
+  @chezmoi apply -vn --force | delta --features "default paging"
+
+# Chezmoi preview the apply result (refresh external)
+preview-refresh-external $LESS="Rmc":
+  @chezmoi apply -Rvn --force | delta --features "default paging"
+
+# Chezmoi reset script state
+reset-script-state:
+  @chezmoi state delete-bucket --bucket=scriptState
+
+# Chezmoi evaluate .chezmoiexternal.toml
+evaluate-external-file $CHEZMOI_MOCK_GITHUB_LATEST_RELEASE_TAG_NAME="true":
+  @chezmoi execute-template < {{ chezmoi_external_filepath }} | bat -l toml

@@ -15,7 +15,7 @@
 
 # { Chezmoi
   alias cm="chezmoi"
-  alias cms="chezmoi-shortcut"
+  alias j-chezmoi="just \${XDG_CONFIG_HOME}/justfiles/chezmoi/"
 # }
 
 # { Brew
