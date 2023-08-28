@@ -1,0 +1,52 @@
+#!/usr/bin/env python3
+import os
+import subprocess
+
+BREWFILE = os.environ['HOMEBREW_BREWFILE']
+
+MAS_ID_LIST = [
+    '1176895641',  # Spark
+    '1443749478',  # WPS Office
+    '497799835',  # Xcode
+    '1630034110',  # Bob
+    '1352778147',  # Bitwarden
+]
+
+
+def get_dump_content():
+    env = os.environ
+    env['HOMEBREW_NO_AUTO_UPDATE'] = 'true'
+    env['HOMEBREW_BUNDLE_NO_LOCK'] = '1'
+    cmd = subprocess.Popen(
+        ['brew', 'bundle', 'dump', '--describe', '--file=-'],
+        stdout=subprocess.PIPE,
+        env=env,
+    )
+    stdout, _ = cmd.communicate()
+    output = stdout.decode()
+    return output
+
+
+def filter_packages(dump_content):
+    dump_content = '\n'.join([
+        line for line in dump_content.splitlines() if
+        not (line.startswith('mas'))
+        or (line.startswith('mas') and any([line.endswith(mas_id) for mas_id in MAS_ID_LIST]))
+    ])
+    return dump_content
+
+
+def write_brewfile(dump_content):
+    os.makedirs(os.path.dirname(BREWFILE), exist_ok=True)
+    with open(BREWFILE, 'w') as fp:
+        fp.write(dump_content)
+
+
+def main():
+    dump_content = get_dump_content()
+    dump_content = filter_packages(dump_content)
+    write_brewfile(dump_content)
+
+
+if __name__ == '__main__':
+    main()

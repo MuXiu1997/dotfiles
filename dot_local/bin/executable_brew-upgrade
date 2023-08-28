@@ -1,44 +1,59 @@
 #!/usr/bin/env python3
 import os
 import subprocess
+import sys
 
 
-def get_outdated(_type, color):
+def get_package_type():
+    package_type = sys.argv[1]
+    if package_type not in ['cask', 'formula']:
+        print('Invalid package type: {}'.format(package_type), file=sys.stderr)
+        exit(1)
+    return package_type
+
+
+def format_outdated_line(line):
+    name, other = line.split(' ', maxsplit=1)
+    return '\033[0;34m{}\033[0m {}'.format(name, other)
+
+
+def fetch_outdated_list(package_type):
     env = os.environ
     env['HOMEBREW_NO_AUTO_UPDATE'] = 'true'
     cmd = subprocess.Popen(
-        ['brew', 'outdated', '-v', '--{}'.format(_type), ],
+        ['brew', 'outdated', '-v', '--greedy', '--{}'.format(package_type), ],
         stdout=subprocess.PIPE,
         env=env
     )
     stdout, _ = cmd.communicate()
     output = stdout.strip().decode()
 
-    def format_line(line):
-        name, other = line.split(' ', maxsplit=1)
-        return '\033[0;{}m{}\033[0m {}'.format(color, name, other)
-
-    return list(map(format_line, output.splitlines()))
+    return list(map(format_outdated_line, output.splitlines()))
 
 
-def main():
-    subprocess.run(['brew', 'update'])
-
-    outdated = [*get_outdated('cask', 33), *get_outdated('formula', 34)]
-
+def select_outdated_list(outdated_list):
     fzf_cmd = subprocess.Popen(
         ['fzf', '--ansi', '-m'],
         stdin=subprocess.PIPE,
         stdout=subprocess.PIPE
     )
-    fzf_cmd_stdout, _ = fzf_cmd.communicate('\n'.join(outdated).encode())
+    fzf_cmd_stdout, _ = fzf_cmd.communicate('\n'.join(outdated_list).encode())
     if fzf_cmd.returncode != 0:
         exit(fzf_cmd.returncode)
-
     selected = [l.split(' ')[0] for l in fzf_cmd_stdout.decode().splitlines()]
+    return selected
 
-    print('brew upgrade --no-quarantine -- {}'.format(' '.join(selected)))
-    os.execvp('brew', ['brew', 'upgrade', '--no-quarantine', '--', *selected])
+
+def execute_upgrade(package_type, outdated_list):
+    print('brew upgrade --no-quarantine --{} -- {}'.format(package_type, ' '.join(outdated_list)))
+    os.execvp('brew', ['brew', 'upgrade', '--no-quarantine', '--{}'.format(package_type), '--', *outdated_list])
+
+
+def main():
+    package_type = get_package_type()
+    outdated_list = fetch_outdated_list(package_type)
+    selected_outdated_list = select_outdated_list(outdated_list)
+    execute_upgrade(package_type, selected_outdated_list)
 
 
 if __name__ == '__main__':

@@ -1,0 +1,19 @@
+[private]
+default:
+  @just --choose -u
+
+# Brew update
+update:
+  @brew update
+
+# Brew upgrade selected casks
+cask-upgrade:
+  @brew-upgrade cask
+
+# Brew upgrade selected formulae
+formula-upgrade:
+  @brew-upgrade formula
+
+# Brew bundle dump
+bundle-dump:
+  @brew-bundle-dump

@@ -19,8 +19,7 @@
 # }
 
 # { Brew
-  alias brewd="brew-dump"
-  alias brewu="brew-upgrade"
+  alias j-brew="just \${XDG_CONFIG_HOME}/justfiles/brew/"
 # }
 
 # { Lazygit
