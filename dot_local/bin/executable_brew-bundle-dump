@@ -5,11 +5,12 @@ import subprocess
 BREWFILE = os.environ['HOMEBREW_BREWFILE']
 
 MAS_ID_LIST = [
-    '1176895641',  # Spark
-    '1443749478',  # WPS Office
     '497799835',  # Xcode
-    '1630034110',  # Bob
+    '1176895641',  # Spark
     '1352778147',  # Bitwarden
+    '1443749478',  # WPS Office
+    '1630034110',  # Bob
+    '1661733229',  # LocalSend
 ]
 
 
