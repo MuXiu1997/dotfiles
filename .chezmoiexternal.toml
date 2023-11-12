@@ -108,10 +108,10 @@ refreshPeriod = '168h'
 
 # =================================== Nvim =================================== #
 ['.config/nvim']
-exact = true
-refreshPeriod = '168h'
 type = 'archive'
 url = 'https://github.com/MuXiu1997/nvim/releases/download/{{ template "gitHubLatestTag" "MuXiu1997/nvim" }}/nvim.zip'
+exact = true
+refreshPeriod = '168h'
 # ============================================================================ #
 
 
