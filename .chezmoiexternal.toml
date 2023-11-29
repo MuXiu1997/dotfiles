@@ -117,7 +117,7 @@ refreshPeriod = '168h'
 
 # ============================= zsh completions ============================== #
 {{ if lookPath "docker" -}}
-{{- $dockerVersion := output "docker" "--version" | replaceAllRegex "Docker version (.+?), .+" "$1" | trim -}}
+{{- $dockerVersion := output "docker" "--version" | replaceAllRegex ".*?(\\d+?\\.\\d+?\\.\\d+?).*" "$1" | trim -}}
 ['.local/share/zsh/site-functions/_docker']
 type = 'file'
 url = 'https://raw.githubusercontent.com/docker/cli/v{{ $dockerVersion }}/contrib/completion/zsh/_docker'
@@ -125,10 +125,9 @@ refreshPeriod = '168h'
 {{- end }}
 
 {{ if lookPath "docker-compose" -}}
-{{- $dockerComposeVersion := output "docker-compose" "--version" | replaceAllRegex "docker-compose version (.+?), .+" "$1" | trim -}}
 ['.local/share/zsh/site-functions/_docker-compose']
 type = 'file'
-url = 'https://raw.githubusercontent.com/docker/compose/{{ $dockerComposeVersion }}/contrib/completion/zsh/_docker-compose'
+url = 'https://raw.githubusercontent.com/docker/compose/1.29.2/contrib/completion/zsh/_docker-compose'
 refreshPeriod = '168h'
 {{- end }}
 
