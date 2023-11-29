@@ -5,10 +5,14 @@ tap "hpedrorodrigues/tools"
 tap "vldmrkl/formulae"
 # Simple, modern, secure file encryption
 brew "age"
-# Clone of cat(1) with syntax highlighting and Git integration
-brew "bat"
 # Cryptography and SSL/TLS Toolkit
 brew "openssl@3"
+# C library implementing the SSH2 protocol
+brew "libssh2"
+# C library of Git core methods that is re-entrant and linkable
+brew "libgit2"
+# Clone of cat(1) with syntax highlighting and Git integration
+brew "bat"
 # High performance key/value database
 brew "berkeley-db"
 # Platform built on V8 to build network applications
@@ -23,16 +27,20 @@ brew "boost"
 brew "bottom"
 # Core application library for C
 brew "glib"
-# Cryptography and SSL/TLS Toolkit
-brew "openssl@1.1"
-# Library for command-line editing
-brew "readline"
+# Vector graphics library with cross-device output support
+brew "cairo"
+# C parser in Python
+brew "pycparser"
 # Manage your dotfiles across multiple diverse machines, securely
 brew "chezmoi"
 # GNU File, Shell, and Text utilities
 brew "coreutils"
 # Top-like interface for container metrics
 brew "ctop"
+# Get a file from an HTTP, HTTPS or FTP server
+brew "curl"
+# Command-line interface for SQLite
+brew "sqlite"
 # Secure runtime for JavaScript and TypeScript
 brew "deno"
 # Load/unload environment variables based on $PWD
@@ -41,18 +49,12 @@ brew "direnv"
 brew "duf"
 # More intuitive version of du in rust
 brew "dust"
-# C library implementing the SSH2 protocol
-brew "libssh2"
-# C library of Git core methods that is re-entrant and linkable
-brew "libgit2"
 # Modern replacement for 'ls'
 brew "exa"
 # Simple, fast and user-friendly alternative to find
 brew "fd"
 # macOS CLI for managing custom icons for files and folders
 brew "fileicon"
-# Command-line tools for fly.io services
-brew "flyctl"
 # Open-source formatting library for C++
 brew "fmt"
 # Collection of reusable C++ library artifacts developed at Facebook
@@ -99,6 +101,8 @@ brew "gum"
 brew "harfbuzz"
 # Kubernetes package manager
 brew "helm"
+# Mozilla CA bundle for Python
+brew "python-certifi"
 # User-friendly cURL replacement (command-line HTTP client)
 brew "httpie"
 # Command-line benchmarking tool
@@ -109,10 +113,14 @@ brew "jenv"
 brew "jless"
 # Lightweight and flexible command-line JSON processor
 brew "jq"
+# Cryptography and SSL/TLS Toolkit
+brew "openssl@1.1"
 # Implementation of JSON Schema for Python
 brew "jsonschema"
 # Handy way to save and run project-specific commands
 brew "just"
+# Development kit for the Java programming language
+brew "openjdk"
 # Anti-bikeshedding Kotlin linter with built-in formatter
 brew "ktlint"
 # Lazier way to manage everything docker
@@ -185,6 +193,8 @@ brew "rustup-init"
 brew "sevenzip"
 # Static analysis and lint tool, for (ba)sh scripts
 brew "shellcheck"
+# Python 2 and 3 compatibility utilities
+brew "six"
 # SOcket CAT: netcat on steroids
 brew "socat"
 # User interface to the TELNET protocol
@@ -261,6 +271,8 @@ cask "mark-text"
 cask "microsoft-auto-update"
 # Web browser
 cask "microsoft-edge"
+# Remote desktop client
+cask "microsoft-remote-desktop"
 # Smooths scrolling and set mouse scroll directions independently
 cask "mos"
 # Re-mounts write-protected NTFS volumes
@@ -293,6 +305,7 @@ cask "wechat"
 cask "wechatwebdevtools"
 mas "Bitwarden", id: 1352778147
 mas "Bob", id: 1630034110
+mas "LocalSend", id: 1661733229
 mas "Spark", id: 1176895641
 mas "WPS Office", id: 1443749478
 mas "Xcode", id: 497799835
