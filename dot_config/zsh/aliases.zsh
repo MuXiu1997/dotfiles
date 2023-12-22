@@ -42,6 +42,11 @@
   alias h="help"
 # }
 
+# { Docker
+  alias dk="docker"
+  alias dkc="docker compose"
+# }
+
 # { Proxy
   alias p="HTTPS_PROXY=socks5://127.0.0.1:1080 HTTP_PROXY=socks5://127.0.0.1:1080 ALL_PROXY=socks5://127.0.0.1:1080"
 # }

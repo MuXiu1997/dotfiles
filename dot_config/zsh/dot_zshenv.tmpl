@@ -149,6 +149,10 @@ typeset -U path fpath
   path=("${JETBRAINS_BIN}" $path)
 # }
 
+# { Local Docker Compose
+  export LOCAL_DOCKER_COMPOSE_DIR="${HOME}/Projects/@local-docker-compose"
+# }
+
 {{ if eq .machineType "MAC" -}}
 # { MuXiu1997 Personal
   export MUXIU1997_SSID_HOME={{
