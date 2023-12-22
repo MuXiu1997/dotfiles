@@ -1,0 +1,4 @@
+{{- $tldrPythonClient := joinPath .chezmoi.homeDir ".config" "tldr-python-client" }}
+{{- $python := joinPath $tldrPythonClient "venv" "bin" "python" }}
+{{- $tldr := joinPath $tldrPythonClient "tldr.py" }}
+{{- output $python $tldr "--print-completion" "zsh" | replace "-m tldr" $tldr -}}
