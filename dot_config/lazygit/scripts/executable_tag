@@ -16,7 +16,7 @@ def get_tag_name():
     while True:
         env = os.environ.copy()
         if not_a_valid_tag_name:
-            env['GUM_INPUT_HEADER_FOREGROUND'] = '1'
+            env['GUM_INPUT_HEADER_FOREGROUND'] = COLOR_RED
             env['GUM_INPUT_HEADER'] = 'The tag name is not valid, please try again'
         cmd = subprocess.Popen(
             ['gum', 'input', '--placeholder', 'Tag name', '--prompt', 'Tag name: '],

@@ -3,6 +3,7 @@ from __global import *
 import argparse
 
 NEW_BRANCH_OPTION = '* New branch *'
+SAME_NAME_BRANCH_OPTION = '* Same name branch *'
 
 
 def push(remote, remote_branch, commit, force=False):
@@ -41,10 +42,12 @@ def get_remote():
     return stdout.decode().rstrip()
 
 
-def get_remote_branch(remote):
+def get_remote_branch(remote, local_branch):
     remote_branches = [b.removeprefix(remote + '/') for b in get_remote_branches() if b.startswith(remote + '/')]
 
     remote_branches.append(NEW_BRANCH_OPTION)
+    if local_branch:
+        remote_branches.append(SAME_NAME_BRANCH_OPTION)
     cmd = subprocess.Popen(
         [
             'gum', 'choose',
@@ -60,6 +63,8 @@ def get_remote_branch(remote):
     branch = stdout.decode().rstrip()
     if branch == NEW_BRANCH_OPTION:
         return get_new_remote_branch()
+    if branch == SAME_NAME_BRANCH_OPTION:
+        return local_branch
     return branch
 
 
@@ -133,7 +138,7 @@ def main():
         commit = args.commit
 
     remote = get_remote()
-    remote_branch = get_remote_branch(remote)
+    remote_branch = get_remote_branch(remote, args.local_branch)
     force = is_force(remote, remote_branch, commit)
     push(remote, remote_branch, commit, force)
 
