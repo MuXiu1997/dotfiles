@@ -34,7 +34,7 @@ refreshPeriod = '168h'
 
 ['.config/oh-my-zsh/custom/plugins/zsh-vi-mode']
 type = 'archive'
-url = 'https://github.com/MuXiu1997/zsh-vi-mode/archive/main.zip'
+url = 'https://github.com/MuXiu1997/zsh-vi-mode/archive/cutbuffer-getset.zip'
 exact = true
 stripComponents = 1
 refreshPeriod = '168h'
