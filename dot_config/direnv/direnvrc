@@ -1,7 +1,11 @@
+# Function to get the absolute path of a file or directory
+# Example: realpath "/path/to/file" => "/absolute/path/to/file"
 realpath() {
     [[ $1 = /* ]] && echo "$1" || echo "$PWD/${1#./}"
 }
 
+# Function to set the version for a given command
+# Example: set_version python 3.8
 set_version() {
     local command version
     command="$1"
@@ -15,6 +19,8 @@ set_version() {
     fi
 }
 
+# Function to get the version for a given command
+# Example: get_version python => "3.8" (if set previously)
 get_version() {
     local command version
     command="$1"
@@ -25,6 +31,8 @@ get_version() {
     head ".$command-version" 2>/dev/null
 }
 
+# Function to log a warning message
+# Example: log_warn "This is a warning message"
 log_warn() {
   local color_normal
   local color_warn
@@ -37,6 +45,14 @@ log_warn() {
   fi
 }
 
+################################################################################
+# Layouts
+################################################################################
+
+# Function to activate a virtual environment layout
+# Example:
+#   layout virtualenv "my-venv"
+#   layout virtualenv => layout virtualenv "venv"
 layout_virtualenv() {
     local venv_path activate_path has_custom_venv
     if [[ -n "$1" ]]; then
@@ -58,6 +74,8 @@ layout_virtualenv() {
     unset PS1
 }
 
+# Function to activate a Python environment layout using pyenv
+# Example: layout pyenv "3.8.1"
 layout_pyenv() {
     local python_version
     set_version python "$1"
@@ -70,11 +88,17 @@ layout_pyenv() {
     log_status "pyenv: currently activated python version is $python_version"
 }
 
+# Function to activate Python-related layouts
+# Example:
+#   layout python "3.8.1"
+#   layout python "3.8.1" "my-venv"
 layout_python() {
     layout_pyenv "$1"
     layout_virtualenv "$2"
 }
 
+# Function to activate a Node.js environment layout using nvm
+# Example: layout nvm "14.17.3"
 layout_nvm() {
     local node_version
     set_version node "$1"
@@ -88,11 +112,15 @@ layout_nvm() {
     log_status "nvm: currently activated node version is $node_version"
 }
 
+# Function to activate Node.js-related layouts
+# Example: layout node "14.17.3"
 layout_node() {
     PATH_add node_modules/.bin
     layout_nvm "$1"
 }
 
+# Function to activate a Go environment layout using goenv
+# Example: layout goenv "1.16"
 layout_goenv() {
   local golang_version
   set_version go "$1"
@@ -105,10 +133,14 @@ layout_goenv() {
   log_status "goenv: currently activated golang version is $golang_version"
 }
 
+# Function to activate Go-related layouts
+# Example: layout golang "1.16"
 layout_golang() {
   layout_goenv "$1"
 }
 
+# Function to activate a Java environment layout using jenv
+# Example: layout jenv "11.0.12"
 layout_jenv() {
   local java_version
   set_version java "$1"
@@ -122,6 +154,8 @@ layout_jenv() {
   log_status "jenv: currently activated java version is $java_version"
 }
 
+# Function to activate Java-related layouts
+# Example: layout java "11.0.12"
 layout_java() {
   layout_jenv "$1"
 }
