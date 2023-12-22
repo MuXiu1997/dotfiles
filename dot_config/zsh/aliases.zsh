@@ -34,10 +34,6 @@
   alias bwu="export BW_SESSION=\"\$(bw unlock --raw)\""
 # }
 
-# { Flyctl
-  alias fly="flyctl"
-# }
-
 # { Just
   alias j="just"
 # }
