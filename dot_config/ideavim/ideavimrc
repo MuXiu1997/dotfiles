@@ -102,7 +102,7 @@ let g:highlightedyank_highlight_color = "rgb(123, 171, 187, 127)"
 nnoremap <Space>ss  :action SelectInProjectView<CR>
 nnoremap <Space>his :action LocalHistory.ShowHistory<CR>
 nnoremap <Space>fs  :action FileStructurePopup<CR>
-nnoremap <Space>tp  :!tmux new-window -c $PWD &<CR>
+nnoremap <Space>tp  :!tmux new-window -c $PWD -n $(basename $PWD) &<CR>
 
 nnoremap <Leader>rf :action ReformatCode<CR>
 
