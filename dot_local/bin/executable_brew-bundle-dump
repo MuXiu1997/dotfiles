@@ -31,8 +31,11 @@ def get_dump_content():
 def filter_packages(dump_content):
     dump_content = '\n'.join([
         line for line in dump_content.splitlines() if
-        not (line.startswith('mas'))
-        or (line.startswith('mas') and any([line.endswith(mas_id) for mas_id in MAS_ID_LIST]))
+        not (line.startswith('vscode')) and
+        (
+            not (line.startswith('mas'))
+            or (line.startswith('mas') and any([line.endswith(mas_id) for mas_id in MAS_ID_LIST]))
+        )
     ])
     return dump_content
 

@@ -3,6 +3,8 @@ tap "homebrew/cask-fonts", "https://github.com/Homebrew/homebrew-cask-fonts.git"
 tap "homebrew/services"
 tap "hpedrorodrigues/tools"
 tap "vldmrkl/formulae"
+# Run your GitHub Actions locally
+brew "act"
 # Simple, modern, secure file encryption
 brew "age"
 # Cryptography and SSL/TLS Toolkit
@@ -137,6 +139,8 @@ brew "lua"
 brew "luajit"
 # Bare libuv bindings for lua
 brew "luv"
+# Swiss Army Knife for macOS
+brew "m-cli"
 # Utility for directing compilation
 brew "make"
 # Mac App Store command-line interface
@@ -199,8 +203,6 @@ brew "six"
 brew "socat"
 # User interface to the TELNET protocol
 brew "telnet"
-# Simplified and community-driven man pages
-brew "tldr"
 # Clean C library for processing UTF-8 Unicode data
 brew "utf8proc"
 # Terminal multiplexer
@@ -299,6 +301,8 @@ cask "squirrel"
 cask "stats"
 # App to switch hosts
 cask "switchhosts"
+# Open-source code editor
+cask "visual-studio-code"
 # Free messaging and calling application
 cask "wechat"
 # Wechat DevTools for Official Account and Mini Program development
