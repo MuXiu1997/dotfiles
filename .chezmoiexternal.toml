@@ -123,6 +123,15 @@ stripComponents = 1
 refreshPeriod = '168h'
 # ============================================================================ #
 
+# =================================== bin =================================== #
+['.local/bin/goet']
+type = 'file'
+url = 'https://github.com/MuXiu1997/goet/releases/download/{{ template "gitHubLatestTag" "MuXiu1997/goet" }}/goet_{{ .chezmoi.os }}_{{ .chezmoi.arch }}'
+executable = true
+refreshPeriod = '168h'
+# ============================================================================ #
+
+
 # ============================= zsh completions ============================== #
 {{ if lookPath "docker" -}}
 {{- $dockerVersion := output "docker" "--version" | replaceAllRegex ".*?(\\d+?\\.\\d+?\\.\\d+?).*" "$1" | trim -}}
