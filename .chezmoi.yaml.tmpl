@@ -30,7 +30,7 @@ diff:
     - scripts
   pager: LESS='Rmc' delta --features 'default paging'
 
-{{ if eq .machineType "MAC" -}}
+{{ if eq (index . "machineType") "MAC" -}}
 merge:
   command: idea-wait
   args:
