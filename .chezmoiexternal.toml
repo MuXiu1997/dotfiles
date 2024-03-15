@@ -58,6 +58,16 @@ refreshPeriod = '168h'
 # ============================================================================ #
 
 
+# ================================ Oh My Tmux ================================ #
+['.config/oh-my-tmux']
+type = 'archive'
+url = 'https://github.com/gpakosz/.tmux/archive/master.zip'
+exact = true
+stripComponents = 1
+refreshPeriod = '168h'
+# ============================================================================ #
+
+
 # ============================== Ranger plugins ============================== #
 ['.config/ranger/plugins/ranger_fzf_filter']
 type = 'archive'
