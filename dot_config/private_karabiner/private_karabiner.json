@@ -1,0 +1,331 @@
+{
+    "global": {
+        "check_for_updates_on_startup": true,
+        "show_in_menu_bar": true,
+        "show_profile_name_in_menu_bar": false
+    },
+    "profiles": [
+        {
+            "name": "MuXiu1997",
+            "parameters": {
+                "delay_milliseconds_before_open_device": 1000
+            },
+            "selected": false,
+            "simple_modifications": [],
+            "virtual_hid_keyboard": {
+                "country_code": 0,
+                "indicate_sticky_modifier_keys_state": true,
+                "mouse_key_xy_scale": 100
+            },
+            "devices": [
+                {
+                    "identifiers": {
+                        "vendor_id": 1452,
+                        "product_id": 272,
+                        "is_keyboard": true,
+                        "is_pointing_device": true
+                    },
+                    "ignore": false,
+                    "disable_built_in_keyboard_if_exists": false,
+                    "manipulate_caps_lock_led": true,
+                    "fn_function_keys": [],
+                    "simple_modifications": []
+                },
+                {
+                    "identifiers": {
+                        "vendor_id": 1155,
+                        "product_id": 20777,
+                        "is_keyboard": true,
+                        "is_pointing_device": false
+                    },
+                    "ignore": false,
+                    "disable_built_in_keyboard_if_exists": false,
+                    "manipulate_caps_lock_led": true,
+                    "fn_function_keys": [],
+                    "simple_modifications": []
+                },
+                {
+                    "identifiers": {
+                        "vendor_id": 1155,
+                        "product_id": 20777,
+                        "is_keyboard": true,
+                        "is_pointing_device": true
+                    },
+                    "ignore": false,
+                    "disable_built_in_keyboard_if_exists": false,
+                    "manipulate_caps_lock_led": true,
+                    "fn_function_keys": [],
+                    "simple_modifications": []
+                }
+            ],
+            "complex_modifications": {
+                "parameters": {
+                    "basic.simultaneous_threshold_milliseconds": 50,
+                    "basic.to_delayed_action_delay_milliseconds": 500,
+                    "basic.to_if_alone_timeout_milliseconds": 1000,
+                    "basic.to_if_held_down_threshold_milliseconds": 500,
+                    "mouse_motion_to_scroll.speed": 100
+                },
+                "rules": [
+                    {
+                        "description": "Swap Fn and Control (Apple Internal Keyboard)",
+                        "manipulators": [
+                            {
+                                "type": "basic",
+                                "description": "fn to control",
+                                "conditions": [
+                                    {
+                                        "type": "device_if",
+                                        "identifiers": [
+                                            {
+                                                "is_built_in_keyboard": true
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "from": {
+                                    "apple_vendor_top_case_key_code": "keyboard_fn",
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "left_control"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "basic",
+                                "description": "control to fn",
+                                "conditions": [
+                                    {
+                                        "type": "device_if",
+                                        "identifiers": [
+                                            {
+                                                "is_built_in_keyboard": true
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "left_control",
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "apple_vendor_top_case_key_code": "keyboard_fn"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Swap Command and Option",
+                        "manipulators": [
+                            {
+                                "type": "basic",
+                                "description": "left_command to left_option",
+                                "conditions": [
+                                    {
+                                        "type": "device_if",
+                                        "identifiers": [
+                                            {
+                                                "vendor_id": 1204,
+                                                "product_id": 4621,
+                                                "is_keyboard": true,
+                                                "is_pointing_device": false
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "left_command",
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "left_option"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "basic",
+                                "description": "left_option to left_command",
+                                "conditions": [
+                                    {
+                                        "type": "device_if",
+                                        "identifiers": [
+                                            {
+                                                "vendor_id": 1204,
+                                                "product_id": 4621,
+                                                "is_keyboard": true,
+                                                "is_pointing_device": false
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "left_option",
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "left_command"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "basic",
+                                "description": "right_command to right_option",
+                                "conditions": [
+                                    {
+                                        "type": "device_if",
+                                        "identifiers": [
+                                            {
+                                                "vendor_id": 1204,
+                                                "product_id": 4621,
+                                                "is_keyboard": true,
+                                                "is_pointing_device": false
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "right_command",
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "right_option"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "basic",
+                                "description": "right_option to right_command",
+                                "conditions": [
+                                    {
+                                        "type": "device_if",
+                                        "identifiers": [
+                                            {
+                                                "vendor_id": 1204,
+                                                "product_id": 4621,
+                                                "is_keyboard": true,
+                                                "is_pointing_device": false
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "right_option",
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "right_command"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Vim",
+                        "manipulators": [
+                            {
+                                "type": "basic",
+                                "description": "control + open_bracket to escape",
+                                "from": {
+                                    "key_code": "open_bracket",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "control"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "escape"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "basic",
+                                "description": "control + m to return_or_enter",
+                                "from": {
+                                    "key_code": "m",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "control"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "return_or_enter"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "basic",
+                                "description": "control + j to down_arrow",
+                                "from": {
+                                    "key_code": "j",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "control"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "down_arrow"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "basic",
+                                "description": "control + k to up_arrow",
+                                "from": {
+                                    "key_code": "k",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "control"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "up_arrow"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    ]
+}

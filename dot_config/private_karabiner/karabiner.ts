@@ -37,57 +37,12 @@ function defineDevice(
   return device
 }
 
-const deviceAppleInternalTrackpad = defineDevice(
-  1452,
-  835,
-  false,
-  true,
-  (d) => d.ignore = true,
-)
-
-const deviceAppleInternalKeyboard = defineDevice(
-  1452,
-  835,
-  true,
-  false,
-)
-
-const deviceAppleMagicTrackpad = defineDevice(
-  76,
-  613,
-  false,
-  true,
-  (d) => d.ignore = true,
-)
-
-const deviceAppleMagicTrackpadUSB = defineDevice(
-  1452,
-  613,
-  false,
-  true,
-  (d) => d.ignore = true,
-)
-
 const deviceMajestouchConvertible2 = defineDevice(
   1204,
   4621,
   true,
   false,
   (d) => d.manipulate_caps_lock_led = true,
-)
-
-const deviceLogitechGPWKeyboard = defineDevice(
-  1133,
-  50489,
-  true,
-  false,
-)
-
-const deviceLogitechGPWPoint = defineDevice(
-  1133,
-  50489,
-  false,
-  true,
 )
 
 const deviceNIZ84BT5_0 = defineDevice(
@@ -115,32 +70,37 @@ const deviceNIZ84USBKeyboardAndPoint = defineDevice(
 )
 
 const devices = [
-  deviceAppleInternalTrackpad,
-  deviceAppleInternalKeyboard,
-  deviceAppleMagicTrackpad,
-  deviceAppleMagicTrackpadUSB,
-  deviceMajestouchConvertible2,
-  deviceLogitechGPWKeyboard,
-  deviceLogitechGPWPoint,
   deviceNIZ84BT5_0,
   deviceNIZ84USBKeyboard,
   deviceNIZ84USBKeyboardAndPoint,
 ]
 // endregion Devices
 
+// region Conditions
+const conditionAppleInternalKeyboard = {
+  type: 'device_if',
+  identifiers: [
+    {
+      is_built_in_keyboard: true,
+    },
+  ],
+}
+
+const conditionMajestouchConvertible2 = {
+  type: 'device_if',
+  identifiers: [
+    deviceMajestouchConvertible2.identifiers,
+  ],
+}
+
 // region Rules
 const ruleSwapFnAndControl = {
-  description: 'Swap Fn and Control',
+  description: 'Swap Fn and Control (Apple Internal Keyboard)',
   manipulators: [
     {
       type: 'basic',
       description: `fn to control`,
-      conditions: [{
-        type: 'device_if',
-        identifiers: [
-          deviceAppleInternalKeyboard,
-        ].map((d) => d.identifiers),
-      }],
+      conditions: [conditionAppleInternalKeyboard],
       from: {
         apple_vendor_top_case_key_code: 'keyboard_fn',
         modifiers: {
@@ -156,12 +116,7 @@ const ruleSwapFnAndControl = {
     {
       type: 'basic',
       description: `control to fn`,
-      conditions: [{
-        type: 'device_if',
-        identifiers: [
-          deviceAppleInternalKeyboard,
-        ].map((d) => d.identifiers),
-      }],
+      conditions: [conditionAppleInternalKeyboard],
       from: {
         key_code: 'left_control',
         modifiers: {
@@ -174,7 +129,7 @@ const ruleSwapFnAndControl = {
         },
       ],
     },
-  ]
+  ],
 }
 
 const ruleSwapCommandAndOption = (() => {
@@ -182,15 +137,7 @@ const ruleSwapCommandAndOption = (() => {
     return {
       type: 'basic',
       description: `${from} to ${to}`,
-      conditions: [{
-        type: 'device_unless',
-        identifiers: [
-          deviceAppleInternalKeyboard,
-          deviceNIZ84BT5_0,
-          deviceNIZ84USBKeyboard,
-          deviceNIZ84USBKeyboardAndPoint,
-        ].map((d) => d.identifiers),
-      }],
+      conditions: [conditionMajestouchConvertible2],
       from: {
         key_code: from,
         modifiers: {
