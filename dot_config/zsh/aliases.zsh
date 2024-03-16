@@ -4,8 +4,9 @@
 # }
 
 # { Ls
-  # If exa is installed, use it instead of ls
+  # If eza/exa is installed, use it instead of ls
   command_exists exa && alias ls="exa --icons --color='always' --time-style=long-iso"
+  command_exists eza && alias ls="eza --icons --color='always' --time-style=long-iso"
 # }
 
 # { Vim
