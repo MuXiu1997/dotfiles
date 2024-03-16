@@ -31,6 +31,8 @@ brew "bottom"
 brew "glib"
 # Vector graphics library with cross-device output support
 brew "cairo"
+# Mozilla CA bundle for Python
+brew "certifi"
 # C parser in Python
 brew "pycparser"
 # Manage your dotfiles across multiple diverse machines, securely
@@ -51,8 +53,8 @@ brew "direnv"
 brew "duf"
 # More intuitive version of du in rust
 brew "dust"
-# Modern replacement for 'ls'
-brew "exa"
+# Modern, maintained replacement for ls
+brew "eza"
 # Simple, fast and user-friendly alternative to find
 brew "fd"
 # macOS CLI for managing custom icons for files and folders
@@ -103,8 +105,6 @@ brew "gum"
 brew "harfbuzz"
 # Kubernetes package manager
 brew "helm"
-# Mozilla CA bundle for Python
-brew "python-certifi"
 # User-friendly cURL replacement (command-line HTTP client)
 brew "httpie"
 # Command-line benchmarking tool
@@ -233,17 +233,13 @@ cask "alt-tab"
 cask "another-redis-desktop-manager"
 # Server and cloud storage browser
 cask "cyberduck"
-# Teamwork app by Alibaba Group
-cask "dingtalk"
-# App to build and share containerized applications and microservices
+# App to build and share containerised applications and microservices
 cask "docker"
 # Client for the Dropbox cloud storage service
 cask "dropbox"
 # Terminal/ssh/sftp client
 cask "electerm"
-# Project management software
-cask "feishu"
-# Download accelerator and organizer
+# Download accelerator and organiser
 cask "free-download-manager"
 # Tools to protect your files
 cask "gpg-suite-no-mail"
@@ -259,9 +255,9 @@ cask "itsycal"
 cask "jetbrains-toolbox"
 # Open-source screen recorder built with web technology
 cask "kap"
-# Keyboard customizer
+# Keyboard customiser
 cask "karabiner-elements"
-# Open-source keystroke visualizer
+# Open-source keystroke visualiser
 cask "keycastr"
 # Snippet management app
 cask "lepton"
