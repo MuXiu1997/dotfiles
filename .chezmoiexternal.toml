@@ -124,14 +124,6 @@ exact = true
 refreshPeriod = '168h'
 # ============================================================================ #
 
-# ============================ tldr-python-client ============================ #
-['.config/tldr-python-client']
-type = 'archive'
-url = 'https://github.com/tldr-pages/tldr-python-client/archive/{{ template "gitHubLatestTag" "tldr-pages/tldr-python-client" }}.zip'
-exact = true
-stripComponents = 1
-refreshPeriod = '168h'
-# ============================================================================ #
 
 # =================================== bin =================================== #
 ['.local/bin/goet']

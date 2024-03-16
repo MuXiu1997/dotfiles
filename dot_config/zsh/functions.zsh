@@ -30,9 +30,3 @@ pls() {
 pp() {
   pwd | sed -e 's/ /\\ /g' | tr -d '\n' | pbcopy
 }
-
-# Tldr python client
-tldr() {
-  export TLDR_ALLOW_INSECURE=1
-  "${XDG_CONFIG_HOME}/tldr-python-client/venv/bin/python" "${XDG_CONFIG_HOME}/tldr-python-client/tldr.py" "$@"
-}

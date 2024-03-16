@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+set -eufo pipefail
+
+# tldr python client version: {{ template "gitHubLatestTag" "tldr-pages/tldr-python-client" }}
+tldr_home="{{ joinPath .chezmoi.homeDir ".local" "share" "tldr" }}"
+mkdir -p "$tldr_home"
+
+# Create a virtual environment if it doesn't exist
+if [ ! -d "$tldr_home/venv" ]; then
+  python3 -m venv --copies "$tldr_home/venv"
+fi
+
+# Install or upgrade tldr
+"$tldr_home/venv/bin/pip" install --upgrade tldr
+
+# Generate the tldr zsh completion
+"$tldr_home/venv/bin/tldr" --print-completion zsh > "{{ joinPath .chezmoi.homeDir ".local" "share" "zsh" "site-functions" "_tldr" }}"

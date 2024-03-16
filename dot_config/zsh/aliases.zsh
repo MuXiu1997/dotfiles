@@ -43,6 +43,10 @@
   alias h="help"
 # }
 
+# { Tldr
+  alias tldr="\${HOME}/.local/share/tldr/venv/bin/tldr"
+# }
+
 # { Docker
   alias dk="docker"
   alias dkc="docker compose"

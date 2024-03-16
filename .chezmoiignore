@@ -13,8 +13,6 @@ install.sh
 
 .config/hammerspoon/Spoons
 
-.config/tldr-python-client/venv
-
 **/__pycache__/**
 
 {{ if ne .machineType "MAC" -}}
