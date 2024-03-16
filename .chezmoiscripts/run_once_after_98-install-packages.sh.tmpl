@@ -2,6 +2,5 @@
 set -eufo pipefail
 
 # install packages
-{{- $brewfile := joinPath .chezmoi.sourceDir ".brewfile" (print .machineType ".brewfile") }}
-export HOMEBREW_BREWFILE={{ $brewfile }}
-$HOME/.local/bin/brew-bundle-install
+export HOMEBREW_BREWFILE="{{ .brewfile }}"
+"$HOME/.local/bin/brew-bundle-install"

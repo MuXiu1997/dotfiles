@@ -1,5 +1,7 @@
 typeset -U path fpath
 
+export DEVICE_ID="{{ .deviceId }}"
+
 # { Helpers
   function file_exists() {
     [[ -f "$1" ]] && return 0 || return 1
@@ -15,16 +17,11 @@ typeset -U path fpath
 # }
 
 # { XDG
-  export XDG_CONFIG_HOME="${HOME}/.config"
-  export XDG_CACHE_HOME="${HOME}/.cache"
-  export XDG_DATA_HOME="${HOME}/.local/share"
-  export XDG_STATE_HOME="${HOME}/.local/state"
-  export XDG_RUNTIME_DIR=
-  {{- if eq .chezmoi.os "darwin" -}}
-    "${TMPDIR}"
-  {{- else -}}
-    "/run/user/${UID}"
-  {{- end }}
+  export XDG_CONFIG_HOME="{{ .XDG_CONFIG_HOME }}"
+  export XDG_CACHE_HOME="{{ .XDG_CACHE_HOME }}"
+  export XDG_DATA_HOME="{{ .XDG_DATA_HOME }}"
+  export XDG_STATE_HOME="{{ .XDG_STATE_HOME }}"
+  export XDG_RUNTIME_DIR="{{ .XDG_RUNTIME_DIR }}"
 # }
 
 # { Zsh
@@ -41,19 +38,14 @@ typeset -U path fpath
 # }
 
 # { Homebrew
-  path=($path "{{ .homebrewPrefix }}/bin")
+  path=($path "{{ .homebrewBin }}")
   fpath=($fpath "{{ .homebrewPrefix }}/share/zsh/site-functions")
-  export HOMEBREW_BREWFILE={{ joinPath .chezmoi.sourceDir ".brewfile" (print .machineType ".brewfile")  }}
+  export HOMEBREW_BREWFILE="{{ .brewfile }}"
 # }
 
 # { Tmux
   export TMUX_PLUGIN_MANAGER_PATH="${XDG_CONFIG_HOME}/tmux/plugins"
-  export __TMUX_MOUSE=
-  {{- if eq .machineType "MAC" -}}
-    "on"
-  {{- else -}}
-    "off"
-  {{- end }}
+  export __TMUX_MOUSE="{{ if eq .chezmoi.os "darwin" }}on{{ else }}off{{ end }}"
 # }
 
 # { Zoxide
@@ -157,7 +149,7 @@ typeset -U path fpath
   export LOCAL_DOCKER_COMPOSE_DIR="${HOME}/Projects/@local-docker-compose"
 # }
 
-{{ if eq .machineType "MAC" -}}
+{{ if eq .deviceId "MACBOOKPRO-MUXIU" -}}
 # { MuXiu1997 Personal
   export MUXIU1997_SSID_HOME={{
 `-----BEGIN AGE ENCRYPTED FILE-----

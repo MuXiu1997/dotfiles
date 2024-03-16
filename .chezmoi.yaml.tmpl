@@ -1,9 +1,5 @@
-{{- $validMachineTypes := list "MAC" "SERVER" -}}
-{{- $machineType := promptStringOnce . "machineType" (printf "Machine type [%s]" ($validMachineTypes | join "|")) | default (first $validMachineTypes) -}}
-{{- if not (has $machineType $validMachineTypes) -}}
-  {{- writeToStdout (printf "Invalid machine type. Valid machine types are: [%s]\n" ($validMachineTypes | join "|")) -}}
-  {{- exit 1 -}}
-{{- end -}}
+{{- $deviceId := promptStringOnce . "deviceId" "Device ID" -}}
+{{- $brewfileId := promptStringOnce . "brewfileId" "Brewfile ID" -}}
 
 {{- $homebrewPrefix := "/home/linuxbrew/.linuxbrew" -}}
 {{- if eq .chezmoi.os "darwin" -}}
@@ -17,8 +13,20 @@
 data:
   name: MuXiu1997
   email: muxiu1997@gmail.com
-  machineType: {{ $machineType | upper | squote }}
+  deviceId: {{ $deviceId }}
+
   homebrewPrefix: {{ $homebrewPrefix | squote }}
+  homebrewBin: {{ joinPath $homebrewPrefix "bin" | squote }}
+  homebrewExec: {{ joinPath $homebrewPrefix "bin" "brew" | squote }}
+
+  brewfileId: {{ $brewfileId }}
+  brewfile: {{ joinPath .chezmoi.sourceDir ".brewfile" (printf "%s.brewfile" $brewfileId) | squote }}
+
+  XDG_CONFIG_HOME: {{ joinPath .chezmoi.homeDir ".config" | squote }}
+  XDG_CACHE_HOME: {{ joinPath .chezmoi.homeDir ".cache" | squote }}
+  XDG_DATA_HOME: {{ joinPath .chezmoi.homeDir ".local" "share" | squote }}
+  XDG_STATE_HOME: {{ joinPath .chezmoi.homeDir ".local" "state" | squote }}
+  XDG_RUNTIME_DIR: {{ if eq .chezmoi.os "darwin" }}${TMPDIR}{{ else }}/run/user/${UID}{{ end }}
 
 encryption: age
 age:
@@ -30,7 +38,7 @@ diff:
     - scripts
   pager: LESS='Rmc' delta --features 'default paging'
 
-{{ if eq (index . "machineType") "MAC" -}}
+{{ if eq .chezmoi.os "darwin" -}}
 merge:
   command: idea-wait
   args:

@@ -2,7 +2,7 @@
 set -eufo pipefail
 
 # tldr python client version: {{ template "gitHubLatestTag" "tldr-pages/tldr-python-client" }}
-tldr_home="{{ joinPath .chezmoi.homeDir ".local" "share" "tldr" }}"
+tldr_home="{{ joinPath .XDG_DATA_HOME "tldr" }}"
 mkdir -p "$tldr_home"
 
 # Create a virtual environment if it doesn't exist
@@ -14,4 +14,4 @@ fi
 "$tldr_home/venv/bin/pip" install --upgrade tldr
 
 # Generate the tldr zsh completion
-"$tldr_home/venv/bin/tldr" --print-completion zsh > "{{ joinPath .chezmoi.homeDir ".local" "share" "zsh" "site-functions" "_tldr" }}"
+"$tldr_home/venv/bin/tldr" --print-completion zsh > "{{ joinPath .XDG_DATA_HOME "zsh" "site-functions" "_tldr" }}"

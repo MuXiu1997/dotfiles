@@ -1,7 +1,7 @@
 [user]
     name = {{ .name }}
     email = {{ .email }}
-    {{ if eq .machineType "MAC" -}}
+    {{ if eq .deviceId "MACBOOKPRO-MUXIU" -}}
     signingkey = FF066B943A937BD1
     {{- end }}
 [init]
@@ -14,7 +14,7 @@
 [push]
     default = current
 [commit]
-    {{ if eq .machineType "MAC" -}}
+    {{ if eq .deviceId "MACBOOKPRO-MUXIU" -}}
     gpgsign = true
     {{- end }}
 [log]

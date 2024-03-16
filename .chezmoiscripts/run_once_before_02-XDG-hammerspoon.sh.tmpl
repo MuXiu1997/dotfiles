@@ -3,5 +3,5 @@
 set -eufo pipefail
 
 # set Hammerspoon config file to ~/.config/hammerspoon/init.lua
-defaults write org.hammerspoon.Hammerspoon MJConfigFile "{{ .chezmoi.homeDir }}/.config/hammerspoon/init.lua"
+defaults write org.hammerspoon.Hammerspoon MJConfigFile "{{ .XDG_CONFIG_HOME }}/hammerspoon/init.lua"
 {{- end }}

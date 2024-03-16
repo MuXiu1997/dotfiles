@@ -7,4 +7,4 @@ if ! type brew &>/dev/null; then
 fi
 
 # install required packages
-{{- joinPath .homebrewPrefix "bin" "brew" | printf "\n%s" }} install git age chezmoi
+{{ .homebrewExec }} install git age chezmoi

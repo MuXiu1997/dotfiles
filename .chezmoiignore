@@ -15,7 +15,7 @@ install.sh
 
 **/__pycache__/**
 
-{{ if ne .machineType "MAC" -}}
+{{ if ne .chezmoi.os "darwin" -}}
 .local/bin/bootstrap-hotkey
 
 .ssh
@@ -26,6 +26,6 @@ install.sh
 .config/ideavim/ideavimrc
 {{- end }}
 
-{{ if ne .machineType "SERVER" -}}
+{{ if ne .chezmoi.os "linux" -}}
 .local/bin/bootstrap-main
 {{- end }}
