@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+set -eufo pipefail
+
+# install homebrew
+if ! type brew &>/dev/null; then
+  bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi
+
+# install required packages
+{{- joinPath .homebrewPrefix "bin" "brew" | printf "\n%s" }} install git age chezmoi

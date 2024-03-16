@@ -1,0 +1,67 @@
+#!/usr/bin/env python3
+import os
+import subprocess
+import sys
+
+BREWFILE = os.environ['HOMEBREW_BREWFILE']
+
+
+def install_apps():
+    print_title('Installing apps')
+    with open(BREWFILE, 'r') as fp:
+        content = '\n'.join(filter(lambda line: line.startswith('mas'), fp.read().splitlines()))
+        cmd = subprocess.Popen(
+            ['brew', 'bundle', 'install', '--no-lock', '--no-upgrade', '--file=/dev/stdin'],
+            stdin=subprocess.PIPE,
+            stdout=sys.stdout,
+            stderr=sys.stderr,
+        )
+        cmd.communicate(input=content.encode())
+    print_end_line(extra_blank_lines=1)
+
+
+def install_formulas():
+    print_title('Installing formulas')
+    with open(BREWFILE, 'r') as fp:
+        content = '\n'.join(filter(lambda line: not line.startswith('brew'), fp.read().splitlines()))
+        cmd = subprocess.Popen(
+            ['brew', 'bundle', 'install', '--no-lock', '--no-upgrade', '--file=/dev/stdin'],
+            stdin=subprocess.PIPE,
+            stdout=sys.stdout,
+            stderr=sys.stderr,
+        )
+        cmd.communicate(input=content.encode())
+    print_end_line(extra_blank_lines=1)
+
+
+def install_casks():
+    print_title('Installing casks')
+    with open(BREWFILE, 'r') as fp:
+        casks = [line[6:-1] for line in fp.read().splitlines() if line.startswith('cask')]
+        cmd = subprocess.Popen(
+            ['brew', 'install', '--cask', '--no-quarantine', *casks],
+            stdout=sys.stdout,
+            stderr=sys.stderr,
+        )
+        cmd.communicate()
+    print_end_line()
+
+
+def print_title(title):
+    title = title.strip()
+    title = ' ' + title + ' '
+    print(f'# {title:=^76} #')
+
+
+def print_end_line(*, extra_blank_lines=0):
+    print('# ' + '=' * 76 + ' #', end='\n' * (extra_blank_lines + 1))
+
+
+def main():
+    install_apps()
+    install_formulas()
+    install_casks()
+
+
+if __name__ == '__main__':
+    main()
