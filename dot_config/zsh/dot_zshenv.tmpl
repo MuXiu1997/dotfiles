@@ -27,14 +27,7 @@ export DEVICE_ID="{{ .deviceId }}"
 # { Zsh
   export ZDOTDIR="${XDG_CONFIG_HOME}/zsh"
 
-  readonly OVERRIDE_HISTFILE="${XDG_STATE_HOME}/zsh/history"
-  export HISTFILE="${OVERRIDE_HISTFILE}" # will be overwritten in /etc/zshrc and needs to be set again.
-
-  readonly OVERRIDE_HISTSIZE="999999999"
-  export HISTSIZE="${OVERRIDE_HISTSIZE}" # will be overwritten in /etc/zshrc and needs to be set again.
-
-  readonly OVERRIDE_SAVEHIST="${OVERRIDE_HISTSIZE}"
-  export SAVEHIST="${OVERRIDE_SAVEHIST}" # will be overwritten in /etc/zshrc and needs to be set again.
+  file_exists_then_source "${ZDOTDIR}/setup-history.zsh"
 # }
 
 # { Homebrew
