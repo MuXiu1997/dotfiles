@@ -149,6 +149,17 @@ export DEVICE_ID="{{ .deviceId }}"
   export LOCAL_DOCKER_COMPOSE_DIR="${HOME}/Projects/@local-docker-compose"
 # }
 
+# { GitHub
+  export GITHUB_TOKEN="{{
+`-----BEGIN AGE ENCRYPTED FILE-----
+YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBNSDJ4T3dhZm9LLzJ5QVFa
+NENCQlMwVHh2MEhXZWpnN0JQTkgvbUtxVVU0Ck5mVWlIRyswL1RWaVlHY0R5YUtn
+UWJPSDJvRWE0d2lzYkdlUDhwS0tIV3cKLS0tIHdqaVFPdE9FY2M4R1R2UklnTUIw
+aVRqUktwUUcyT053TXIweEtoQ0QxTmcKi494GnxJRN7kDYRZS4Wca5KuyROsoXVl
+m1Nccz37l+Xi/6jsVfYD2/9+AiMos+6rC3aecnkWiMc0t5DBrLJXBHFLmNQ7s+X+
+-----END AGE ENCRYPTED FILE-----` | decrypt }}"
+# }
+
 {{ if eq .deviceId "MACBOOKPRO-MUXIU" -}}
 # { MuXiu1997 Personal
   export MUXIU1997_SSID_HOME="{{
