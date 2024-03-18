@@ -1,0 +1,1 @@
+{{- . | printf "%s.age" | joinPath ".agefiles" | include | decrypt -}}

@@ -1,0 +1,37 @@
+#!/usr/bin/env python3
+import argparse
+import os
+import subprocess
+import json
+
+
+def get_age_files_dir():
+    chezmoi_source = subprocess.run(['chezmoi', 'source-path'], capture_output=True, text=True).stdout.strip()
+    return os.path.join(chezmoi_source, '.agefiles')
+
+
+def get_age_recipient():
+    chezmoi_data = subprocess.run(['chezmoi', 'data'], capture_output=True, text=True).stdout.strip()
+    return json.loads(chezmoi_data)['chezmoi']['config']['age']['recipient']
+
+
+def create_age_file(name, content):
+    age_files_dir = get_age_files_dir()
+    os.makedirs(age_files_dir, exist_ok=True)
+    age_file_path = os.path.join(age_files_dir, f'{name}.age')
+    subprocess.run(
+        ['age', '--encrypt', '--armor', '--recipient', get_age_recipient(), '--output', age_file_path],
+        input=content.encode(),
+    )
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('name', type=str, help='Name of the age file to create')
+    parser.add_argument('content', type=str, help='Content of the age file to create')
+    args = parser.parse_args()
+    create_age_file(args.name, args.content)
+
+
+if __name__ == '__main__':
+    main()
