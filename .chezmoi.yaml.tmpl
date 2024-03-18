@@ -20,7 +20,7 @@ data:
   homebrewExec: {{ joinPath $homebrewPrefix "bin" "brew" | squote }}
 
   brewfileId: {{ $brewfileId }}
-  brewfile: {{ joinPath .chezmoi.sourceDir ".brewfile" (printf "%s.brewfile" $brewfileId) | squote }}
+  brewfile: {{ joinPath .chezmoi.sourceDir ".brewfiles" (printf "%s.brewfile" $brewfileId) | squote }}
 
   XDG_CONFIG_HOME: {{ joinPath .chezmoi.homeDir ".config" | squote }}
   XDG_CACHE_HOME: {{ joinPath .chezmoi.homeDir ".cache" | squote }}
