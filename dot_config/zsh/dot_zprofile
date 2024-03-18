@@ -1,3 +1,5 @@
 # { Homebrew
+  # `brew shellenv` prints the environment variables that need to be set in order to use Homebrew, and 'eval' sets them.
+  # This ensures that Homebrew and its packages function correctly in the current shell session.
   command_exists brew && eval "$(brew shellenv)"
 # }

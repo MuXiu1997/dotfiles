@@ -1,3 +1,4 @@
+# Function 'r' is a custom command for navigating directories using the ranger file manager and zoxide.
 r() {
   local temp_file choosedir
   temp_file="$(mktemp -t "ranger_cd.XXXXXXXXXX")"
@@ -8,6 +9,7 @@ r() {
   fi
 }
 
+# Function 'help' is a custom command for displaying help information.
 help() {
   if type col &>/dev/null && type bat &>/dev/null; then
     "$@" --help | col -bx | bat -pl help
@@ -16,7 +18,7 @@ help() {
   fi
 }
 
-# List Port
+# Function 'pls' is a custom command for listing and managing network ports.
 pls() {
   local command="lsof -i -nP 2> /dev/null | awk '{if ( 1<NR ) {print}}'"
   local kill_process="echo {} | awk '{print \$2}' | xargs kill -9"
@@ -26,7 +28,7 @@ pls() {
     --bind "ctrl-r:reload(${command})"
 }
 
-# Copy current path to clipboard
+# Function 'pp' is a custom command for copying the current directory path to the clipboard.
 pp() {
   pwd | sed -e 's/ /\\ /g' | tr -d '\n' | pbcopy
 }
