@@ -52,13 +52,23 @@ log_warn() {
 # Function to activate a virtual environment layout
 # Example:
 #   layout virtualenv "my-venv"
-#   layout virtualenv => layout virtualenv "venv"
+#   layout virtualenv => layout virtualenv "venv" / layout virtualenv ".venv"
 layout_virtualenv() {
     local venv_path activate_path has_custom_venv
     if [[ -n "$1" ]]; then
         has_custom_venv=true
+        venv_path=$(realpath "$1")
+    else
+        if [[ -d "./venv" ]]; then
+            venv_path=$(realpath "./venv")
+        elif [[ -d "./.venv" ]]; then
+            venv_path=$(realpath "./.venv")
+        else
+            log_error "virtualenv: no valid virtualenv path found"
+            exit 1
+        fi
     fi
-    venv_path=$(realpath "${1:-venv}")
+
     activate_path="${venv_path}/bin/activate"
     if [[ ! -f "$activate_path" ]]; then
         if [[ "$has_custom_venv" == true ]]; then
