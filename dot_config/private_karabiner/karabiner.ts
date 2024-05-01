@@ -18,7 +18,8 @@ function defineDevice(
   product_id: number,
   is_keyboard: boolean,
   is_pointing_device: boolean,
-  callback: (device: Device) => void = () => {},
+  callback: (device: Device) => void = () => {
+  },
 ): Device {
   const device: Device = {
     identifiers: {
@@ -36,14 +37,6 @@ function defineDevice(
   callback(device)
   return device
 }
-
-const deviceMajestouchConvertible2 = defineDevice(
-  1204,
-  4621,
-  true,
-  false,
-  (d) => d.manipulate_caps_lock_led = true,
-)
 
 const deviceNIZ84BT5_0 = defineDevice(
   1452,
@@ -77,6 +70,11 @@ const devices = [
 // endregion Devices
 
 // region Conditions
+const getVendorIdAndProductId = (device: Device) => {
+  const { vendor_id, product_id } = device.identifiers
+  return { vendor_id, product_id }
+}
+
 const conditionAppleInternalKeyboard = {
   type: 'device_if',
   identifiers: [
@@ -86,10 +84,14 @@ const conditionAppleInternalKeyboard = {
   ],
 }
 
-const conditionMajestouchConvertible2 = {
-  type: 'device_if',
+const conditionNotAppleInternalKeyboardAndNIZ84 = {
+  type: 'device_unless',
   identifiers: [
-    deviceMajestouchConvertible2.identifiers,
+    {
+      is_built_in_keyboard: true,
+    },
+    getVendorIdAndProductId(deviceNIZ84BT5_0),
+    getVendorIdAndProductId(deviceNIZ84USBKeyboard),
   ],
 }
 
@@ -137,7 +139,7 @@ const ruleSwapCommandAndOption = (() => {
     return {
       type: 'basic',
       description: `${from} to ${to}`,
-      conditions: [conditionMajestouchConvertible2],
+      conditions: [conditionNotAppleInternalKeyboardAndNIZ84],
       from: {
         key_code: from,
         modifiers: {

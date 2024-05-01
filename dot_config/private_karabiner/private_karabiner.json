@@ -134,13 +134,18 @@
                                 "description": "left_command to left_option",
                                 "conditions": [
                                     {
-                                        "type": "device_if",
+                                        "type": "device_unless",
                                         "identifiers": [
                                             {
-                                                "vendor_id": 1204,
-                                                "product_id": 4621,
-                                                "is_keyboard": true,
-                                                "is_pointing_device": false
+                                                "is_built_in_keyboard": true
+                                            },
+                                            {
+                                                "vendor_id": 1452,
+                                                "product_id": 272
+                                            },
+                                            {
+                                                "vendor_id": 1155,
+                                                "product_id": 20777
                                             }
                                         ]
                                     }
@@ -164,13 +169,18 @@
                                 "description": "left_option to left_command",
                                 "conditions": [
                                     {
-                                        "type": "device_if",
+                                        "type": "device_unless",
                                         "identifiers": [
                                             {
-                                                "vendor_id": 1204,
-                                                "product_id": 4621,
-                                                "is_keyboard": true,
-                                                "is_pointing_device": false
+                                                "is_built_in_keyboard": true
+                                            },
+                                            {
+                                                "vendor_id": 1452,
+                                                "product_id": 272
+                                            },
+                                            {
+                                                "vendor_id": 1155,
+                                                "product_id": 20777
                                             }
                                         ]
                                     }
@@ -194,13 +204,18 @@
                                 "description": "right_command to right_option",
                                 "conditions": [
                                     {
-                                        "type": "device_if",
+                                        "type": "device_unless",
                                         "identifiers": [
                                             {
-                                                "vendor_id": 1204,
-                                                "product_id": 4621,
-                                                "is_keyboard": true,
-                                                "is_pointing_device": false
+                                                "is_built_in_keyboard": true
+                                            },
+                                            {
+                                                "vendor_id": 1452,
+                                                "product_id": 272
+                                            },
+                                            {
+                                                "vendor_id": 1155,
+                                                "product_id": 20777
                                             }
                                         ]
                                     }
@@ -224,13 +239,18 @@
                                 "description": "right_option to right_command",
                                 "conditions": [
                                     {
-                                        "type": "device_if",
+                                        "type": "device_unless",
                                         "identifiers": [
                                             {
-                                                "vendor_id": 1204,
-                                                "product_id": 4621,
-                                                "is_keyboard": true,
-                                                "is_pointing_device": false
+                                                "is_built_in_keyboard": true
+                                            },
+                                            {
+                                                "vendor_id": 1452,
+                                                "product_id": 272
+                                            },
+                                            {
+                                                "vendor_id": 1155,
+                                                "product_id": 20777
                                             }
                                         ]
                                     }
