@@ -1,11 +1,11 @@
 # Function to get the absolute path of a file or directory
-# Example: realpath "/path/to/file" => "/absolute/path/to/file"
+# Example: realpath "path/to/file" => "/absolute/path/to/file"
 realpath() {
     [[ $1 = /* ]] && echo "$1" || echo "$PWD/${1#./}"
 }
 
 # Function to set the version for a given command
-# Example: set_version python 3.8
+# Example: set_version python 3.8 => sets the version for python to 3.8 (in a file named .python-version)
 set_version() {
     local command version
     command="$1"
@@ -20,7 +20,7 @@ set_version() {
 }
 
 # Function to get the version for a given command
-# Example: get_version python => "3.8" (if set previously)
+# Example: get_version python => "3.8" (if set previously in a file named .python-version)
 get_version() {
     local command version
     command="$1"
