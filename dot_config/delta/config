@@ -1,10 +1,12 @@
 [delta]
     features = default
+    navigate = true # use n and N to move between diff sections
 
 [delta "default"]
     features = nord nord-minus nord-plus line-numbers no-hunk-header
 
 [delta "lazygit"]
+    true-color = always
     features = default no-paging
 
     line-fill-method = spaces
