@@ -67,8 +67,8 @@ class du(Command):
 
 if is_darwin:
     class trash(Command):
-        """:trash
-
+        """
+        :trash
         Moves the selection to the trash (Darwin only).
         """
 
@@ -84,11 +84,10 @@ if is_darwin:
                 return os.path.isdir(path) and not os.path.islink(path) and len(os.listdir(path)) > 0
 
             if self.rest(1):
-                file_names = shlex.split(self.rest(1))
-                files = self.fm.get_filesystem_objects(file_names)
+                files = shlex.split(self.rest(1))
                 if files is None:
                     return
-                many_files = (len(files) > 1 or is_directory_with_files(files[0].path))
+                many_files = (len(files) > 1 or is_directory_with_files(files[0]))
             else:
                 cwd = self.fm.thisdir
                 tfile = self.fm.thisfile
@@ -132,3 +131,19 @@ if is_darwin:
             end tell
             '''
             subprocess.run(['osascript', '-e', script], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+
+if is_darwin:
+    class copy_content(Command):
+        """
+        :copy_content
+        Copies the content of the current file to the clipboard.
+        """
+
+        def execute(self):
+            import subprocess
+
+            file = self.fm.thisfile
+            if not file:
+                return
+
+            subprocess.run(['sh', '-c', f'pbcopy < "{file.path}"'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
