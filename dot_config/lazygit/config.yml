@@ -1,9 +1,20 @@
+# $schema: https://github.com/jesseduffield/lazygit/raw/master/schema/config.json
+
+gui:
+  nerdFontsVersion: '3'
+  timeFormat: '2006-01-02'
+  shortTimeFormat: '15:04:05'
+  sidePanelWidth: 0.2
+  authorColors:
+    'MuXiu1997': '#B8AFE6'
 git:
   paging:
     colorArg: always
     pager: >
-      delta --features lazygit
-      --max-line-length "$((2 * {{columnWidth}}))"
+      delta
+      --features lazygit
+      --max-line-length {{columnWidth}}
+      -s
   parseEmoji: true
 
 customCommands:
