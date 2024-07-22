@@ -60,6 +60,7 @@ vnoremap aJ        a"
     Plug 'tommcdo/vim-exchange'
     Plug 'tpope/vim-surround'
     Plug 'vim-scripts/argtextobj.vim'
+    set  quickscope
 " }
 
 " https://github.com/JetBrains/ideavim/wiki/%22ideajoin%22-examples
@@ -72,38 +73,40 @@ set idearefactormode=visual
 let g:highlightedyank_highlight_color = "rgb(123, 171, 187, 127)"
 
 " { Browse
-    noremap <Space>d :action GotoDeclaration<CR>
+    map <Space>d <Action>(GotoDeclaration)
 
-    noremap <BS>     :action Back<CR>
-    noremap <C-BS>   :action Forward<CR>
+    map <BS>     <Action>(Back)
+    map <C-BS>   <Action>(Forward)
 
-    noremap gi       :action GotoImplementation<CR>
-    noremap gs       :action GotoSuperMethod<CR>
+    map gi       <Action>(GotoImplementation)
+    map gs       <Action>(GotoSuperMethod)
 " }
 
 " { EditorSelectWord
-    noremap <C-W>   :action EditorSelectWord<CR>
-    noremap <C-S-W> :action EditorUnSelectWord<CR>
+    map <C-W>   <Action>(EditorSelectWord)
+    map <C-S-W> <Action>(EditorUnSelectWord)
 " }
 
 " { Windows
-    nnoremap <Tab>m :action HideAllWindows<CR>
-    nnoremap <Tab>r :action ActivatenpmToolWindow<CR>:action ActivateMavenToolWindow<CR>:action ActivatemakeToolWindow<CR>
-    nnoremap <Tab>g :action ActivateCommitToolWindow<CR>
-    nnoremap <Tab>t :action ActivateTerminalToolWindow<CR>
+    map <Tab>m <Action>(HideAllWindows)
+    map <Tab>g <Action>(ActivateCommitToolWindow)
+    map <Tab>t <Action>(ActivateTerminalToolWindow)
 " }
 
 " { Edit
-    noremap <Space>ca :action StringManipulation.Group.SwitchCase<CR>
-    noremap <Space>rr :action Refactorings.QuickListPopupAction<CR>
-    noremap <Space>sw :action SurroundWith<CR>
+    map  <Space>ca <Action>(StringManipulation.Group.SwitchCase)
+    map  <Space>rr <Action>(Refactorings.QuickListPopupAction)
+    map  <Space>sw <Action>(SurroundWith)
+    imap <D-L>     <Action>(FittenCode.InsertOneWordCompletion)
+    map  <D-U>     u
+    imap <D-U>     <C-O>u
 " }
 
-nnoremap <Space>ss  :action SelectInProjectView<CR>
-nnoremap <Space>his :action LocalHistory.ShowHistory<CR>
-nnoremap <Space>fs  :action FileStructurePopup<CR>
-nnoremap <Space>tp  :!tmux new-window -c $PWD -n $(basename $PWD) &<CR>
+map <Space>ss  <Action>(SelectInProjectView)
+map <Space>his <Action>(LocalHistory.ShowHistory)
+map <Space>fs  <Action>(FileStructurePopup)
+map <Space>tp  :!tmux new-window -c $PWD -n $(basename $PWD) &<CR>
 
-nnoremap <Leader>rf :action ReformatCode<CR>
+map <Space>rf  <Action>(ReformatCode)
 
-map      <Tab><Tab> <Plug>(easymotion-s)
+map <Tab><Tab> <Plug>(easymotion-s)
