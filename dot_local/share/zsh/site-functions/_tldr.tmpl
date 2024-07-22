@@ -1,0 +1,3 @@
+{{- if lookPath "tldr" -}}
+    {{- output "bash" "-c" "tldr --print-completion zsh 2>/dev/null" -}}
+{{- end -}}
