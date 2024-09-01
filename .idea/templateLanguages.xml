@@ -4,11 +4,12 @@
     <file url="file://$PROJECT_DIR$/.chezmoi.yaml.tmpl" dialect="yaml" />
     <file url="file://$PROJECT_DIR$/.chezmoiexternal.toml" dialect="TOML" />
     <file url="file://$PROJECT_DIR$/.chezmoiignore" dialect="IgnoreLang" />
-    <file url="file://$PROJECT_DIR$/.chezmoiscripts/run_once_after_98-install-packages.sh.tmpl" dialect="Shell Script" />
-    <file url="file://$PROJECT_DIR$/.chezmoiscripts/run_once_after_99-configure-darwin.sh.tmpl" dialect="Shell Script" />
+    <file url="file://$PROJECT_DIR$/.chezmoiscripts/run_once_after_90-install-packages.sh.tmpl" dialect="Shell Script" />
+    <file url="file://$PROJECT_DIR$/.chezmoiscripts/run_once_after_92-configure-darwin.sh.tmpl" dialect="Shell Script" />
     <file url="file://$PROJECT_DIR$/.chezmoiscripts/run_once_before_00-install-required-packages.sh.tmpl" dialect="Shell Script" />
     <file url="file://$PROJECT_DIR$/.chezmoiscripts/run_once_before_01-decrypt-private-key.sh.tmpl" dialect="Shell Script" />
     <file url="file://$PROJECT_DIR$/.chezmoiscripts/run_once_before_02-XDG-hammerspoon.sh.tmpl" dialect="Shell Script" />
+    <file url="file://$PROJECT_DIR$/.chezmoiscripts/run_onchange_after_91-install-fonts.sh.tmpl" dialect="Shell Script" />
     <file url="file://$PROJECT_DIR$/dot_config/git/config.tmpl" dialect="TEXT" />
     <file url="file://$PROJECT_DIR$/dot_config/maven/settings.xml.tmpl" dialect="XML" />
     <file url="file://$PROJECT_DIR$/dot_config/npm/private_npmrc.tmpl" dialect="TEXT" />

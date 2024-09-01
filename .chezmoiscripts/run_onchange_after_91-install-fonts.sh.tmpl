@@ -1,0 +1,30 @@
+{{- if (eq .chezmoi.os "darwin") -}}
+#!/usr/bin/env bash
+
+install_fonts() {
+    local url="$1"
+    local font_glob="$2"
+    local temp_dir=$(mktemp -d)
+
+    # Download the font archive
+    curl -L "$url" -o "$temp_dir/font.zip"
+
+    # Unzip the font archive
+    unzip "$temp_dir/font.zip" -d "$temp_dir"
+
+    # Copy the fonts to /Library/Fonts using rsync
+    sudo rsync -av --include="$font_glob" --exclude="*" "$temp_dir/" /Library/Fonts/
+
+    # Clean up
+    rm -rf "$temp_dir"
+}
+
+# JetBrains Mono
+install_fonts {{ gitHubLatestReleaseAssetURL "JetBrains/JetBrainsMono" "JetBrainsMono-*.zip" | squote }} 'fonts/ttf/*.ttf'
+
+# Source Han Sans
+install_fonts {{ gitHubLatestReleaseAssetURL "adobe-fonts/source-han-sans" "SourceHanSans.ttc.zip" | squote }} '*.ttc'
+
+# Nerd Fonts - JetBrains Mono
+install_fonts {{ gitHubLatestReleaseAssetURL "ryanoasis/nerd-fonts" "JetBrainsMono.zip" | squote }} '*.ttf'
+{{- end }}
