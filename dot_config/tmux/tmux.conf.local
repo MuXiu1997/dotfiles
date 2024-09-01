@@ -67,7 +67,9 @@ tmux_conf_new_pane_reconnect_ssh=false
 # automatic detection relies on the COLORTERM environment variable being defined
 # to 'truecolor' or '24bit' or '$ tput colors' answering '16777216'
 # see https://github.com/termstandard/colors
-tmux_conf_24b_colour=true  # ✅
+# { ✅
+tmux_conf_24b_colour=true
+# } ✅
 
 
 # -- theming -------------------------------------------------------------------
@@ -361,8 +363,15 @@ tmux_conf_theme_clock_style="24"
 #   - false (default)
 #   - disabled
 # on Linux, this requires xsel, xclip or wl-copy
-tmux_conf_copy_to_os_clipboard=true  # ✅
+# } ✅
+tmux_conf_copy_to_os_clipboard=true
+# } ✅
 
+
+# -- urlscan -------------------------------------------------------------------
+
+# options passed to urlscan
+tmux_conf_urlscan_options="--compact --dedupe"
 
 # -- user customizations -------------------------------------------------------
 
@@ -372,19 +381,25 @@ tmux_conf_copy_to_os_clipboard=true  # ✅
 #set -g history-limit 10000
 
 # start with mouse mode enabled
-if-shell -b '[[ "$__TMUX_MOUSE" == "on" ]]' 'set -g mouse on'  # ✅
+# } ✅
+if-shell -b '[[ "$__TMUX_MOUSE" == "on" ]]' 'set -g mouse on'
+# } ✅
 
 # force Vi mode
 #   really you should export VISUAL or EDITOR environment variable, see manual
 #set -g status-keys vi
-set -g mode-keys vi  # ✅
+# } ✅
+set -g mode-keys vi
+# } ✅
 
 # replace C-b by C-a instead of using both prefixes
 # set -gu prefix2
 # unbind C-a
-unbind C-b  # ✅
-set -g prefix C-a  # ✅
-bind C-a send-prefix  # ✅
+# } ✅
+unbind C-b
+set -g prefix C-a
+bind C-a send-prefix
+# } ✅
 
 # if you don't want Oh my tmux! to alter a binding, use #!important
 # bind c new-window -c '#{pane_current_path}' #!important
@@ -392,11 +407,13 @@ bind C-a send-prefix  # ✅
 # move status line to top
 #set -g status-position top
 
-set-option -g allow-rename off  # ✅
+# } ✅
+set-option -g allow-rename off
 
-# start a non-login shell  # ✅
-# reference: https://wiki.archlinux.org/title/tmux#Start_a_non-login_shell  # ✅
-set -g default-command "$SHELL"  # ✅
+# start a non-login shell
+# reference: https://wiki.archlinux.org/title/tmux#Start_a_non-login_shell
+set -g default-command "$SHELL"
+# } ✅
 
 # -- tpm -----------------------------------------------------------------------
 
@@ -410,18 +427,24 @@ set -g default-command "$SHELL"  # ✅
 # by default, launching tmux will update tpm and all plugins
 #   - true (default)
 #   - false
-tmux_conf_update_plugins_on_launch=false  # ✅
+# } ✅
+tmux_conf_update_plugins_on_launch=false
+# } ✅
 
 # by default, reloading the configuration will update tpm and all plugins
 #   - true (default)
 #   - false
-tmux_conf_update_plugins_on_reload=false  # ✅
+# } ✅
+tmux_conf_update_plugins_on_reload=false
+# } ✅
 
 # by default, reloading the configuration will uninstall tpm and plugins when no
 # plugins are enabled
 #   - true (default)
 #   - false
-tmux_conf_uninstall_plugins_on_reload=false  # ✅
+# } ✅
+tmux_conf_uninstall_plugins_on_reload=false
+# } ✅
 
 # /!\ the tpm bindings differ slightly from upstream:
 #   - installing plugins: <prefix> + I
