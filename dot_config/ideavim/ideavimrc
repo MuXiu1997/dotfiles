@@ -80,6 +80,10 @@ let g:highlightedyank_highlight_color = "rgb(123, 171, 187, 127)"
 
     map gi       <Action>(GotoImplementation)
     map gs       <Action>(GotoSuperMethod)
+
+    map <Space>q <Action>(QuickImplementations)
+
+    noremap gI '.
 " }
 
 " { EditorSelectWord
