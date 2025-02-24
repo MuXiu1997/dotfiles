@@ -5,7 +5,7 @@ url = 'https://github.com/ohmyzsh/ohmyzsh/archive/master.zip'
 exact = true
 stripComponents = 1
 refreshPeriod = '168h'
-exclude = ['*/themes', '*/plugins']
+exclude = ['*/.github', '*/*.md', '*/.devcontainer', '*/themes', '*/plugins']
 # ============================================================================ #
 
 
@@ -24,6 +24,7 @@ url = 'https://github.com/zsh-users/zsh-autosuggestions/archive/master.zip'
 exact = true
 stripComponents = 1
 refreshPeriod = '168h'
+exclude = ['*/.github', '*/*.md']
 
 ['.config/oh-my-zsh/custom/plugins/zsh-syntax-highlighting']
 type = 'archive'
@@ -31,6 +32,7 @@ url = 'https://github.com/zsh-users/zsh-syntax-highlighting/archive/master.zip'
 exact = true
 stripComponents = 1
 refreshPeriod = '168h'
+exclude = ['*/.github', '*/*.md']
 
 ['.config/oh-my-zsh/custom/plugins/zsh-vi-mode']
 type = 'archive'
@@ -38,6 +40,7 @@ url = 'https://github.com/MuXiu1997/zsh-vi-mode/archive/cutbuffer-getset.zip'
 exact = true
 stripComponents = 1
 refreshPeriod = '168h'
+exclude = ['*/.github', '*/*.md']
 
 ['.config/oh-my-zsh/custom/plugins/fzf-tab']
 type = 'archive'
@@ -45,6 +48,7 @@ url = 'https://github.com/Aloxaf/fzf-tab/archive/master.zip'
 exact = true
 stripComponents = 1
 refreshPeriod = '168h'
+exclude = ['*/.github', '*/*.md']
 # ============================================================================ #
 
 
@@ -55,6 +59,7 @@ url = 'https://github.com/romkatv/powerlevel10k/archive/{{ template "gitHubLates
 exact = true
 stripComponents = 1
 refreshPeriod = '168h'
+exclude = ['*/.github', '*/*.md']
 # ============================================================================ #
 
 
@@ -65,6 +70,7 @@ url = 'https://github.com/gpakosz/.tmux/archive/master.zip'
 exact = true
 stripComponents = 1
 refreshPeriod = '168h'
+exclude = ['*/.github', '*/*.md', '*/.logo']
 # ============================================================================ #
 
 
@@ -75,6 +81,7 @@ url = 'https://github.com/MuXiu1997/ranger-fzf-filter/archive/main.zip'
 exact = true
 stripComponents = 1
 refreshPeriod = '168h'
+exclude = ['*/.github', '*/*.md']
 
 ['.config/ranger/plugins/ranger_airdrop']
 type = 'archive'
@@ -82,6 +89,7 @@ url = 'https://github.com/MuXiu1997/ranger-airdrop/archive/main.zip'
 exact = true
 stripComponents = 1
 refreshPeriod = '168h'
+exclude = ['*/.github', '*/*.md']
 
 ['.config/ranger/plugins/ranger_yoink']
 type = 'archive'
@@ -89,6 +97,7 @@ url = 'https://github.com/MuXiu1997/ranger-yoink/archive/main.zip'
 exact = true
 stripComponents = 1
 refreshPeriod = '168h'
+exclude = ['*/.github', '*/*.md']
 
 ['.config/ranger/plugins/ranger_devicons']
 type = 'archive'
@@ -96,6 +105,7 @@ url = 'https://github.com/alexanderjeurissen/ranger_devicons/archive/main.zip'
 exact = true
 stripComponents = 1
 refreshPeriod = '168h'
+exclude = ['*/.github', '*/*.md']
 
 ['.config/ranger/plugins/ranger_zoxide']
 type = 'archive'
@@ -103,6 +113,7 @@ url = 'https://github.com/jchook/ranger-zoxide/archive/master.zip'
 exact = true
 stripComponents = 1
 refreshPeriod = '168h'
+exclude = ['*/.github', '*/*.md']
 # ============================================================================ #
 
 
@@ -113,6 +124,7 @@ url = 'https://github.com/MuXiu1997/hammerspoon/archive/main.zip'
 exact = true
 stripComponents = 1
 refreshPeriod = '168h'
+exclude = ['*/.github', '*/*.md']
 # ============================================================================ #
 
 
@@ -122,6 +134,7 @@ type = 'archive'
 url = 'https://github.com/MuXiu1997/nvim/releases/download/{{ template "gitHubLatestTag" "MuXiu1997/nvim" }}/nvim.zip'
 exact = true
 refreshPeriod = '168h'
+exclude = ['*/.github', '*/*.md']
 # ============================================================================ #
 
 
