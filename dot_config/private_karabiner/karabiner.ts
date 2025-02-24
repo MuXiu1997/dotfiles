@@ -221,6 +221,7 @@ const profile = {
     country_code: 0,
     indicate_sticky_modifier_keys_state: true,
     mouse_key_xy_scale: 100,
+    keyboard_type_v2: 'ansi',
   },
   devices,
   complex_modifications: {
