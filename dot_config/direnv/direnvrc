@@ -107,26 +107,25 @@ layout_python() {
     layout_virtualenv "$2"
 }
 
-# Function to activate a Node.js environment layout using nvm
-# Example: layout nvm "14.17.3"
-layout_nvm() {
+# Function to activate a Node.js environment layout using fnm
+# Example: layout fnm "18.20.8"
+layout_fnm() {
     local node_version
     set_version node "$1"
     node_version=$(get_version node)
     if [[ -z "$node_version" ]]; then
-        log_warn "nvm: nvm is used but no node version found, skip loading"
+        log_warn "fnm: fnm is used but no node version found, skip loading"
         return
     fi
-    source "$(brew --prefix)/opt/nvm/nvm.sh"
-    nvm use "$node_version"
-    log_status "nvm: currently activated node version is $node_version"
+    fnm use "$node_version"
+    log_status "fnm: currently activated node version is $node_version"
 }
 
 # Function to activate Node.js-related layouts
-# Example: layout node "14.17.3"
+# Example: layout node "18.20.8"
 layout_node() {
     PATH_add node_modules/.bin
-    layout_nvm "$1"
+    layout_fnm "$1"
 }
 
 # Function to activate a Go environment layout using goenv

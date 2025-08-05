@@ -45,10 +45,8 @@ fi
   export GPG_TTY="${TTY}"
 # }
 
-# { Nvm
-  # Don't try to load nvm if command already available
-  ! command_exists nvm && file_exists_then_source "${HOMEBREW_PREFIX}/opt/nvm/nvm.sh"
-  command_exists nvm && nvm use default --silent
+# { Fnm
+  command_exists fnm && eval "$(fnm env --shell zsh)"
 # }
 
 # { Pyenv
@@ -72,3 +70,4 @@ path=("${USER_LOCAL_BIN}" $path)
 
 # To customize prompt, run `p10k configure` or edit $ZDOTDIR/p10k.zsh.
 file_exists_then_source "${ZDOTDIR}/p10k.zsh"
+file_exists_then_source "${ZDOTDIR}/p10k-fnm.zsh"
