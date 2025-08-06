@@ -1,34 +1,35 @@
 #!/usr/bin/env bash
-set -eufo pipefail
+
+set -euo pipefail
 
 install_homebrew() {
-    if ! type brew &>/dev/null; then
-        echo "Installing Homebrew..."
-        bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-        echo "Homebrew installation completed"
-    else
-        echo "Homebrew is already installed"
-    fi
+  if ! type brew &>/dev/null; then
+    echo "Installing Homebrew..."
+    NONINTERACTIVE=1 bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    echo "Homebrew installation completed"
+  else
+    echo "Homebrew is already installed"
+  fi
 }
 
 install_required_packages() {
-    echo "Installing required packages..."
-    local packages=("git" "age" "chezmoi")
-    
-    for package in "${packages[@]}"; do
-        if ! brew list --versions "$package" &>/dev/null; then
-            echo "Installing $package..."
-            {{ .homebrewExec }} install "$package"
-        else
-            echo "$package is already installed"
-        fi
-    done
-    echo "All required packages installed"
+  echo "Installing required packages..."
+  local packages=("git" "age" "chezmoi")
+
+  for package in "${packages[@]}"; do
+    if ! {{ .homebrewExec }} list --versions "$package" &>/dev/null; then
+      echo "Installing $package..."
+      {{ .homebrewExec }} install "$package"
+    else
+      echo "$package is already installed"
+    fi
+  done
+  echo "All required packages installed"
 }
 
 main() {
-    install_homebrew
-    install_required_packages
+  install_homebrew
+  install_required_packages
 }
 
 main

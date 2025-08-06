@@ -1,6 +1,7 @@
 {{- if (eq .chezmoi.os "darwin") -}}
 #!/usr/bin/env bash
-set -eufo pipefail
+
+set -euo pipefail
 
 defaults write NSGlobalDomain InitialKeyRepeat -int 15
 defaults write NSGlobalDomain KeyRepeat -int 2
