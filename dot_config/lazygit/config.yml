@@ -1,13 +1,16 @@
 # $schema: https://github.com/jesseduffield/lazygit/raw/master/schema/config.json
 
 gui:
+  language: 'zh-CN'
   nerdFontsVersion: '3'
   timeFormat: '2006-01-02'
   shortTimeFormat: '15:04:05'
   sidePanelWidth: 0.2
   authorColors:
     'MuXiu1997': '#B8AFE6'
+
 git:
+  parseEmoji: true
   paging:
     colorArg: always
     pager: >
@@ -15,31 +18,30 @@ git:
       --features lazygit
       --max-line-length {{columnWidth}}
       -s
-  parseEmoji: true
 
 customCommands:
   - key: T
     description: '[ tag ]'
     command: '$(dirname ${LG_CONFIG_FILE})/scripts/tag "{{ .SelectedLocalCommit.Sha }}"'
     context: commits
-    subprocess: true
+    output: terminal
   - key: n
     description: '[ new remote ]'
     command: '$(dirname ${LG_CONFIG_FILE})/scripts/new-remote'
     context: remotes
-    subprocess: true
+    output: terminal
   - key: P
     description: '[ push tag ]'
     command: '$(dirname ${LG_CONFIG_FILE})/scripts/push-tag "{{ .SelectedTag.Name }}"'
     context: tags
-    subprocess: true
+    output: terminal
   - key: N
     description: '[ push branch ]'
     command: '$(dirname ${LG_CONFIG_FILE})/scripts/custom-push --local-branch "{{ .SelectedLocalBranch.Name }}"'
     context: localBranches
-    subprocess: true
+    output: terminal
   - key: N
     description: '[ push commit ]'
     command: '$(dirname ${LG_CONFIG_FILE})/scripts/custom-push --commit "{{ .SelectedLocalCommit.Sha }}"'
     context: commits
-    subprocess: true
+    output: terminal
