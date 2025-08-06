@@ -75,3 +75,11 @@ path=("${USER_LOCAL_BIN}" $path)
 # To customize prompt, run `p10k configure` or edit $ZDOTDIR/p10k.zsh.
 file_exists_then_source "${ZDOTDIR}/p10k.zsh"
 file_exists_then_source "${ZDOTDIR}/p10k-fnm.zsh"
+
+# Disable powerlevel10k when running under Cursor Agent
+# This fixes compatibility issues where the agent cannot detect command completion
+# due to the complex prompt structure of powerlevel10k
+# Reference: https://forum.cursor.com/t/cursor-agent-terminal-doesn-t-work-well-with-powerlevel10k-oh-my-zsh/96808/14
+if [[ -n $CURSOR_TRACE_ID ]]; then
+  prompt_powerlevel9k_teardown
+fi
