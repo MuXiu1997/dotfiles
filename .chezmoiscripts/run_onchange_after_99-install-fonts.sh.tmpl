@@ -25,7 +25,7 @@ install_fonts() {
 install_fonts {{ gitHubLatestReleaseAssetURL "JetBrains/JetBrainsMono" "JetBrainsMono-*.zip" | squote }} 'fonts/ttf/*.ttf'
 
 # Source Han Sans
-install_fonts {{ gitHubLatestReleaseAssetURL "adobe-fonts/source-han-sans" "SourceHanSans.ttc.zip" | squote }} '*.ttc'
+install_fonts {{ gitHubLatestReleaseAssetURL "adobe-fonts/source-han-sans" "*SourceHanSans.ttc.zip" | squote }} '*.ttc'
 
 # Nerd Fonts - JetBrains Mono
 install_fonts {{ gitHubLatestReleaseAssetURL "ryanoasis/nerd-fonts" "JetBrainsMono.zip" | squote }} '*.ttf'
