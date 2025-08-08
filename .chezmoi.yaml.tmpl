@@ -28,6 +28,37 @@ data:
   XDG_STATE_HOME: {{ joinPath .chezmoi.homeDir ".local" "state" | squote }}
   XDG_RUNTIME_DIR: {{ if eq .chezmoi.os "darwin" }}${TMPDIR}{{ else }}/run/user/${UID}{{ end }}
 
+  nordTheme:
+    foreground: "#d8dee9"
+    background: "#2e3440"
+    cursorBg: "#eceff4"
+    cursorBorder: "#eceff4"
+    cursorFg: "#282828"
+    selectionBg: "#eceff4"
+    selectionFg: "#4c566a"
+
+    # region ansi colors
+    black: "#3b4252"
+    red: "#bf616a"
+    green: "#a3be8c"
+    yellow: "#ebcb8b"
+    blue: "#81a1c1"
+    magenta: "#b48ead"
+    cyan: "#88c0d0"
+    white: "#e5e9f0"
+    # endregion ansi colors
+
+    # region bright colors
+    blackBright: "#4c566a"
+    redBright: "#bf616a"
+    greenBright: "#a3be8c"
+    yellowBright: "#ebcb8b"
+    blueBright: "#81a1c1"
+    magentaBright: "#b48ead"
+    cyanBright: "#8fbcbb"
+    whiteBright: "#eceff4"
+    # endregion bright colors
+
 encryption: age
 age:
   identity: {{ joinPath .chezmoi.homeDir ".local" "share" "age_secret_key" }}
