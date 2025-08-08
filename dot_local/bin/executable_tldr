@@ -1,57 +1,13 @@
 #!/usr/bin/env python3
 
-# Tldr cli wrapper for local installation
+# Tldr cli wrapper
 import os
-import re
-import subprocess
 import sys
-from pathlib import Path
-
-XDG_DATA_HOME = os.environ.get('XDG_DATA_HOME')
-assert XDG_DATA_HOME is not None, "XDG_DATA_HOME not set"
-TLDR_HOME = Path(XDG_DATA_HOME) / 'tldr'
-VENV_PATH = TLDR_HOME / '.venv'
-
-
-def get_remote_version():
-    with (TLDR_HOME / '.version').open() as f:
-        return f.read().strip()
-
-
-def get_local_version():
-    # noinspection PyBroadException
-    try:
-        output = subprocess.check_output([str(VENV_PATH / 'bin' / 'tldr'), '--version']).decode('utf-8')
-        return re.search(r'^tldr (\d+\.\d+\.\d+)', output).group(1)
-    except Exception:
-        return '0.0.0'
-
-
-def ensure_tldr_venv():
-    if not VENV_PATH.exists():
-        subprocess.check_call(['python3', '-m', 'venv', '--copies', str(VENV_PATH)], stdout=sys.stderr)
-
-
-def install_or_update_tldr():
-    subprocess.check_call([str(VENV_PATH / 'bin' / 'pip'), 'install', '--upgrade', 'tldr'], stdout=sys.stderr)
-
-
-def exec_tldr():
-    env = os.environ.copy()
-    env['TLDR_ALLOW_INSECURE'] = '1'
-    os.execve(str(VENV_PATH / 'bin' / 'tldr'), ['tldr'] + sys.argv[1:], env=env)
-
 
 def main():
-    remote_version = get_remote_version()
-    local_version = get_local_version()
-    if remote_version != local_version:
-        print(f'Local tldr version {local_version} is outdated. Updating to {remote_version}', file=sys.stderr)
-        ensure_tldr_venv()
-        install_or_update_tldr()
-
-    exec_tldr()
-
+    env = os.environ.copy()
+    env['TLDR_ALLOW_INSECURE'] = '1'
+    os.execvpe('uv', ['uv', 'tool', 'run', '--no-progress', '--quiet', '--python', '3.13', '--', 'tldr@latest'] + sys.argv[1:], env=env)
 
 if __name__ == '__main__':
     main()
