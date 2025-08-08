@@ -1,3 +1,7 @@
+# { Open
+  alias o="open ."
+# }
+
 # { Cd
   alias ..="cd .."
   alias -- -="cd -"
