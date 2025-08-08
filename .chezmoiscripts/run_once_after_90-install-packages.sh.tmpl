@@ -1,7 +1,17 @@
+{{- if (eq .chezmoi.os "darwin") -}}
 #!/usr/bin/env bash
 
 set -euo pipefail
 
-# install packages
-export HOMEBREW_BREWFILE="{{ .brewfile }}"
-"$HOME/.local/bin/brew-bundle-install"
+{{ .homebrewExec }} bundle install --no-upgrade --file=/dev/stdin <<EOF
+{{ range .homebrewPackages.darwin.formula -}}
+brew {{ . | quote }}
+{{ end -}}
+{{ range .homebrewPackages.darwin.cask -}}
+cask {{ . | quote }}
+{{ end -}}
+{{ range .homebrewPackages.darwin.mas -}}
+mas {{ .name | quote }}, id: {{ .id }}
+{{ end -}}
+EOF
+{{- end }}
