@@ -19,3 +19,7 @@
     {{- end }}
 [log]
     date = format:%Y-%m-%d %H:%M:%S
+[safe]
+    directory = {{ .homebrewPrefix }}
+[includeIf "gitdir:@kanyun.com/"]
+    path = kanyun.config
