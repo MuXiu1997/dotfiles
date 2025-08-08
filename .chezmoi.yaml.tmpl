@@ -1,6 +1,3 @@
-{{- $deviceId := promptStringOnce . "deviceId" "Device ID" -}}
-{{- $brewfileId := promptStringOnce . "brewfileId" "Brewfile ID" -}}
-
 {{- $homebrewPrefix := "/home/linuxbrew/.linuxbrew" -}}
 {{- if eq .chezmoi.os "darwin" -}}
   {{- if eq .chezmoi.arch "arm64" -}}
@@ -11,6 +8,7 @@
 {{- end -}}
 
 data:
+  deviceId: UNUSED
   name: MuXiu1997
   email: muxiu1997@gmail.com
   deviceId: {{ $deviceId }}
@@ -18,9 +16,6 @@ data:
   homebrewPrefix: {{ $homebrewPrefix | squote }}
   homebrewBin: {{ joinPath $homebrewPrefix "bin" | squote }}
   homebrewExec: {{ joinPath $homebrewPrefix "bin" "brew" | squote }}
-
-  brewfileId: {{ $brewfileId }}
-  brewfile: {{ joinPath .chezmoi.sourceDir ".brewfiles" (printf "%s.brewfile" $brewfileId) | squote }}
 
   XDG_CONFIG_HOME: {{ joinPath .chezmoi.homeDir ".config" | squote }}
   XDG_CACHE_HOME: {{ joinPath .chezmoi.homeDir ".cache" | squote }}
@@ -58,6 +53,125 @@ data:
     cyanBright: "#8fbcbb"
     whiteBright: "#eceff4"
     # endregion bright colors
+
+  homebrewPackages:
+    darwin:
+      formula:
+        # region Language / Runtime / Package Management
+        - deno
+        - fnm
+        - goenv
+        - jenv
+        - maven
+        - pnpm
+        - poetry
+        - pyenv
+        - uv
+        # endregion Language / Runtime / Package Management
+
+        # region Shell / Terminal
+        - bash
+        - eza
+        - ranger
+        - tmux
+        - zoxide
+        - zsh
+        # endregion Shell / Terminal
+
+        # region Tools
+        - age
+        - vldmrkl/formulae/airdrop-cli
+        - bat
+        - bitwarden-cli
+        - bottom
+        - chezmoi
+        - ctop
+        - duf
+        - dust
+        - fd
+        - fileicon
+        - fzf
+        - gh
+        - git
+        - git-delta
+        - golangci-lint
+        - goreleaser
+        - gost
+        - grex
+        - grpcurl
+        - gum
+        - helm
+        - httpie
+        - hyperfine
+        - jless
+        - jq
+        - just
+        - ktlint
+        - lazydocker
+        - lazygit
+        - mas
+        - neofetch
+        - neovim
+        - pinentry-mac
+        - procs
+        - rclone
+        - ripgrep
+        - shellcheck
+        - tokei
+        - tree
+        - yq
+        - vim
+        - wget
+        # endregion Tools
+      cask:
+        - alfred
+        - alt-tab
+        - another-redis-desktop-manager
+        - cursor
+        - cyberduck
+        - docker
+        - dropbox
+        - electerm
+        - free-download-manager
+        - gpg-suite-no-mail
+        - hammerspoon
+        - iina
+        - itsycal
+        - jetbrains-toolbox
+        - kap
+        - karabiner-elements
+        - keycastr
+        - maczip
+        - mark-text
+        - microsoft-edge
+        - mos
+        - mounty
+        - neteasemusic
+        - postman
+        - qq
+        - rectangle
+        - rustdesk
+        - sloth
+        - snipaste
+        - squirrel
+        - stats
+        - switchhosts
+        - visual-studio-code
+        - wechat
+        - wechatwebdevtools
+      mas:
+        - name: Bitwarden
+          id: 1352778147
+        - name: Bob
+          id: 1630034110
+        - name: LocalSend
+          id: 1661733229
+        - name: Spark
+          id: 1176895641
+        - name: WPS Office
+          id: 1443749478
+        - name: Xcode
+          id: 497799835
 
 encryption: age
 age:
