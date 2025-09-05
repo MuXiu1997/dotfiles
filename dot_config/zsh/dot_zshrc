@@ -41,6 +41,10 @@ fi
   # Fzf
   zvm_after_init_commands+=("file_exists_then_source ${XDG_CONFIG_HOME}/fzf.zsh") # See: https://github.com/jeffreytse/zsh-vi-mode#execute-extra-commands
 
+  # Atuin
+  command_exists atuin && eval "$(atuin init zsh --disable-up-arrow --disable-ctrl-r)"
+  zvm_after_init_commands+=("file_exists_then_source ${XDG_CONFIG_HOME}/fzf-atuin.zsh")
+
   # Fzf-tab
   zvm_after_init_commands+=("file_exists_then_source ${XDG_CONFIG_HOME}/fzf-tab.zsh")
 # }
