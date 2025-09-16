@@ -12,3 +12,10 @@ indent_style = space
 insert_final_newline = true
 max_line_length = 120
 trim_trailing_whitespace = true
+
+# see https://github.com/CppCXY/EmmyLuaCodeStyle
+[*.lua]
+quote_style = single
+trailing_table_separator = always
+end_statement_with_semicolon = same_line
+align_continuous_rect_table_field = true
