@@ -1,46 +1,49 @@
 local wezterm = require('wezterm')
+local action = wezterm.action
 
-local home = os.getenv('HOME')
-
-local function fileExists(filepath)
-  local file = io.open(filepath, 'r')
-  if file then
-    file:close()
-    return true
-  else
-    return false
-  end
-end
+-- 导入模块
+local base_config = require('base_config')
+local tmux_like = require('tmux_like')
+local nord_status = require('nord_status')
+local smart_right_click = require('smart_right_click')
 
 local config = wezterm.config_builder()
 
-config.color_scheme = 'nord'
+-- ============================================================================
+-- 应用基础配置
+-- ============================================================================
+base_config.apply_to_config(config)
 
-config.font = wezterm.font_with_fallback({
-  'JetBrains Mono',
-  'Symbols Nerd Font Mono',
-  'Source Han Sans CN',
-})
-config.font_size = 16.0
+-- ============================================================================
+-- 应用 tmux-like 键绑定和功能
+-- ============================================================================
+tmux_like.apply_to_config(config)
 
-config.line_height = 1.0
-config.cell_width = 1.0
+-- ============================================================================
+-- 应用 Nord 状态栏配置
+-- ============================================================================
+nord_status.apply_to_config(config)
 
-config.default_cursor_style = 'BlinkingBar'
-config.text_blink_rate = 500
+-- ============================================================================
+-- 应用智能右键功能
+-- ============================================================================
+smart_right_click.apply_to_config(config)
 
-config.enable_tab_bar = false
+wezterm.on('augment-command-palette', function(window, pane)
+  return {
+    {
+      brief = 'Rename tab',
 
-config.window_background_opacity = 0.8
-config.macos_window_background_blur = 25
-config.text_background_opacity = 0.9
-
-config.native_macos_fullscreen_mode = false
---config.macos_fullscreen_extend_behind_notch = true
-
-config.default_prog = { 'zsh', '-l' }
-if fileExists(home .. '/.local/bin/bootstrap-hotkey') then
-  config.default_prog = { home .. '/.local/bin/bootstrap-hotkey' }
-end
+      action = wezterm.action.PromptInputLine {
+        description = 'Enter new name for tab',
+        action = wezterm.action_callback(function(window, pane, line)
+          if line then
+            window:active_tab():set_title(line)
+          end
+        end),
+      },
+    },
+  }
+end)
 
 return config
