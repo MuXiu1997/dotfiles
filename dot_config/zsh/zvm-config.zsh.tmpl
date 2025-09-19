@@ -1,16 +1,4 @@
-# jeffreytse/zsh-vi-mode Version: {{ template "gitHubLatestTag" "jeffreytse/zsh-vi-mode" }}
-
 zvm_config() {
   ZVM_VI_HIGHLIGHT_BACKGROUND='#3B4252'
+  ZVM_SYSTEM_CLIPBOARD_ENABLED=true
 }
-
-# CUTBUFFER getter
-zvm_get_cutbuffer() {
-  pbpaste
-}
-
-# CUTBUFFER setter
-zvm_set_cutbuffer() {
-  echo -n $1 | pbcopy
-}
-
