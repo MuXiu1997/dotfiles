@@ -3,33 +3,96 @@
 
 set -euo pipefail
 
-install_fonts() {
-  local url="$1"
-  local font_glob="$2"
+# Source the shell library
+source {{ joinPath .chezmoi.sourceDir ".chezmoiscripts" ".lib.sh" | quote }}
+
+install_font() {
+  local font_name="$1"
+  local url="$2"
+  local font_glob="$3"
   local temp_dir=$(mktemp -d)
 
+  log_progress "Installing $font_name..."
+
   # Download the font archive
-  curl -L "$url" -o "$temp_dir/font.zip"
+  if ! curl -L "$url" -o "$temp_dir/font.zip" --silent --show-error; then
+    log_error "Failed to download $font_name from $url"
+    rm -rf "$temp_dir"
+    return 1
+  fi
 
   # Unzip the font archive
-  unzip "$temp_dir/font.zip" -d "$temp_dir"
+  if ! unzip -q "$temp_dir/font.zip" -d "$temp_dir"; then
+    log_error "Failed to extract $font_name archive"
+    rm -rf "$temp_dir"
+    return 1
+  fi
 
   # Copy the fonts to /Library/Fonts using rsync
-  sudo rsync -av --include="$font_glob" --exclude="*" "$temp_dir/" /Library/Fonts/
+  if sudo rsync -av --include="$font_glob" --exclude="*" "$temp_dir/" /Library/Fonts/ >/dev/null; then
+    log_success "$font_name installed successfully"
+  else
+    log_error "Failed to install $font_name to /Library/Fonts"
+    rm -rf "$temp_dir"
+    return 1
+  fi
 
   # Clean up
   rm -rf "$temp_dir"
+  return 0
 }
 
-# JetBrains Mono
-install_fonts {{ gitHubLatestReleaseAssetURL "JetBrains/JetBrainsMono" "JetBrainsMono-*.zip" | squote }} 'fonts/ttf/*.ttf'
+install_all_fonts() {
+  local failed_fonts=()
 
-# Source Han Sans
-install_fonts {{ gitHubLatestReleaseAssetURL "adobe-fonts/source-han-sans" "*SourceHanSans.ttc.zip" | squote }} '*.ttc'
+  # JetBrains Mono
+  if ! install_font "JetBrains Mono" {{ gitHubLatestReleaseAssetURL "JetBrains/JetBrainsMono" "JetBrainsMono-*.zip" | squote }} 'fonts/ttf/*.ttf'; then
+    failed_fonts+=("JetBrains Mono")
+  fi
 
-# Nerd Fonts - JetBrains Mono
-install_fonts {{ gitHubLatestReleaseAssetURL "ryanoasis/nerd-fonts" "JetBrainsMono.zip" | squote }} '*.ttf'
+  # Source Han Sans
+  if ! install_font "Source Han Sans" {{ gitHubLatestReleaseAssetURL "adobe-fonts/source-han-sans" "*SourceHanSans.ttc.zip" | squote }} '*.ttc'; then
+    failed_fonts+=("Source Han Sans")
+  fi
 
-# Update font cache
-fc-cache -f
+  # Nerd Fonts - JetBrains Mono
+  if ! install_font "Nerd Fonts JetBrains Mono" {{ gitHubLatestReleaseAssetURL "ryanoasis/nerd-fonts" "JetBrainsMono.zip" | squote }} '*.ttf'; then
+    failed_fonts+=("Nerd Fonts JetBrains Mono")
+  fi
+
+  # Report results
+  if [[ ${#failed_fonts[@]} -eq 0 ]]; then
+    log_success "All fonts installed successfully"
+    return 0
+  else
+    log_error "Failed to install ${#failed_fonts[@]} font(s): ${failed_fonts[*]}"
+    return 1
+  fi
+}
+
+update_font_cache() {
+  log_progress "Updating font cache..."
+  if fc-cache -f >/dev/null 2>&1; then
+    log_success "Font cache updated successfully"
+    return 0
+  else
+    log_warn "Failed to update font cache (fc-cache not available or failed)"
+    return 0  # Non-critical failure
+  fi
+}
+
+main() {
+  log_header "Installing Fonts"
+
+  if ! install_all_fonts; then
+    log_error "Font installation failed, aborting"
+    exit 1
+  fi
+
+  update_font_cache
+
+  log_success "Font installation completed successfully!"
+}
+
+main
 {{- end }}

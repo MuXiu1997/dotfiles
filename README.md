@@ -16,8 +16,9 @@ bash -c "$(curl -fsSL https://github.com/MuXiu1997/dotfiles/raw/main/install.sh)
 
 ## TODO
 
-- [ ] Remove `deviceId` related configurations and replace the condition with a better one
-- [ ] Enhance scripts in `.chezmoiscripts` directory with better logging output
+- [x] Remove `deviceId` related configurations and replace the condition with `personal` tag
+- [x] Enhance scripts in `.chezmoiscripts` directory with better logging output
+- [ ] Remove `dot_local/bin/executable_setup-dock` and migrate its functionality to `.chezmoiscripts/run_once_after_91-configure-darwin.sh.tmpl`
 - [x] Optimize `Homebrew` installation process and configuration management
 
 ## License

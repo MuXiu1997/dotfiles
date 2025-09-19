@@ -3,6 +3,38 @@
 
 set -euo pipefail
 
-# set Hammerspoon config file to ~/.config/hammerspoon/init.lua
-defaults write org.hammerspoon.Hammerspoon MJConfigFile "{{ .XDG_CONFIG_HOME }}/hammerspoon/init.lua"
+# Source the shell library
+source {{ joinPath .chezmoi.sourceDir ".chezmoiscripts" ".lib.sh" | quote }}
+
+main() {
+  log_header "Configuring Hammerspoon XDG Support"
+
+  local config_path="{{ .XDG_CONFIG_HOME }}/hammerspoon/init.lua"
+
+  log_step "Setting Hammerspoon config file path"
+  log_progress "Configuring Hammerspoon to use XDG config directory"
+  log_info "Config path: $config_path"
+
+  if defaults write org.hammerspoon.Hammerspoon MJConfigFile "$config_path"; then
+    log_success "Hammerspoon XDG configuration completed"
+  else
+    log_error "Failed to configure Hammerspoon XDG support"
+    exit 1
+  fi
+
+  # Verify the setting was applied
+  log_progress "Verifying configuration..."
+  local current_config
+  if current_config=$(defaults read org.hammerspoon.Hammerspoon MJConfigFile 2>/dev/null); then
+    if [[ "$current_config" == "$config_path" ]]; then
+      log_success "Configuration verified: $current_config"
+    else
+      log_warn "Configuration mismatch. Expected: $config_path, Got: $current_config"
+    fi
+  else
+    log_warn "Could not verify configuration (this is normal if Hammerspoon is not installed yet)"
+  fi
+}
+
+main
 {{- end }}

@@ -3,18 +3,43 @@
 
 set -euo pipefail
 
-echo "🍺 Installing Homebrew packages using install-packages script..."
+# Source the shell library
+source {{ joinPath .chezmoi.sourceDir ".chezmoiscripts" ".lib.sh" | quote }}
 
-{{- /* Generate install-packages arguments from homebrew configuration */ -}}
-{{- $packages := includeTemplate "homebrewPackages" . | fromYaml -}}
 
-# Run install-packages script if there are packages to install
-{{- if $packages }}
-echo "📦 Installing {{ len $packages }} packages..."
-deno run -A --quiet --ext ts "{{ joinPath .chezmoi.sourceDir "dot_local/bin/executable_install-packages" }}"{{- range $packages }} "{{ . }}"{{- end }}
-{{- else }}
-echo "ℹ️  No packages to install"
-{{- end }}
+install_packages() {
+  {{- /* Generate install-packages arguments from homebrew configuration */ -}}
+  {{- $packages := includeTemplate "homebrewPackages" . | fromYaml -}}
+  {{- if $packages }}
+  local package_count={{ len $packages }}
+  log_progress "Installing $package_count packages..."
 
-echo "✅ Package installation completed!"
+  local install_script={{ joinPath .chezmoi.sourceDir "dot_local/bin/executable_install-packages" | quote }}
+  local packages=({{ range $packages }}{{ . | quote }} {{ end }})
+
+  if deno run -A --quiet --ext ts "$install_script" "${packages[@]}"; then
+    log_success "All $package_count packages processed successfully"
+    return 0
+  else
+    log_error "Package installation failed"
+    return 1
+  fi
+  {{- else }}
+  log_info "No packages to install"
+  return 0
+  {{- end }}
+}
+
+main() {
+  log_header "Installing Homebrew Packages"
+
+  if ! install_packages; then
+    log_error "Package installation failed, aborting"
+    exit 1
+  fi
+
+  log_success "Package installation completed successfully!"
+}
+
+main
 {{- end }}
