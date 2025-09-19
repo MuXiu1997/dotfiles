@@ -1,7 +1,5 @@
 typeset -U path fpath
 
-export DEVICE_ID="{{ .deviceId }}"
-
 # { Helpers
   function file_exists() {
     [[ -f "$1" ]] && return 0 || return 1
@@ -141,7 +139,7 @@ export DEVICE_ID="{{ .deviceId }}"
   export GITHUB_TOKEN="{{ template "ageDecrypted" "github-token" }}"
 # }
 
-{{ if eq .deviceId "MACBOOKPRO-MUXIU" -}}
+{{ if has "personal" .tags -}}
 # { MuXiu1997 Personal
   export MUXIU1997_SSID_HOME="{{ template "ageDecrypted" "muxiu1997-ssid-home" }}"
   export MUXIU1997_SSID_WORK="NULL"

@@ -14,6 +14,6 @@ global-bin-dir=${XDG_DATA_HOME}/pnpm/bin
 state-dir=${XDG_STATE_HOME}/pnpm
 cache-dir=${XDG_CACHE_HOME}/pnpm
 
-{{ if eq .deviceId "MACBOOKPRO-MUXIU" -}}
+{{ if has "personal" .tags -}}
 //registry.npmjs.org/:_authToken={{ template "ageDecrypted" "npm-token" }}
 {{- end }}
