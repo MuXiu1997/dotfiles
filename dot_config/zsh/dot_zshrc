@@ -32,6 +32,7 @@ fi
 
   file_exists_then_source "${ZDOTDIR}/functions.zsh"
   file_exists_then_source "${ZDOTDIR}/aliases.zsh"
+  file_exists_then_source "${ZDOTDIR}/tmutil-auto-exclude.zsh"
 # }
 
 # { Cli
