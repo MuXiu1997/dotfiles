@@ -6,9 +6,6 @@
 .zsh_sessions
 .zcompdump
 
-# tmux
-.tmux.conf
-
 # git
 .gitconfig
 

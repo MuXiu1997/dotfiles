@@ -31,10 +31,6 @@
   alias lg="GPG_TTY=\"\$TTY\" lazygit"
 # }
 
-# { Tmux
-  alias tkill="tmux kill-server"
-# }
-
 # { Bitwarden
   alias bwu="export BW_SESSION=\"\$(bw unlock --raw)\""
 # }

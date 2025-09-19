@@ -33,11 +33,6 @@ typeset -U path fpath
   fpath=($fpath "{{ .homebrewPrefix }}/share/zsh/site-functions")
 # }
 
-# { Tmux
-  export TMUX_PLUGIN_MANAGER_PATH="${XDG_CONFIG_HOME}/tmux/plugins"
-  export __TMUX_MOUSE="{{ if eq .chezmoi.os "darwin" }}on{{ else }}off{{ end }}"
-# }
-
 # { Zoxide
   export _ZO_DATA_DIR="$XDG_DATA_HOME"
 # }

@@ -46,7 +46,6 @@ packages:
       - ripgrep
       - sevenzip
       - shellcheck
-      - tmux
       - tokei
       - tree
       - uv
