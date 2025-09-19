@@ -7,12 +7,32 @@
   {{- end -}}
 {{- end -}}
 
+{{/* Define available tags */}}
+{{- $availableTags := list "personal" "work" -}}
+{{- $defaultTags := list -}}
+
+{{/* Prompt user to select tags during initialization */}}
+{{- $tagPrompt := `选择使用场景 (可多选):
+- personal: 个人使用
+- work: 工作使用` -}}
+
+{{- $selectedTags := promptMultichoiceOnce . "tags" $tagPrompt $availableTags $defaultTags -}}
+
+{{/* Add darwin tag automatically if on macOS */}}
+{{- if eq .chezmoi.os "darwin" -}}
+  {{- $selectedTags = append $selectedTags "darwin" | uniq -}}
+{{- end -}}
+
 data:
   deviceId: UNUSED
   name: MuXiu1997
   email: muxiu1997@muxiu1997.com
   workName: MuXiu1997(邹昆峰)
   workEmail: zoukunfeng@kanyun.com
+
+  # Tags for managing different configurations and dependencies
+  # Available tags: personal, work, darwin (auto-added on macOS)
+  tags: {{ $selectedTags | toYaml | nindent 4 }}
 
   homebrewPrefix: {{ $homebrewPrefix | squote }}
   homebrewBin: {{ joinPath $homebrewPrefix "bin" | squote }}
@@ -23,158 +43,6 @@ data:
   XDG_DATA_HOME: {{ joinPath .chezmoi.homeDir ".local" "share" | squote }}
   XDG_STATE_HOME: {{ joinPath .chezmoi.homeDir ".local" "state" | squote }}
   XDG_RUNTIME_DIR: {{ if eq .chezmoi.os "darwin" }}${TMPDIR}{{ else }}/run/user/${UID}{{ end }}
-
-  nordTheme:
-    foreground: "#d8dee9"
-    background: "#2e3440"
-    cursorBg: "#eceff4"
-    cursorBorder: "#eceff4"
-    cursorFg: "#282828"
-    selectionBg: "#eceff4"
-    selectionFg: "#4c566a"
-
-    # region ansi colors
-    black: "#3b4252"
-    red: "#bf616a"
-    green: "#a3be8c"
-    yellow: "#ebcb8b"
-    blue: "#81a1c1"
-    magenta: "#b48ead"
-    cyan: "#88c0d0"
-    white: "#e5e9f0"
-    # endregion ansi colors
-
-    # region bright colors
-    blackBright: "#4c566a"
-    redBright: "#bf616a"
-    greenBright: "#a3be8c"
-    yellowBright: "#ebcb8b"
-    blueBright: "#81a1c1"
-    magentaBright: "#b48ead"
-    cyanBright: "#8fbcbb"
-    whiteBright: "#eceff4"
-    # endregion bright colors
-
-  homebrewPackages:
-    darwin:
-      formula:
-        # region Language / Runtime / Package Management
-        - deno
-        - fnm
-        - goenv
-        - jenv
-        - maven
-        - pnpm
-        - poetry
-        - pyenv
-        - uv
-        # endregion Language / Runtime / Package Management
-
-        # region Shell / Terminal
-        - bash
-        - eza
-        - ranger
-        - tmux
-        - zoxide
-        - zsh
-        # endregion Shell / Terminal
-
-        # region Tools
-        - age
-        - vldmrkl/formulae/airdrop-cli
-        - bat
-        - bitwarden-cli
-        - bottom
-        - chezmoi
-        - ctop
-        - duf
-        - dust
-        - fd
-        - fileicon
-        - fzf
-        - gh
-        - git
-        - git-delta
-        - golangci-lint
-        - goreleaser
-        - gost
-        - grex
-        - grpcurl
-        - gum
-        - helm
-        - httpie
-        - hyperfine
-        - jless
-        - jq
-        - just
-        - ktlint
-        - lazydocker
-        - lazygit
-        - mas
-        - neofetch
-        - neovim
-        - pinentry-mac
-        - procs
-        - rclone
-        - ripgrep
-        - shellcheck
-        - tokei
-        - tree
-        - yq
-        - vim
-        - wget
-        # endregion Tools
-      cask:
-        - alfred
-        - alt-tab
-        - another-redis-desktop-manager
-        - cursor
-        - cyberduck
-        - docker
-        - dropbox
-        - electerm
-        - free-download-manager
-        - gpg-suite-no-mail
-        - hammerspoon
-        - iina
-        - itsycal
-        - jetbrains-toolbox
-        - jordanbaird-ice
-        - kap
-        - karabiner-elements
-        - keycastr
-        - maczip
-        - mark-text
-        - microsoft-edge
-        - mos
-        - mounty
-        - neteasemusic
-        - postman
-        - qq
-        - rectangle
-        - rustdesk
-        - sloth
-        - snipaste
-        - squirrel
-        - stats
-        - switchhosts
-        - visual-studio-code
-        - wechat
-        - wechatwebdevtools
-        - wezterm
-      mas:
-        - name: Bitwarden
-          id: 1352778147
-        - name: Bob
-          id: 1630034110
-        - name: LocalSend
-          id: 1661733229
-        - name: Spark
-          id: 1176895641
-        - name: WPS Office
-          id: 1443749478
-        - name: Xcode
-          id: 497799835
 
 encryption: age
 age:

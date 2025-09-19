@@ -3,15 +3,18 @@
 
 set -euo pipefail
 
-{{ .homebrewExec }} bundle install --no-upgrade --file=/dev/stdin <<EOF
-{{ range .homebrewPackages.darwin.formula -}}
-brew {{ . | quote }}
-{{ end -}}
-{{ range .homebrewPackages.darwin.cask -}}
-cask {{ . | quote }}
-{{ end -}}
-{{ range .homebrewPackages.darwin.mas -}}
-mas {{ .name | quote }}, id: {{ .id }}
-{{ end -}}
-EOF
+echo "🍺 Installing Homebrew packages using install-packages script..."
+
+{{- /* Generate install-packages arguments from homebrew configuration */ -}}
+{{- $packages := includeTemplate "homebrewPackages" . | fromYaml -}}
+
+# Run install-packages script if there are packages to install
+{{- if $packages }}
+echo "📦 Installing {{ len $packages }} packages..."
+deno run -A --quiet --ext ts "{{ joinPath .chezmoi.sourceDir "dot_local/bin/executable_install-packages" }}"{{- range $packages }} "{{ . }}"{{- end }}
+{{- else }}
+echo "ℹ️  No packages to install"
+{{- end }}
+
+echo "✅ Package installation completed!"
 {{- end }}

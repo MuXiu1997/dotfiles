@@ -1,0 +1,66 @@
+{{- /*
+  Generate install-packages arguments from homebrew configuration
+  Reads .homebrew-packages.yaml, merges base + selected tags, and builds formatted arguments
+  No input parameters required - uses chezmoi context directly
+*/ -}}
+
+{{- $homebrewPackagesFile := joinPath .chezmoi.sourceDir ".homebrew-packages.yaml" -}}
+{{- $homebrewPackages := include $homebrewPackagesFile | fromYaml -}}
+
+{{- /* Start with base packages */ -}}
+{{- $finalPackages := dict -}}
+{{- if $homebrewPackages.packages.base -}}
+  {{- $finalPackages = $homebrewPackages.packages.base -}}
+{{- end -}}
+
+{{- /* Merge packages from selected tags */ -}}
+{{- range .tags -}}
+  {{- if hasKey $homebrewPackages.packages . -}}
+    {{- $tagPackages := get $homebrewPackages.packages . -}}
+    {{- /* Merge formulas */ -}}
+    {{- if and (hasKey $tagPackages "formula") (hasKey $finalPackages "formula") -}}
+      {{- $finalPackages = set $finalPackages "formula" (concat $finalPackages.formula $tagPackages.formula | uniq) -}}
+    {{- else if hasKey $tagPackages "formula" -}}
+      {{- $finalPackages = set $finalPackages "formula" $tagPackages.formula -}}
+    {{- end -}}
+    {{- /* Merge casks */ -}}
+    {{- if and (hasKey $tagPackages "cask") (hasKey $finalPackages "cask") -}}
+      {{- $finalPackages = set $finalPackages "cask" (concat $finalPackages.cask $tagPackages.cask | uniq) -}}
+    {{- else if hasKey $tagPackages "cask" -}}
+      {{- $finalPackages = set $finalPackages "cask" $tagPackages.cask -}}
+    {{- end -}}
+    {{- /* Merge mas packages */ -}}
+    {{- if and (hasKey $tagPackages "mas") (hasKey $finalPackages "mas") -}}
+      {{- $finalPackages = set $finalPackages "mas" (concat $finalPackages.mas $tagPackages.mas | uniq) -}}
+    {{- else if hasKey $tagPackages "mas" -}}
+      {{- $finalPackages = set $finalPackages "mas" $tagPackages.mas -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- /* Build package arguments array */ -}}
+{{- $packages := list -}}
+
+{{- /* Add formulas */ -}}
+{{- if hasKey $finalPackages "formula" -}}
+  {{- range $finalPackages.formula -}}
+    {{- $packages = append $packages (printf "formula:%s" .) -}}
+  {{- end -}}
+{{- end -}}
+
+{{- /* Add casks */ -}}
+{{- if hasKey $finalPackages "cask" -}}
+  {{- range $finalPackages.cask -}}
+    {{- $packages = append $packages (printf "cask:%s" .) -}}
+  {{- end -}}
+{{- end -}}
+
+{{- /* Add mas apps */ -}}
+{{- if hasKey $finalPackages "mas" -}}
+  {{- range $finalPackages.mas -}}
+    {{- $packages = append $packages (printf "mas:%v:%s" .id .name) -}}
+  {{- end -}}
+{{- end -}}
+
+{{- /* Return the packages array */ -}}
+{{- $packages | toYaml -}}

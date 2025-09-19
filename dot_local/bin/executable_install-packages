@@ -1,0 +1,265 @@
+#!/usr/bin/env -S deno run -A --quiet --ext ts
+
+import { $, fs, path } from 'npm:zx@8.8.1'
+
+// 设置 Homebrew 环境变量以优化体验
+$.env = {
+  ...$.env,
+  // 禁用自动更新以加快安装速度
+  HOMEBREW_NO_AUTO_UPDATE: '1',
+  // 隐藏环境变量提示
+  HOMEBREW_NO_ENV_HINTS: '1',
+  // 禁用安装时的清理操作以加快速度
+  HOMEBREW_NO_INSTALL_CLEANUP: '1',
+}
+
+// 缓存变量
+let cachedCasks: string[] | null = null
+let cachedFormulas: string[] | null = null
+let cachedMasApps: Array<{ id: string; name: string; version: string }> | null =
+  null
+
+// 清除缓存函数
+function clearCache() {
+  cachedCasks = null
+  cachedFormulas = null
+  cachedMasApps = null
+}
+
+// 解析包类型和名称
+interface Package {
+  type: 'cask' | 'formula' | 'mas'
+  name: string
+  id?: string // 仅用于 mas 应用
+}
+
+function parsePackage(arg: string): Package | null {
+  const parts = arg.split(':')
+
+  if (parts.length < 2) {
+    console.error(`❌ 无效的参数格式: ${arg}`)
+    return null
+  }
+
+  const type = parts[0] as 'cask' | 'formula' | 'mas'
+
+  if (!['cask', 'formula', 'mas'].includes(type)) {
+    console.error(`❌ 不支持的包类型: ${type}`)
+    return null
+  }
+
+  if (type === 'mas') {
+    if (parts.length < 3) {
+      console.error(`❌ mas 应用需要提供 ID 和名称: mas:id:name`)
+      return null
+    }
+    return { type, id: parts[1], name: parts[2] }
+  }
+
+  return { type, name: parts[1] }
+}
+
+// 获取已安装的 cask 列表
+async function getInstalledCasks(): Promise<string[]> {
+  if (cachedCasks !== null) {
+    return cachedCasks
+  }
+
+  try {
+    const result = await $`brew list --cask`.quiet()
+    cachedCasks = result.stdout.trim().split('\n').filter((line) =>
+      line.length > 0
+    )
+    return cachedCasks
+  } catch (error) {
+    cachedCasks = []
+    return cachedCasks
+  }
+}
+
+// 获取已安装的 formula 列表
+async function getInstalledFormulas(): Promise<string[]> {
+  if (cachedFormulas !== null) {
+    return cachedFormulas
+  }
+
+  try {
+    const result = await $`brew list --formula`.quiet()
+    cachedFormulas = result.stdout.trim().split('\n').filter((line) =>
+      line.length > 0
+    )
+    return cachedFormulas
+  } catch (error) {
+    cachedFormulas = []
+    return cachedFormulas
+  }
+}
+
+// 获取已安装的 mas 应用列表
+async function getInstalledMasApps(): Promise<
+  Array<{ id: string; name: string; version: string }>
+> {
+  if (cachedMasApps !== null) {
+    return cachedMasApps
+  }
+
+  try {
+    const result = await $`mas list`.quiet()
+    cachedMasApps = result.stdout.trim().split('\n')
+      .filter((line) => line.length > 0)
+      .map((line) => {
+        // 匹配格式: ID  AppName  (version)
+        const match = line.match(/^(\d+)\s+(.+?)\s+\(([^)]+)\)$/)
+        return match
+          ? { id: match[1], name: match[2].trim(), version: match[3] }
+          : null
+      })
+      .filter(Boolean) as Array<{ id: string; name: string; version: string }>
+    return cachedMasApps
+  } catch (error) {
+    cachedMasApps = []
+    return cachedMasApps
+  }
+}
+
+// 检查包是否已安装
+async function isPackageInstalled(pkg: Package): Promise<boolean> {
+  switch (pkg.type) {
+    case 'cask':
+      const installedCasks = await getInstalledCasks()
+      return installedCasks.includes(pkg.name)
+
+    case 'formula':
+      const installedFormulas = await getInstalledFormulas()
+      return installedFormulas.includes(pkg.name)
+
+    case 'mas':
+      const installedMasApps = await getInstalledMasApps()
+      return installedMasApps.some((app) => app.id === pkg.id)
+
+    default:
+      return false
+  }
+}
+
+// 安装包
+async function installPackage(pkg: Package): Promise<boolean> {
+  try {
+    console.log(`📦 正在安装 ${pkg.type}: ${pkg.name}...`)
+
+    switch (pkg.type) {
+      case 'cask':
+        await $`brew install --cask --no-quarantine ${pkg.name}`
+        break
+
+      case 'formula':
+        await $`brew install --formula ${pkg.name}`
+        break
+
+      case 'mas':
+        await $`mas install ${pkg.id}`
+        break
+    }
+
+    console.log(`✅ 成功安装 ${pkg.type}: ${pkg.name}`)
+
+    // 清除相关缓存，以便后续检查能获取最新状态
+    switch (pkg.type) {
+      case 'cask':
+        cachedCasks = null
+        break
+      case 'formula':
+        cachedFormulas = null
+        break
+      case 'mas':
+        cachedMasApps = null
+        break
+    }
+
+    return true
+  } catch (error) {
+    console.error(`❌ 安装失败 ${pkg.type}: ${pkg.name}`, error)
+    return false
+  }
+}
+
+// 主函数
+async function main() {
+  const args = Deno.args
+
+  if (args.length === 0) {
+    console.log('📋 显示已安装的包列表...\n')
+
+    // 显示已安装的 cask 应用
+    const installedCasks = await getInstalledCasks()
+    if (installedCasks.length > 0) {
+      console.log('🍺 已安装的 cask 应用:')
+      installedCasks.forEach((cask, index) => {
+        console.log(`  ${index + 1}. ${cask}`)
+      })
+      console.log()
+    }
+
+    // 显示已安装的 formula 包
+    const installedFormulas = await getInstalledFormulas()
+    if (installedFormulas.length > 0) {
+      console.log('⚗️  已安装的 formula 包:')
+      installedFormulas.forEach((formula, index) => {
+        console.log(`  ${index + 1}. ${formula}`)
+      })
+      console.log()
+    }
+
+    // 显示已安装的 mas 应用
+    const installedMasApps = await getInstalledMasApps()
+    if (installedMasApps.length > 0) {
+      console.log('🏪 已安装的 Mac App Store 应用:')
+      installedMasApps.forEach((app, index) => {
+        console.log(
+          `  ${index + 1}. ${app.name} (ID: ${app.id}, 版本: ${app.version})`,
+        )
+      })
+      console.log()
+    }
+
+    console.log('💡 使用方法:')
+    console.log(
+      '  install-packages cask:mounty formula:zsh mas:1630034110:Bob',
+    )
+    return
+  }
+
+  // 解析参数
+  const packages: Package[] = []
+  for (const arg of args) {
+    const pkg = parsePackage(arg)
+    if (pkg) {
+      packages.push(pkg)
+    }
+  }
+
+  if (packages.length === 0) {
+    console.error('❌ 没有有效的包参数')
+    return
+  }
+
+  console.log(`🔍 检查 ${packages.length} 个包的安装状态...\n`)
+
+  // 检查并安装包
+  for (const pkg of packages) {
+    const isInstalled = await isPackageInstalled(pkg)
+
+    if (isInstalled) {
+      console.log(`✅ ${pkg.type}: ${pkg.name} 已经安装`)
+    } else {
+      await installPackage(pkg)
+    }
+  }
+
+  console.log('\n🎉 安装任务完成！')
+}
+
+// 运行主函数
+if (import.meta.main) {
+  await main()
+}
