@@ -2,34 +2,57 @@
 
 set -euo pipefail
 
+# Source the shell library
+source {{ joinPath .chezmoi.sourceDir ".chezmoiscripts" ".lib.sh" | quote }}
+
 install_homebrew() {
   if ! type brew &>/dev/null; then
-    echo "Installing Homebrew..."
-    NONINTERACTIVE=1 bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    echo "Homebrew installation completed"
+    if bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"; then
+      log_success "Homebrew installation completed"
+    else
+      log_error "Failed to install Homebrew"
+      return 1
+    fi
   else
-    echo "Homebrew is already installed"
+    log_info "Homebrew is already installed"
   fi
 }
 
 install_required_packages() {
-  echo "Installing required packages..."
-  local packages=("git" "age" "chezmoi")
+  local packages=("git" "age" "chezmoi" "uv" "deno")
 
   for package in "${packages[@]}"; do
     if ! {{ .homebrewExec }} list --versions "$package" &>/dev/null; then
-      echo "Installing $package..."
-      {{ .homebrewExec }} install "$package"
+      log_progress "Installing $package..."
+      if {{ .homebrewExec }} install "$package"; then
+        log_success "$package installed successfully"
+      else
+        log_error "Failed to install $package"
+        return 1
+      fi
     else
-      echo "$package is already installed"
+      log_info "$package is already installed"
     fi
   done
-  echo "All required packages installed"
+  log_success "All required packages installed"
 }
 
 main() {
-  install_homebrew
-  install_required_packages
+  log_header "Installing Required Packages"
+
+  log_step "Step 1: Install Homebrew"
+  if ! install_homebrew; then
+    log_error "Failed to install Homebrew, aborting"
+    exit 1
+  fi
+
+  log_step "Step 2: Install Required Packages"
+  if ! install_required_packages; then
+    log_error "Failed to install required packages, aborting"
+    exit 1
+  fi
+
+  log_success "All installation steps completed successfully!"
 }
 
 main

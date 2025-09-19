@@ -3,9 +3,169 @@
 
 set -euo pipefail
 
-defaults write NSGlobalDomain InitialKeyRepeat -int 15
-defaults write NSGlobalDomain KeyRepeat -int 2
-defaults write -g ApplePressAndHoldEnabled -bool false
+# Source the shell library
+source {{ joinPath .chezmoi.sourceDir ".chezmoiscripts" ".lib.sh" | quote }}
 
-"$HOME/.local/bin/setup-dock"
+configure_darwin_settings() {
+  { # Keyboard Settings - 键盘设置
+    # Set initial key repeat delay (15 = 225ms) - 设置按键重复初始延迟（15 = 225毫秒）
+    defaults write NSGlobalDomain InitialKeyRepeat -int 15  
+    # Set key repeat rate (2 = 30ms) - 设置按键重复速率（2 = 30毫秒）
+    defaults write NSGlobalDomain KeyRepeat -int 2
+    # Disable press and hold for accented characters - 禁用长按显示重音字符
+    defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
+  }
+
+  { # Interface Behavior Settings - 界面行为设置
+    # Disable minimize on double-click title bar - 禁用双击标题栏最小化
+    defaults write NSGlobalDomain AppleMiniaturizeOnDoubleClick -bool false
+  }
+
+  { # Text Input Settings - 文本输入设置
+    # Disable automatic capitalization - 禁用自动大写
+    defaults write NSGlobalDomain NSAutomaticCapitalizationEnabled -bool false
+    # Disable automatic period substitution - 禁用自动句号替换
+    defaults write NSGlobalDomain NSAutomaticPeriodSubstitutionEnabled -bool false
+    # Disable automatic spelling correction - 禁用自动拼写纠正
+    defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
+  }
+
+  { # System Behavior Optimization - 系统行为优化
+    # Enable spring loading for directories - 启用文件夹弹簧加载
+    defaults write NSGlobalDomain com.apple.springing.enabled -bool true
+    # Set spring loading delay to 0.3 seconds - 设置弹簧加载延迟为0.3秒
+    defaults write NSGlobalDomain com.apple.springing.delay -float 0.3
+    # Speed up window resize animations - 加快窗口调整大小动画
+    defaults write NSGlobalDomain NSWindowResizeTime -float 0.001
+    # Show all file extensions - 显示所有文件扩展名
+    defaults write NSGlobalDomain AppleShowAllExtensions -bool true
+  }
+
+  { # Keyboard Navigation Settings - 键盘导航设置
+    # Enable full keyboard access for all controls - 启用全键盘访问所有控件
+    defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
+  }
+
+  { # Built-in Trackpad Settings - 内置触控板设置
+    # Enable tap to click on built-in trackpad - 启用内置触控板轻点点击
+    defaults write com.apple.AppleMultitouchTrackpad Clicking -bool true
+    # Enable three finger drag on built-in trackpad - 启用内置触控板三指拖拽
+    defaults write com.apple.AppleMultitouchTrackpad TrackpadThreeFingerDrag -bool true
+    # Enable two finger double tap gesture on built-in trackpad - 启用内置触控板双指双击手势
+    defaults write com.apple.AppleMultitouchTrackpad TrackpadTwoFingerDoubleTapGesture -bool true
+    # Set two finger swipe from right edge gesture on built-in trackpad - 设置内置触控板右边缘双指滑动手势
+    defaults write com.apple.AppleMultitouchTrackpad TrackpadTwoFingerFromRightEdgeSwipeGesture -int 3
+  }
+
+  { # Bluetooth Trackpad Settings - 蓝牙触控板设置
+    # Enable tap to click on Bluetooth trackpad - 启用蓝牙触控板轻点点击
+    defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
+    # Enable three finger drag on Bluetooth trackpad - 启用蓝牙触控板三指拖拽
+    defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerDrag -bool true
+    # Enable two finger double tap gesture on Bluetooth trackpad - 启用蓝牙触控板双指双击手势
+    defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadTwoFingerDoubleTapGesture -bool true
+    # Set two finger swipe from right edge gesture on Bluetooth trackpad - 设置蓝牙触控板右边缘双指滑动手势
+    defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadTwoFingerFromRightEdgeSwipeGesture -int 3
+  }
+
+  { # Force Touch and Global Mouse Settings - Force Touch 和全局鼠标设置
+    # Enable Force Touch and haptic feedback - 启用Force Touch和触觉反馈
+    defaults write NSGlobalDomain com.apple.trackpad.forceClick -bool true
+    # Enable tap to click for mouse - 启用鼠标轻点点击
+    defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
+  }
+
+  { # Multi-touch Mouse Settings - 多点触控鼠标设置
+    # Set two finger double tap gesture for Apple mouse - 设置苹果鼠标双指双击手势
+    defaults write com.apple.AppleMultitouchMouse MouseTwoFingerDoubleTapGesture -int 3
+    # Set two finger double tap gesture for Bluetooth mouse - 设置蓝牙鼠标双指双击手势
+    defaults write com.apple.driver.AppleBluetoothMultitouch.mouse MouseTwoFingerDoubleTapGesture -int 3
+  }
+
+  { # Siri Menu Bar Settings - Siri 菜单栏设置
+    # Hide Siri from menu bar - 隐藏菜单栏中的Siri
+    defaults write com.apple.Siri StatusMenuVisible -bool false
+  }
+
+  { # Menu Bar Clock Settings - 菜单栏时钟设置
+    # Use analog clock in menu bar - 使用模拟时钟显示
+    defaults write com.apple.menuextra.clock IsAnalog -bool true
+    # Show AM/PM in menu bar clock - 在菜单栏时钟显示上午/下午
+    defaults write com.apple.menuextra.clock ShowAMPM -bool true
+    # Hide date in menu bar clock - 隐藏菜单栏时钟中的日期
+    defaults write com.apple.menuextra.clock ShowDate -int 0
+    # Show day of week in menu bar clock - 在菜单栏时钟显示星期
+    defaults write com.apple.menuextra.clock ShowDayOfWeek -bool true
+  }
+
+  { # Finder Interface Settings - Finder 界面设置
+    # Show status bar in Finder - 在Finder中显示状态栏
+    defaults write com.apple.finder ShowStatusBar -bool true
+    # Show path bar in Finder - 在Finder中显示路径栏
+    defaults write com.apple.finder ShowPathbar -bool true
+    # Show sidebar in Finder - 在Finder中显示侧边栏
+    defaults write com.apple.finder ShowSidebar -bool true
+  }
+
+  { # Finder Advanced Features - Finder 高级功能
+    # Show full POSIX path in Finder title bar - 在Finder标题栏显示完整POSIX路径
+    defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
+    # Enable text selection in Quick Look - 启用Quick Look中的文本选择
+    defaults write com.apple.finder QLEnableTextSelection -bool true
+    # Add quit menu item to Finder - 为Finder添加退出菜单项
+    defaults write com.apple.finder QuitMenuItem -bool true
+  }
+
+  { # Desktop Icon Display Settings - 桌面图标显示设置
+    # Show external hard drives on desktop - 在桌面显示外置硬盘
+    defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
+    # Hide internal hard drives on desktop - 隐藏桌面上的内置硬盘
+    defaults write com.apple.finder ShowHardDrivesOnDesktop -bool false
+    # Show removable media on desktop - 在桌面显示可移动媒体
+    defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool true
+    # Hide mounted servers on desktop - 隐藏桌面上的已挂载服务器
+    defaults write com.apple.finder ShowMountedServersOnDesktop -bool false
+  }
+
+  { # Sidebar Section Disclosure States - 侧边栏各部分展开状态
+    # Expand devices section in Finder sidebar - 展开Finder侧边栏设备部分
+    defaults write com.apple.finder SidebarDevicesSectionDisclosedState -bool true
+    # Expand places section in Finder sidebar - 展开Finder侧边栏位置部分
+    defaults write com.apple.finder SidebarPlacesSectionDisclosedState -bool true
+    # Expand tags section in Finder sidebar - 展开Finder侧边栏标签部分
+    defaults write com.apple.finder SidebarTagsSctionDisclosedState -bool true
+    # Expand iCloud Drive section in Finder sidebar - 展开Finder侧边栏iCloud Drive部分
+    defaults write com.apple.finder SidebariCloudDriveSectionDisclosedState -bool true
+  }
+
+  { # iCloud Related Settings - iCloud 相关设置
+    # Show iCloud sign-in status in Finder sidebar - 在Finder侧边栏显示iCloud登录状态
+    defaults write com.apple.finder SidebarShowingSignedIntoiCloud -bool true
+    # Hide iCloud Desktop in Finder sidebar - 隐藏Finder侧边栏中的iCloud桌面
+    defaults write com.apple.finder SidebarShowingiCloudDesktop -bool false
+  }
+
+  { # Restart Related Services to Apply Settings - 重启相关服务使设置生效
+    # Restart SystemUIServer to apply menu bar changes - 重启SystemUIServer以应用菜单栏更改
+    killall SystemUIServer 2>/dev/null || true
+    # Restart Finder to apply Finder settings - 重启Finder以应用Finder设置
+    killall Finder 2>/dev/null || true
+
+    # Run dock setup script - 运行dock设置脚本
+    "$HOME/.local/bin/setup-dock"
+  }
+}
+
+main() {
+  log_header "Configuring macOS System Settings"
+
+  if ! configure_darwin_settings; then
+    log_error "Failed to configure Darwin settings, aborting"
+    exit 1
+  fi
+
+  log_success "macOS system configuration completed successfully!"
+}
+
+main
 {{- end }}
