@@ -13,4 +13,4 @@ if [ ! "$(command -v chezmoi)" ]; then
 fi
 
 # chezmoi init
-chezmoi init --apply --verbose MuXiu1997
+chezmoi init --apply --verbose --no-pager MuXiu1997
