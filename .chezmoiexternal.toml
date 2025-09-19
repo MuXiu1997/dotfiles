@@ -36,7 +36,7 @@ exclude = ['*/.github', '*/*.md']
 
 ['.config/oh-my-zsh/custom/plugins/zsh-vi-mode']
 type = 'archive'
-url = 'https://github.com/MuXiu1997/zsh-vi-mode/archive/cutbuffer-getset.zip'
+url = 'https://github.com/jeffreytse/zsh-vi-mode/archive/{{ template "gitHubLatestTag" "jeffreytse/zsh-vi-mode" }}.zip'
 exact = true
 stripComponents = 1
 refreshPeriod = '168h'
