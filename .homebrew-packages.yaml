@@ -1,0 +1,123 @@
+packages:
+  base:
+    formula:
+      - age
+      - bash
+      - bat
+      - bottom
+      - chezmoi
+      - ctop
+      - deno
+      - duf
+      - dust
+      - eza
+      - fd
+      - fnm
+      - fzf
+      - gh
+      - git
+      - git-delta
+      - goenv
+      - golangci-lint
+      - goreleaser
+      - gost
+      - grex
+      - grpcurl
+      - gum
+      - helm
+      - httpie
+      - hyperfine
+      - jenv
+      - jless
+      - jq
+      - just
+      - ktlint
+      - lazydocker
+      - lazygit
+      - maven
+      - neofetch
+      - neovim
+      - pnpm
+      - poetry
+      - procs
+      - pyenv
+      - ranger
+      - rclone
+      - ripgrep
+      - sevenzip
+      - shellcheck
+      - tmux
+      - tokei
+      - tree
+      - uv
+      - vim
+      - wget
+      - yq
+      - zoxide
+      - zsh
+  darwin:
+    cask:
+      - alfred
+      - alt-tab
+      - another-redis-desktop-manager
+      - cursor
+      - cyberduck
+      - docker-desktop
+      - dropbox
+      - electerm
+      - free-download-manager
+      - hammerspoon
+      - iina
+      - itsycal
+      - jetbrains-toolbox
+      - jordanbaird-ice
+      - kap
+      - karabiner-elements
+      - keycastr
+      - maczip
+      - mark-text
+      - microsoft-edge
+      - mos
+      - mounty
+      - neteasemusic
+      - postman
+      - rectangle
+      - rustdesk
+      - sloth
+      - snipaste
+      - squirrel-app
+      - stats
+      - switchhosts
+      - visual-studio-code
+      - wechatwebdevtools
+      - wezterm
+    mas:
+      - name: Bitwarden
+        id: 1352778147
+      - name: Bob
+        id: 1630034110
+      - name: LocalSend
+        id: 1661733229
+      - name: WPS Office
+        id: 1443749478
+      - name: Xcode
+        id: 497799835
+      - name: 豆包
+        id: 6683305962
+  personal:
+    formula:
+      - pinentry-mac
+    cask:
+      - gpg-suite-no-mail
+      - qq
+      - wechat
+    mas:
+      - name: Spark
+        id: 1176895641
+  work:
+    mas:
+      - name: 企业微信
+        id: 1189898970
+      - name: 小米互联服务
+        id: 6673908449
+  
