@@ -9,13 +9,61 @@ default:
 apply:
   @chezmoi apply -v
 
-# # Chezmoi preview the apply result
+# Chezmoi preview the apply result
 preview $LESS="Rmc":
-  @chezmoi apply -vn --force | delta --features "default paging"
+  #!/usr/bin/env -S uv run --quiet --script
+  # /// script
+  # dependencies = []
+  # ///
+  import subprocess
+  import sys
+  
+  # Run chezmoi and capture output
+  result = subprocess.run(
+      ["chezmoi", "apply", "-vn", "--force", "--no-pager"],
+      capture_output=True,
+      text=True,
+  )
+  
+  # Exit if chezmoi fails
+  if result.returncode != 0:
+      sys.stderr.write(result.stderr)
+      sys.exit(result.returncode)
+  
+  # Pass output to delta for formatting
+  subprocess.run(
+      ["delta", "--features", "default paging"],
+      input=result.stdout,
+      text=True,
+  )
 
 # Chezmoi preview the apply result (refresh external)
 preview-refresh-external $LESS="Rmc":
-  @chezmoi apply -Rvn --force | delta --features "default paging"
+  #!/usr/bin/env -S uv run --quiet --script
+  # /// script
+  # dependencies = []
+  # ///
+  import subprocess
+  import sys
+  
+  # Run chezmoi with external refresh and capture output
+  result = subprocess.run(
+      ["chezmoi", "apply", "-Rvn", "--force", "--no-pager"],
+      capture_output=True,
+      text=True,
+  )
+  
+  # Exit if chezmoi fails
+  if result.returncode != 0:
+      sys.stderr.write(result.stderr)
+      sys.exit(result.returncode)
+  
+  # Pass output to delta for formatting
+  subprocess.run(
+      ["delta", "--features", "default paging"],
+      input=result.stdout,
+      text=True,
+  )
 
 # Chezmoi reset script state
 reset-script-state:
