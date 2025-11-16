@@ -113,6 +113,8 @@ packages:
     mas:
       - name: Spark
         id: 1176895641
+      - name: Windows App
+        id: 1295203466
   work:
     mas:
       - name: 企业微信
