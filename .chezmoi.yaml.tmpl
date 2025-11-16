@@ -18,9 +18,11 @@
 
 {{- $selectedTags := promptMultichoiceOnce . "tags" $tagPrompt $availableTags $defaultTags -}}
 
-{{/* Add darwin tag automatically if on macOS */}}
+{{/* Add platform-specific tags automatically */}}
 {{- if eq .chezmoi.os "darwin" -}}
   {{- $selectedTags = append $selectedTags "darwin" | uniq -}}
+{{- else if eq .chezmoi.os "linux" -}}
+  {{- $selectedTags = append $selectedTags "linux" | uniq -}}
 {{- end -}}
 
 data:
@@ -31,7 +33,7 @@ data:
   workEmail: zoukunfeng@kanyun.com
 
   # Tags for managing different configurations and dependencies
-  # Available tags: personal, work, darwin (auto-added on macOS)
+  # Available tags: personal, work, darwin (auto-added on macOS), linux (auto-added on Linux)
   tags: {{ $selectedTags | toYaml | nindent 4 }}
 
   homebrewPrefix: {{ $homebrewPrefix | squote }}
