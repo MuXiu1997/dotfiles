@@ -85,6 +85,6 @@ file_exists_then_source "${ZDOTDIR}/p10k-fnm.zsh"
 # This fixes compatibility issues where the agent cannot detect command completion
 # due to the complex prompt structure of powerlevel10k
 # Reference: https://forum.cursor.com/t/cursor-agent-terminal-doesn-t-work-well-with-powerlevel10k-oh-my-zsh/96808/14
-if [[ -n $CURSOR_TRACE_ID ]]; then
+if [[ -n $CURSOR_AGENT ]]; then
   prompt_powerlevel9k_teardown
 fi
