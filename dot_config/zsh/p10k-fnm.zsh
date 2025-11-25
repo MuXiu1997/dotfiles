@@ -1,5 +1,11 @@
 # Reference: https://github.com/romkatv/powerlevel10k/issues/713#issuecomment-997322170
 function prompt_fnm() {
+  if ! command -v fnm &> /dev/null; then
+    return
+  fi
+  if [[ -z "$FNM_MULTISHELL_PATH" ]]; then
+    eval "$(fnm env --shell zsh)"
+  fi
   local fnm_default
   fnm_default=$(fnm list | grep default | awk '{ print $2 }') || return
   local fnm_current=$(fnm current)

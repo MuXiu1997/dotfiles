@@ -1,3 +1,9 @@
+# { Helpers
+  function is_fnm_initialized() {
+    [[ -n "$FNM_MULTISHELL_PATH" ]] && return 0 || return 1
+  }
+# }
+
 # { Reference: https://github.com/romkatv/powerlevel10k/blob/master/README.md#how-do-i-initialize-direnv-when-using-instant-prompt
   command_exists direnv && emulate zsh -c "$(direnv export zsh)"
 # }
@@ -55,7 +61,7 @@ fi
 # }
 
 # { Fnm
-  command_exists fnm && eval "$(fnm env --shell zsh)"
+  command_exists fnm && ! is_fnm_initialized && eval "$(fnm env --shell zsh)"
 # }
 
 # { Pyenv

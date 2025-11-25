@@ -117,6 +117,9 @@ layout_fnm() {
     log_warn "fnm: fnm is used but no node version found, skip loading"
     return
   fi
+  if [[ -z "$FNM_MULTISHELL_PATH" ]]; then
+    eval "$(fnm env --shell bash)"
+  fi
   fnm use "$node_version"
   log_status "fnm: currently activated node version is $node_version"
 }
