@@ -1,4 +1,8 @@
 # { Helpers
+  function is_cursor_agent() {
+    [[ -n $CURSOR_AGENT ]] && return 0 || return 1
+  }
+
   function is_fnm_initialized() {
     [[ -n "$FNM_MULTISHELL_PATH" ]] && return 0 || return 1
   }
@@ -11,9 +15,7 @@
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
+is_cursor_agent || file_exists_then_source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 
 # { Zsh
   # set HISTFILE and HISTSIZE and SAVEHIST again because /etc/zshrc overwrites them.
@@ -31,7 +33,7 @@ fi
 # { Zsh
   # Zsh vi mode config
   # Must before oh-my-zsh.zsh
-  file_exists_then_source "${ZDOTDIR}/zvm-config.zsh"
+  is_cursor_agent || file_exists_then_source "${ZDOTDIR}/zvm-config.zsh"
 
   # Oh my zsh
   file_exists_then_source "${ZDOTDIR}/oh-my-zsh.zsh"
@@ -46,14 +48,17 @@ fi
   command_exists zoxide && eval "$(zoxide init zsh)"
 
   # Fzf
-  zvm_after_init_commands+=("file_exists_then_source ${XDG_CONFIG_HOME}/fzf.zsh") # See: https://github.com/jeffreytse/zsh-vi-mode#execute-extra-commands
+  is_cursor_agent && file_exists_then_source "${XDG_CONFIG_HOME}/fzf.zsh" \
+  || zvm_after_init_commands+=("file_exists_then_source ${XDG_CONFIG_HOME}/fzf.zsh")
 
   # Atuin
   command_exists atuin && eval "$(atuin init zsh --disable-up-arrow --disable-ctrl-r)"
-  zvm_after_init_commands+=("file_exists_then_source ${XDG_CONFIG_HOME}/fzf-atuin.zsh")
+  is_cursor_agent && file_exists_then_source "${XDG_CONFIG_HOME}/fzf-atuin.zsh" \
+  || zvm_after_init_commands+=("file_exists_then_source ${XDG_CONFIG_HOME}/fzf-atuin.zsh")
 
   # Fzf-tab
-  zvm_after_init_commands+=("file_exists_then_source ${XDG_CONFIG_HOME}/fzf-tab.zsh")
+  is_cursor_agent && file_exists_then_source "${XDG_CONFIG_HOME}/fzf-tab.zsh" \
+  || zvm_after_init_commands+=("file_exists_then_source ${XDG_CONFIG_HOME}/fzf-tab.zsh")
 # }
 
 # { Pgp
@@ -84,13 +89,5 @@ fi
 path=("${USER_LOCAL_BIN}" $path)
 
 # To customize prompt, run `p10k configure` or edit $ZDOTDIR/p10k.zsh.
-file_exists_then_source "${ZDOTDIR}/p10k.zsh"
-file_exists_then_source "${ZDOTDIR}/p10k-fnm.zsh"
-
-# Disable powerlevel10k when running under Cursor Agent
-# This fixes compatibility issues where the agent cannot detect command completion
-# due to the complex prompt structure of powerlevel10k
-# Reference: https://forum.cursor.com/t/cursor-agent-terminal-doesn-t-work-well-with-powerlevel10k-oh-my-zsh/96808/14
-if [[ -n $CURSOR_AGENT ]]; then
-  prompt_powerlevel9k_teardown
-fi
+is_cursor_agent || file_exists_then_source "${ZDOTDIR}/p10k.zsh"
+is_cursor_agent || file_exists_then_source "${ZDOTDIR}/p10k-fnm.zsh"
