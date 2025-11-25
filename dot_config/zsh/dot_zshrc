@@ -15,11 +15,11 @@
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
-is_cursor_agent || file_exists_then_source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+is_cursor_agent || file_readable_then_source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 
 # { Zsh
   # set HISTFILE and HISTSIZE and SAVEHIST again because /etc/zshrc overwrites them.
-  file_exists_then_source "${ZDOTDIR}/setup-history.zsh"
+  file_readable_then_source "${ZDOTDIR}/setup-history.zsh"
 # }
 
 # { Editor
@@ -33,14 +33,14 @@ is_cursor_agent || file_exists_then_source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k
 # { Zsh
   # Zsh vi mode config
   # Must before oh-my-zsh.zsh
-  is_cursor_agent || file_exists_then_source "${ZDOTDIR}/zvm-config.zsh"
+  is_cursor_agent || file_readable_then_source "${ZDOTDIR}/zvm-config.zsh"
 
   # Oh my zsh
-  file_exists_then_source "${ZDOTDIR}/oh-my-zsh.zsh"
+  file_readable_then_source "${ZDOTDIR}/oh-my-zsh.zsh"
 
-  file_exists_then_source "${ZDOTDIR}/functions.zsh"
-  file_exists_then_source "${ZDOTDIR}/aliases.zsh"
-  file_exists_then_source "${ZDOTDIR}/tmutil-auto-exclude.zsh"
+  file_readable_then_source "${ZDOTDIR}/functions.zsh"
+  file_readable_then_source "${ZDOTDIR}/aliases.zsh"
+  file_readable_then_source "${ZDOTDIR}/tmutil-auto-exclude.zsh"
 # }
 
 # { Cli
@@ -48,17 +48,17 @@ is_cursor_agent || file_exists_then_source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k
   command_exists zoxide && eval "$(zoxide init zsh)"
 
   # Fzf
-  is_cursor_agent && file_exists_then_source "${XDG_CONFIG_HOME}/fzf.zsh" \
-  || zvm_after_init_commands+=("file_exists_then_source ${XDG_CONFIG_HOME}/fzf.zsh")
+  is_cursor_agent && file_readable_then_source "${XDG_CONFIG_HOME}/fzf.zsh" \
+  || zvm_after_init_commands+=("file_readable_then_source ${XDG_CONFIG_HOME}/fzf.zsh")
 
   # Atuin
   command_exists atuin && eval "$(atuin init zsh --disable-up-arrow --disable-ctrl-r)"
-  is_cursor_agent && file_exists_then_source "${XDG_CONFIG_HOME}/fzf-atuin.zsh" \
-  || zvm_after_init_commands+=("file_exists_then_source ${XDG_CONFIG_HOME}/fzf-atuin.zsh")
+  is_cursor_agent && file_readable_then_source "${XDG_CONFIG_HOME}/fzf-atuin.zsh" \
+  || zvm_after_init_commands+=("file_readable_then_source ${XDG_CONFIG_HOME}/fzf-atuin.zsh")
 
   # Fzf-tab
-  is_cursor_agent && file_exists_then_source "${XDG_CONFIG_HOME}/fzf-tab.zsh" \
-  || zvm_after_init_commands+=("file_exists_then_source ${XDG_CONFIG_HOME}/fzf-tab.zsh")
+  is_cursor_agent && file_readable_then_source "${XDG_CONFIG_HOME}/fzf-tab.zsh" \
+  || zvm_after_init_commands+=("file_readable_then_source ${XDG_CONFIG_HOME}/fzf-tab.zsh")
 # }
 
 # { Pgp
@@ -89,5 +89,5 @@ is_cursor_agent || file_exists_then_source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k
 path=("${USER_LOCAL_BIN}" $path)
 
 # To customize prompt, run `p10k configure` or edit $ZDOTDIR/p10k.zsh.
-is_cursor_agent || file_exists_then_source "${ZDOTDIR}/p10k.zsh"
-is_cursor_agent || file_exists_then_source "${ZDOTDIR}/p10k-fnm.zsh"
+is_cursor_agent || file_readable_then_source "${ZDOTDIR}/p10k.zsh"
+is_cursor_agent || file_readable_then_source "${ZDOTDIR}/p10k-fnm.zsh"

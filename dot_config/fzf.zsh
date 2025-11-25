@@ -1,5 +1,5 @@
 # { Key bindings
-  file_exists_then_source "$HOMEBREW_PREFIX/opt/fzf/shell/key-bindings.zsh"
+  file_readable_then_source "$HOMEBREW_PREFIX/opt/fzf/shell/key-bindings.zsh"
 # }
 
 # { Default
