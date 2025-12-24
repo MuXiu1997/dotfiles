@@ -109,7 +109,18 @@ exclude = ['*/.github', '*/*.md']
 # =============================== Hammerspoon ================================ #
 ['.config/hammerspoon']
 type = 'archive'
-url = 'https://github.com/MuXiu1997/hammerspoon/archive/main.zip'
+url = 'https://github.com/MuXiu1997/dot-hammerspoon/archive/dist.zip'
+exact = true
+stripComponents = 1
+refreshPeriod = '168h'
+exclude = ['*/.github', '*/*.md']
+# ============================================================================ #
+
+
+# ================================= Wezterm ================================== #
+['.config/wezterm']
+type = 'archive'
+url = 'https://github.com/MuXiu1997/dot-wezterm/archive/dist.zip'
 exact = true
 stripComponents = 1
 refreshPeriod = '168h'
