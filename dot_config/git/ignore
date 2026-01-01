@@ -1,6 +1,9 @@
 .idea/*
+.cursor/*
+.vscode/*
+
 .DS_Store
-.*.local
+*.local
 *.local.*
 .envrc
 .*-version
