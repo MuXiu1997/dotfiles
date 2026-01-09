@@ -28,7 +28,13 @@ pls() {
     --bind "ctrl-r:reload(${command})"
 }
 
-# Function 'pp' is a custom command for copying the current directory path to the clipboard.
-pp() {
-  pwd | sed -e 's/ /\\ /g' | tr -d '\n' | pbcopy
+# Function 'yp' is a custom command for copying the current directory path for non-terminal apps (e.g., Finder, Slack).
+yp() {
+  printf '%s' "${PWD}" | pbcopy
+}
+
+# Function 'ypt' is a custom command for copying the current directory path for terminal use.
+ypt() {
+  local q="'\\''"
+  printf '%s' "'${PWD//\'/${q}}'" | pbcopy
 }
