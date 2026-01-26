@@ -2,12 +2,14 @@
 
 set -euo pipefail
 
-# Source the shell library
-source {{ joinPath .chezmoi.sourceDir ".chezmoiscripts" ".lib.sh" | quote }}
+# {{ template "shellLib" . }}
 
 install_homebrew() {
   if ! type brew &>/dev/null; then
-    if bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"; then
+    local install_script_url='https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh'
+    local install_script
+    install_script="$(curl -fsSL "${install_script_url}")"
+    if bash -c "${install_script}"; then
       log_success "Homebrew installation completed"
     else
       log_error "Failed to install Homebrew"
@@ -20,18 +22,19 @@ install_homebrew() {
 
 install_required_packages() {
   local packages=("git" "age" "chezmoi" "uv" "deno")
+  local brew_exec='{{ .homebrewExec }}'
 
   for package in "${packages[@]}"; do
-    if ! {{ .homebrewExec }} list --versions "$package" &>/dev/null; then
-      log_progress "Installing $package..."
-      if {{ .homebrewExec }} install "$package"; then
-        log_success "$package installed successfully"
+    if ! "${brew_exec}" list --versions "${package}" &>/dev/null; then
+      log_progress "Installing ${package}..."
+      if "${brew_exec}" install "${package}"; then
+        log_success "${package} installed successfully"
       else
-        log_error "Failed to install $package"
+        log_error "Failed to install ${package}"
         return 1
       fi
     else
-      log_info "$package is already installed"
+      log_info "${package} is already installed"
     fi
   done
   log_success "All required packages installed"
@@ -41,13 +44,17 @@ main() {
   log_header "Installing Required Packages"
 
   log_step "Step 1: Install Homebrew"
-  if ! install_homebrew; then
+  install_homebrew
+  local exit_code=$?
+  if [[ ${exit_code} -ne 0 ]]; then
     log_error "Failed to install Homebrew, aborting"
     exit 1
   fi
 
   log_step "Step 2: Install Required Packages"
-  if ! install_required_packages; then
+  install_required_packages
+  exit_code=$?
+  if [[ ${exit_code} -ne 0 ]]; then
     log_error "Failed to install required packages, aborting"
     exit 1
   fi

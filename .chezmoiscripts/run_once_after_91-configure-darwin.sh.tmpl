@@ -1,10 +1,9 @@
-{{- if (eq .chezmoi.os "darwin") -}}
 #!/usr/bin/env bash
+# {{ if ne .chezmoi.os "darwin" }}{{ abortEmpty }}{{ end }}
 
 set -euo pipefail
 
-# Source the shell library
-source {{ joinPath .chezmoi.sourceDir ".chezmoiscripts" ".lib.sh" | quote }}
+# {{ template "shellLib" . }}
 
 configure_darwin_settings() {
   { # Keyboard Settings - 🇨🇳键盘设置
@@ -152,14 +151,16 @@ configure_darwin_settings() {
     killall Finder 2>/dev/null || true
 
     # Run dock setup script - 🇨🇳运行dock设置脚本
-    "$HOME/.local/bin/setup-dock"
+    "${HOME}/.local/bin/setup-dock"
   }
 }
 
 main() {
   log_header "Configuring macOS System Settings"
 
-  if ! configure_darwin_settings; then
+  configure_darwin_settings
+  local exit_code=$?
+  if [[ ${exit_code} -ne 0 ]]; then
     log_error "Failed to configure Darwin settings, aborting"
     exit 1
   fi
@@ -168,4 +169,3 @@ main() {
 }
 
 main
-{{- end }}

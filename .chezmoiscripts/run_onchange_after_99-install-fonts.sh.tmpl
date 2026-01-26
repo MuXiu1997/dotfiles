@@ -1,44 +1,44 @@
-{{- if (eq .chezmoi.os "darwin") -}}
 #!/usr/bin/env bash
+# {{ if ne .chezmoi.os "darwin" }}{{ abortEmpty }}{{ end }}
 
 set -euo pipefail
 
-# Source the shell library
-source {{ joinPath .chezmoi.sourceDir ".chezmoiscripts" ".lib.sh" | quote }}
+# {{ template "shellLib" . }}
 
 install_font() {
   local font_name="$1"
   local url="$2"
   local font_glob="$3"
-  local temp_dir=$(mktemp -d)
+  local temp_dir
+  temp_dir=$(mktemp -d)
 
-  log_progress "Installing $font_name..."
+  log_progress "Installing ${font_name}..."
 
   # Download the font archive
-  if ! curl -L "$url" -o "$temp_dir/font.zip" --silent --show-error; then
-    log_error "Failed to download $font_name from $url"
-    rm -rf "$temp_dir"
+  if ! curl -L "${url}" -o "${temp_dir}/font.zip" --silent --show-error; then
+    log_error "Failed to download ${font_name} from ${url}"
+    rm -rf "${temp_dir}"
     return 1
   fi
 
   # Unzip the font archive
-  if ! unzip -q "$temp_dir/font.zip" -d "$temp_dir"; then
-    log_error "Failed to extract $font_name archive"
-    rm -rf "$temp_dir"
+  if ! unzip -q "${temp_dir}/font.zip" -d "${temp_dir}"; then
+    log_error "Failed to extract ${font_name} archive"
+    rm -rf "${temp_dir}"
     return 1
   fi
 
   # Copy the fonts to /Library/Fonts using rsync
-  if sudo rsync -av --include="$font_glob" --exclude="*" "$temp_dir/" /Library/Fonts/ >/dev/null; then
-    log_success "$font_name installed successfully"
+  if sudo rsync -av --include="${font_glob}" --exclude="*" "${temp_dir}/" /Library/Fonts/ >/dev/null; then
+    log_success "${font_name} installed successfully"
   else
-    log_error "Failed to install $font_name to /Library/Fonts"
-    rm -rf "$temp_dir"
+    log_error "Failed to install ${font_name} to /Library/Fonts"
+    rm -rf "${temp_dir}"
     return 1
   fi
 
   # Clean up
-  rm -rf "$temp_dir"
+  rm -rf "${temp_dir}"
   return 0
 }
 
@@ -46,22 +46,31 @@ install_all_fonts() {
   local failed_fonts=()
 
   # JetBrains Mono
-  if ! install_font "JetBrains Mono" {{ gitHubLatestReleaseAssetURL "JetBrains/JetBrainsMono" "JetBrainsMono-*.zip" | squote }} 'fonts/ttf/*.ttf'; then
+  local jb_mono_url='{{ gitHubLatestReleaseAssetURL "JetBrains/JetBrainsMono" "JetBrainsMono-*.zip" }}'
+  install_font "JetBrains Mono" "${jb_mono_url}" 'fonts/ttf/*.ttf'
+  local exit_code=$?
+  if [[ ${exit_code} -ne 0 ]]; then
     failed_fonts+=("JetBrains Mono")
   fi
 
   # Source Han Sans
-  if ! install_font "Source Han Sans" {{ gitHubLatestReleaseAssetURL "adobe-fonts/source-han-sans" "*SourceHanSans.ttc.zip" | squote }} '*.ttc'; then
+  local shs_url='{{ gitHubLatestReleaseAssetURL "adobe-fonts/source-han-sans" "*SourceHanSans.ttc.zip" }}'
+  install_font "Source Han Sans" "${shs_url}" '*.ttc'
+  exit_code=$?
+  if [[ ${exit_code} -ne 0 ]]; then
     failed_fonts+=("Source Han Sans")
   fi
 
   # Nerd Fonts - JetBrains Mono
-  if ! install_font "Nerd Fonts JetBrains Mono" {{ gitHubLatestReleaseAssetURL "ryanoasis/nerd-fonts" "JetBrainsMono.zip" | squote }} '*.ttf'; then
+  local nf_jb_mono_url='{{ gitHubLatestReleaseAssetURL "ryanoasis/nerd-fonts" "JetBrainsMono.zip" }}'
+  install_font "Nerd Fonts JetBrains Mono" "${nf_jb_mono_url}" '*.ttf'
+  exit_code=$?
+  if [[ ${exit_code} -ne 0 ]]; then
     failed_fonts+=("Nerd Fonts JetBrains Mono")
   fi
 
   # Report results
-  if [[ ${#failed_fonts[@]} -eq 0 ]]; then
+  if [[ "${#failed_fonts[@]}" -eq 0 ]]; then
     log_success "All fonts installed successfully"
     return 0
   else
@@ -72,7 +81,9 @@ install_all_fonts() {
 
 update_font_cache() {
   log_progress "Updating font cache..."
-  if fc-cache -f >/dev/null 2>&1; then
+  fc-cache -f >/dev/null 2>&1
+  local exit_code=$?
+  if [[ ${exit_code} -eq 0 ]]; then
     log_success "Font cache updated successfully"
     return 0
   else
@@ -84,7 +95,9 @@ update_font_cache() {
 main() {
   log_header "Installing Fonts"
 
-  if ! install_all_fonts; then
+  install_all_fonts
+  local exit_code=$?
+  if [[ ${exit_code} -ne 0 ]]; then
     log_error "Font installation failed, aborting"
     exit 1
   fi
@@ -95,4 +108,3 @@ main() {
 }
 
 main
-{{- end }}

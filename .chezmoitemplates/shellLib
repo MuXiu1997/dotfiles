@@ -1,5 +1,3 @@
-#!/usr/bin/env bash
-
 # Shell Library for Chezmoi Scripts
 # Provides logging functions with emoji and colors
 
@@ -132,6 +130,3 @@ if is_ci; then
     BOLD=''
     RESET=''
 fi
-
-# Export functions for use in other scripts
-export -f log_debug log_info log_warn log_error log_success log_progress log_step log_header set_log_level
