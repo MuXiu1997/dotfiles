@@ -1,12 +1,20 @@
 save-prefix=
 
-# prefix is unnecessary (and unsupported) if Node.js is installed by nvm
-# prefix=${XDG_DATA_HOME}/npm
+# npm follow XDG specification
+prefix=${XDG_DATA_HOME}/npm
 cache=${XDG_CACHE_HOME}/npm
 tmp=${XDG_RUNTIME_DIR}/npm
-init-module=${XDG_CONFIG_HOME}/npm/config/npm-init.js
 
-# pnpm
+# npm init defaults
+init-author-name=MuXiu1997
+init-author-email=muxiu1997@muxiu1997.com
+init-author-url=https://github.com/MuXiu1997
+init-license=MIT
+init-version=0.1.0
+init-type=module
+init-private=true
+
+# pnpm follow XDG specification
 prefer-offline=true
 store-dir=${XDG_DATA_HOME}/pnpm/store
 global-dir=${XDG_DATA_HOME}/pnpm/global
