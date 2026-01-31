@@ -1,20 +1,37 @@
 # Shell Library for Chezmoi Scripts
 # Provides logging functions with emoji and colors
 
-# Color definitions
-readonly RED='\033[0;31m'
-readonly GREEN='\033[0;32m'
-readonly YELLOW='\033[1;33m'
-readonly BLUE='\033[0;34m'
-readonly PURPLE='\033[0;35m'
-readonly CYAN='\033[0;36m'
-readonly WHITE='\033[1;37m'
-readonly GRAY='\033[0;90m'
-readonly NC='\033[0m' # No Color
+# Check if running in CI environment
+is_ci() {
+    [[ -n "${CI:-}" ]] || [[ -n "${GITHUB_ACTIONS:-}" ]] || [[ -n "${GITLAB_CI:-}" ]]
+}
 
-# Text formatting
-readonly BOLD='\033[1m'
-readonly RESET='\033[0m'
+# Color definitions
+if is_ci; then
+    readonly RED=''
+    readonly GREEN=''
+    readonly YELLOW=''
+    readonly BLUE=''
+    readonly PURPLE=''
+    readonly CYAN=''
+    readonly WHITE=''
+    readonly GRAY=''
+    readonly NC=''
+    readonly BOLD=''
+    readonly RESET=''
+else
+    readonly RED='\033[0;31m'
+    readonly GREEN='\033[0;32m'
+    readonly YELLOW='\033[1;33m'
+    readonly BLUE='\033[0;34m'
+    readonly PURPLE='\033[0;35m'
+    readonly CYAN='\033[0;36m'
+    readonly WHITE='\033[1;37m'
+    readonly GRAY='\033[0;90m'
+    readonly NC='\033[0m'
+    readonly BOLD='\033[1m'
+    readonly RESET='\033[0m'
+fi
 
 # Log level definitions
 readonly LOG_LEVEL_DEBUG=0
@@ -110,23 +127,3 @@ set_log_level() {
     esac
     log_info "Log level set to: $1"
 }
-
-# Check if running in CI environment
-is_ci() {
-    [[ -n "${CI:-}" ]] || [[ -n "${GITHUB_ACTIONS:-}" ]] || [[ -n "${GITLAB_CI:-}" ]]
-}
-
-# Disable colors in CI environment
-if is_ci; then
-    RED=''
-    GREEN=''
-    YELLOW=''
-    BLUE=''
-    PURPLE=''
-    CYAN=''
-    WHITE=''
-    GRAY=''
-    NC=''
-    BOLD=''
-    RESET=''
-fi
