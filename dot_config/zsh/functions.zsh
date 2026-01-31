@@ -38,3 +38,21 @@ ypt() {
   local q="'\\''"
   printf '%s' "'${PWD//\'/${q}}'" | pbcopy
 }
+
+# Function 'cmat' is a custom command for applying chezmoi changes by source path (apply + target-path).
+cmat() {
+  if [ $# -eq 0 ]; then
+    echo "Usage: cmat <path> [path...]" >&2
+    return 1
+  fi
+
+  for arg in "$@"; do
+    local target
+    target=$(chezmoi target-path "$arg" 2>/dev/null)
+    if [ -n "$target" ]; then
+      chezmoi apply "$target"
+    else
+      echo "Error: '$arg' is not managed by chezmoi" >&2
+    fi
+  done
+}
