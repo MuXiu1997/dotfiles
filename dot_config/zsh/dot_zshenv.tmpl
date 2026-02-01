@@ -31,6 +31,18 @@ typeset -U path fpath
 # { Homebrew
   path=($path "{{ .homebrewBin }}")
   fpath=($fpath "{{ .homebrewPrefix }}/share/zsh/site-functions")
+
+  {{- if eq .chezmoi.os "darwin" }}
+  # curl (keg-only)
+  if file_exists "{{ .homebrewPrefix }}/opt/curl/bin/curl"; then
+    path=("{{ .homebrewPrefix }}/opt/curl/bin" $path)
+    export LDFLAGS="-L{{ .homebrewPrefix }}/opt/curl/lib $LDFLAGS"
+    export CPPFLAGS="-I{{ .homebrewPrefix }}/opt/curl/include $CPPFLAGS"
+  fi
+
+  # coreutils (gnubin)
+  file_exists "{{ .homebrewPrefix }}/opt/coreutils/libexec/gnubin/ls" && path=("{{ .homebrewPrefix }}/opt/coreutils/libexec/gnubin" $path)
+  {{- end }}
 # }
 
 # { Zoxide
