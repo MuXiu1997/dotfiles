@@ -9,17 +9,29 @@
 [core]
     autocrlf = input
     ignorecase = false
-[include]
-    path = ../delta/config
-[push]
-    default = current
+
 [commit]
     {{ if has "personal" .tags -}}
     gpgsign = true
     {{- end }}
+[pull]
+    rebase = true
+[push]
+    default = current
+
 [log]
     date = format:%Y-%m-%d %H:%M:%S
+[rerere]
+    enabled = true
+[filter "lfs"]
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
+    required = true
+
 [safe]
     directory = {{ .homebrewPrefix }}
+[include]
+    path = ../delta/config
 [includeIf "gitdir:@kanyun.com/"]
     path = kanyun.config
