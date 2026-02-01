@@ -11,13 +11,13 @@ gui:
 
 git:
   parseEmoji: true
-  paging:
-    colorArg: always
-    pager: >
-      delta
-      --features lazygit
-      --max-line-length {{columnWidth}}
-      -s
+  pagers:
+    - colorArg: always
+      pager: >
+        delta
+        --features lazygit
+        --max-line-length {{columnWidth}}
+        -s
 
 customCommands:
   - key: T
