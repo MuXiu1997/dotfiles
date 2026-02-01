@@ -4,64 +4,48 @@ import pathlib
 import subprocess
 
 script = '''
-use framework "Appkit"
-use Finder : application "Finder"
+use framework "AppKit"
 
 property this : a reference to current application
 property NSFileManager : a reference to NSFileManager of this
-property NSImage : a reference to NSImage of this
-property NSMutableArray : a reference to NSMutableArray of this
 property NSPasteboard : a reference to NSPasteboard of this
 property NSString : a reference to NSString of this
-property NSURL : a reference to NSURL of this
-
-property pb : missing value
 
 on run argv
-	if (count of argv) < 1 then
-		error "Usage: paste_to_directory <destination_directory> [overwrite]"
-	end if
+    if (count of argv) < 1 then
+        error "Usage: paste_to_directory <destination_directory> [overwrite]"
+    end if
 
-	set destinationDirectory to (item 1 of argv) as text
-	set overwrite to false
-	if (count of argv) is 2 then
-		set overwrite to (item 2 of argv) as text is "true"
-	end if
+    set destinationDirectory to (item 1 of argv) as text
+    set overwrite to false
+    if (count of argv) is 2 then
+        set overwrite to (item 2 of argv) as text is "true"
+    end if
 
-	init()
-	pasteFilesToDirectory(destinationDirectory, overwrite)
+    set pb to NSPasteboard's generalPasteboard()
+    set filePaths to pb's propertyListForType:"NSFilenamesPboardType"
+    if filePaths is missing value then
+        error "No files in clipboard"
+    end if
+
+    set dp to (NSString's stringWithString:destinationDirectory)'s ¬
+        stringByStandardizingPath()
+    set dPath to dp as text
+
+    set fileManager to NSFileManager's defaultManager()
+    repeat with sourcePath in filePaths
+        set fileName to (NSString's stringWithString:(sourcePath as text))'s lastPathComponent() as text
+        set destinationPath to dPath & "/" & fileName
+        if overwrite then
+            if (fileManager's fileExistsAtPath:destinationPath) then
+                fileManager's removeItemAtPath:destinationPath |error|:(missing value)
+            end if
+        end if
+        fileManager's copyItemAtPath:sourcePath toPath:destinationPath |error|:(missing value)
+    end repeat
+
+    return true
 end run
-
-to init()
-	set pb to NSPasteboard's generalPasteboard()
-end init
-
-to pasteFilesToDirectory(destinationDirectory, overwrite)
-	if pb = missing value then init()
-
-	set dp to (NSString's stringWithString:destinationDirectory)'s ¬
-            stringByStandardizingPath()
-
-	set dURL to NSURL's fileURLWithPath:dp
-	set dPath to (dURL's path()) as text
-
-	set fileURLs to (pb's readObjectsForClasses:{NSURL} options:{})
-	if fileURLs is missing value then
-		error "No files in clipboard"
-	end if
-
-	set fileManager to NSFileManager's defaultManager()
-	repeat with fileURL in fileURLs
-		set sourcePath to (fileURL's |path|()) as text
-		set destinationPath to (dPath & "/" &(fileURL's lastPathComponent()) as text)
-		if overwrite then
-			if (fileManager's fileExistsAtPath:destinationPath) then
-				fileManager's removeItemAtPath:destinationPath |error|:(missing value)
-			end if
-		end if
-		fileManager's copyItemAtPath:sourcePath toPath:destinationPath |error|:(missing value)
-	end repeat
-end pasteFilesToDirectory
 '''
 
 def main():
@@ -87,8 +71,10 @@ def main():
         stderr=subprocess.PIPE,
         universal_newlines=True
     )
-    stdout, _ = p.communicate(script)
-    if not stdout.startswith('true'):
+    stdout, stderr = p.communicate(script)
+    if p.returncode != 0 or not stdout.strip().startswith('true'):
+        if stderr:
+            print(stderr)
         exit(1)
 
 if __name__ == '__main__':
