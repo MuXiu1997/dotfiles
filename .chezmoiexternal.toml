@@ -9,7 +9,7 @@ exclude = ['*/.github', '*/*.md', '*/.devcontainer', '*/themes', '*/plugins']
 # ============================================================================ #
 
 
-# ============================ Oh My Zsh plugins ============================= #
+# ============================ Oh My Zsh Plugins ============================= #
 ['.config/oh-my-zsh/custom/plugins/command-not-found']
 type = 'archive'
 url = 'https://github.com/ohmyzsh/ohmyzsh/archive/master.zip'
@@ -52,7 +52,7 @@ exclude = ['*/.github', '*/*.md']
 # ============================================================================ #
 
 
-# ============================= Oh My Zsh themes ============================= #
+# ============================= Oh My Zsh Themes ============================= #
 ['.config/oh-my-zsh/custom/themes/powerlevel10k']
 type = 'archive'
 url = 'https://github.com/romkatv/powerlevel10k/archive/{{ template "gitHubLatestTag" "romkatv/powerlevel10k" }}.zip'
@@ -63,7 +63,7 @@ exclude = ['*/.github', '*/*.md']
 # ============================================================================ #
 
 
-# ============================== Ranger plugins ============================== #
+# ============================== Ranger Plugins ============================== #
 ['.config/ranger/plugins/ranger_fzf_filter']
 type = 'archive'
 url = 'https://github.com/MuXiu1997/ranger-fzf-filter/archive/main.zip'
@@ -138,16 +138,7 @@ exclude = ['*/.github', '*/*.md']
 # ============================================================================ #
 
 
-# =================================== bin =================================== #
-['.local/bin/goet']
-type = 'file'
-url = 'https://github.com/MuXiu1997/goet/releases/download/{{ template "gitHubLatestTag" "MuXiu1997/goet" }}/goet_{{ .chezmoi.os }}_{{ .chezmoi.arch }}'
-executable = true
-refreshPeriod = '168h'
-# ============================================================================ #
-
-
-# ============================= zsh completions ============================== #
+# ============================= Zsh Completions ============================== #
 {{ if lookPath "docker" -}}
 {{- $dockerVersion := output "docker" "--version" | replaceAllRegex ".*?(\\d+?\\.\\d+?\\.\\d+?).*" "$1" | trim -}}
 ['.local/share/zsh/site-functions/_docker']
@@ -167,17 +158,6 @@ refreshPeriod = '168h'
 ['.local/share/zsh/site-functions/_mvn']
 type = 'file'
 url = 'https://github.com/zsh-users/zsh-completions/raw/master/src/_mvn'
-refreshPeriod = '168h'
-{{- end }}
-
-{{/*
-nvm may have been installed but nvm.sh is not loaded,
-the judgment criterion is whether nvm has been installed
-*/ -}}
-{{ if and (lookPath "brew") (output "brew" "list" "--formula" "-1" | splitList "\n" | has  "nvm") -}}
-['.local/share/zsh/site-functions/_nvm']
-type = 'file'
-url = 'https://github.com/zsh-users/zsh-completions/raw/master/src/_nvm'
 refreshPeriod = '168h'
 {{- end }}
 
