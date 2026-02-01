@@ -1,0 +1,6 @@
+# pnpm follow XDG specification
+store-dir=${XDG_DATA_HOME}/pnpm/store
+global-dir=${XDG_DATA_HOME}/pnpm/global
+global-bin-dir=${XDG_DATA_HOME}/pnpm/bin
+state-dir=${XDG_STATE_HOME}/pnpm
+cache-dir=${XDG_CACHE_HOME}/pnpm
