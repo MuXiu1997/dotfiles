@@ -8,7 +8,7 @@ set -euo pipefail
 configure_darwin_settings() {
   { # Keyboard Settings - 🇨🇳键盘设置
     # Set initial key repeat delay (15 = 225ms) - 🇨🇳设置按键重复初始延迟（15 = 225毫秒）
-    defaults write NSGlobalDomain InitialKeyRepeat -int 15  
+    defaults write NSGlobalDomain InitialKeyRepeat -int 15
     # Set key repeat rate (2 = 30ms) - 🇨🇳设置按键重复速率（2 = 30毫秒）
     defaults write NSGlobalDomain KeyRepeat -int 2
     # Disable press and hold for accented characters - 🇨🇳禁用长按显示重音字符

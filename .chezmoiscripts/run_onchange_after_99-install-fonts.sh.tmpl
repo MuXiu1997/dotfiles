@@ -46,7 +46,7 @@ install_font() {
       log_error "Failed to copy ${filename} to /Library/Fonts"
       copy_failed=true
     fi
-  done <<< "${font_files}"
+  done <<<"${font_files}"
 
   # Clean up
   rm -rf "${temp_dir}"
@@ -122,7 +122,7 @@ update_font_cache() {
     return 0
   else
     log_warn "Failed to update font cache (fc-cache not available or failed)"
-    return 0  # Non-critical failure
+    return 0 # Non-critical failure
   fi
 }
 
