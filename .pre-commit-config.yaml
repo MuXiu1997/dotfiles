@@ -1,0 +1,24 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-added-large-files
+
+  - repo: local
+    hooks:
+      - id: shellcheck-tmpl
+        name: ShellCheck (.sh.tmpl)
+        entry: shellcheck --shell=bash --external-sources
+        language: system
+        files: (^.chezmoiscripts/.*\.sh\.tmpl$|^.chezmoitemplates/shellLib$|^install\.sh$)
+        verbose: true
+
+      - id: shfmt-tmpl
+        name: shfmt (.sh.tmpl)
+        # -w: write, -i 2: 2 spaces indent, -ci: case indent
+        entry: shfmt -w -i 2 -ci
+        language: system
+        files: (^.chezmoiscripts/.*\.sh\.tmpl$|^.chezmoitemplates/shellLib$|^install\.sh$)
