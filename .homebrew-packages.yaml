@@ -1,95 +1,92 @@
 packages:
   base:
     formula:
-      - age
-      - bash
-      - bat
-      - bottom
-      - chezmoi
-      - ctop
-      - deno
-      - duf
-      - dust
-      - eza
-      - fd
-      - fnm
-      - fzf
-      - gh
-      - git
-      - git-delta
-      - goenv
-      - golangci-lint
-      - goreleaser
-      - gost
-      - grex
-      - grpcurl
-      - gum
-      - helm
-      - httpie
-      - hyperfine
-      - jenv
-      - jless
-      - jq
-      - just
-      - ktlint
-      - lazydocker
-      - lazygit
-      - maven
-      - neofetch
-      - neovim
-      - pnpm
-      - poetry
-      - procs
-      - pyenv
-      - ranger
-      - rclone
-      - ripgrep
-      - sevenzip
-      - shellcheck
-      - tokei
-      - tree
-      - uv
-      - vim
-      - wget
-      - yq
-      - zoxide
-      - zsh
+      - age # Simple, modern, secure file encryption
+      - atuin # Improved shell history for zsh, bash, fish and nushell
+      - bash # Bourne-Again SHell, a UNIX command interpreter
+      - bat # Clone of cat(1) with syntax highlighting and Git integration
+      - bottom # Yet another cross-platform graphical process/system monitor
+      - chezmoi # Manage your dotfiles across multiple diverse machines, securely
+      - ctop # Top-like interface for container metrics
+      - deno # Secure runtime for JavaScript and TypeScript
+      - duf # Disk Usage/Free Utility - a better 'df' alternative
+      - dust # More intuitive version of du in rust
+      - eza # Modern, maintained replacement for ls
+      - fd # Simple, fast and user-friendly alternative to find
+      - fzf # Command-line fuzzy finder written in Go
+      - gh # GitHub command-line tool
+      - git # Distributed revision control system
+      - git-delta # Syntax-highlighting pager for git and diff output
+      - git-lfs # Git extension for versioning large files
+      - gost # GO Simple Tunnel - a simple tunnel written in golang
+      - grex # Command-line tool for generating regular expressions
+      - grpcurl # Like cURL, but for gRPC
+      - gum # Tool for glamorous shell scripts
+      - helm # Kubernetes package manager
+      - httpie # User-friendly cURL replacement (command-line HTTP client)
+      - hyperfine # Command-line benchmarking tool
+      - jless # Command-line pager for JSON data
+      - jq # Lightweight and flexible command-line JSON processor
+      - just # Handy way to save and run project-specific commands
+      - lazydocker # Lazier way to manage everything docker
+      - lazygit # Simple terminal UI for git commands
+      - mas # Mac App Store command-line interface
+      - mise # Polyglot runtime manager (asdf rust clone)
+      - neofetch # Fast, highly customisable system info script
+      - neovim # Ambitious Vim-fork focused on extensibility and agility
+      - procs # Modern replacement for ps written in Rust
+      - ranger # File browser
+      - rclone # Rsync for cloud storage
+      - ripgrep # Search tool like grep and The Silver Searcher
+      - sevenzip # 7-Zip is a file archiver with a high compression ratio
+      - tokei # Program that allows you to count code, quickly
+      - tree # Display directories as trees (with optional color/HTML output)
+      - uv # Extremely fast Python package installer and resolver, written in Rust
+      - vim # Vi 'workalike' with many additional features
+      - wget # Internet file retriever
+      - yq # Process YAML, JSON, XML, CSV and properties documents from the CLI
+      - zoxide # Shell extension to navigate your filesystem faster
+      - zsh # UNIX shell (command interpreter)
   darwin:
     cask:
-      - alfred
-      - alt-tab
-      - another-redis-desktop-manager
-      - cursor
-      - cyberduck
-      - docker-desktop
-      - dropbox
-      - electerm
-      - free-download-manager
-      - hammerspoon
-      - iina
-      - itsycal
-      - jetbrains-toolbox
-      - jordanbaird-ice
-      - kap
-      - karabiner-elements
-      - keycastr
-      - maczip
-      - mark-text
-      - microsoft-edge
-      - mos
-      - mounty
-      - neteasemusic
-      - postman
-      - rectangle
-      - rustdesk
-      - sloth
-      - snipaste
-      - squirrel-app
-      - stats
-      - switchhosts
-      - visual-studio-code
-      - wechatwebdevtools
-      - wezterm
+      - alfred # Application launcher and productivity software
+      - alt-tab # Enable Windows-like alt-tab
+      - another-redis-desktop-manager # Redis desktop manager
+      - bruno # Open source IDE for exploring and testing APIs
+      - cursor # Write, edit, and chat about your code with AI
+      - cyberduck # Server and cloud storage browser
+      - dropbox # Client for the Dropbox cloud storage service
+      - electerm # Terminal/ssh/sftp client
+      - flowvision # Waterfall-style image viewer
+      - free-download-manager # Download accelerator and organiser
+      - hammerspoon # Desktop automation application
+      - iina # Free and open-source media player
+      - itsycal # Menu bar calendar
+      - jetbrains-toolbox # JetBrains tools manager
+      - jordanbaird-ice@beta # Menu bar manager
+      - kap # Open-source screen recorder built with web technology
+      - karabiner-elements # Keyboard customiser
+      - keycastr # Open-source keystroke visualiser
+      - maczip # Utility to open, create and modify archive files
+      - mark-text # Markdown editor
+      - microsoft-edge # Multi-platform web browser
+      - mos # Smooths scrolling and set mouse scroll directions independently
+      - mounty # Re-mounts write-protected NTFS volumes
+      - neteasemusic # Music streaming platform
+      - orbstack # Replacement for Docker Desktop
+      - pearcleaner # Utility to uninstall apps and remove leftover files from old/uninstalled apps
+      - postman # Collaboration platform for API development
+      - rectangle # Move and resize windows using keyboard shortcuts or snap areas
+      - rustdesk # Open source virtual/remote desktop application
+      - sloth # Displays all open files and sockets in use by all running processes
+      - snipaste # Snip or pin screenshots
+      - squirrel-app # Rime input method engine
+      - stats # System monitor for the menu bar
+      - switchhosts # App to switch hosts
+      - visual-studio-code # Open-source code editor
+      - wechatwebdevtools # Wechat DevTools for Official Account and Mini Program development
+      - wezterm # GPU-accelerated cross-platform terminal emulator and multiplexer
+      - zerotier-one # Mesh VPN client
     mas:
       - name: Bitwarden
         id: 1352778147
@@ -101,15 +98,13 @@ packages:
         id: 1443749478
       - name: Xcode
         id: 497799835
-      - name: 豆包
-        id: 6683305962
   personal:
     formula:
-      - pinentry-mac
+      - pinentry-mac # Pinentry for GPG on Mac
     cask:
-      - gpg-suite-no-mail
-      - qq
-      - wechat
+      - gpg-suite-no-mail # Tools to protect your files
+      - qq # Instant messaging tool
+      - wechat # Free messaging and calling application
     mas:
       - name: Spark
         id: 1176895641
@@ -121,4 +116,3 @@ packages:
         id: 1189898970
       - name: 小米互联服务
         id: 6673908449
-  
