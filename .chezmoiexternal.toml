@@ -182,3 +182,40 @@ url = 'https://github.com/zsh-users/zsh-completions/raw/master/src/_direnv'
 refreshPeriod = '168h'
 {{- end }}
 # ============================================================================ #
+
+
+# ================================== Fonts =================================== #
+{{- $fontCacheDir := ".cache/chezmoi-external-fonts" }}
+
+["{{ $fontCacheDir }}/JetBrainsMono"]
+    type = "archive"
+    url = {{ gitHubLatestReleaseAssetURL "JetBrains/JetBrainsMono" "JetBrainsMono-*.zip" | quote }}
+    stripComponents = 0
+    exact = true
+    refreshPeriod = "168h"
+
+["{{ $fontCacheDir }}/SourceHanSans"]
+    type = "archive"
+    url = {{ gitHubLatestReleaseAssetURL "adobe-fonts/source-han-sans" "*SourceHanSans.ttc.zip" | quote }}
+    exact = true
+    refreshPeriod = "168h"
+
+["{{ $fontCacheDir }}/NerdFontsJetBrainsMono"]
+    type = "archive"
+    url = {{ gitHubLatestReleaseAssetURL "ryanoasis/nerd-fonts" "JetBrainsMono.zip" | quote }}
+    exact = true
+    refreshPeriod = "168h"
+
+["{{ $fontCacheDir }}/MapleMonoMuXiu1997"]
+    type = "archive"
+    url = {{ gitHubLatestReleaseAssetURL "MuXiu1997/maple-font-custom" "*-NF-CN-*.zip" | quote }}
+    exact = true
+    refreshPeriod = "168h"
+
+["{{ $fontCacheDir }}/ExternalFonts"]
+    type = "archive"
+    url = "https://github.com/MuXiu1997/dotfiles/archive/fonts.zip"
+    stripComponents = 1
+    exact = true
+    refreshPeriod = "168h"
+# ============================================================================ #

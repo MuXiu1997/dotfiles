@@ -5,140 +5,51 @@ set -euo pipefail
 
 # {{ template "shellLib" . }}
 
-install_font() {
-  local font_name="$1"
-  local url="$2"
-  local file_regex="$3"
-  local temp_dir
-  temp_dir=$(mktemp -d)
-
-  log_progress "Installing ${font_name}..."
-
-  # Download the font archive
-  if ! curl -L "${url}" -o "${temp_dir}/font.zip" --silent --show-error; then
-    log_error "Failed to download ${font_name} from ${url}"
-    rm -rf "${temp_dir}"
-    return 1
-  fi
-
-  # Unzip the font archive
-  if ! unzip -q "${temp_dir}/font.zip" -d "${temp_dir}"; then
-    log_error "Failed to extract ${font_name} archive"
-    rm -rf "${temp_dir}"
-    return 1
-  fi
-
-  # Find matching font files using extended regex
-  local font_files
-  font_files=$(find -E "${temp_dir}" -type f -regex "${file_regex}")
-
-  if [[ -z "${font_files}" ]]; then
-    log_error "No font files matching '${file_regex}' found in ${font_name} archive"
-    rm -rf "${temp_dir}"
-    return 1
-  fi
-
-  local copy_failed=false
-  while IFS= read -r font_file; do
-    local filename
-    filename=$(basename "${font_file}")
-    if ! sudo cp "${font_file}" "/Library/Fonts/${filename}"; then
-      log_error "Failed to copy ${filename} to /Library/Fonts"
-      copy_failed=true
-    fi
-  done <<<"${font_files}"
-
-  # Clean up
-  rm -rf "${temp_dir}"
-
-  if [[ "${copy_failed}" == "true" ]]; then
-    log_error "Failed to install some fonts from ${font_name}"
-    return 1
-  fi
-
-  log_success "${font_name} installed successfully"
-  return 0
-}
-
-install_all_fonts() {
-  local failed_fonts=()
-
-  # JetBrains Mono (variable fonts)
-  local jb_mono_url='{{ gitHubLatestReleaseAssetURL "JetBrains/JetBrainsMono" "JetBrainsMono-*.zip" }}'
-  install_font "JetBrains Mono" "${jb_mono_url}" '.*/fonts/variable/.*\.ttf'
-  local exit_code=$?
-  if [[ ${exit_code} -ne 0 ]]; then
-    failed_fonts+=("JetBrains Mono")
-  fi
-
-  # Source Han Sans
-  local shs_url='{{ gitHubLatestReleaseAssetURL "adobe-fonts/source-han-sans" "*SourceHanSans.ttc.zip" }}'
-  install_font "Source Han Sans" "${shs_url}" '.*\.ttc'
-  exit_code=$?
-  if [[ ${exit_code} -ne 0 ]]; then
-    failed_fonts+=("Source Han Sans")
-  fi
-
-  # Nerd Fonts - JetBrains Mono
-  local nf_jb_mono_url='{{ gitHubLatestReleaseAssetURL "ryanoasis/nerd-fonts" "JetBrainsMono.zip" }}'
-  install_font "Nerd Fonts JetBrains Mono" "${nf_jb_mono_url}" '.*\.ttf'
-  exit_code=$?
-  if [[ ${exit_code} -ne 0 ]]; then
-    failed_fonts+=("Nerd Fonts JetBrains Mono")
-  fi
-
-  # Maple Mono MuXiu1997
-  local maple_mono_url='{{ gitHubLatestReleaseAssetURL "MuXiu1997/maple-font-custom" "*-NF-CN-*.zip" }}'
-  install_font "Maple Mono MuXiu1997" "${maple_mono_url}" '.*\.ttf'
-  exit_code=$?
-  if [[ ${exit_code} -ne 0 ]]; then
-    failed_fonts+=("Maple Mono MuXiu1997")
-  fi
-
-  # Custom Fonts from fonts branch
-  local custom_fonts_url="https://github.com/MuXiu1997/dotfiles/archive/fonts.zip"
-  install_font "Custom Fonts" "${custom_fonts_url}" '.*\.(otf|ttf|TTF)'
-  exit_code=$?
-  if [[ ${exit_code} -ne 0 ]]; then
-    failed_fonts+=("Custom Fonts")
-  fi
-
-  # Report results
-  if [[ "${#failed_fonts[@]}" -eq 0 ]]; then
-    log_success "All fonts installed successfully"
-    return 0
-  else
-    log_error "Failed to install ${#failed_fonts[@]} font(s): ${failed_fonts[*]}"
-    return 1
-  fi
-}
-
-update_font_cache() {
-  log_progress "Updating font cache..."
-  fc-cache -f >/dev/null 2>&1
-  local exit_code=$?
-  if [[ ${exit_code} -eq 0 ]]; then
-    log_success "Font cache updated successfully"
-    return 0
-  else
-    log_warn "Failed to update font cache (fc-cache not available or failed)"
-    return 0 # Non-critical failure
-  fi
-}
+# {{ $fontCacheDir := joinPath .chezmoi.homeDir ".cache/chezmoi-external-fonts" }}
+: <<'CHZ_TEMPLATE'
+# Font Cache Content Hashes:
+{{- range (list "ttf" "otf" "ttc" "TTF") }}
+{{- $ext := . }}
+{{- range (glob (joinPath $fontCacheDir (printf "**/*.%s" $ext))) }}
+# {{ . }}: {{ include . | sha256sum }}
+{{- end }}
+{{- end }}
+CHZ_TEMPLATE
 
 main() {
-  log_header "Installing Fonts"
+  log_header "Installing Fonts from External Cache"
 
-  install_all_fonts
-  local exit_code=$?
-  if [[ ${exit_code} -ne 0 ]]; then
-    log_error "Font installation failed, aborting"
-    exit 1
-  fi
+  # shellcheck disable=SC2154
+  local font_src="{{ $fontCacheDir }}"
+  local font_dest="/Library/Fonts"
 
-  update_font_cache
+  log_progress "Updating fonts in ${font_dest}..."
+
+  # 1. JetBrains Mono (Variable)
+  log_progress "Installing JetBrains Mono (Variable)..."
+  find -E "${font_src}/JetBrainsMono" -type f -regex '.*/fonts/variable/.*\.ttf' -exec sudo cp -f {} "${font_dest}/" \;
+
+  # 2. Source Han Sans (TTC)
+  log_progress "Installing Source Han Sans..."
+  find "${font_src}/SourceHanSans" -type f -name "*.ttc" -exec sudo cp -f {} "${font_dest}/" \;
+
+  # 3. Nerd Fonts JetBrains Mono
+  log_progress "Installing Nerd Fonts JetBrains Mono..."
+  find "${font_src}/NerdFontsJetBrainsMono" -type f -name "*.ttf" -exec sudo cp -f {} "${font_dest}/" \;
+
+  # 4. Maple Mono MuXiu1997
+  log_progress "Installing Maple Mono MuXiu1997..."
+  find "${font_src}/MapleMonoMuXiu1997" -type f -name "*.ttf" -exec sudo cp -f {} "${font_dest}/" \;
+
+  # 5. External Fonts
+  log_progress "Installing External Fonts..."
+  find -E "${font_src}/ExternalFonts" -type f -regex '.*\.(otf|ttf|TTF)' -exec sudo cp -f {} "${font_dest}/" \;
 
   log_success "Font installation completed successfully!"
+
+  # Update font cache
+  log_progress "Updating font cache..."
+  fc-cache -f >/dev/null 2>&1 || true
 }
 
 main
