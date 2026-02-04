@@ -32,7 +32,13 @@ is_cursor_agent || file_readable_then_source "${XDG_CACHE_HOME:-$HOME/.cache}/p1
 
 # { Zsh
   # Zsh vi mode config
-  # Must before oh-my-zsh.zsh
+  # Reference: https://github.com/jeffreytse/zsh-vi-mode#configuration-function
+  # > Since there are some config options relied to some variables defined in the plugin, however, some not.
+  # > We need to provide an unified config entry function. The name of entry function is stored in an option
+  # > called ZVM_CONFIG_FUNC and default value is zvm_config, you can change to others for fitting your flavor.
+  # >
+  # > If this config function exists, it will be called automatically, you can do some configurations in this
+  # > aspect before you source this plugin.
   is_cursor_agent || file_readable_then_source "${ZDOTDIR}/zvm-config.zsh"
 
   # Oh my zsh
@@ -45,20 +51,20 @@ is_cursor_agent || file_readable_then_source "${XDG_CACHE_HOME:-$HOME/.cache}/p1
 
 # { Cli
   # Zoxide
-  command_exists zoxide && eval "$(zoxide init zsh)"
-
-  # Fzf
-  is_cursor_agent && file_readable_then_source "${XDG_CONFIG_HOME}/fzf.zsh" \
-  || zvm_after_init_commands+=("file_readable_then_source ${XDG_CONFIG_HOME}/fzf.zsh")
+  is_cursor_agent || command_exists zoxide && eval "$(zoxide init zsh)"
 
   # Atuin
-  command_exists atuin && eval "$(atuin init zsh --disable-up-arrow --disable-ctrl-r)"
-  is_cursor_agent && file_readable_then_source "${XDG_CONFIG_HOME}/fzf-atuin.zsh" \
-  || zvm_after_init_commands+=("file_readable_then_source ${XDG_CONFIG_HOME}/fzf-atuin.zsh")
+  is_cursor_agent || command_exists atuin && eval "$(atuin init zsh --disable-up-arrow --disable-ctrl-r)"
 
-  # Fzf-tab
-  is_cursor_agent && file_readable_then_source "${XDG_CONFIG_HOME}/fzf-tab.zsh" \
-  || zvm_after_init_commands+=("file_readable_then_source ${XDG_CONFIG_HOME}/fzf-tab.zsh")
+  # Fzf Keybindings
+  # Reference: https://github.com/jeffreytse/zsh-vi-mode#execute-extra-commands
+  # > Since the default initialization mode, this plugin will overwrite the previous key bindings,
+  # > this causes the key bindings of other plugins (i.e. fzf, zsh-autocomplete, etc.) to fail.
+  function zvm_after_init() {
+    file_readable_then_source "${XDG_CONFIG_HOME}/fzf.zsh"
+    file_readable_then_source "${XDG_CONFIG_HOME}/fzf-atuin.zsh"
+    file_readable_then_source "${XDG_CONFIG_HOME}/fzf-tab.zsh"
+  }
 # }
 
 # { Pgp
