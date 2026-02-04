@@ -91,3 +91,12 @@ path=("${USER_LOCAL_BIN}" $path)
 # To customize prompt, run `p10k configure` or edit $ZDOTDIR/p10k.zsh.
 is_cursor_agent || file_readable_then_source "${ZDOTDIR}/p10k.zsh"
 is_cursor_agent || file_readable_then_source "${ZDOTDIR}/p10k-fnm.zsh"
+
+# { Local
+  # Load local zsh configurations not managed by chezmoi
+  if [[ -d "$ZDOTDIR/zshrc.local.d" ]]; then
+    for config_file in "$ZDOTDIR/zshrc.local.d"/*.zsh(N); do
+      file_readable_then_source "$config_file"
+    done
+  fi
+# }
