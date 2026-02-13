@@ -1,11 +1,41 @@
+x-files:
+  shell: &FILES_SHELL |
+    (?x)^(
+      install\.sh|
+      private_dot_claude/executable_play-notification\.sh|
+      .chezmoiscripts/.*\.sh\.tmpl|
+      .chezmoitemplates/shellLib
+    )$
+  python: &FILES_PYTHON |
+    (?x)^(
+      dot_config/lazygit/scripts/.*|
+      dot_config/ranger/commands\.py|
+      dot_local/bin/executable_pbcopyfile|
+      dot_local/bin/executable_pbpastefile
+    )$
+
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v5.0.0
+    rev: v6.0.0
     hooks:
       - id: trailing-whitespace
       - id: end-of-file-fixer
       - id: check-yaml
       - id: check-added-large-files
+
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.15.0
+    hooks:
+      # Linter
+      - id: ruff-check
+        args: [--fix]
+        types_or: [file, python]
+        files: *FILES_PYTHON
+      # Formatter
+      - id: ruff-format
+        args: [--config=format.quote-style='single']
+        types_or: [file, python]
+        files: *FILES_PYTHON
 
   - repo: local
     hooks:
@@ -13,7 +43,7 @@ repos:
         name: ShellCheck (.sh.tmpl)
         entry: shellcheck --shell=bash --external-sources
         language: system
-        files: (^.chezmoiscripts/.*\.sh\.tmpl$|^.chezmoitemplates/shellLib$|^install\.sh$)
+        files: *FILES_SHELL
         verbose: true
 
       - id: shfmt-tmpl
@@ -21,4 +51,4 @@ repos:
         # -w: write, -i 2: 2 spaces indent, -ci: case indent
         entry: shfmt -w -i 2 -ci
         language: system
-        files: (^.chezmoiscripts/.*\.sh\.tmpl$|^.chezmoitemplates/shellLib$|^install\.sh$)
+        files: *FILES_SHELL
