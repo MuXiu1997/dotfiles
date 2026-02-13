@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
-from __global import *
+from __global import get_remotes
+import sys
+import os
+import subprocess
+import time
 
 
 def push_tag(tag_name, remote, force):
@@ -14,10 +18,12 @@ def get_remote():
 
     cmd = subprocess.Popen(
         [
-            'gum', 'choose',
-            '--header', 'Select the remote repository to push the tag to:',
+            'gum',
+            'choose',
+            '--header',
+            'Select the remote repository to push the tag to:',
             '--',
-            *remotes
+            *remotes,
         ],
         stdout=subprocess.PIPE,
     )
@@ -30,11 +36,16 @@ def get_remote():
 def check_tag_exists(tag_name, remote):
     spin_cmd = subprocess.Popen(
         [
-            'gum', 'spin',
-            '--spinner', 'minidot',
-            '--title', 'Checking if the tag exists in the remote repository...',
+            'gum',
+            'spin',
+            '--spinner',
+            'minidot',
+            '--title',
+            'Checking if the tag exists in the remote repository...',
             '--',
-            'tail', '-f', '/dev/null'
+            'tail',
+            '-f',
+            '/dev/null',
         ],
         stdout=subprocess.PIPE,
     )
@@ -51,7 +62,7 @@ def check_tag_exists(tag_name, remote):
             spin_cmd.terminate()
             stdout = cmd.stdout.read()
             tags = [line.split('\t')[1] for line in stdout.decode().splitlines()]
-            return "refs/tags/{}".format(tag_name) in tags
+            return 'refs/tags/{}'.format(tag_name) in tags
         time.sleep(0.1)
 
 
@@ -60,7 +71,11 @@ def is_force(tag_name, remote):
         return False
 
     cmd = subprocess.Popen(
-        ['gum', 'confirm', 'The tag already exists in the remote repository. Do you want to force push it?'],
+        [
+            'gum',
+            'confirm',
+            'The tag already exists in the remote repository. Do you want to force push it?',
+        ],
         stdout=subprocess.PIPE,
     )
     cmd.communicate()

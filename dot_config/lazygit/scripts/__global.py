@@ -1,9 +1,5 @@
 import os
 import subprocess
-# noinspection PyUnresolvedReferences
-import sys
-# noinspection PyUnresolvedReferences
-import time
 
 COLOR_BLACK = '0'
 COLOR_RED = '1'

@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
-from __global import *
+from __global import COLOR_RED
+import sys
+import os
+import subprocess
 
 
 def set_tag(tag_name, commit, massage, force):
@@ -45,10 +48,14 @@ def get_message():
 
     cmd = subprocess.Popen(
         [
-            'gum', 'write',
-            '--header', 'Tag message: ',
-            '--placeholder', 'Tag message',
-            '--header.foreground', '4',
+            'gum',
+            'write',
+            '--header',
+            'Tag message: ',
+            '--placeholder',
+            'Tag message',
+            '--header.foreground',
+            '4',
             '--show-line-numbers',
         ],
         stdout=subprocess.PIPE,

@@ -44,11 +44,16 @@ def get_remote_url():
 def check_remote_url_is_valid(remote_url):
     spin_cmd = subprocess.Popen(
         [
-            'gum', 'spin',
-            '--spinner', 'minidot',
-            '--title', 'Checking the remote url...',
+            'gum',
+            'spin',
+            '--spinner',
+            'minidot',
+            '--title',
+            'Checking the remote url...',
             '--',
-            'tail', '-f', '/dev/null'
+            'tail',
+            '-f',
+            '/dev/null',
         ],
         stdout=subprocess.PIPE,
     )

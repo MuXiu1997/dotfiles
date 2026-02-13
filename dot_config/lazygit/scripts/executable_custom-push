@@ -1,6 +1,13 @@
 #!/usr/bin/env python3
-from __global import *
+from __global import (
+    get_local_branch_commit,
+    get_remote_branches,
+    get_remotes,
+)
 import argparse
+import os
+import subprocess
+import time
 
 NEW_BRANCH_OPTION = '* New branch *'
 SAME_NAME_BRANCH_OPTION = '* Same name branch *'
@@ -29,10 +36,12 @@ def get_remote():
 
     cmd = subprocess.Popen(
         [
-            'gum', 'choose',
-            '--header', 'Select the remote repository to push to:',
+            'gum',
+            'choose',
+            '--header',
+            'Select the remote repository to push to:',
             '--',
-            *remotes
+            *remotes,
         ],
         stdout=subprocess.PIPE,
     )
@@ -43,17 +52,23 @@ def get_remote():
 
 
 def get_remote_branch(remote, local_branch):
-    remote_branches = [b.removeprefix(remote + '/') for b in get_remote_branches() if b.startswith(remote + '/')]
+    remote_branches = [
+        b.removeprefix(remote + '/')
+        for b in get_remote_branches()
+        if b.startswith(remote + '/')
+    ]
 
     remote_branches.append(NEW_BRANCH_OPTION)
     if local_branch:
         remote_branches.append(SAME_NAME_BRANCH_OPTION)
     cmd = subprocess.Popen(
         [
-            'gum', 'choose',
-            '--header', 'Select the branch to push to:',
+            'gum',
+            'choose',
+            '--header',
+            'Select the branch to push to:',
             '--',
-            *remote_branches
+            *remote_branches,
         ],
         stdout=subprocess.PIPE,
     )
@@ -71,11 +86,16 @@ def get_remote_branch(remote, local_branch):
 def check_commit_non_fast_forward(remote, remote_branch, commit):
     spin_cmd = subprocess.Popen(
         [
-            'gum', 'spin',
-            '--spinner', 'minidot',
-            '--title', 'Checking if the commit will overwrite the remote branch...',
+            'gum',
+            'spin',
+            '--spinner',
+            'minidot',
+            '--title',
+            'Checking if the commit will overwrite the remote branch...',
             '--',
-            'tail', '-f', '/dev/null'
+            'tail',
+            '-f',
+            '/dev/null',
         ],
         stdout=subprocess.PIPE,
     )
