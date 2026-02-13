@@ -57,6 +57,7 @@ packages:
       - cyberduck # Server and cloud storage browser
       - dropbox # Client for the Dropbox cloud storage service
       - electerm # Terminal/ssh/sftp client
+      - finetune # Per-application volume mixer, equalizer, and audio router
       - flowvision # Waterfall-style image viewer
       - free-download-manager # Download accelerator and organiser
       - hammerspoon # Desktop automation application
