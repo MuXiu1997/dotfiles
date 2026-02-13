@@ -14,12 +14,16 @@ typeset -U path fpath
   }
 # }
 
+# { Config Directories
+  # Directory for managed zshenv configuration files
+  _zshenv_d="${HOME}/.config/zsh/zshenv.d"
+  # Directory for local zshenv configuration files (not managed by chezmoi)
+  _zshenv_local_d="${HOME}/.config/zsh/zshenv.local.d"
+# }
+
 # { XDG
-  export XDG_CONFIG_HOME="{{ .XDG_CONFIG_HOME }}"
-  export XDG_CACHE_HOME="{{ .XDG_CACHE_HOME }}"
-  export XDG_DATA_HOME="{{ .XDG_DATA_HOME }}"
-  export XDG_STATE_HOME="{{ .XDG_STATE_HOME }}"
-  export XDG_RUNTIME_DIR="{{ .XDG_RUNTIME_DIR }}"
+  # Exports: XDG_CONFIG_HOME, XDG_CACHE_HOME, XDG_DATA_HOME, XDG_STATE_HOME, XDG_RUNTIME_DIR
+  file_readable_then_source "${_zshenv_d}/xdg.zsh"
 # }
 
 # { Zsh
@@ -32,20 +36,9 @@ typeset -U path fpath
 # }
 
 # { Homebrew
-  path=($path "{{ .homebrewBin }}")
-  fpath=($fpath "{{ .homebrewPrefix }}/share/zsh/site-functions")
-
-  {{- if eq .chezmoi.os "darwin" }}
-  # curl (keg-only)
-  if file_exists "{{ .homebrewPrefix }}/opt/curl/bin/curl"; then
-    path=("{{ .homebrewPrefix }}/opt/curl/bin" $path)
-    export LDFLAGS="-L{{ .homebrewPrefix }}/opt/curl/lib $LDFLAGS"
-    export CPPFLAGS="-I{{ .homebrewPrefix }}/opt/curl/include $CPPFLAGS"
-  fi
-
-  # coreutils (gnubin)
-  file_exists "{{ .homebrewPrefix }}/opt/coreutils/libexec/gnubin/ls" && path=("{{ .homebrewPrefix }}/opt/coreutils/libexec/gnubin" $path)
-  {{- end }}
+  # Updates: path, fpath
+  # Exports: LDFLAGS, CPPFLAGS (Darwin only)
+  file_readable_then_source "${_zshenv_d}/homebrew.zsh"
 # }
 
 # { Zoxide
@@ -54,7 +47,7 @@ typeset -U path fpath
 
 # { Ranger
   export RANGER_LOAD_DEFAULT_RC="FALSE"
-# {
+# }
 
 # { Git
   export GIT_CONFIG_GLOBAL="${XDG_CONFIG_HOME}/git/config"
@@ -135,23 +128,14 @@ typeset -U path fpath
 # }
 
 # { GitHub
-  export GITHUB_TOKEN="{{ template "ageDecrypted" "github-token" }}"
+  # Exports: GITHUB_TOKEN
+  file_readable_then_source "${_zshenv_d}/github.zsh"
 # }
-
-{{ if has "personal" .tags -}}
-# { MuXiu1997 Personal
-  export MUXIU1997_SSID_HOME="{{ template "ageDecrypted" "muxiu1997-ssid-home" }}"
-  export MUXIU1997_SSID_WORK="NULL"
-  export MUXIU1997_NAS_HOST="{{ template "ageDecrypted" "muxiu1997-nas-host" }}"
-  export MUXIU1997_NAS_USERNAME="{{ template "ageDecrypted" "muxiu1997-nas-username" }}"
-  export MUXIU1997_NAS_PASSWORD="{{ template "ageDecrypted" "muxiu1997-nas-password" }}"
-# }
-{{- end }}
 
 # { Local
   # Load local zsh configurations not managed by chezmoi
-  if [[ -d "$ZDOTDIR/zshenv.local.d" ]]; then
-    for config_file in "$ZDOTDIR/zshenv.local.d"/*.zsh(N); do
+  if [[ -d "$_zshenv_local_d" ]]; then
+    for config_file in "$_zshenv_local_d"/*.zsh(N); do
       file_readable_then_source "$config_file"
     done
   fi
