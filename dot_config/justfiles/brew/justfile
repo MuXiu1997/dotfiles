@@ -13,7 +13,3 @@ cask-upgrade:
 # Brew upgrade selected formulae
 formula-upgrade:
   @brew-upgrade formula
-
-# Brew bundle dump
-bundle-dump:
-  @brew-bundle-dump
