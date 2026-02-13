@@ -144,14 +144,41 @@ configure_darwin_settings() {
     defaults write com.apple.finder SidebarShowingiCloudDesktop -bool false
   }
 
+  { # Dock Settings - 🇨🇳Dock 设置
+    # Enable autohide - 🇨🇳启用自动隐藏
+    defaults write com.apple.dock autohide -bool true
+    # Set autohide delay to 0 - 🇨🇳设置自动隐藏延迟为0
+    defaults write com.apple.dock autohide-delay -float 0
+    # Set autohide animation duration to 0.5s - 🇨🇳设置自动隐藏动画时长为0.5秒
+    defaults write com.apple.dock autohide-time-modifier -float 0.5
+    # Group windows by application in Mission Control - 🇨🇳在调度中心按应用程序分组窗口
+    defaults write com.apple.dock expose-group-apps -bool true
+    # Set icon size to 72 pixels - 🇨🇳设置图标大小为72像素
+    defaults write com.apple.dock tilesize -int 72
+    # Set magnification icon size to 128 pixels - 🇨🇳设置放大后的图标大小为128像素
+    defaults write com.apple.dock largesize -int 128
+    # Enable magnification - 🇨🇳启用放大效果
+    defaults write com.apple.dock magnification -bool true
+    # Set Dock orientation to bottom - 🇨🇳设置Dock位置在底部
+    defaults write com.apple.dock orientation -string "bottom"
+    # Set hot corner actions (bl: 1, br: 4, tl: 11, tr: 2) - 🇨🇳设置触发角动作
+    defaults write com.apple.dock wvous-bl-corner -int 1
+    defaults write com.apple.dock wvous-bl-modifier -int 1048576
+    defaults write com.apple.dock wvous-br-corner -int 4
+    defaults write com.apple.dock wvous-br-modifier -int 0
+    defaults write com.apple.dock wvous-tl-corner -int 11
+    defaults write com.apple.dock wvous-tl-modifier -int 0
+    defaults write com.apple.dock wvous-tr-corner -int 2
+    defaults write com.apple.dock wvous-tr-modifier -int 0
+  }
+
   { # Restart Related Services to Apply Settings - 🇨🇳重启相关服务使设置生效
     # Restart SystemUIServer to apply menu bar changes - 🇨🇳重启SystemUIServer以应用菜单栏更改
     killall SystemUIServer 2>/dev/null || true
     # Restart Finder to apply Finder settings - 🇨🇳重启Finder以应用Finder设置
     killall Finder 2>/dev/null || true
-
-    # Run dock setup script - 🇨🇳运行dock设置脚本
-    "${HOME}/.local/bin/setup-dock"
+    # Restart Dock to apply Dock settings - 🇨🇳重启Dock以应用Dock设置
+    killall Dock 2>/dev/null || true
   }
 }
 

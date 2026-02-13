@@ -27,10 +27,6 @@
 bash -c "$(curl -fsSL https://github.com/MuXiu1997/dotfiles/raw/main/install.sh)"
 ```
 
-## TODO
-
-- [ ] Remove `dot_local/bin/executable_setup-dock` and migrate its functionality to `.chezmoiscripts/run_once_after_91-configure-darwin.sh.tmpl`
-
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
