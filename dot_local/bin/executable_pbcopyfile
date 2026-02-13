@@ -4,7 +4,7 @@ import pathlib
 import subprocess
 
 # Ref: https://apple.stackexchange.com/questions/339201/how-do-i-copy-multiple-files-to-macoss-clipboard-programmatically/339436#339436
-script = '''
+script = """
 use framework "AppKit"
 
 property this : a reference to current application
@@ -30,7 +30,7 @@ on run input
 
     return true
 end run
-'''
+"""
 
 
 def main():
@@ -40,7 +40,7 @@ def main():
         nargs='+',
         help='paths to files to add to clipboard',
         type=pathlib.Path,
-        metavar='PATH'
+        metavar='PATH',
     )
     args = parser.parse_args()
     paths = [str(p.resolve()) for p in args.paths]
@@ -50,7 +50,7 @@ def main():
         stdin=subprocess.PIPE,
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
-        universal_newlines=True
+        universal_newlines=True,
     )
     stdout, stderr = p.communicate(script)
     if p.returncode != 0 or not stdout.strip().startswith('true'):
