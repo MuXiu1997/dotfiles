@@ -12,4 +12,3 @@ zstyle ':fzf-tab:complete:(-command-|-parameter-|-brace-parameter-|export|unset|
   popup-pad 100 5
 zstyle ':fzf-tab:complete:(-command-|-parameter-|-brace-parameter-|export|unset|expand):*' \
   fzf-flags --preview-window=down:3:wrap
-

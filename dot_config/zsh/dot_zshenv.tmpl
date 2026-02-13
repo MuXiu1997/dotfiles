@@ -25,7 +25,10 @@ typeset -U path fpath
 # { Zsh
   export ZDOTDIR="${XDG_CONFIG_HOME}/zsh"
 
-  file_readable_then_source "${ZDOTDIR}/setup-history.zsh"
+  # Directory for managed zshrc configuration files
+  _zshrc_d="${ZDOTDIR}/zshrc.d"
+
+  file_readable_then_source "${_zshrc_d}/setup-history.zsh"
 # }
 
 # { Homebrew
