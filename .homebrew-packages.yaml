@@ -64,7 +64,6 @@ packages:
       - iina # Free and open-source media player
       - itsycal # Menu bar calendar
       - jetbrains-toolbox # JetBrains tools manager
-      - jordanbaird-ice@beta # Menu bar manager
       - kap # Open-source screen recorder built with web technology
       - karabiner-elements # Keyboard customiser
       - keycastr # Open-source keystroke visualiser
@@ -84,10 +83,11 @@ packages:
       - squirrel-app # Rime input method engine
       - stats # System monitor for the menu bar
       - switchhosts # App to switch hosts
+      - tailscale-app # Mesh VPN based on WireGuard
+      - thaw # Menu bar manager
       - visual-studio-code # Open-source code editor
       - wechatwebdevtools # Wechat DevTools for Official Account and Mini Program development
       - wezterm # GPU-accelerated cross-platform terminal emulator and multiplexer
-      - zerotier-one # Mesh VPN client
     mas:
       - name: Bitwarden
         id: 1352778147
