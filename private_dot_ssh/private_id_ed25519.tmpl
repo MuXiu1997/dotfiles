@@ -1,0 +1,5 @@
+{{- if (has "work" .tags) -}}
+{{ template "ageDecrypted" "ssh-id-ed25519-work" }}
+{{- else if (has "personal" .tags) -}}
+{{ template "ageDecrypted" "ssh-id-ed25519-personal" }}
+{{- end -}}

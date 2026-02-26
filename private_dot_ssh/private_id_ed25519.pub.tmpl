@@ -1,0 +1,5 @@
+{{- if (has "work" .tags) -}}
+ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMvhLHUOrpqaVll6nrxz+LZHQLpqFm24AIjWvt95zdAG zoukunfeng@kanyun.com
+{{- else if (has "personal" .tags) -}}
+ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDYgNdf53Xedah2OtLDO4UEb/KxMi1LB66DZ9w0bkVKn muxiu1997@muxiu1997.com
+{{- end -}}
