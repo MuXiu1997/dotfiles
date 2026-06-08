@@ -1,11 +1,22 @@
 {
   "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash|Shell",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${HOME}/.claude/hooks/modify-git-commit.py"
+          }
+        ]
+      }
+    ],
     "Notification": [
       {
         "hooks": [
           {
             "type": "command",
-            "command": "${HOME}/.claude/play-notification.sh"
+            "command": "${HOME}/.claude/hooks/play-notification.sh"
           }
         ]
       }
@@ -15,7 +26,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "${HOME}/.claude/play-notification.sh"
+            "command": "${HOME}/.claude/hooks/play-notification.sh"
           }
         ]
       }
@@ -26,7 +37,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "${HOME}/.claude/play-notification.sh"
+            "command": "${HOME}/.claude/hooks/play-notification.sh"
           }
         ]
       }
