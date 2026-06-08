@@ -6,6 +6,7 @@ packages:
       - bash # Bourne-Again SHell, a UNIX command interpreter
       - bat # Clone of cat(1) with syntax highlighting and Git integration
       - bottom # Yet another cross-platform graphical process/system monitor
+      - bun # Incredibly fast JavaScript runtime, bundler, transpiler and package manager - all in one
       - chezmoi # Manage your dotfiles across multiple diverse machines, securely
       - ctop # Top-like interface for container metrics
       - deno # Secure runtime for JavaScript and TypeScript
@@ -67,6 +68,7 @@ packages:
       - kap # Open-source screen recorder built with web technology
       - karabiner-elements # Keyboard customiser
       - keycastr # Open-source keystroke visualiser
+      - keepingyouawake # Tool to prevent the system from going into sleep mode
       - maczip # Utility to open, create and modify archive files
       - mark-text # Markdown editor
       - microsoft-edge # Multi-platform web browser
