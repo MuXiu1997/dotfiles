@@ -56,3 +56,11 @@ cmat() {
     fi
   done
 }
+
+# Function 'ocp' opens a project directory in OpenCode.
+ocp() {
+  local dir
+  dir="${1:-$PWD}"
+  dir="$(python3 -c 'import pathlib, sys, urllib.parse; print(urllib.parse.quote(str(pathlib.Path(sys.argv[1]).expanduser().resolve()), safe=""))' "$dir")"
+  open "opencode://open-project?directory=$dir"
+}
