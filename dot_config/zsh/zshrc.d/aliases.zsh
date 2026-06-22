@@ -23,6 +23,10 @@
   alias j-chezmoi="just \${XDG_CONFIG_HOME}/justfiles/chezmoi/"
 # }
 
+# { OpenCode
+  command_exists opencode && alias oc="opencode"
+# }
+
 # { Brew
   alias j-brew="just \${XDG_CONFIG_HOME}/justfiles/brew/"
 # }
