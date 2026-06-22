@@ -39,6 +39,10 @@
   alias j="just"
 # }
 
+# { Mise
+  command_exists mise && alias m="mise" && alias mr="mise run"
+# }
+
 # { Help
   alias h="help"
 # }
