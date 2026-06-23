@@ -1,0 +1,11 @@
+[settings]
+experimental = true
+
+[tools]
+shellcheck = "latest"
+shfmt = "latest"
+ruff = "latest"
+prek = "latest"
+
+[hooks]
+postinstall = "prek install"
